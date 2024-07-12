@@ -1,0 +1,6 @@
+.wfh-request-filters{
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-auto-flow: row;
+}

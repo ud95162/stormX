@@ -1,0 +1,46 @@
+
+<div class="analytics-previous-icon" *ngIf="!isFirstCardVisible()">
+  <svg class="a-icon" (click)="scrollLeft()">
+    <use xlink:href="#previous"></use>
+  </svg>
+</div>
+<div class="analytics-projects">
+  <div class="analytics-projects-card" *ngFor="let data of visibleCards">
+    <div class="analytics-projects-row u-mb+">
+      <div class="analytics-project-details">
+        <p class="analytics-project-details__title">{{data.companyName}}</p>
+        <span class="analytics-project-details__value">{{data.totalEmployeeCount}}</span>
+      </div>
+      <div class="analytics-project-card__icon">
+        <svg class="a-icon">
+          <use xlink:href="#users-01"></use>
+        </svg>
+      </div>
+    </div>
+    <div class="l-grid l-grid--1-1">
+      <div class="analytics-project-details">
+        <p class="analytics-project-details__subtitle">Permanent</p>
+        <span class="analytics-project-details__subvalue">{{data.permanentEmployeeCount}}</span>
+      </div>
+      <div class="analytics-project-details">
+        <p class="analytics-project-details__subtitle">Contact</p>
+        <span class="analytics-project-details__subvalue">{{data.contractEmployeeCount}}</span>
+      </div>
+    </div>
+    <div class="l-grid l-grid--1-1">
+      <div class="analytics-project-details">
+        <p class="analytics-project-details__subtitle">Trainee</p>
+        <span class="analytics-project-details__subvalue">{{data.traineeEmployeeCount}}</span>
+      </div>
+      <div class="analytics-project-details">
+        <p class="analytics-project-details__subtitle">Extend</p>
+        <span class="analytics-project-details__subvalue">{{data.extendEmployeeCount}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="analytics-next-icon" *ngIf="!isLastCardVisible() && companySummary.length > 4">
+  <svg class="a-icon" (click)="scrollRight()">
+    <use xlink:href="#next"></use>
+  </svg>
+</div>

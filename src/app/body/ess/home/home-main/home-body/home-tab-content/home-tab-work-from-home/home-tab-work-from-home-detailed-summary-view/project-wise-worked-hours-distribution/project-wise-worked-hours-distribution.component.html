@@ -1,0 +1,131 @@
+<div
+  *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortProjectWiseWorkedHoursDistribution')">
+  <div class="dashboard-page @@class">
+    <div class="dashboard-page__block-main">
+      <div class="dashboard-page__block-wrapper-main">
+
+        <!--work effort filters--->
+        <div class="workeffort-filter_section-right">
+
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--workflow" for="project-wise-system">System</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select " id="project-wise-system" [(ngModel)]="selectedSystem"
+                        (change)="setDetailedSummaryReportObject()">
+                  <option *ngFor="let datasource of dataSources" [ngValue]="datasource">{{datasource}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+
+
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--workflow" for="project-wise-date">Date</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" id="project-wise-date" type="date" minlength="0" maxlength="524288"
+                       placeholder="Days" value=""
+                       (change)="setDetailedSummaryReportObject()" [(ngModel)]="selectedDate">
+              </div>
+            </div>
+
+            <span class="m-form-field__error">error</span>
+          </div>
+        </div>
+
+
+        <!---table-->
+
+
+        <div class="projet-wice__hour-distribution">
+
+          <div class="projet-wice__today--hours">
+            <table class="projet-wice__table">
+              <thead class="projet-wice__table--header">
+              <tr class="projet-wice__table-header-row">
+                <th></th>
+                <th class="projet-wice__table-time">6.5hrs</th>
+                <th class="projet-wice__table-time">6.5hrs to 10hrs</th>
+                <th class="projet-wice__table-time">10hrs</th>
+                <th class="project-wice__nodata"></th>
+                <th class="projet-wice__table-time"> Total Hrs</th>
+                <th class="projet-wice__table-time">Employees</th>
+                <th class="projet-wice__table-time">Expected 40hrs</th>
+                <th class="project-wice__nodata"></th>
+                <th class="projet-wice__table-time"> Total Hrs</th>
+                <th class="projet-wice__table-time">Employees</th>
+                <th class="projet-wice__table-time">Expected
+                  160hrs
+                </th>
+              </tr>
+
+              <tr class="projet-wice__table-header-row">
+                <th></th>
+                <th colspan="3" class="projet-wice__hour--header">Today</th>
+                <th class="project-wice__nodata"></th>
+                <th colspan="3" class="projet-wice__hour--header">This Week</th>
+                <th class="project-wice__nodata"></th>
+                <th colspan="3" class="projet-wice__hour--header">This Month</th>
+              </tr>
+              </thead>
+
+              <tbody class="workeffort-filter__table--bod" *ngIf="responseDataLoaded">
+              <tr class="projet-wice__table-row" *ngFor="let data of response">
+                <td class="projet-wice__name" title="Codegen">{{data.project}}</td>
+                <td>{{data.dailyResponse.lessThanSixAndHalf}}</td>
+                <td>{{data.dailyResponse.sixAndHalfAndTen}}</td>
+                <td>{{data.dailyResponse.greaterThanTen}}</td>
+                <td class="project-wice__nodata"></td>
+                <td>{{data.weeklyResponse.workingHrsForPeriod}}</td>
+                <td>{{data.weeklyResponse.avgEmpForPeriod}}</td>
+                <td *ngIf="data.weeklyResponse.statusOfPeriod == true"
+                    style="color: green">{{data.weeklyResponse.upOrDownHrs}}
+                  <i class="fa fa-arrow-up" aria-hidden="true" style="color: green"></i></td>
+                <td *ngIf="data.weeklyResponse.statusOfPeriod == false"
+                    style="color: red">{{data.weeklyResponse.upOrDownHrs}}
+                  <i class="fa fa-arrow-down" aria-hidden="true" style="color: red"></i></td>
+                <td class="project-wice__nodata"></td>
+                <td>{{data.monthlyResponse.workingHrsForPeriod}}</td>
+                <td>{{data.monthlyResponse.avgEmpForPeriod}}</td>
+                <td *ngIf="data.monthlyResponse.statusOfPeriod == true"
+                    style="color: green">{{data.monthlyResponse.upOrDownHrs}}
+                  <i class="fa fa-arrow-up" aria-hidden="true" style="color: green"></i></td>
+                <td *ngIf="data.monthlyResponse.statusOfPeriod == false"
+                    style="color: red">{{data.monthlyResponse.upOrDownHrs}}
+                  <i class="fa fa-arrow-down" aria-hidden="true" style="color: red"></i></td>
+              </tr>
+              </tbody>
+              <tbody class="workeffort-filter__table--bod" *ngIf="!responseDataLoaded">
+              <!--              <tbody class="workeffort-filter__table&#45;&#45;bod">-->
+              <tr class="projet-wice__table-row">
+                <td class="projet-wice__name loading"></td>
+                <td class="loading"></td>
+                <td class="loading"></td>
+                <td class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td class="loading"></td>
+                <td class="loading"></td>
+                <td class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td class="loading"></td>
+                <td class="loading"></td>
+                <td class="loading"></td>
+              </tr>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

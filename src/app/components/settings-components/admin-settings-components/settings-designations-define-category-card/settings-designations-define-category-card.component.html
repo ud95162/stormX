@@ -1,0 +1,262 @@
+<app-error-modal></app-error-modal>
+<!--<div class="w3-panel w3-card">-->
+<!--  <h5 class="card-title-h5">{{cardTitle}}</h5>-->
+<!--  <div class="card-content-div">-->
+<!--    <form class="form-horizontal">-->
+<!--      <div class="form-group">-->
+<!--        <label class="col-sm-3 form-label-card no-padding" for="categoryname{{callingType}}">{{titleLabel}}</label>-->
+<!--        <div class="col-sm-9">-->
+<!--          <input [(ngModel)]="designationObj.name" class="form-control" id="categoryname{{callingType}}"-->
+<!--                 name="categoryname{{callingType}}"-->
+<!--                 type="text">-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <label class="col-sm-3 form-label-card no-padding"-->
+<!--               for="categoryabbreviation{{callingType}}">Abbreviation</label>-->
+<!--        <div class="col-sm-9">-->
+<!--          <input [(ngModel)]="designationObj.abbreviation" class="form-control" id="categoryabbreviation{{callingType}}"-->
+<!--                 name="categoryabbreviation{{callingType}}" type="text">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div *ngIf="callingType === 'designation' && showDesignationPreInsert" class="form-group">-->
+<!--        <label class="col-sm-3 form-label-card no-padding" for="categoryfordesignation{{callingType}}">-->
+<!--          Designation Group</label>-->
+<!--        <div class="col-sm-9">-->
+<!--          <select [(ngModel)]="designationObj.category" class="form-control"-->
+<!--                  id="categoryfordesignation{{callingType}}" name="categoryfordesignation{{callingType}}">-->
+<!--            <option *ngFor="let designationCategory of designationPreInsert.designationGroups">-->
+<!--              {{designationCategory.type}}-->
+<!--            </option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div *ngIf="callingType === 'designation' && showDesignationPreInsert" class="form-group">-->
+<!--        <label class="col-sm-3 form-label-card no-padding" for="designationcadre{{callingType}}">-->
+<!--          Designation Cadre</label>-->
+<!--        <div class="col-sm-9">-->
+<!--          <select [(ngModel)]="designationObj.designationCadre" class="form-control"-->
+<!--                  id="designationcadre{{callingType}}" name="designationcadre{{callingType}}">-->
+<!--            <option *ngFor="let employeeCadre of designationPreInsert.employeeCadreList">-->
+<!--              {{employeeCadre.cadre}}-->
+<!--            </option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--      <div class="form-group">-->
+<!--        <button (click)="saveCategoryDesignation('category', callingType)" *ngIf="callingType === 'category'"-->
+<!--                class="btn save-category-designation"-->
+<!--                type="button">-->
+<!--          <i aria-hidden="true" class="fa fa-floppy-o"></i> Save Designation Group-->
+<!--        </button>-->
+<!--        <button (click)="saveCategoryDesignation('designation', callingType)" *ngIf="callingType === 'designation'"-->
+<!--                class="btn save-category-designation"-->
+<!--                type="button">-->
+<!--          <i aria-hidden="true" class="fa fa-floppy-o"></i> Save Designation-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--new implementation -->
+<div class="c-designation-wrapper">
+  <div class="c-define-designation-group">
+    <h2 class="c-define-designation__text">{{cardTitle}}</h2>
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold" for="categoryname{{callingType}}">{{titleLabel}}</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" id="categoryname{{callingType}}" name="categoryname{{callingType}}"
+                 type="text" minlength="0" maxlength="524288" placeholder="" value="" [(ngModel)]="designationObj.name">
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div class="m-form-field-inline" *ngIf="callingType === 'designation' || callingType === 'category'">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold" for="categoryabbreviation{{callingType}}">Abbreviation</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" id="categoryabbreviation{{callingType}}"
+                 name="categoryabbreviation{{callingType}}"
+                 type="text" minlength="0" maxlength="524288" placeholder="" value=""
+                 [(ngModel)]="designationObj.abbreviation">
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div *ngIf="callingType === 'category' && showDesignationMainCategories" class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold" for="mainCategoryfordesignation{{callingType}}">Designation Category</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <select [(ngModel)]="designationObj.mainCategory" class="m-form-field__select"
+                  id="mainCategoryfordesignation{{callingType}}" name="mainCategoryfordesignation{{callingType}}">
+            <option *ngFor="let mainCategory of allDesignationMainCategories">
+              {{mainCategory.type}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div *ngIf="callingType === 'designation' && showDesignationPreInsert" class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold" for="categoryfordesignation{{callingType}}">Designation Group</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <select [(ngModel)]="designationObj.category" class="m-form-field__select"
+                  id="categoryfordesignation{{callingType}}" name="categoryfordesignation{{callingType}}">
+            <option *ngFor="let designationCategory of designationPreInsert.designationGroups">
+              {{designationCategory.type}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div *ngIf="callingType === 'designation' && showDesignationPreInsert" class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold" for="designationcadre{{callingType}}">Designation Cadre</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <select [(ngModel)]="designationObj.designationCadre" class="m-form-field__select"
+                  id="designationcadre{{callingType}}" name="designationcadre{{callingType}}">
+            <option *ngFor="let employeeCadre of designationPreInsert.employeeCadreList">
+              {{employeeCadre.cadre}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+<!--    <div class="m-form-field-inline" *ngIf="callingType === 'category-main'">-->
+<!--      <div class="m-form-field__label-wrap">-->
+<!--        <label class="m-form-field__label&#45;&#45;bold" for="categoryMainName{{callingType}}">{{titleLabel}}</label>-->
+<!--      </div>-->
+
+<!--      <div class="m-form-field__field">-->
+<!--        <div class="m-form-field__field-item">-->
+<!--          <input class="m-form-field__input" id="categoryMainName{{callingType}}"-->
+<!--                 name="categoryMainName{{callingType}}"-->
+<!--                 type="text" minlength="0" maxlength="524288" placeholder="" value=""-->
+<!--                 [(ngModel)]="designationCategoryMainObj.name">-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <span class="m-form-field__error">error</span>-->
+<!--    </div>-->
+
+    <div class="c-define-designation__action">
+      <button class="c-define-designation__action--button" (click)="saveCategoryDesignation('category-main', callingType)"
+              *ngIf="callingType === 'category-main'">Save
+      </button>
+      <button class="c-define-designation__action--button" (click)="saveCategoryDesignation('category', callingType)"
+              *ngIf="callingType === 'category'">Save
+      </button>
+      <button class="c-define-designation__action--button" (click)="saveCategoryDesignation('designation', callingType)"
+              *ngIf="callingType === 'designation'">Save
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!--&lt;!&ndash;-Define a designation &ndash;&gt;-->
+
+<!--<div class="c-designation-wrapper">-->
+<!--  <div class="c-define-designation-group">-->
+<!--    <h2 class="c-define-designation__text">Define a designation</h2>-->
+
+<!--    <div class="m-form-field-inline">-->
+<!--      <div class="m-form-field__label-wrap">-->
+<!--        <label class="m-form-field__label&#45;&#45;bold" for="f-name">Group name</label>-->
+<!--      </div>-->
+
+<!--      <div class="m-form-field__field">-->
+<!--        <div class="m-form-field__field-item">-->
+<!--          <input class="m-form-field__input" id="f-name" type="text" minlength="0" maxlength="524288" placeholder="text"-->
+<!--                 value="">-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <span class="m-form-field__error">error</span>-->
+<!--    </div>-->
+
+<!--    <div class="m-form-field-inline">-->
+<!--      <div class="m-form-field__label-wrap">-->
+<!--        <label class="m-form-field__label&#45;&#45;bold" for="f-name">Abbreviation</label>-->
+<!--      </div>-->
+
+<!--      <div class="m-form-field__field">-->
+<!--        <div class="m-form-field__field-item">-->
+<!--          <input class="m-form-field__input" id="f-name" type="text" minlength="0" maxlength="524288" placeholder="text"-->
+<!--                 value="">-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <span class="m-form-field__error">error</span>-->
+<!--    </div>-->
+
+<!--    <div class="m-form-field-inline">-->
+<!--      <div class="m-form-field__label-wrap">-->
+<!--        <label class="m-form-field__label&#45;&#45;bold" for="f-name">Designation Group</label>-->
+<!--      </div>-->
+
+<!--      <div class="m-form-field__field">-->
+<!--        <div class="m-form-field__field-item">-->
+<!--          <input class="m-form-field__input" id="f-name" type="text" minlength="0" maxlength="524288" placeholder="text"-->
+<!--                 value="">-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <span class="m-form-field__error">error</span>-->
+<!--    </div>-->
+
+<!--    <div class="m-form-field-inline">-->
+<!--      <div class="m-form-field__label-wrap">-->
+<!--        <label class="m-form-field__label&#45;&#45;bold" for="f-name">Designation Cadre</label>-->
+<!--      </div>-->
+
+<!--      <div class="m-form-field__field">-->
+<!--        <div class="m-form-field__field-item">-->
+<!--          <input class="m-form-field__input" id="f-name" type="text" minlength="0" maxlength="524288" placeholder="text"-->
+<!--                 value="">-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <span class="m-form-field__error">error</span>-->
+<!--    </div>-->
+
+<!--    <div class="c-define-designation__action">-->
+<!--      <button class="c-define-designation__action&#45;&#45;button">Save</button>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->

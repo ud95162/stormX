@@ -1,0 +1,22 @@
+<!--<div *ngIf="componentPermission.OtherProfile.mainComponentPermission">-->
+<!--  <app-header-card-->
+<!--    *ngIf="componentPermission.OtherProfile.subComponentPermissions.ProfileHeader.mainComponentPermission"-->
+<!--    [employeeId]="employeeId"></app-header-card>-->
+<!--  <br>-->
+<!--  <div>-->
+<!--    <app-profile-body-->
+<!--      *ngIf="componentPermission.OtherProfile.subComponentPermissions.ProfileBody.mainComponentPermission"-->
+<!--      [employeeId]="employeeId"></app-profile-body>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--new Implementation-->
+<div *ngIf="checkPermission.checkUserHavePermissionForSection('OtherProfile')">
+  <div>
+    <app-profile-body
+      *ngIf="checkPermission.checkUserHavePermissionForSection('ProfileBody')"
+      [employeeId]="employeeId"></app-profile-body>
+  </div>
+
+
+</div>

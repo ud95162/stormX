@@ -1,0 +1,165 @@
+<section class="l-grid l-grid--1-3 selection-uni">
+  <div class="l-grid__item">
+    <label class="a-radio">
+      <input type="radio" class="a-radio__check" value="None" name="price-block" checked (click)="educationTypeCheck('university')">
+      <span class="a-radio__label">University</span>
+    </label>
+  </div>
+  <div class="l-grid__item">
+    <label class="a-radio">
+      <input type="radio" class="a-radio__check" value="None" name="price-block" (click)="educationTypeCheck('high_school')">
+      <span class="a-radio__label">High School</span>
+    </label>
+  </div>
+</section>
+
+<!--dropdown component-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label *ngIf="UniNameLabel" class="m-form-field__label" for="university">University<span class="required">*</span></label>
+    <label *ngIf="HighSchoolNameLabel" class="m-form-field__label" for="highSchool">High School<span class="required">*</span></label>
+  </div>
+  <div class="m-form-field__field">
+
+    <!-- visible in mobile-->
+<!--    <select class="m-form-field__select" hidden>-->
+<!--      <option value="undefined" disabled selected hidden>Select</option>-->
+<!--      <option value="Days">Days</option>-->
+<!--      <option value="Nights">Nights</option>-->
+<!--    </select>-->
+
+    <!-- visible in desktop-->
+    <span class="m-form-field__pre">
+                    <svg class="a-icon m-form-field__pre-icon">
+                    <use xlink:href="#search"></use>
+                </svg>
+                </span>
+    <input *ngIf="UniNameLabel" list="uniList" name="university" id="university" class="m-form-field__input" type="text" minlength="0" maxlength="524288" placeholder="Search university"
+            value="" [(ngModel)]="uniSchool">
+    <input *ngIf="HighSchoolNameLabel" list="schoolList" name="highSchool" id="highSchool" class="m-form-field__input" type="text" minlength="0" maxlength="524288" placeholder="Search school"
+           value="" [(ngModel)]="uniSchool" >
+    <datalist *ngIf="UniNameLabel" id="uniList">
+      <option *ngFor="let university of edituniversityList" value={{university.name}}>
+    </datalist>
+    <datalist *ngIf="HighSchoolNameLabel" id="schoolList">
+      <option *ngFor="let school of editschoolList" value={{school.name}}>
+    </datalist>
+  </div>
+  <!-- visible in desktop end-->
+
+</div>
+
+<div *ngIf="UniTypeView" class="selection-uni">
+  <div class="l-grid__item">
+    <label class="a-radio">
+      <input type="radio" class="a-radio__check" value="None" name="uni-type" (click)="edituniTypeCheck('State')">
+      <span class="a-radio__label">State</span>
+    </label>
+  </div>
+  <div class="l-grid__item">
+    <label class="a-radio">
+      <input type="radio" class="a-radio__check" value="None" name="uni-type"(click)="edituniTypeCheck('Private')">
+      <span class="a-radio__label">Private</span>
+    </label>
+  </div>
+  <div class="l-grid__item">
+    <label class="a-radio">
+      <input type="radio" class="a-radio__check" value="None" name="uni-type" (click)="edituniTypeCheck('Foreign')">
+      <span class="a-radio__label">Foreign</span>
+    </label>
+  </div>
+</div>
+
+<!--        uni-batch-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="batch">Batch <span class="required">*</span></label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="batch" type="text" minlength="0"
+             maxlength="524288" placeholder="" value="" [(ngModel)]="batch">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="degree">Degree <span class="required">*</span></label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="degree" type="text" minlength="0"
+             maxlength="524288" placeholder="" value="" [(ngModel)]="degree">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="results">Results <span class="required">*</span></label>
+  </div>
+  <div *ngIf="educationType=='university'" class="m-form-field__field">
+    <select class="m-form-field__select" id="results" [(ngModel)]="grade">
+      <option *ngIf="grade == null" value="undefined" disabled selected hidden>Select</option>
+      <option value="1st Class">1st Class</option>
+      <option value="2nd Upper">2nd Upper</option>
+      <option value="2nd Class">2nd Class</option>
+      <option value="2nd Lower">2nd Lower</option>
+      <option value="General">General</option>
+      <option value="Merit">Merit</option>
+      <option value="Pass">Pass</option>
+      <option value="Pending">Pending</option>
+    </select>
+  </div>
+  <div *ngIf="educationType=='high_school'" class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="results" type="text" minlength="0"
+             maxlength="524288" placeholder="-" value="" [(ngModel)]="grade">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<section class="l-grid l-grid--1-1 date-sec">
+  <div class="l-grid__item">
+    <!--        has-focus-->
+    <div class="m-form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label" for="results">From <span class="required">*</span></label>
+      </div>
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" id="calender1" value="123" [(ngModel)]="eduFrom">
+        </div>
+      </div>
+      <span class="m-form-field__error">error</span>
+    </div>
+  </div>
+  <div class="l-grid__item">
+    <!--        has-focus-->
+    <div class="m-form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label" for="results">To <span class="required">*</span></label>
+      </div>
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" id="calender2" value="123" [(ngModel)]="eduTo">
+        </div>
+      </div>
+      <span class="m-form-field__error">error</span>
+    </div>
+
+  </div>
+</section>
+
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label">Description </label>
+  </div><textarea id="test" name="test" rows="8" cols="95" [(ngModel)]="description"></textarea>
+</div>

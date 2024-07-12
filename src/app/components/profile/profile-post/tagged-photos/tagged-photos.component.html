@@ -1,0 +1,21 @@
+<div *ngIf="showContainer" class="w3-panel w3-card">
+  <div>
+    <div class="scrollbar" id="style-1">
+      <div class="force-overflow">
+
+        <div style="text-align: center">
+          <img *ngIf="imageLoading" src="assets/image/loading/spinner-loading.svg" style="padding-top: 5%">
+        </div>
+
+        <div *ngIf="imageList.length === 0" style="margin-top: 20px; text-align: center">
+          <img src="assets/image/bad_face.svg">
+        </div>
+
+        <div *ngIf="dataLoaded" class="gal">
+          <img *ngFor="let image of this.imageList" src={{image}} style="cursor: pointer">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

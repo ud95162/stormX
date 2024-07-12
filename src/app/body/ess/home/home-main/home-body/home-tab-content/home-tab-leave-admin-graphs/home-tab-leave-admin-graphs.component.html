@@ -1,0 +1,96 @@
+<!--<main class="l-page__main profile-page">-->
+  <div class="l-wrapper profile-page__wrapper"
+    *ngIf="checkPermission.checkUserHavePermissionForSection('LeaveTab')">
+
+    <div class="dashboard-page__block-main-header">
+      <div class="dashboard-page__left dashboard-page_previous">
+        <div class="previous-icon">
+          <svg class="a-icon" (click)="returnToHomePage()">
+            <use xlink:href="#previous"></use>
+          </svg>
+        </div>
+        <div class="previous-text">Leave Dashboard</div>
+      </div>
+    </div>
+
+    <div class="profile-page__page-content">
+
+      <!--sidebar-->
+      <div class="profile-page__sidebar">
+
+        <div class="c-profile-card @@class">
+          <div class="c-profile-card__summary">
+            <div class="c-page-nav c-page-nav--vertical">
+              <nav class="c-page-nav__wrapper c-page-nav__wrapper--vertical">
+                <a [ngClass]="total_leave_class" (click)="changeActiveTab('Total Leave Count')"
+                  *ngIf="checkPermission.checkUserHavePermissionForSection('TotalLeaveCountGraph')">Total Leave Count (Days)</a>
+                <a [ngClass]="eligible_leave_class" (click)="changeActiveTab('Eligible Leave')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('EligibleLeaveCategoryGraph')">Eligible Leave Category </a>
+                <a [ngClass]="additional_leave_class" (click)="changeActiveTab('Additional Leave')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('AdditionalLeaveGraph')">Additional Leaves</a>
+                <a [ngClass]="short_leave_class" (click)="changeActiveTab('Short Leave')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('ShortLeaveUtilizationGraph')">Short Leave Utilization</a>
+                <a [ngClass]="avg_leave_util_class" (click)="changeActiveTab('Avg Leave')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('AverageLeaveUtilizationCard')">Average Leave Utilization</a>
+                <a [ngClass]="approval_pending_class" (click)="changeActiveTab('Pending Leave')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('LeaveApprovalPendingsCard')">Leave Approval Pendings</a>
+<!--                <a [ngClass]="approval_pending_class" (click)="changeActiveTab('Pending Leave')">Leave Approval Pendings</a>-->
+                <a [ngClass]="no_pay_class" (click)="changeActiveTab('No Pay')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('NoPayLeavesCard')">No Pay Leaves</a>
+                <a [ngClass]="onSite_official_class" (click)="changeActiveTab('OnSite Official')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('OnSiteVisitAndOfficialLeavesCard')">Onsite visit & Office leaves</a>
+                <a [ngClass]="util_vs_role_class" (click)="changeActiveTab('Utilized Vs Role')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('UtilizedLeavesVsEmployeeRoleCard')">Utilized Leaves vs Employee Role</a>
+                <a [ngClass]="type_vs_des_class" (click)="changeActiveTab('Type Vs Des')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('LeaveTypeVsDesignationCard')">Leave types vs Designation</a>
+                <a [ngClass]="util_project_class" (click)="changeActiveTab('Leave Project')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('UtilizedLeavesByProjectCard')">Utilized Leaves by Project</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--main-->
+      <div class="profile-page__main-content" *ngIf="totalLeaveCountClicked">
+        <app-total-count-of-leaves-graph></app-total-count-of-leaves-graph>
+      </div>
+      <div class="profile-page__main-content" *ngIf="eligibleLeaveClicked">
+        <app-standard-leave-types-graph></app-standard-leave-types-graph>
+      </div>
+      <div class="profile-page__main-content" *ngIf="additionalLeaveClicked">
+        <app-special-leave-types-graph></app-special-leave-types-graph>
+      </div>
+      <div class="profile-page__main-content" *ngIf="shortLeaveClicked">
+        <app-short-leave-utlization></app-short-leave-utlization>
+      </div>
+      <div class="profile-page__main-content" *ngIf="avgLeaveUtilizationClicked">
+        <app-avg-leave-utilization></app-avg-leave-utilization>
+      </div>
+      <div class="profile-page__main-content" *ngIf="approvalPendingClicked">
+        <app-leave-approval-pendings></app-leave-approval-pendings>
+      </div>
+
+      <div class="profile-page__main-content" *ngIf="noPayClicked">
+        <app-no-pay-leaves></app-no-pay-leaves>
+      </div>
+      <div class="profile-page__main-content" *ngIf="onSiteAndOfficeClicked">
+        <app-onsite-visit-and-official-leave></app-onsite-visit-and-official-leave>
+      </div>
+      <div class="profile-page__main-content" *ngIf="utilizedVsRoleClicked">
+        <app-utilized-leaves-by-des-group></app-utilized-leaves-by-des-group>
+      </div>
+      <div class="profile-page__main-content" *ngIf="typeVsDesignationClicked">
+        <app-utilized></app-utilized>
+      </div>
+      <div class="profile-page__main-content" *ngIf="utilizedLeaveProjectClicked">
+        <app-utilized-leaves-by-project></app-utilized-leaves-by-project>
+      </div>
+
+
+
+    </div>
+  </div>
+<!--</main>-->
+

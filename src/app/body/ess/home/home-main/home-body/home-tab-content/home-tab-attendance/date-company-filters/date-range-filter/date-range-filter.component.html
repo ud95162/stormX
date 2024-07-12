@@ -1,0 +1,58 @@
+<div class="advance-attendace__sidebar">
+  <div class="advance-attendace__sidebar--wrapper">
+
+    <!---  Today Date Filter-->
+    <div class="m-form-field__radio">
+      <input id="drToday" name="rangeType" (click)="setDateRange('drToday')" type="radio" [(ngModel)]="rangeType" value="drToday">
+      <label  for="drToday" class="m-form-radio__label-wrap">Today</label>
+    </div>
+
+    <!---  Yesterday Date Filter-->
+    <div class="m-form-field__radio">
+      <input id="drYesterday" name="rangeType" (click)="setDateRange('drYesterday')" type="radio" [(ngModel)]="rangeType" value="drYesterday">
+      <label  for="drYesterday" class="m-form-radio__label-wrap">Yesterday</label>
+    </div>
+
+    <!-- Custom Date Range-->
+    <div class="m-form-field__radio">
+      <input id="drCustom" name="rangeType" (click)="rangeCustomWidget = true;" type="radio" [(ngModel)]="rangeType" value="drCustom">
+      <label  for="drCustom" class="m-form-radio__label-wrap">Custom</label>
+    </div>
+
+    <div class="m-form__from--to" *ngIf="rangeCustomWidget">
+      <!--      From-->
+      <div class="m-form-field">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label" for="fromDate">From Date</label>
+        </div>
+        <div class="m-form-field__field m-form-field__min-height">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" minlength="0" maxlength="524288" placeholder="" value=""
+                   type="date" [(ngModel)]="selectedFromDate"  id="fromDate" max="{{currentDate}}">
+          </div>
+        </div>
+        <span class="m-form-field__error">error</span>
+      </div>
+
+      <!---to-->
+      <div class="m-form-field Custom-height__from-date">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label" for="toDate">To Date</label>
+        </div>
+        <div class="m-form-field__field m-form-field__min-height">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" minlength="0" maxlength="524288" placeholder="" value=""
+                    type="date" [(ngModel)]="selectedToDate"  id="toDate" max="{{currentDate}}">
+          </div>
+        </div>
+        <span class="m-form-field__error">error</span>
+      </div>
+
+      <div>
+        <button (click)="setDateRange('drCustom')">Go</button>
+      </div>
+    </div>
+    <!-- END of Custom Date Range-->
+
+  </div>
+</div>

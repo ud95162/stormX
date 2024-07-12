@@ -1,0 +1,20 @@
+<div *ngIf="dataLoaded">
+  <h4>EVENTS</h4>
+  <div *ngFor="let event of eventList" class="w3-panel w3-card">
+    <div class="media">
+      <div class="media-left">
+        <img
+          class="media-object"
+          src={{event.image}} style="width:60px">
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">{{event.name}}</h4>
+        <h5>{{event.displayTime}} ({{event.startDate}})</h5>
+        <h6>From {{event.startTime}} to {{event.endTime}} at {{event.venue.name}}</h6>
+        <h6>Organized by {{event.organizer}}</h6>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+</div>

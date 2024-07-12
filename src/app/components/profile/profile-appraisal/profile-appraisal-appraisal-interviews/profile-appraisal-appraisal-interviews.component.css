@@ -1,0 +1,99 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background-color: #ffffff !important;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.title-header-h4 {
+  font-size: 14px;
+  color: #2d2f32;
+  margin: 0 !important;
+  font-weight: 600 !important;
+}
+
+.comment-title-custom {
+  font-size: 14px;
+  color: #616060;
+  margin: 0 !important;
+  font-weight: 400 !important;
+}
+
+.title-description-h6 {
+  font-size: 12px;
+  color: #949393;
+  margin: 5px 0 !important;
+}
+
+.header-create-button {
+  border-radius: 4px;
+  background-color: #006eff;
+  padding: 4px 12px;
+  color: #FFFFFF;
+}
+
+.header-line-button {
+  border-radius: 4px;
+  border: 1px solid #006eff;
+  padding: 4px 12px;
+  color: #006eff;
+  background: #ffffff;
+}
+
+.header-dropdown-li {
+  padding: 4px 12px;
+}
+
+.appraisal-disclamer-div {
+  font-size: 12px !important;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.appraiser-notes-div {
+  margin: 10px 0 0 0;
+}
+
+.self-appraisal-paragraph {
+  font-size: 14px;
+  line-height: 21px;
+  color: #333333;
+  letter-spacing: 0;
+}
+
+.appraisal-question-comments-textarea {
+  margin: 10px 0;
+  font-size: 14px;
+  padding: 10px 15px !important;
+  color: #004882;
+  line-height: 1.8;
+  resize: vertical;
+  overflow: scroll;
+  min-height: 120px !important;
+  max-height: 800px !important;
+}
+
+.appraisal-question-comments-textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.self-appraisal-form-submission-status {
+  font-size: 14px !important;
+  color: #333333;
+}

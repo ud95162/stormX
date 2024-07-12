@@ -1,0 +1,52 @@
+<div *ngIf="isDesktop" class="col-sm-12">
+  <div class="col-sm-3" style="text-align: center;">
+    <h4>PRESENT</h4>
+    <p style="font-size: 60px; color: #6DBD26">201</p>
+  </div>
+  <div class="col-sm-9">
+    <div class="col-sm-3" style="text-align: center;">
+      <h4>ABROAD</h4>
+      <p style="font-size: 50px; color: #6DBD26">12</p>
+    </div>
+    <div class="col-sm-3" style="text-align: center;">
+      <h4>LEAVE</h4>
+      <p style="font-size: 50px; color: #3576B9">5</p>
+    </div>
+    <div class="col-sm-3" style="text-align: center;">
+      <h4>HALFDAY</h4>
+      <p style="font-size: 50px; color: #3576B9">9</p>
+    </div>
+    <div class="col-sm-3" style="text-align: center;">
+      <h4>ABSENT</h4>
+      <p style="font-size: 50px; color: #F72931">21</p>
+    </div>
+  </div>
+</div>
+<div *ngIf="isMobile || isTablet">
+  <div style="text-align: center">
+    <h4>PRESENT</h4>
+    <p style="font-size: 60px; color: #6DBD26">201</p>
+  </div>
+  <table style="width: 100%;">
+    <tr style="text-align: center">
+      <td style="width: 50% !important;">
+        <h4>ABROAD</h4>
+        <p style="font-size: 50px; color: #6DBD26">12</p>
+      </td>
+      <td style="width: 50% !important;">
+        <h4>LEAVE</h4>
+        <p style="font-size: 50px; color: #3576B9">5</p>
+      </td>
+    </tr>
+    <tr style="text-align: center">
+      <td style="width: 50% !important;">
+        <h4>HALFDAY</h4>
+        <p style="font-size: 50px; color: #3576B9">9</p>
+      </td>
+      <td style="width: 50% !important;">
+        <h4>ABSENT</h4>
+        <p style="font-size: 50px; color: #F72931">21</p>
+      </td>
+    </tr>
+  </table>
+</div>

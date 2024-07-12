@@ -1,0 +1,35 @@
+
+<div class="ratingDiv">
+
+  <p id="itext">You can select a service and rate it!</p>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Main Service</mat-label>
+      <mat-select [(ngModel)]='service' (selectionChange)="updateQuestions()">
+        <mat-option *ngFor="let service of services" [value]="service.id" >{{service.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Sub Service</mat-label>
+      <mat-select [(ngModel)]='subService' (selectionChange)="updateSubService()">
+        <mat-option *ngFor="let sub of subServicesList" [value]="sub.id" >{{sub.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+  <mat-list>
+    <div *ngFor="let question of questions">
+      <mat-list-item ><b>{{question.quiz.quiz}}</b>  </mat-list-item>
+      <div class="rating">
+        <mat-icon class='star' (mouseover)="question.rating.setRating(1)">{{question.rating.getRating(0)}}</mat-icon>
+        <mat-icon class='star' (mouseover)="question.rating.setRating(2)">{{question.rating.getRating(1)}}</mat-icon>
+        <mat-icon class='star' (mouseover)="question.rating.setRating(3)">{{question.rating.getRating(2)}}</mat-icon>
+        <mat-icon class='star' (mouseover)="question.rating.setRating(4)">{{question.rating.getRating(3)}}</mat-icon>
+        <mat-icon class='star' (mouseover)="question.rating.setRating(5)">{{question.rating.getRating(4)}}</mat-icon>
+      </div>
+    </div>
+
+  </mat-list>
+  <div id="ratingNext">
+    <button (click)="submitRating()" [class.spinner]="loading" [disabled]="loading" id="nextButton" mat-raised-button color="primary" style="padding-left: 5px;">Next</button>
+  </div>
+</div>

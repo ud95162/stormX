@@ -1,0 +1,89 @@
+/*!*Card Styles*!*/
+/*.w3-panel:after, .w3-panel:before {*/
+/*  content: "";*/
+/*  display: table;*/
+/*  clear: both*/
+/*}*/
+
+/*.w3-panel {*/
+/*  padding: 15px;*/
+/*  margin-bottom: 20px;*/
+/*  border-radius: 2px;*/
+/*  background-color: #ffffff !important;*/
+/*}*/
+
+/*.w3-card, .w3-card-2 {*/
+/*  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)*/
+/*}*/
+
+/*.w3-card-4, .w3-hover-shadow:hover {*/
+/*  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.top-card-class-custom {*/
+/*  background-color: transparent !important;*/
+/*  padding: 0 !important;*/
+/*  box-shadow: none !important;*/
+/*  margin: 0 !important;*/
+/*}*/
+
+/*.scrollbar {*/
+/*  float: left;*/
+/*  height: 100px;*/
+/*  overflow-y: scroll;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.force-overflow {*/
+/*  min-height: 75px;*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar-track {*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar {*/
+/*  width: 3px;*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar-thumb {*/
+/*  background-color: rgba(0, 0, 0, .1);*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+
+/*.card-containing-div {*/
+/*  margin: 0 -15px;*/
+/*}*/
+
+/*.header-title-div {*/
+/*  height: 30px;*/
+/*}*/
+
+/*.card-title-h5 {*/
+/*  margin: 0 0 10px 0;*/
+/*  font-size: 14px;*/
+/*  color: #2d2f32;*/
+/*  font-weight: 600 !important;*/
+/*}*/
+
+/*.label-pointer {*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.card-content-div {*/
+/*  height: 100px;*/
+/*}*/
+
+/*.group-type-title-h4 {*/
+/*  color: #858585;*/
+/*  font-size: 14px;*/
+/*  margin: 0 0 10px 0;*/
+/*}*/
+
+/*.permission-group-indicator-icon-color {*/
+/*  color: #006eff;*/
+/*  float: right;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/

@@ -1,0 +1,574 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background-color: #ffffff !important;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.title-header-h4 {
+  font-size: 14px;
+  color: #2d2f32;
+  margin: 0 !important;
+  font-weight: 600 !important;
+}
+
+.title-description-h6 {
+  font-size: 12px;
+  color: #949393;
+  margin: 5px 0 !important;
+}
+
+.header-create-button {
+  border-radius: 4px;
+  background-color: #006eff;
+  padding: 4px 12px;
+  color: #FFFFFF;
+}
+
+.header-line-button {
+  border-radius: 4px;
+  border: 1px solid #006eff;
+  padding: 4px 12px;
+  color: #006eff;
+  background: #ffffff;
+}
+
+.header-dropdown-li {
+  padding: 4px 12px;
+}
+
+.appraisal-disclamer-div {
+  font-size: 12px !important;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.self-appraisal-paragraph-div {
+  margin: 10px 0 25px 0;
+}
+
+.self-appraisal-paragraph {
+  font-size: 14px;
+  line-height: 21px;
+  color: #333333;
+  letter-spacing: 0;
+}
+
+.appraisal-question-comments-textarea {
+  margin: 10px 0;
+  font-size: 14px;
+  padding: 10px 15px !important;
+  color: #004882;
+  line-height: 1.8;
+  resize: vertical;
+  overflow: scroll;
+  min-height: 120px !important;
+  max-height: 800px !important;
+}
+
+.appraisal-question-comments-textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.self-appraisal-form-submission-status {
+  font-size: 14px !important;
+  text-align: center;
+}
+
+.submission-type-0 {
+  color: #DD5C01;
+}
+
+.submission-type-1 {
+  color: #359B07;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.div-separator-small {
+  height: 20px;
+}
+
+.display-remaining-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title-description-h6 {
+  font-size: 12px;
+  color: #949393;
+  margin: 5px 0 !important;
+}
+
+.header-create-button {
+  border-radius: 4px;
+  background-color: #006eff;
+  padding: 4px 12px;
+  color: #FFFFFF;
+}
+
+.header-dropdown-button {
+  border-radius: 4px;
+  border: 1px solid #006eff;
+  padding: 4px 12px;
+  color: #006eff;
+  background: #ffffff;
+}
+
+.header-dropdown-li {
+  padding: 4px 12px;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.appraisal-employee-header-media {
+  overflow-x: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.appraisal-employee-header-square-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px !important;
+}
+
+.appraisal-employee-header-data-td {
+  height: 50px !important;
+}
+
+.appraisal-print-view {
+  cursor: pointer;
+  color: #5c5c5c;
+  font-size: 1.2em;
+}
+
+.appraisal-disclamer-div {
+  font-size: 12px !important;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.appraisal-question-group-header-div {
+  min-height: 30px;
+  padding: 7px 15px;
+  width: 100%;
+  background-color: #ededed;
+  margin: 10px 0;
+}
+
+.appraisal-question-group-questions-div {
+  padding: 5px 15px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #85858538;
+}
+
+.appraisal-question-group-question-div-sm8 {
+  padding-top: 5px;
+}
+
+.appraisal-question-group-questions {
+  font-size: 14px;
+  color: #333333;
+  margin: 0 0 5px 0 !important;
+}
+
+.appraisal-question-group-answers-input {
+  margin-bottom: 5px !important;
+}
+
+.appraisal-question-comments-textArea {
+  margin: 10px 0;
+  font-size: 14px;
+  padding: 10px 15px !important;
+  color: #004882;
+  line-height: 1.8;
+  resize: vertical;
+  overflow: scroll;
+  min-height: 120px !important;
+  max-height: 800px !important;
+}
+
+
+.appraisal-employee-official-use-div {
+  margin: 10px 0 !important;
+}
+
+.appraisal-panelist-image {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.appraisal-panelist-name {
+  margin: 0 0 5px 0;
+  font-size: 16px !important;
+  color: #333333;
+}
+
+.appraisal-panelist-designation {
+  margin: 0 0 5px 0;
+  font-size: 12px !important;
+  color: #969696
+}
+
+.appraisal-panelist-delete {
+  cursor: pointer;
+  color: #ef3648;
+  font-size: 1.2em;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.appraisee-acknowledgement-form {
+  margin: 10px 0;
+}
+
+.leave-user-redirect-button {
+  background-color: #006eff;
+  color: white;
+  border-radius: 4px;
+}
+
+.search-div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 230px;
+}
+
+.search-header-name {
+  margin-top: 2px;
+  font-weight: 600 !important;
+  font-size: 16px;
+}
+
+.search-header-designation {
+  margin-top: -2px;
+  color: #4a90e2;
+  font-size: 15px;
+}
+
+.search-header-completion {
+  margin-top: -1px;
+  font-size: 14px;
+  color: #6f6f6f;
+  font-weight: 600 !important;
+}
+
+.notification-body {
+  font-size: 16px;
+  margin: 0 !important;
+  color: #5d92ff !important;
+}
+
+@media (max-width: 768px) {
+  .attendance-admin-date-select {
+    padding-left: 17px;
+    margin-top: 8px;
+  }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------*/
+.radio {
+  padding-left: 20px;
+}
+
+.radio-inline {
+  /*margin-right: 8px;*/
+  margin-right: 15px;
+  margin-left: 0;
+  margin-bottom: 12px;
+}
+
+.radio label {
+  display: inline-block;
+  position: relative;
+  padding-left: 5px;
+}
+
+.radio label::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 0;
+  margin-left: -20px;
+  border: 1px solid #cccccc;
+  border-radius: 50%;
+  background-color: #fff;
+  -webkit-transition: border 0.15s ease-in-out;
+  -o-transition: border 0.15s ease-in-out;
+  transition: border 0.15s ease-in-out;
+}
+
+.radio label::after {
+  display: inline-block;
+  position: absolute;
+  content: " ";
+  width: 11px;
+  height: 11px;
+  left: 3px;
+  top: 3px;
+  margin-left: -20px;
+  border-radius: 50%;
+  background-color: #555555;
+  -webkit-transform: scale(0, 0);
+  -ms-transform: scale(0, 0);
+  -o-transform: scale(0, 0);
+  transform: scale(0, 0);
+  -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+  -moz-transition: -moz-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+  -o-transition: -o-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+  transition: transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+}
+
+.radio input[type="radio"] {
+  opacity: 0;
+}
+
+.radio input[type="radio"]:focus + label::before {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.radio input[type="radio"]:checked + label::after {
+  -webkit-transform: scale(1, 1);
+  -ms-transform: scale(1, 1);
+  -o-transform: scale(1, 1);
+  transform: scale(1, 1);
+}
+
+.radio input[type="radio"]:disabled + label {
+  opacity: 0.65;
+}
+
+.radio input[type="radio"]:disabled + label::before {
+  cursor: not-allowed;
+}
+
+.radio.radio-inline {
+  margin-top: 0;
+}
+
+.radio-primary input[type="radio"] + label::after {
+  background-color: #006eff;
+}
+
+.radio-primary input[type="radio"]:checked + label::before {
+  border-color: #006eff;
+}
+
+.radio-primary input[type="radio"]:checked + label::after {
+  background-color: #006eff;
+}
+
+.view-history {
+  padding: 0px;
+  margin-top: -3px;
+  cursor: pointer;
+}
+
+.view-history:hover {
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Scrollbar*/
+.scrollbar {
+  height: 550px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.force-overflow {
+  min-height: 300px;
+}
+
+#style-1::-webkit-scrollbar-track {
+}
+
+#style-1::-webkit-scrollbar {
+  width: 2px;
+  height: 20px;
+}
+
+#style-1::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.table > thead > tr > th {
+  vertical-align: middle;
+  border-bottom: 2px solid #dddddd;
+}
+
+.div-separator-small {
+  height: 5px;
+}
+
+.table-div {
+  overflow-x: scroll;
+}
+
+.table-div::-webkit-scrollbar {
+  display: none;
+}
+
+.tableFixHead {
+  overflow-y: auto;
+  height: 760px;
+  width: 1078px;
+  overflow-x: auto;
+}
+
+.tableFixHead thead th {
+  position: sticky;
+  /*top: -1px;*/
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px 10px;
+}
+
+th {
+  background: #eee;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.appraisal-pillar-comments-textArea {
+  margin: 10px 0;
+  font-size: 14px;
+  padding: 10px 15px !important;
+  color: #004882;
+  line-height: 1.8;
+  resize: vertical;
+  overflow: scroll;
+  min-height: 90px !important;
+  max-height: 800px !important;
+}
+
+.cmt-save {
+  font-size: 14px;
+  margin-left: 2px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: 500 !important;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: 'Rubik', sans-serif;
+
+}
+
+.pillar-cmt-save {
+  margin-top: 35px;
+  padding-right: 15px;
+}
+
+.pillar-cmt-input {
+  padding-left: 33px;
+  padding-right: 20px;
+}
+
+.cmt-section {
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+
+.title-header-h4 {
+  font-size: 14px;
+  color: #2d2f32;
+  margin: 0 !important;
+  font-weight: 600 !important;
+}
+
+
+
+
+
+.tab-focus{
+  color: darkred !important;
+  background-color: #8B5A68 !important;
+}
+
+
+.tab-not-focus{
+
+}
+
+
+::ng-deep .nav-fill .nav-link.active {
+  margin-top: -1px;
+  border-top: 2px solid #20a8d8;
+  color: yellow;
+}
+
+::ng-deep a {
+  color: purple;
+}
+
+::ng-deep a:hover {
+  color: #00008b;
+}
+
+::ng-deep .nav-pills a.nav-link.active,
+::ng-deep .nav-pills .show > a.nav-link {
+  color: #fff;
+  background-color: #006eff;
+}
+
+/*expectation formatting*/
+.formatted {
+  white-space: pre-wrap;
+}

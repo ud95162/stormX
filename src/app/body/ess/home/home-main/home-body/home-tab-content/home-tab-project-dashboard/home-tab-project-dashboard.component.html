@@ -1,0 +1,13 @@
+<!--Desktop-->
+<div *ngIf="isDesktop" class="graph-container">
+  <div>
+    <app-proj-dashboard-header></app-proj-dashboard-header>
+  </div>
+</div>
+
+<!--Mobile / Tab -->
+<div *ngIf="isMobile || isTablet" class="graph-container">
+  <div>
+    <app-proj-dashboard-header></app-proj-dashboard-header>
+  </div>
+</div>

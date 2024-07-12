@@ -1,0 +1,95 @@
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="bond">Bond</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <select class="m-form-field__select" id="bond" [(ngModel)]="familyMemBond">
+        <option *ngIf="familyMemBond == 'No Data' " value="undefined" disabled selected hidden>Select</option>
+        <option value="Parent">Parent</option>
+        <option value="Sibling">Sibling</option>
+        <option value="Spouse">Spouse</option>
+        <option value="Child">Child</option>
+        <option value="In Law">In Law</option>
+      </select>
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="name">Name</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="name" type="text" minlength="0"
+             maxlength="524288" placeholder="Juan" [(ngModel)]="familyMemName" value="{{familyMemName}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="Occupation">Occupation</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="Occupation" type="text" minlength="0"
+             maxlength="524288" placeholder="-" [(ngModel)]="familyMemOccupation" value="{{familyMemOccupation}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<div class="u-mt u-mb-"></div>
+
+<div class="member-card" *ngIf="familyDetails.length !== 0">
+  <div class="member-card__title">Existing</div>
+  <div class="member-card__main-body">
+    <div class="member-card__item" *ngFor="let familyDetail of familyDetails; let i = index">
+      <div class="member-card__header">
+        <div class="member-card__left">{{familyDetail.name}}</div>
+        <div class="a-link-btn member-card__right" (click)="onFamilyPostDelete(i)">
+          <svg class="a-icon o-modal__delete-icon">
+            <use xlink:href="#delete"></use>
+          </svg>
+        </div>
+<!--        <div class="delete-card__item" (click)="delete()">-->
+<!--          <svg class="a-link-btn a-icon c-pax-details__block-main-icon">-->
+<!--            <use xlink:href="#bin"></use>-->
+<!--          </svg>-->
+<!--        </div>-->
+        <div class="c-pax-details__edit">
+          <svg class="a-link-btn a-icon c-pax-details__block-main-icon" (click)="onFamilyPostDelete(i)">
+            <use xlink:href="#bin"></use>
+          </svg>&nbsp;
+          <svg class="a-link-btn a-icon c-pax-details__block-main-icon" (click)="onEditClick(i)">
+            <use xlink:href="#edit"></use>
+          </svg>
+        </div>
+<!--        <button class="a-link-btn member-card__right" (click)="onEditClick(i)">edit</button>-->
+      </div>
+      <div class="member-card__body">
+        <div class="member-card__body-item">Bond</div>
+        <div class="member-card__body-item">{{familyDetail.bond}}</div>
+        <div class="member-card__body-item">Occupation</div>
+        <div class="member-card__body-item">{{familyDetail.occupation}}</div>
+      </div>
+    </div>
+<!--    <div class="member-card__item">-->
+<!--      <div class="member-card__header">-->
+<!--        <div class="member-card__left">Member Name</div>-->
+<!--        <div class="member-card__right">edit</div>-->
+<!--      </div>-->
+<!--      <div class="member-card__body">-->
+<!--        <div class="member-card__body-item">Bond</div>-->
+<!--        <div class="member-card__body-item"> Occupation</div>-->
+<!--        <div class="member-card__body-item"> Lorem Ipsum</div>-->
+<!--        <div class="member-card__body-item"> Lorem Ipsum</div>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+</div>

@@ -1,0 +1,204 @@
+<!--new implementation-->
+<div class="advance-attendace__summary-sidebar">
+  <div class="advance-attendace__sidebar">
+    <div class="advance-attendace__sidebar--wrapper">
+      <h2 class="select-range__card--text">Select Range Type</h2>
+
+      <!---radio button list-->
+            <div class="m-form-field__radio">
+        <input id="detailedViewRangeType11" name="detailedViewRangeType" (click)="setDateRange('R11')" type="radio"
+               [(ngModel)]="detailedViewRangeType" value="R111">
+        <label for="detailedViewRangeType11" class="m-form-radio__label-wrap">Yesterday</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setDateRange('R4')" type="radio"
+               [(ngModel)]="detailedViewRangeType" name="detailedViewRangeType" id="detailedViewRangeType4" value="R44">
+        <label for="detailedViewRangeType4" class="m-form-radio__label-wrap">Today</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setDateRange('R3')" type="radio"
+               [(ngModel)]="detailedViewRangeType" name="detailedViewRangeType" id="detailedViewRangeType3" value="R33">
+        <label for="detailedViewRangeType3" class="m-form-radio__label-wrap">This Week</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setDateRange('R2')" type="radio"
+               [(ngModel)]="detailedViewRangeType" name="detailedViewRangeType" id="detailedViewRangeType2" value="R22">
+        <label for="detailedViewRangeType2" class="m-form-radio__label-wrap">Last Week</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setDateRange('R1')" type="radio"
+               [(ngModel)]="detailedViewRangeType" name="detailedViewRangeType" id="detailedViewRangeType1" value="R11">
+        <label for="detailedViewRangeType1" class="m-form-radio__label-wrap">Last 7 Days</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setDateRange('R8')" type="radio"
+               [(ngModel)]="detailedViewRangeType"  name="detailedViewRangeType" id="detailedViewRangeType8" value="R88">
+        <label for="detailedViewRangeType8" class="m-form-radio__label-wrap">This Month</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setDateRange('R6')" type="radio"
+               [(ngModel)]="detailedViewRangeType" name="detailedViewRangeType" id="detailedViewRangeType6" value="R66">
+        <label for="detailedViewRangeType6" class="m-form-radio__label-wrap">Select Month</label>
+      </div>
+      <!---select month-->
+
+      <div class="m-form__select--month" *ngIf="rangeSingleMonthWidget">
+
+        <div class="m-form-field">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label" for="f-name">Select Month</label>
+          </div>
+          <div class="m-form-field__field m-form-field__min-height">
+            <div class="m-form-field__field-item">
+              <select class="m-form-field__select " (change)="setDateRange('R6')"
+                      [(ngModel)]="selectedMonthFilter" id="filterSelect" name="filterSelect">
+                <option *ngFor="let filter of loadedMonthFilters">{{filter}}</option>
+              </select>
+            </div>
+          </div>
+          <span class="m-form-field__error">error</span>
+        </div><br>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setDateRange('R5')" type="radio"
+               [(ngModel)]="detailedViewRangeType"  name="detailedViewRangeType" id="detailedViewRangeType5" value="R55">
+        <label for="detailedViewRangeType5" class="m-form-radio__label-wrap">Custom</label>
+      </div>
+      <!---from date to-->
+
+      <div class="m-form__from--to" *ngIf="rangeCustomWidget">
+
+        <div class="m-form-field">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label" for="fromDate">From Date</label>
+          </div>
+          <div class="m-form-field__field m-form-field__min-height">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" minlength="0" maxlength="524288" placeholder="" value=""
+                     (change)="setDateRange('R5')" type="date" [(ngModel)]="selectedFromDate"  id="fromDate">
+            </div>
+          </div>
+          <span class="m-form-field__error">error</span>
+        </div>
+
+        <!---to-->
+
+        <div class="m-form-field Custom-height__from-date">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label" for="toDate">To Date</label>
+          </div>
+          <div class="m-form-field__field m-form-field__min-height">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" minlength="0" maxlength="524288" placeholder="" value=""
+                     (change)="setDateRange('R5')" type="date" [(ngModel)]="selectedToDate"  id="toDate">
+            </div>
+          </div>
+          <span class="m-form-field__error">error</span>
+        </div>
+
+      </div>
+
+      <h2 class="select-range__card--text time-gap__range">Time Gap</h2>
+
+      <div class="m-form-field__radio">
+        <input (click)="setTimeGap('8')" type="radio"
+               [(ngModel)]="selectedTimeGapForDetailedView" name="selectedTimeGapForDetailedView" id="selectedTimeGapForDetailedView8" value='88'>
+        <label for="selectedTimeGapForDetailedView8" class="m-form-radio__label-wrap">All</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setTimeGap('1')" type="radio"
+               [(ngModel)]="selectedTimeGapForDetailedView" name="selectedTimeGapForDetailedView" id="selectedTimeGapForDetailedView1" value='11'>
+        <label for="selectedTimeGapForDetailedView1" class="m-form-radio__label-wrap">0 - 2 hrs</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setTimeGap('2')" type="radio"
+               [(ngModel)]="selectedTimeGapForDetailedView" name="selectedTimeGapForDetailedView" id="selectedTimeGapForDetailedView2" value='22'>
+        <label for="selectedTimeGapForDetailedView2" class="m-form-radio__label-wrap">2 - 4 hrs</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setTimeGap('3')" type="radio"
+               [(ngModel)]="selectedTimeGapForDetailedView" name="selectedTimeGapForDetailedView" id="selectedTimeGapForDetailedView3" value='33'>
+        <label for="selectedTimeGapForDetailedView3" class="m-form-radio__label-wrap">4 - 6 hrs</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setTimeGap('4')" type="radio"
+               [(ngModel)]="selectedTimeGapForDetailedView" name="selectedTimeGapForDetailedView" id="selectedTimeGapForDetailedView4" value='44'>
+        <label for="selectedTimeGapForDetailedView4" class="m-form-radio__label-wrap">6 - 7.5 hrs</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setTimeGap('5')" type="radio"
+               [(ngModel)]="selectedTimeGapForDetailedView" name="selectedTimeGapForDetailedView" id="selectedTimeGapForDetailedView5" value='55'>
+        <label for="selectedTimeGapForDetailedView5" class="m-form-radio__label-wrap">7.5 - 8.5 hrs</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setTimeGap('6')" type="radio"
+               [(ngModel)]="selectedTimeGapForDetailedView" name="selectedTimeGapForDetailedView" id="selectedTimeGapForDetailedView6" value='66'>
+        <label for="selectedTimeGapForDetailedView6" class="m-form-radio__label-wrap">8.5 - 10 hrs</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setTimeGap('7')" type="radio"
+               [(ngModel)]="selectedTimeGapForDetailedView" name="selectedTimeGapForDetailedView" id="selectedTimeGapForDetailedView7" value='77'>
+        <label for="selectedTimeGapForDetailedView7" class="m-form-radio__label-wrap">10 - 12 hrs</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input (click)="setTimeGap('10')" type="radio"
+               [(ngModel)]="selectedTimeGapForDetailedView" name="selectedTimeGapForDetailedView" id="selectedTimeGapForDetailedView10" value='100'>
+        <label for="selectedTimeGapForDetailedView10" class="m-form-radio__label-wrap">&gt; 12 hrs</label>
+      </div>
+      <div class="m-form-field__radio">
+        <input (click)="setTimeGap('9')" type="radio"
+               [(ngModel)]="selectedTimeGapForDetailedView" name="selectedTimeGapForDetailedView" id="selectedTimeGapForDetailedView9" value='99'>
+        <label for="selectedTimeGapForDetailedView9" class="m-form-radio__label-wrap">Custom</label>
+      </div>
+      <!---Time gap-->
+
+      <div class="m-form__tome-gap" *ngIf="showCustomTimeGapWidget">
+
+        <div class="m-form-field">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label" for="f-name">From</label>
+          </div>
+          <div class="m-form-field__field m-form-field__min-height">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" id="timeGapFrom" minlength="0" maxlength="524288" placeholder="" value=""
+                     (change)="setTimeGap('9')" [(ngModel)]="timeGapFrom" type="number" name="timeGapFrom">
+            </div>
+          </div>
+          <span class="m-form-field__error">error</span>
+        </div>
+
+        <!---to-->
+
+        <div class="m-form-field Custom-height__from-date">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label" for="f-name">To</label>
+          </div>
+          <div class="m-form-field__field m-form-field__mint">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" id="timeGapTo" minlength="0" maxlength="524288" placeholder="" value=""
+                     (change)="setTimeGap('9')" [(ngModel)]="timeGapTo" type="number" name="timeGapTo">
+            </div>
+          </div>
+          <span class="m-form-field__error">error</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

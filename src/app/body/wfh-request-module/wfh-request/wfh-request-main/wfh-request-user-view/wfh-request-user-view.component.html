@@ -1,0 +1,261 @@
+<div class="reservtion-page__content">
+  <div class="transport-header">
+    <h3 class="transport-header__title">Work From Home Request Details</h3>
+    <button class="a-btn a-btn--primary transport-header__btn" (click)="showModal('createNewWfhRequestModal')">+ WFH
+      Request
+    </button>
+  </div>
+  <div class="reservation-filter">
+    <div class="m-form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label">Start Date</label>
+      </div>
+
+      <div class="m-form-field__field m-form-field__min-height">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" minlength="0" maxlength="524288"
+                 placeholder="Days" value="" [(ngModel)]="startDateForFetchRequest"
+                 [ngModelOptions]="{standalone: true }" (change)="changeDateRange()">
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+    <div class="m-form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label">End Date</label>
+      </div>
+
+      <div class="m-form-field__field m-form-field__min-height">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" minlength="0" maxlength="524288"
+                 placeholder="Days" value="" [(ngModel)]="endDateForFetchRequest" [ngModelOptions]="{standalone: true }"
+                 (change)="changeDateRange()">
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+
+    <div class="m-form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label">Approved Status</label>
+      </div>
+
+      <div class="m-form-field__label-wrap">
+        <div class="m-form-field__radio u-mr3+">
+          <input id="radio-wfh-all" name="m-form-radio__input-for-wfh-all" type="radio"
+                 [checked]="selectedApprovedStatus === 0" (click)="changeApprovedStatus(0)">
+          <label for="radio-wfh-all" class="m-form-radio__label-wrap">All</label>
+        </div>
+        <div class="m-form-field__radio u-mr3+">
+          <input id="radio-wfh-pending" name="m-form-radio__input-for-wfh-pending" type="radio"
+                 [checked]="selectedApprovedStatus === 1" (click)="changeApprovedStatus(1)">
+          <label for="radio-wfh-pending" class="m-form-radio__label-wrap">Pending</label>
+        </div>
+
+        <div class="m-form-field__radio u-mr3+">
+          <input id="radio-wfh-approved" name="m-form-radio__input-for-wfh-approved" type="radio"
+                 [checked]="selectedApprovedStatus === 2" (click)="changeApprovedStatus(2)">
+          <label for="radio-wfh-approved" class="m-form-radio__label-wrap">Approved</label>
+        </div>
+        <div class="m-form-field__radio u-mr3+">
+          <input id="radio-wfh-declined" name="m-form-radio__input-for-wfh-declined" type="radio"
+                 [checked]="selectedApprovedStatus === 3" (click)="changeApprovedStatus(3)">
+          <label for="radio-wfh-declined" class="m-form-radio__label-wrap">Declined</label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="reservation-table">
+    <table class="c-kriyo-deta__table " *ngIf="userWfhRequestsDataLoaded && userWfhRequests.length > 0"
+           aria-describedby="transport-data">
+      <thead class="c-kriyo-deta__table--header ">
+      <tr>
+        <th id="employeeDetailsTransportHr">Date</th>
+        <th id="routeTransportHr">Supervisor Name</th>
+        <th id="dateTransportHr">Notify Member Name</th>
+        <th id="timeSlotTransportHr">Status</th>
+        <th id="projectTransportHr">Reason</th>
+        <th id="transportHr"></th>
+      </tr>
+
+      </thead>
+
+      <tbody class="c-kriyo-deta__table--body" style="overflow-y: auto">
+      <tr *ngFor="let data of userWfhRequests">
+        <td class="reservation-table__row">
+          <p class="reservation-table__main">{{data.date}}</p>
+        </td>
+        <td class="reservation-table__row">
+          <p class="reservation-table__main">{{data.supervisorName}}</p>
+        </td>
+        <td class="reservation-table__row">
+          <p class="reservation-table__main">{{ data.notifyMemberName ? data.notifyMemberName : '-' }}</p>
+        </td>
+        <td class="reservation-table__row">
+          <span
+            class="reservation-table__tag reservation-table__tag--{{generalOps.getApproveStatusNameFromId(data.approvedStatus).toLowerCase()}}">
+            {{generalOps.getApproveStatusNameFromId(data.approvedStatus)}}
+          </span>
+        </td>
+        <td class="reservation-table__row">
+          <p class="reservation-table__main">{{data.reason}}</p>
+        </td>
+        <td class="reservation-table__icons">
+          <a class="reservation-table__icons-link" *ngIf="data.approvedStatus !== 3"
+             (click)="getConfirmationToCancelRequest(data.id)">
+            <svg class="a-icon c-global-header__nav-icon reservation-table__icons-close" style="cursor: pointer">
+              <use xlink:href="#bin"></use>
+            </svg>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="userWfhRequestsDataLoaded && userWfhRequests.length === 0">
+      <div class="profile-summary__block-main u-mt">
+        <div class="c-data__empty" style="display: grid; justify-content: center">
+          <img src="/assets/new-design-images/no-data.png" alt="no data">
+          <div class="gray-500 s-small-default c-data__empty-sub">
+            Wfh Requests Not Available!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="o-modal reservation-modal" id="createNewWfhRequestModal">
+
+  <div class="o-modal__content" style="max-width: 600px !important;">
+
+    <div class="o-modal__inner-header">
+      <h3 class="o-modal__inner-header-title" style="font-weight: 600 !important;">Work From Home Request</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('createNewWfhRequestModal')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body">
+      <section class="l-grid l-grid--1-1">
+
+        <div class="l-grid__item">
+          <div class="m-form-field">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label reservation-details__title u-mb3-" for="startDateOfNewWfhRequest">From
+                <span class="reservation-details__required">*</span></label>
+            </div>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="date"
+                       id="startDateOfNewWfhRequest" value="123"
+                       (change)="changeDateRangeOfNewRequest()"
+                       [(ngModel)]="newWfhRequestDetails.startDate" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+        </div>
+
+        <div class="l-grid__item">
+          <div class="m-form-field">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label reservation-details__title u-mb3-" for="endDateOfNewWfhRequest">To <span class="reservation-details__required">*</span></label>
+            </div>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="date"
+                       id="endDateOfNewWfhRequest" value="123"
+                       (change)="changeDateRangeOfNewRequest()"
+                       [(ngModel)]="newWfhRequestDetails.endDate" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+        </div>
+
+      </section>
+      <section class="l-grid l-grid--1-1">
+
+        <div class="l-grid__item">
+          <div class="m-form-field">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label reservation-details__title u-mb3-">Select Supervisor <span class="reservation-details__required">*</span></label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select "
+                        [(ngModel)]="newWfhRequestDetails.supervisorProfileId" [ngModelOptions]="{standalone: true}">
+                  <option value=-1>Select Supervisor</option>
+                  <option *ngFor="let supervisor of supervisorList"
+                          value="{{supervisor.empId}}">{{supervisor.name}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+        </div>
+
+        <div class="l-grid__item">
+          <div class="m-form-field">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label reservation-details__title u-mb3-">Select Notify Member</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select "
+                        [(ngModel)]="newWfhRequestDetails.notifyMemberProfileId" [ngModelOptions]="{standalone: true}">
+                  <option value=-1>Select Member</option>
+                  <option *ngFor="let supervisor of supervisorList"
+                          value="{{supervisor.empId}}">{{supervisor.name}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="l-grid">
+        <div class="l-grid__item">
+          <div class="reservation-details">
+            <p class="m-form-field__label reservation-details__title u-mb3-">Reason <span class="reservation-details__required">*</span></p>
+            <textarea class="reservation__textarea" name="" rows="3" placeholder="Reason For Request"
+                      [(ngModel)]="newWfhRequestDetails.reason" [ngModelOptions]="{standalone: true}"></textarea>
+          </div>
+        </div>
+      </section>
+
+
+      <p class="error-message" id="errorMessage"
+         style="margin-top: 16px !important; color: red; margin-bottom: 0 !important;">{{validationErrorMessage}}</p>
+
+    </div>
+
+    <div class="o-modal__footer">
+      <div class="">
+        <button class="a-btn a-btn--primary" [ngClass]="{'is-disabled': submitButtonClicked}"
+                [disabled]="submitButtonClicked" (click)="applyNewWfhRequest()">Apply</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-confirmation-modal
+  [modalType]="'DECLINE'"
+  [headerText]="'Confirm Delete'"
+  [subText]="'Are you sure want to delete this record?'"
+  (performActionOnConfirmationButton)="cancelWfhRequestByEmployee($event)">
+</app-confirmation-modal>

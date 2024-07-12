@@ -1,0 +1,94 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  border-radius: 0 0 3px 3px;
+  background-color: #ffffff !important;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*----------------------------------------------------------------------------------*/
+.birthdayTab {
+  margin: 0 !important;
+}
+
+.media-heading {
+  color: #0c0aa5;
+}
+
+.employeeDesignation {
+  color: rgb(19, 21, 105);
+  padding: 0;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.employeeProjectName {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.employeeBirthdayDate {
+  color: #091f99;
+  margin-top: 5px;
+}
+
+.birthday-card-icon {
+  padding: 0;
+}
+
+.birthday-avatar {
+  border: 3px solid #FFFFFF;
+  width: 70px;
+  height: 70px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.sayHBDbtn {
+  background-color: #006eff;
+  padding: 4px 8px;
+  border-radius: 0 4px 4px 0;
+  color: #FFFFFF;
+}
+
+/*Scrollbar*/
+.scrollbar {
+  float: left;
+  height: 450px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.force-overflow {
+  min-height: 650px;
+  margin-right: 10px;
+}
+
+/* #style-1::-webkit-scrollbar-track {
+} */
+
+#style-1::-webkit-scrollbar {
+  width: 3px;
+}
+
+#style-1::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.bdayTabClass {
+  width: 33%;
+  text-align: center;
+}

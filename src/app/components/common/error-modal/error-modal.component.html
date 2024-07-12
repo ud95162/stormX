@@ -1,0 +1,72 @@
+<button (click)="openErrorModal()" class="a-btn a-btn--trinity c-post-add__btn"
+        (click)="showSaveQuoteModal('errorModal')" data-target="#errorModal" id="modalTrigger"
+        style="display: none" type="button">Open Modal
+</button>
+<!--<div class="modal fade" id="errorModal" role="dialog" style="z-index: 10000 !important;">-->
+<!--  <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--    <div class="modal-content error-message-modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <a aria-label="close" class="close crossHover" data-dismiss="modal">&times;</a>-->
+<!--        <h4 class="modal-title {{errorType}}">-->
+<!--          <i aria-hidden="true" class="fa fa-exclamation-triangle"></i> {{errorTypeHeader}}-->
+<!--        </h4>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <h4 id="errorHeader" style="margin-top: 0"></h4>-->
+<!--        <h5 id="errorContent" style="color: #1f1a1a"></h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="o-modal" id="errorModal">-->
+<!--  <div class="o-modal__content">-->
+
+<!--    <div class="o-modal__body">-->
+<!--      <div class="o-modal__inner-header">-->
+<!--        <button class="a-btn a-btn&#45;&#45;link o-modal__inner-close" (click)="hideModal('errorModal')">-->
+<!--          <svg class="a-icon o-modal__close-icon">-->
+<!--            <use xlink:href="#close"></use>-->
+<!--          </svg>-->
+<!--        </button>-->
+<!--      </div>-->
+
+<!--      <h3 class="t1 ts-dark">{{errorType}}-->
+<!--        <i aria-hidden="true" class="fa fa-exclamation-triangle"></i> {{errorTypeHeader}}-->
+<!--      </h3>-->
+<!--      <span>-->
+<!--        <h4 id="errorHeader" style="margin-top: 0"></h4>-->
+<!--        <h5 id="errorContent" style="color: #1f1a1a"></h5>-->
+<!--      </span>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</div>-->
+
+<div class="o-modal reservation-modal" id = "errorModal">
+<div class="o-modal__content-sm edit-personal-details reservation-modal__content-sm">
+  <div class="o-modal__body">
+    <div class="o-modal__inner-header header-line__bottom">
+<!--      <h3 class="o-modal__inner-header-title " id = "errorHeader">-->
+      <h4 id = "errorHeader">
+        <svg class="a-icon u-mr m-success-icon">
+          <use xlink:href="#checked"></use>
+        </svg></h4>
+      <button class="a-btn a-btn--link o-modal__inner-close o-modal__inner-close-sm" (click)="hideModal('errorModal')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+      <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm">
+        <svg class="a-icon u-mr ">
+          <use xlink:href="#previous"></use>
+        </svg>
+        Back
+      </button>
+    </div>
+    <div class="o-modal-review__wraper">
+      <span class="{{errorContentClass}}" id="errorContent"></span>
+    </div>
+  </div>
+</div>
+</div>

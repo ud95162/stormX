@@ -1,0 +1,15 @@
+<div *ngIf="isDesktop" class="container">
+  <div class="col-sm-2" style="top: 30px; padding-left: 0; padding-right: 5px">
+    <app-event-view-sidebar [employeeId]="employeeId"></app-event-view-sidebar>
+  </div>
+  <div class="col-sm-10" style="top: 30px;">
+    <app-event-edit-view-component></app-event-edit-view-component>
+  </div>
+</div>
+
+<div *ngIf="isMobile || isTablet" class="container">
+  <div class="event-mobile-view">
+    <app-event-edit-view-component></app-event-edit-view-component>
+  </div>
+</div>
+

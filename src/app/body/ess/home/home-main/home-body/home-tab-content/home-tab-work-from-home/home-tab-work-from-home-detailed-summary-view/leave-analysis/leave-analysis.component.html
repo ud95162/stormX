@@ -1,0 +1,102 @@
+<div class="dashboard-page @@class"
+     *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortLeaveAnalysis')">
+  <div class="dashboard-page__block-main">
+    <div class="dashboard-page__block-wrapper-main">
+
+
+      <!--work effort filters--->
+      <div class="workeffort-filter_section">
+        <div class="m-form-field-inline d-hide"></div>
+        <div class="m-form-field-inline d-hide"></div>
+        <div class="m-form-field-inline">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label--workflow" for="f-name">From</label>
+          </div>
+
+          <div class="m-form-field__field m-form-field__min-height">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="date" minlength="0" maxlength="524288" placeholder="Days" value=""
+                     [(ngModel)]="fromDate" (change)="setDetailedSummaryReportObject()">
+            </div>
+          </div>
+
+          <span class="m-form-field__error">error</span>
+        </div>
+        <div class="m-form-field-inline">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label--workflow" for="f-name">To</label>
+          </div>
+
+          <div class="m-form-field__field m-form-field__min-height">
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="date" minlength="0" maxlength="524288" placeholder="Days" value=""
+                     [(ngModel)]="toDate" (change)="setDetailedSummaryReportObject()">
+            </div>
+          </div>
+
+          <span class="m-form-field__error">error</span>
+        </div>
+
+      </div>
+
+      <!---leave analysis accordian-->
+
+      <div class="leave-analysis__accordian" *ngIf="responseDataLoaded">
+
+        <ul class="leave-analysis__accordian--wrapper">
+          <li class="leave-analysis__accordian--item" *ngFor="let data of response; let index = index"
+          (click)="showSubLeaveResponses(index)">
+            <div class="analysis-accordian__item-wraper">
+              <div class="analysis-accordian__name">
+                <svg class="a-link-btn a-icon c-accordian__collapse-icon">
+                  <use xlink:href="#pointer-down"></use>
+                </svg>
+                <h3 class="accordian-leave__type--text" *ngIf="responseDataLoaded">{{data[0]}}</h3>
+              </div>
+
+              <div class="analysis-accordian__leave--count">
+                <h3 class="accordian-leave__count-value" *ngIf="responseDataLoaded">{{data[1].length}}</h3>
+              </div>
+            </div>
+
+            <div class="time-analysis__table--wraper" *ngIf="visibleIndex === index">
+              <table class="task-time__table">
+                <thead class="task-time__table-header">
+                <tr>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Emp No</th>
+                  <th>Amount</th>
+                </tr>
+                </thead>
+
+                <tbody class="task-time__table-body" >
+                  <tr *ngFor="let subData of data[1]">
+                    <td>{{subData[4]}}</td>
+                    <td>{{subData[0]}}</td>
+                    <td>{{subData[2]}}</td>
+                    <td>{{subData[3]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!--result list-->
+<!--            <ul class="accordian-leave__details&#45;&#45;list" *ngIf="visibleIndex === index">-->
+<!--              <li class="accordian-leave__item" *ngFor="let subData of data[1]">-->
+<!--                <h3 class="accordian-leave__item&#45;&#45;text">{{subData[4]}}</h3>-->
+<!--                <h3 class="accordian-leave__item&#45;&#45;text">{{subData[0]}}</h3>-->
+<!--                <h3 class="accordian-leave__item&#45;&#45;text">n/a</h3>-->
+<!--                <h3 class="accordian-leave__item&#45;&#45;text">{{subData[2]}}</h3>-->
+<!--                <h3 class="accordian-leave__item&#45;&#45;text">{{subData[3]}}</h3>-->
+<!--              </li>-->
+<!--            </ul>-->
+          </li>
+        </ul>
+      </div>
+      <div class="leave-analysis__accordian" *ngIf="!responseDataLoaded" style="text-align: center">
+        <img src="assets/image/loading/spinner-loading.svg" style="width: 160px;">
+      </div>
+    </div>
+  </div>
+</div>

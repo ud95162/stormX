@@ -1,0 +1,19 @@
+<div style="width: 200px; background-color: red">
+  <h1 style="color: white">Hello {{message}}</h1>
+
+  <div class="form-group">
+    <label for="usr">Name:</label>
+    <input class="form-control" id="usr" type="text">
+  </div>
+
+  <button (click)="newMessage()" class="btn btn-primary">Click</button>
+
+</div>
+
+<div>
+  Example 2
+
+  <h1>{{checkInputMessage}}</h1>
+
+  <button (click)="sendMessageToParent()" class="btn btn-primary">Click</button>
+</div>

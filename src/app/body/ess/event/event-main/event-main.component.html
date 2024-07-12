@@ -1,0 +1,4 @@
+<div *ngIf="checkPermission.checkUserHavePermissionForSection('Events')">
+  <app-event-calendar-view
+    *ngIf="checkPermission.checkUserHavePermissionForSection('CalendarView')"></app-event-calendar-view>
+</div>

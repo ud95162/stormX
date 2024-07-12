@@ -1,0 +1,80 @@
+.time-slot-table {
+  font-size: 8px !important;
+}
+
+
+.time-slot-table-td {
+  cursor: pointer;
+}
+
+.time-slot-table-td:hover {
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.19);
+  /*-ms-transform: scale(1.2); !* IE 9 *!*/
+  /*-webkit-transform: scale(1.2); !* Safari 3-8 *!*/
+  /*transform: scale(1.2);*/
+}
+
+.time-slot-table-left-corner-td {
+  border-radius: 10px 0 0 10px !important;
+}
+
+.time-slot-table-right-corner-td {
+  border-radius: 0 10px 10px 0 !important;
+}
+
+.AWAY {
+  background-color: #C4C4C4;
+}
+
+.IN {
+  background-color: #147AD6;
+}
+
+.OUT {
+  background-color: #EF4444;
+}
+
+
+.attendance-log__th {
+  width: 14.28%;
+}
+
+.attendance-log__td {
+  width: 14.28%;
+  text-align: left;
+  align-items: center;
+}
+
+.attendance-logs__details{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-auto-flow: row;
+  margin-top: 16px;
+}
+
+.attendance-logs__details-block{
+  display: grid;
+}
+
+.attendance-logs-leave__card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #d3f7de;
+  border: 1px solid #d3f7de;
+  margin-bottom: 20px;
+}
+
+.attendance-logs__details-block__title{
+  font-size: 12px;
+}
+
+.attendance-logs__details-block__value{
+  font-size: 14px;
+}
+
+.td{
+  font-size: 15px;
+}

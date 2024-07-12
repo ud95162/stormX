@@ -1,0 +1,44 @@
+<!--new implementation-->
+<div class="project-setting__accepted--list" *ngIf="showcurrentpages">
+  <!--input field-->
+
+  <div class="welfare-header-input__wraper">
+    <div class="m-form-field__field">
+      <div class="m-form-field__field-item">
+        <span class="m-form-field__pre">
+                    <svg class="a-icon m-form-field__pre-icon">
+                    <use xlink:href="#search"></use>
+                </svg>
+                </span>
+        <input class="m-form-field__input" id="page" type="text" minlength="0" maxlength="524288" placeholder="Search Page or creator"
+               value="" [(ngModel)]="searchTerm">
+      </div>
+    </div>
+  </div>
+
+  <!--list-->
+
+  <div class="project-setting__action-list-wraper">
+
+    <!--card-->
+    <div class="project-setting__action--card" *ngFor="let page of currentpages | pageFilterPipe:searchTerm">
+      <div class="project-setting__action--card-header">
+        <div class="project-setting__action--card-details">
+          <img src="{{page.pageImage}}" class="project-setting__project--image-sm" alt="">
+          <h2 class="project-setting__action--project-name">{{page.pageName}}</h2>
+        </div>
+        <div class="project-setting__action--card-delete" (click)="deletePage(page.id)">
+          <svg class="a-link-btn a-icon project-setting__action-delete">
+            <use xlink:href="#bin"></use>
+          </svg>
+        </div>
+      </div>
+
+      <h2 class="project-created__by">Created By </h2>
+      <h2 class="project-created__by--name">{{page.creatorInfo.name}}</h2>
+
+      <span *ngIf="page.acceptedStatus == 'ACCEPTED'" class="project-setting__action--accepted">{{page.acceptedStatus}}</span>
+      <span *ngIf="page.acceptedStatus == 'DECLINED'" class="project-setting__action--rejected">{{page.acceptedStatus}}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+<div class="w3-panel w3-card">
+  <div class="panel-group" id="accordion">
+
+    <div class="panel request-panel" *ngFor="let viewQue of questionAnswerData; let i= index">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a class="request-header-access-link" data-parent="#accordion" data-toggle="collapse"
+             href="#collapse{{viewQue.cycleId}}">
+            <i aria-hidden="true" class="fa fa-bookmark-o request-header-type-icon"></i>&nbsp;&nbsp;
+            <span class="request-header-user-name">{{viewQue.cycleName}}</span>&nbsp;
+          </a>
+        </h4>
+      </div>
+      <div class="panel-collapse collapse" id="collapse{{viewQue.cycleId}}">
+        <div class="panel-body">
+
+          <div class="well request-content-well">
+            <div class="media">
+              <div class="media-body">
+                <div class="settings-card" id="setting-view">
+
+                  <div class="scrollbar" id="feedback-cycle">
+                    <div class="force-overflow">
+
+
+                      <div class="modal-body">
+                      <!--<div style="background: white; padding: 10px; width:840px">-->
+
+                        <div class="row">
+                          <form>
+                            <div class="col-sm-12">
+                              <div class="row-que">
+                                <div class="col-sm-6"></div>
+                                <div class="col-sm-6">
+                                  <p
+                                    class="answer-message"
+                                    id="answerNotification"
+                                    style="color: green">{{answerNotification}}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="row row-que">
+                                    <div class="col-sm-12 no-border-padding row-que" *ngIf="viewQue.questionAnswerList.length > 0">
+                                      <div *ngFor="let queObj of viewQue.questionAnswerList; let j= index">
+                                        <div class="row special-padding" id="chip_{{j}}">
+                                          <div class="col-sm-1 row-que-number">
+                                            <h5 class="que-number-custome">{{j+1}}.</h5>
+                                          </div>
+                                          <div class="col-sm-11 chip-custom">
+                                            <h4 class="que-question">{{queObj.question}}</h4>
+                                            <h4 class="que-description">{{queObj.questionDescription}}</h4>
+                                            <textarea
+                                              [(ngModel)]="queObj.answer"
+                                              class="form-control"
+                                              name="giveAnswer-{{queObj.questionId}}"
+                                              placeholder="Enter Answer"
+                                              type="text"
+                                              #answerInput
+                                              id="giveAnswer-{{queObj.questionId}}"
+                                              (change)="onAddingAnswer(queObj.questionId,queObj.answer,viewQue.questionAnswerList)"
+                                              [disabled]="isUserLogged"></textarea>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </form>
+                        </div>
+
+                     <!--</div>-->
+                    </div>
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div *ngIf="showSaveButton" class="col-sm-12" style="padding-top: 21px;">
+                      <div class="col-sm-10">
+                        <p class="error-message" id="errorMessage" style="color: red">{{validationErrorMessage}}</p>
+                      </div>
+                      <div class="col-sm-2">
+                        <button [hidden]="isUserLogged" (click)="saveAnswer(viewQue.questionAnswerList,viewQue.cycleId)" class="btn save-events" type="button">
+                          Save
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!--FeedBack saving Notification Popup-->
+<div>
+  <button
+    class="btn btn-info hide" data-target="#notificationFeedBackPersonalPopup" data-toggle="modal"
+    id="openFeedBackNotificationPopup"
+    type="button">Open Modal
+  </button>
+  <!--Modal-->
+  <div class="modal fade" id="notificationFeedBackPersonalPopup" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            class="close" data-dismiss="modal" id="closeFeedBackNotificationPopup"
+            type="button">&times;
+          </button>
+          <h4 class="modal-title title-header-h4">Notification</h4>
+        </div>
+        <div class="modal-body">
+          <h5 class="notification-body">
+            {{answerSavingResponse?.message}}
+          </h5>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

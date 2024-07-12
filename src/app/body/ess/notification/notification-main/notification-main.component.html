@@ -1,0 +1,49 @@
+<div *ngIf="checkPermission.checkUserHavePermissionForSection('Notification')">
+
+  <div>
+    <div *ngIf="isDesktop">
+      <div class="container">
+        <div class="col-sm-8">
+          <app-noti-list [selectedTab]="notificationSelectedTab"></app-noti-list>
+        </div>
+        <div class="col-sm-4">
+          <app-noti-bday-cal
+            *ngIf="checkPermission.checkUserHavePermissionForSection('BirthdayEmployeesCard')"></app-noti-bday-cal>
+<!--          <app-noti-hr-calender-->
+<!--            *ngIf="checkPermission.checkUserHavePermissionForSection('HRCalendar')"></app-noti-hr-calender>-->
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isMobile || isTablet">
+      <div class="container" style="margin-top: 15px">
+        <div class="tabbable-panel">
+          <div class="tabbable-line">
+            <ul class="nav nav-tabs">
+              <li class="active notiTypeTabStyle"><a data-toggle="tab" href="#mob_notification">
+                <i aria-hidden="true" class="fa fa-bell"></i>
+              </a></li>
+              <li class="notiTypeTabStyle"><a
+                *ngIf="checkPermission.checkUserHavePermissionForSection('BirthdayEmployeesCard')"
+                data-toggle="tab"
+                href="#mob_birthday">
+                <i aria-hidden="true" class="fa fa-birthday-cake"></i>
+              </a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane fade in active" id="mob_notification">
+                <app-noti-list  [selectedTab]="notificationSelectedTab"></app-noti-list>
+              </div>
+              <div class="tab-pane fade" id="mob_birthday">
+                <app-noti-bday-cal></app-noti-bday-cal>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

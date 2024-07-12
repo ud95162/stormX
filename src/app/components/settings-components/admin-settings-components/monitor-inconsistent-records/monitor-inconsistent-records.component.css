@@ -1,0 +1,36 @@
+
+
+.leave-table-th__check {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  min-width: 35px;
+  width: 35px;
+  text-align: center;
+}
+
+.leave-table-td__check {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  min-width: 35px;
+  width: 35px;
+  text-align: center;
+}
+
+
+.leave-btn__approved {
+  border-radius: 4px !important;
+  color: white;
+  background: #147AD6;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.leave-btn__approved:focus {
+  outline: none;
+}
+
+.leave-btn__approved:hover {
+  opacity: .8;
+}

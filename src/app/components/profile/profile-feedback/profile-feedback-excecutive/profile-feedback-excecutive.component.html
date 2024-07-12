@@ -1,0 +1,143 @@
+<div class="w3-panel w3-card">
+
+<div>
+  <!--<div *ngIf="componentPermission.Attendance.subComponentPermissions.AttendanceAdminView.mainComponentPermission" class="col-sm-12 no-padding">-->
+  <div class="col-sm-12 no-padding">
+    <div class="col-sm-2 select-container no-right-padding">
+      <div class="fb-header">
+        <h5 class="fb-title-special">Select Project</h5>
+      </div>
+    </div>
+    <div class="col-sm-4 select-container" *ngIf="executiveProjectData.length > 0">
+      <select
+        (change)="changeProject()" [(ngModel)]="selectedProject"
+        class="form-control pull-right attendance-admin-project-select"
+        id="projectSelect" name="projectSelect">
+        <option *ngFor="let project of executiveProjectData">{{project}}</option>
+      </select>
+    </div>
+    <div class="col-sm-6 select-container">
+    </div>
+  </div>
+  <div class=""></div>
+  <div class="div-section-separator"></div>
+</div>
+
+  <div *ngIf="isLoadingProgressBarData" class="col-sm-12 no-padding" style="text-align: center; top: 25%;">
+    <img src="assets/image/loading/graph-loading.svg" style="height: 120px !important;">
+  </div>
+
+  <div *ngIf="showNoDataError" class="col-sm-12 no-padding" style="text-align: center; top: 25%;">
+    <img src="assets/image/bad_face.svg">
+    <h4 style="color: #838383">No data available</h4>
+  </div>
+
+  <div *ngIf="loadedCycleData">
+
+    <div *ngIf="cycleStatusData.length === 0" class="div-no-records">
+      <img src="assets/image/bad_face.svg">
+      <h4>No records available!</h4>
+    </div>
+
+
+    <div *ngIf="cycleStatusData.length > 0">
+      <div *ngFor="let cycleDetail of cycleStatusData">
+        <div class="fb-header">
+          <h5 class="fb-title">{{cycleDetail.cycleName}}</h5>
+        </div>
+
+        <div class="div-separator-small"></div>
+
+        <div>
+          <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-10">
+              <div
+                class="progress"
+                style="height: 27px !important;padding: 0px!important;background-color: #f6f6f6!important;border: 0px solid #ccc!important;border-radius: 5px;">
+                <div
+                  class="progress-bar progress-bar-striped progress-bar-animated"
+                  [style.width.%]="cycleDetail.complete.percentage"
+                  style="line-height: 26px !important;background-color: #28a745!important">
+                  {{cycleDetail.complete.text}}
+                </div>
+                <div
+                  class="progress-bar progress-bar-striped progress-bar-animated"
+                  [style.width.%]="cycleDetail.incomplete.percentage"
+                  style="line-height: 26px !important;background-color: #dc3545!important">
+                  {{cycleDetail.incomplete.text}}
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-1">
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-sm-1">
+            </div>
+
+
+            <div class="col-sm-10">
+
+              <div class="row">
+
+                <div class="col-sm-6">
+
+                  <h5 class="group-list header-font-color">{{cycleDetail.complete.listHeader}}</h5>
+                  <div class="scrollbar" id="progressbar-complete">
+                    <div class="force-overflow">
+                      <ul
+                        class="list-group group-list"
+                        style="margin-bottom: 0px !important; font-size: 12px !important;"
+                        *ngFor="let completeSet of cycleDetail.complete.listData">
+                        <li class="list-group-item" style="padding: 5px 5px !important;">{{completeSet}}</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col-sm-6">
+
+                  <h5 class="group-list header-font-color">{{cycleDetail.incomplete.listHeader}}</h5>
+                  <div class="scrollbar" id="progressbar-uncomplete">
+                    <div class="force-overflow">
+                      <ul
+                        class="list-group group-list"
+                        style="margin-bottom: 0px !important; font-size: 12px !important;"
+                        *ngFor="let inCompleteSet of cycleDetail.incomplete.listData">
+                        <li class="list-group-item" style="padding: 5px 5px !important;">{{inCompleteSet}}</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="col-sm-1">
+            </div>
+
+
+          </div>
+
+        </div>
+        <hr>
+      </div>
+    </div>
+
+  </div>
+
+  <!--<div *ngIf="cycleStatusData.length === 0" class="div-no-records">-->
+      <!--<img src="assets/image/bad_face.svg">-->
+      <!--<h4>No records available!</h4>-->
+    <!--</div>-->
+
+
+</div>

@@ -1,0 +1,368 @@
+<div>
+  <div class="dashboard-page @@class">
+    <div class="dashboard-page__block-main">
+      <div class="dashboard-page__block-wrapper-main">
+
+        <!--work effort filters--->
+        <div class="workeffort-filter_section-right">
+
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--workflow" for="employee-wise-system">System</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select " id="employee-wise-system" [(ngModel)]="selectedSystem"
+                        (change)="getDataForSelectedSystem()">
+                  <option *ngFor="let datasource of dataSources" [ngValue]="datasource">{{datasource}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+        </div>
+
+        <div class="wide-worked-hour__table--wraper">
+          <!--        day start new-->
+          <table class="c-emp_workhour--table" *ngIf="employeeWiseWHAYesterday">
+            <thead class="c-emp_workhour--table-head">
+            <tr>
+              <td colspan="3"></td>
+              <td colspan="10" class="c-emp_workhour--selector ">
+                <b>Today</b>
+                <svg class="a-link-btn a-icon c-emp_workhour--selector-icon" (click)="showEmployeeWiseWHAWeek()">
+                  <use xlink:href="#pointer-down"></use>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3"></td>
+              <td class="c-emp_table__header-secondary" colspan="3">Employees</td>
+              <td class="c-emp_table__header-secondary" colspan="2">Expected</td>
+              <td class="c-emp_table__header-secondary"  colspan="3">Actual Hrs</td>
+              <td class="c-emp_table__header-secondary" colspan="2">Logged Hrs</td>
+            </tr>
+            <tr>
+              <td colspan="3"></td>
+              <td class="c-emp_table__header-counts">Total</td>
+              <td class="c-emp_table__header-counts">OnLeave</td>
+              <td class="c-emp_table__header-counts">Unutilized</td>
+              <td class="c-emp_table__header-counts">hrs</td>
+              <td class="c-emp_table__header-counts">Deviation</td>
+              <td class="c-emp_table__header-counts">Tracker</td>
+              <td class="c-emp_table__header-counts">Jira</td>
+              <td class="c-emp_table__header-counts">Office</td>
+              <td class="c-emp_table__header-counts">Tracker</td>
+              <td class="c-emp_table__header-counts">Office</td>
+            </tr>
+            </thead>
+
+
+            <tbody class="c-emp_workhour--table-body"  *ngIf="dataLoadedForDay">
+            <ng-container *ngFor="let data of employeeWHADataForYesterday">
+              <tr (click)="data.projectExpanded = !data.projectExpanded">
+                <td colspan="3" class="c-emp_table__project--name">  <svg class="a-link-btn a-icon c-accordian__collapse-icon">
+                  <use xlink:href="#pointer-down"></use>
+                </svg>
+                  {{data.projectName}}</td>
+                <td class="c-emp_table__project--data" >{{data.projectEmployeeCount}}</td>
+                <td class="c-emp_table__project--data" >{{data.projectUtilizedLeaveCount}}</td>
+                <td class="c-emp_table__project--data-seperator" ></td>
+                <td class="c-emp_table__project--data" >{{data.projectExpectedHrs}}</td>
+                <td class="c-emp_table__project--data-seperator deviation-up__arrow" *ngIf="data.projectStatus == 'true'" >{{data.projectDeviationHrs}}
+                  <svg class="a-link-btn a-icon deviation-up__arrow">
+                    <use xlink:href="#long-arrow--up"></use>
+                  </svg>
+                </td>
+                <td class="c-emp_table__project--data-seperator deviation-down__arrow" *ngIf="data.projectStatus == 'false'" >{{data.projectDeviationHrs}}
+                  <svg class="a-link-btn a-icon deviation-down__arrow">
+                    <use xlink:href="#long-arrow--down"></use>
+                  </svg>
+                </td>
+                <td class="c-emp_table__project--data-seperator deviation-down__arrow" *ngIf="data.projectStatus == 'neutral'" >{{data.projectDeviationHrs}}
+                  <svg class="a-link-btn a-icon deviation-down__arrow">
+                    <use xlink:href="#long-arrow--down"></use>
+                  </svg>
+                </td>
+                <td class="c-emp_table__project--data" >{{data.projectAvgWorkHrs}}</td>
+                <td class="c-emp_table__project--data" >n/a</td>
+                <td class="c-emp_table__project--data-seperator" >n/a</td>
+                <td class="c-emp_table__project--data" >{{data.projectAvgWorkHrs}}</td>
+                <td class="c-emp_table__project--data" >n/a</td>
+              </tr>
+              <ng-container *ngFor="let emp of data.employeeData">
+                <tr *ngIf="data.projectExpanded">
+                  <td colspan="3" class="hour-analysis__person--wrapper">
+                    <div class="hour-analysis__person">
+                      <img src="{{emp.empImage}}" class="hour-analysis__person--image" alt="">
+                      <div class="hour-analysis__person-details">
+                        <h3 class="hour-analysis__person--name">{{emp.empName}}</h3>
+                        <p class="hour-analysis__person--posistion"><i>{{emp.empDesignation}}</i></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td *ngIf="emp.empLeaveCount == 1" class="c-emp_table__person--data">Full-Day</td>
+                  <td *ngIf="emp.empLeaveCount == 0.5" class="c-emp_table__person--data">Half-Day</td>
+                  <td *ngIf="emp.empLeaveCount == 0.25" class="c-emp_table__person--data">Short-Leave</td>
+                  <td *ngIf="emp.empLeaveCount == 0" class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data">{{emp.empExpectedHours}}</td>
+                  <td class="c-emp_table__person--data" *ngIf="emp.empStatus == 'true'">{{emp.empDeviationHrs}}
+                    <svg class="a-link-btn a-icon deviation-up__arrow">
+                      <use xlink:href="#long-arrow--up"></use>
+                    </svg>
+                  </td>
+                  <td class="c-emp_table__person--data" *ngIf="emp.empStatus == 'false'">{{emp.empDeviationHrs}}
+                    <svg class="a-link-btn a-icon deviation-down__arrow">
+                      <use xlink:href="#long-arrow--down"></use>
+                    </svg>
+                  </td>
+                  <td class="c-emp_table__person--data" *ngIf="emp.empStatus == 'neutral'">{{emp.empDeviationHrs}}
+                    <svg class="a-link-btn a-icon deviation-down__arrow">
+                      <use xlink:href="#long-arrow--down"></use>
+                    </svg>
+                  </td>
+                  <td class="c-emp_table__person--data">{{emp.empAvgWorkTime}}</td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data">{{emp.empAvgWorkTime}}</td>
+                  <td class="c-emp_table__person--data">n/a</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+            </tbody>
+          </table>
+          <!--        day new end-->
+
+          <!--        week start new-->
+          <table class="c-emp_workhour--table" *ngIf="employeeWiseWHAWeek">
+            <thead class="c-emp_workhour--table-head">
+            <tr>
+              <td colspan="3"></td>
+              <td colspan="10" class="c-emp_workhour--selector ">
+                <svg class="a-link-btn a-icon c-emp_workhour--selector-left" (click)="showEmployeeWiseWHAYesterday()">
+                  <use xlink:href="#pointer-down"></use>
+                </svg>
+
+                <b>This Week</b>
+                <svg class="a-link-btn a-icon c-emp_workhour--selector-icon" (click)="showEmployeeWiseWHAMonth()">
+                  <use xlink:href="#pointer-down"></use>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3"></td>
+              <td class="c-emp_table__header-secondary" colspan="3">Employees</td>
+              <td class="c-emp_table__header-secondary" colspan="2">Expected</td>
+              <td class="c-emp_table__header-secondary"  colspan="3">Actual Hrs</td>
+              <td class="c-emp_table__header-secondary" colspan="2">Logged Hrs</td>
+            </tr>
+            <tr>
+              <td colspan="3"></td>
+              <td class="c-emp_table__header-counts">Total</td>
+              <td class="c-emp_table__header-counts">OnLeave</td>
+              <td class="c-emp_table__header-counts">Unutilized</td>
+              <td class="c-emp_table__header-counts">hrs</td>
+              <td class="c-emp_table__header-counts">Deviation</td>
+              <td class="c-emp_table__header-counts">Tracker</td>
+              <td class="c-emp_table__header-counts">Jira</td>
+              <td class="c-emp_table__header-counts">Office</td>
+              <td class="c-emp_table__header-counts">Tracker</td>
+              <td class="c-emp_table__header-counts">Office</td>
+            </tr>
+            </thead>
+            <tbody class="c-emp_workhour--table-body"  *ngIf="dataLoadedForWeek">
+            <ng-container *ngFor="let data of employeeWHADataForWeek">
+              <tr (click)="data.projectExpanded = !data.projectExpanded">
+                <td colspan="3" class="c-emp_table__project--name">  <svg class="a-link-btn a-icon c-accordian__collapse-icon">
+                  <use xlink:href="#pointer-down"></use>
+                </svg>
+                  {{data.projectName}}</td>
+                <td class="c-emp_table__project--data" >{{data.projectEmployeeCount}}</td>
+                <td class="c-emp_table__project--data" >{{data.projectUtilizedLeaveCount}}</td>
+                <td class="c-emp_table__project--data-seperator" ></td>
+                <td class="c-emp_table__project--data" >{{data.projectExpectedHrs}}</td>
+                <td class="c-emp_table__project--data-seperator deviation-up__arrow" *ngIf="data.projectStatus == 'true'" >{{data.projectDeviationHrs}}
+                  <svg class="a-link-btn a-icon deviation-up__arrow">
+                    <use xlink:href="#long-arrow--up"></use>
+                  </svg>
+                </td>
+                <td class="c-emp_table__project--data-seperator deviation-down__arrow" *ngIf="data.projectStatus == 'false'" >{{data.projectDeviationHrs}}
+                  <svg class="a-link-btn a-icon deviation-down__arrow">
+                    <use xlink:href="#long-arrow--down"></use>
+                  </svg>
+                </td>
+                <td class="c-emp_table__project--data-seperator" *ngIf="data.projectStatus == 'neutral'" >{{data.projectDeviationHrs}}
+                  <svg class="a-link-btn a-icon deviation-down__arrow">
+                    <use xlink:href="#long-arrow--down"></use>
+                  </svg>
+                </td>
+                <td class="c-emp_table__project--data" >{{data.projectAvgWorkHrs}}</td>
+                <td class="c-emp_table__project--data" >n/a</td>
+                <td class="c-emp_table__project--data-seperator" >n/a</td>
+                <td class="c-emp_table__project--data" >{{data.projectAvgWorkHrs}}</td>
+                <td class="c-emp_table__project--data" >n/a</td>
+              </tr>
+              <ng-container *ngFor="let emp of data.employeeData">
+                <tr *ngIf="data.projectExpanded">
+                  <td colspan="3" class="hour-analysis__person--wrapper">
+                    <div class="hour-analysis__person">
+                      <img src="{{emp.empImage}}" class="hour-analysis__person--image" alt="">
+                      <div class="hour-analysis__person-details">
+                        <h3 class="hour-analysis__person--name">{{emp.empName}}</h3>
+                        <p class="hour-analysis__person--posistion"><i>{{emp.empDesignation}}</i></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td *ngIf="emp.empLeaveCount == 1" class="c-emp_table__person--data">Full-Day</td>
+                  <td *ngIf="emp.empLeaveCount == 0.5" class="c-emp_table__person--data">Half-Day</td>
+                  <td *ngIf="emp.empLeaveCount == 0.25" class="c-emp_table__person--data">Short-Leave</td>
+                  <td *ngIf="emp.empLeaveCount == 0" class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data">{{emp.empExpectedHours}}</td>
+                  <td class="c-emp_table__person--data deviation-up__arrow" *ngIf="emp.empStatus == 'true'">{{emp.empDeviationHrs}}
+                    <svg class="a-link-btn a-icon deviation-up__arrow">
+                      <use xlink:href="#long-arrow--up"></use>
+                    </svg>
+                  </td>
+                  <td class="c-emp_table__person--data deviation-down__arrow" *ngIf="emp.empStatus == 'false'">{{emp.empDeviationHrs}}
+                    <svg class="a-link-btn a-icon deviation-down__arrow">
+                      <use xlink:href="#long-arrow--down"></use>
+                    </svg>
+                  </td>
+                  <td class="c-emp_table__person--data" *ngIf="emp.empStatus == 'neutral'">{{emp.empDeviationHrs}}
+                    <svg class="a-link-btn a-icon deviation-down__arrow">
+                      <use xlink:href="#long-arrow--down"></use>
+                    </svg>
+                  </td>
+                  <td class="c-emp_table__person--data">{{emp.empAvgWorkTime}}</td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data">{{emp.empAvgWorkTime}}</td>
+                  <td class="c-emp_table__person--data">n/a</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+            </tbody>
+          </table>
+          <!--        week new end-->
+
+          <!--        month start new-->
+          <table class="c-emp_workhour--table" *ngIf="employeeWiseWHAMonth">
+            <thead class="c-emp_workhour--table-head">
+            <tr>
+              <td colspan="3"></td>
+              <td colspan="10" class="c-emp_workhour--selector ">
+                <svg class="a-link-btn a-icon c-emp_workhour--selector-left" (click)="showEmployeeWiseWHAWeek()">
+                  <use xlink:href="#pointer-down"></use>
+                </svg>
+
+                <b>This Month</b>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3"></td>
+              <td class="c-emp_table__header-secondary" colspan="3">Employees</td>
+              <td class="c-emp_table__header-secondary" colspan="2">Expected</td>
+              <td class="c-emp_table__header-secondary"  colspan="3">Actual Hrs</td>
+              <td class="c-emp_table__header-secondary" colspan="2">Logged Hrs</td>
+            </tr>
+            <tr>
+              <td colspan="3"></td>
+              <td class="c-emp_table__header-counts">Total</td>
+              <td class="c-emp_table__header-counts">OnLeave</td>
+              <td class="c-emp_table__header-counts">Unutilized</td>
+              <td class="c-emp_table__header-counts">hrs</td>
+              <td class="c-emp_table__header-counts">Deviation</td>
+              <td class="c-emp_table__header-counts">Tracker</td>
+              <td class="c-emp_table__header-counts">Jira</td>
+              <td class="c-emp_table__header-counts">Office</td>
+              <td class="c-emp_table__header-counts">Tracker</td>
+              <td class="c-emp_table__header-counts">Office</td>
+            </tr>
+            </thead>
+            <tbody class="c-emp_workhour--table-body"  *ngIf="dataLoadedForMonth">
+            <ng-container *ngFor="let data of employeeWHADataForMonth">
+              <tr (click)="data.projectExpanded = !data.projectExpanded">
+                <td colspan="3" class="c-emp_table__project--name">  <svg class="a-link-btn a-icon c-accordian__collapse-icon">
+                  <use xlink:href="#pointer-down"></use>
+                </svg>
+                  {{data.projectName}}</td>
+                <td class="c-emp_table__project--data" >{{data.projectEmployeeCount}}</td>
+                <td class="c-emp_table__project--data" >{{data.projectUtilizedLeaveCount}}</td>
+                <td class="c-emp_table__project--data-seperator" ></td>
+                <td class="c-emp_table__project--data" >{{data.projectExpectedHrs}}</td>
+                <td class="c-emp_table__project--data-seperator deviation-up__arrow" *ngIf="data.projectStatus == 'true'" >{{data.projectDeviationHrs}}
+                  <svg class="a-link-btn a-icon deviation-up__arrow">
+                    <use xlink:href="#long-arrow--up"></use>
+                  </svg>
+                </td>
+                <td class="c-emp_table__project--data-seperator deviation-down__arrow" *ngIf="data.projectStatus == 'false'" >{{data.projectDeviationHrs}}
+                  <svg class="a-link-btn a-icon deviation-down__arrow">
+                    <use xlink:href="#long-arrow--down"></use>
+                  </svg>
+                </td>
+                <td class="c-emp_table__project--data-seperator deviation-down__arrow" *ngIf="data.projectStatus == 'neutral'" >{{data.projectDeviationHrs}}
+                  <svg class="a-link-btn a-icon deviation-down__arrow">
+                    <use xlink:href="#long-arrow--down"></use>
+                  </svg>
+                </td>
+                <td class="c-emp_table__project--data" >{{data.projectAvgWorkHrs}}</td>
+                <td class="c-emp_table__project--data" >n/a</td>
+                <td class="c-emp_table__project--data-seperator" >n/a</td>
+                <td class="c-emp_table__project--data" >{{data.projectAvgWorkHrs}}</td>
+                <td class="c-emp_table__project--data" >n/a</td>
+              </tr>
+              <ng-container *ngFor="let emp of data.employeeData">
+                <tr *ngIf="data.projectExpanded">
+                  <td colspan="3" class="hour-analysis__person--wrapper">
+                    <div class="hour-analysis__person">
+                      <img src="{{emp.empImage}}" class="hour-analysis__person--image" alt="">
+                      <div class="hour-analysis__person-details">
+                        <h3 class="hour-analysis__person--name">{{emp.empName}}</h3>
+                        <p class="hour-analysis__person--posistion"><i>{{emp.empDesignation}}</i></p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td *ngIf="emp.empLeaveCount == 1" class="c-emp_table__person--data">Full-Day</td>
+                  <td *ngIf="emp.empLeaveCount == 0.5" class="c-emp_table__person--data">Half-Day</td>
+                  <td *ngIf="emp.empLeaveCount == 0.25" class="c-emp_table__person--data">Short-Leave</td>
+                  <td *ngIf="emp.empLeaveCount == 0" class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data">{{emp.empExpectedHours}}</td>
+                  <td class="c-emp_table__person--data" *ngIf="emp.empStatus == 'true'">{{emp.empDeviationHrs}}
+                    <svg class="a-link-btn a-icon deviation-up__arrow">
+                      <use xlink:href="#long-arrow--up"></use>
+                    </svg>
+                  </td>
+                  <td class="c-emp_table__person--data" *ngIf="emp.empStatus == 'false'">{{emp.empDeviationHrs}}
+                    <svg class="a-link-btn a-icon deviation-down__arrow">
+                      <use xlink:href="#long-arrow--down"></use>
+                    </svg>
+                  </td>
+                  <td class="c-emp_table__person--data" *ngIf="emp.empStatus == 'neutral'">{{emp.empDeviationHrs}}
+                    <svg class="a-link-btn a-icon deviation-down__arrow">
+                      <use xlink:href="#long-arrow--down"></use>
+                    </svg>
+                  </td>
+                  <td class="c-emp_table__person--data">{{emp.empAvgWorkTime}}</td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data"></td>
+                  <td class="c-emp_table__person--data">{{emp.empAvgWorkTime}}</td>
+                  <td class="c-emp_table__person--data">n/a</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+            </tbody>
+          </table>
+          <!--        month new end-->
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

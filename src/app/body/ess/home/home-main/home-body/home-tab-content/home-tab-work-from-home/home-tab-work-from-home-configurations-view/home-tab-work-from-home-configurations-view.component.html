@@ -1,0 +1,582 @@
+<!--<div class="col-sm-12" *ngIf="message">-->
+<!--  <div class="w3-panel w3-card">-->
+<!--    <div class="col-sm-12" style="background-color: #2ECC40; color: white; text-align: center">-->
+<!--      <h5>{{message}}<i class="fa fa-times" aria-hidden="true"-->
+<!--                        style="float: right; cursor: pointer" (click)="closeMessage()"></i></h5>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="col-sm-12 w3-card w3-panel">-->
+<!--  <div class="col-sm-4 groupsToExclude" style="text-align: center">-->
+<!--    <h5><b>Add Groups to Exclude</b></h5>-->
+<!--    <div class="row" style="border-bottom: solid brown">-->
+<!--      <div class="col-sm-6">-->
+<!--        <h5>Group Name</h5>-->
+<!--      </div>-->
+<!--      <div class="col-sm-6">-->
+<!--        <h5>Remove</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div *ngIf="activeFilterMap.size > 0 && userConfigurationsLoaded">-->
+<!--      <div class="row" *ngFor="let data of activeFilterMap | keyvalue">-->
+<!--        <div class="col-sm-6">-->
+<!--          <h5>{{data.key}}</h5>-->
+<!--        </div>-->
+<!--        <div class="col-sm-6">-->
+<!--          <h5><button class="btn btn-warning btn-xs" (click)="removeGroupFromActiveFilters(data.key)">Remove</button></h5>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div *ngIf="activeFilterMap.size === 0 && userConfigurationsLoaded">-->
+<!--      <div class="row">-->
+<!--        <div class="col-sm-12">-->
+<!--          <P style="font-size: 12px">Currently All Users Are Included</P>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div *ngIf="!userConfigurationsLoaded">-->
+<!--      <div class="row">-->
+<!--        <div class="col-sm-12">-->
+<!--          <p class="loading">Loading</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;      <table class="table">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <thead class="fixedHeader">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <th>Group Name</th>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <th>Remove</th>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </thead>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <tbody *ngIf="activeFilterMap.size > 0">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <tr *ngFor="let data of activeFilterMap | keyvalue">&ndash;&gt;-->
+<!--    &lt;!&ndash;          <td>{{data.key}}</td>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <td><button class="btn btn-warning btn-xs" (click)="removeGroupFromActiveFilters(data.key)">Remove</button></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </tbody>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <tbody *ngIf="activeFilterMap.size === 0">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <td colspan="2">Currently All Users Are Included</td>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </tbody>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </table>&ndash;&gt;-->
+<!--  </div>-->
+<!--  <div class="col-sm-5 timeGapFilterType">-->
+<!--    <h5 style="text-align: center"><b>Selected Time Gaps</b></h5>-->
+<!--    <div class="col-sm-12">-->
+<!--      <div class="col-sm-4">-->
+<!--        <h5>Default Time Gap Filters</h5>-->
+<!--      </div>-->
+<!--      <div class="col-sm-4" style="margin: 0 auto;text-align: center;vertical-align: middle" *ngIf="!userConfigurationsLoaded">-->
+<!--        <i class="fa fa-refresh fa-spin" style="margin-top: 15px"></i>-->
+<!--      </div>-->
+<!--      <div class="col-sm-4" style="margin: 0 auto;text-align: center;vertical-align: middle" *ngIf="userConfigurationsLoaded">-->
+<!--        <label class="switch" style="margin-top: 15px">-->
+<!--          <input type="checkbox" checked name="timeFilters" [(ngModel)]="timeGapFilterType">-->
+<!--          <span class="slider round"></span>-->
+<!--        </label>-->
+<!--      </div>-->
+<!--      <div class="col-sm-4">-->
+<!--        <h5>My Time Gap Filters</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col-sm-3">-->
+<!--    <div class="col-sm-12">-->
+<!--      <div class="col-sm-6" style="margin: auto 0;text-align: center">-->
+<!--        <button class="btn btn-success btn-xs saveConfigurationBtn" style="border-right: 4px !important;" (click)="saveConfigurations()">Save These<br/> Configurations</button>-->
+<!--      </div>-->
+<!--      <div class="col-sm-6" style="margin: auto 0;text-align: center">-->
+<!--        <button class="btn btn-primary btn-xs generateSummaryReportBtn" style="border-right: 4px !important" (click)="generateSummaryReport();tabChange()">Generate The<br/> Summary Report</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-sm-12" style="text-align: center;margin-top: 15px">-->
+<!--      <h5>Range: {{range}}</h5>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="col-sm-12">-->
+<!--  <div class="col-sm-6">-->
+<!--    <div class="w3-panel w3-card">-->
+<!--      <h5 style="float: left">Define Time Gaps</h5>-->
+<!--      <button class="btn btn-success btn-xs" style="float: right;vertical-align: middle" *ngIf="!updateTimeGapHit"-->
+<!--              (click)="addTimeGap();fromTimeGap.value='';toTimeGap.value=''">Add-->
+<!--      </button>-->
+<!--      <button class="btn btn-warning btn-xs" style="float: right;margin-left: 10px;vertical-align: middle" *ngIf="updateTimeGapHit"-->
+<!--              (click)="cancelTimeGapUpdate();fromTimeGap.value='';toTimeGap.value=''">Cancel-->
+<!--      </button>-->
+<!--      <button class="btn btn-primary btn-xs" style="float: right;vertical-align: middle" *ngIf="updateTimeGapHit"-->
+<!--              (click)="updateTimeGap();fromTimeGap.value='';toTimeGap.value=''">Update-->
+<!--      </button>-->
+<!--      <br>-->
+<!--      <div class="col-sm-12 addTimeGaps">-->
+<!--        <div class="col-sm-6">-->
+<!--          <label class="col-form-label" style="text-align: left">From</label>-->
+<!--          <input class="form-control" #fromTimeGap [(ngModel)]="timeGapFrom" type="number" name="timeGapFrom">-->
+<!--        </div>-->
+<!--        <div class="col-sm-6">-->
+<!--          <label class="col-form-label" style="text-align: left">To</label>-->
+<!--          <input class="form-control" #toTimeGap [(ngModel)]="timeGapTo" type="number" name="timeGapTo">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <br>-->
+<!--      <hr>-->
+<!--      <table class="table" *ngIf="timeGapsToSave.length > 0">-->
+<!--        <thead class="thead-dark fixedHeader">-->
+<!--        <tr>-->
+<!--          <th>Time Gap</th>-->
+<!--          <th>From</th>-->
+<!--          <th>To</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr *ngFor="let timeGap of timeGapsToSave" #rowIndex>-->
+<!--          <td>{{rowIndex.rowIndex}}</td>-->
+<!--          <td>{{timeGap.split('-')[0]}}</td>-->
+<!--          <td>{{timeGap.split('-')[1]}}</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td colspan="3"><button class="btn btn-primary btn-sm" (click)="saveTimeGaps()">Save</button></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col-sm-6">-->
+<!--    <div class="w3-panel w3-card">-->
+<!--      <h5>Time Gaps <button class="btn btn-danger btn-xs" style="float: right" (click)="deleteAllConfirmation()">Delete All</button></h5>-->
+<!--      <table class="table">-->
+<!--        <thead class="thead-dark fixedHeader">-->
+<!--        <tr>-->
+<!--          <th>Time Gap</th>-->
+<!--          <th>From</th>-->
+<!--          <th>To</th>-->
+<!--          <th>Update</th>-->
+<!--          <th>Delete</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr *ngIf="!userConfigurationsLoaded">-->
+<!--          <td><p class="loading">Loading</p></td>-->
+<!--        </tr>-->
+<!--        <tr *ngFor="let timeGap of timeGaps" #rowIndex>-->
+<!--          <td>{{rowIndex.rowIndex}}</td>-->
+<!--          <td>{{timeGap.timeRange.split('-')[0]}}</td>-->
+<!--          <td>{{timeGap.timeRange.split('-')[1]}}</td>-->
+<!--          <td><button class="btn btn-primary btn-xs" (click)="updateTimeGapInstance(timeGap.id, timeGap.timeRange)">Update</button></td>-->
+<!--          <td><button class="btn btn-danger btn-xs" (click)="deleteTimeGapInstanceConfirmation(timeGap.id)">Delete</button></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="col-sm-12">-->
+<!--  <div class="col-sm-6">-->
+<!--    <div class="col-sm-12">-->
+<!--      <div class="w3-panel w3-card">-->
+<!--        <div>-->
+<!--          <h5 style="float: left">Pick Users to Exclude</h5>-->
+<!--          <button class="btn btn-success btn-xs" style="float: right;vertical-align: middle"-->
+<!--                  (click)="addUserToExclude();excludeUserSelectInput.value=''" [disabled]="usersToExclude.length<1 && excludeUserSelectInput.value.length <1">Add-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <input class="form-control" list="userFullNames" type="text" [(ngModel)]="selectedFullName"-->
+<!--               [disabled]="!userFullNamesLoaded"-->
+<!--               placeholder="All" #excludeUserSelectInput>-->
+<!--        <datalist id="userFullNames">-->
+<!--          <option *ngFor="let user of users">{{user.fullname}}</option>-->
+<!--        </datalist>-->
+<!--        <br/>-->
+<!--        <table width="100%">-->
+<!--          <tr *ngFor="let fullNameOfUserToExclude of usersToExclude" #excludeUserFullNames>-->
+<!--            <td colspan="2">{{fullNameOfUserToExclude}}</td>-->
+<!--            <td><i class="fa fa-times" aria-hidden="true"-->
+<!--                   (click)="removeUserFromExclusion(excludeUserFullNames.rowIndex)" style="float: right;cursor: pointer"></i></td>-->
+<!--          </tr>-->
+<!--          <tr *ngIf="usersToExclude.length > 0" style="margin: auto 0;text-align: center">-->
+<!--            <td colspan="3" style="padding-top: 20px">-->
+<!--              <button class="btn btn-warning" style="width: 100%" (click)="showCreateGroupWidget()">Create Group</button>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          <hr/>-->
+<!--          <tr *ngIf="createGroupSelected" style="padding-top: 20px">-->
+<!--            <td colspan="3"><input class="form-control" type="text" [(ngModel)]="chosenGroupName" placeholder="Type Group Name" ></td>-->
+<!--          </tr>-->
+<!--          <tr *ngIf="createGroupSelected">-->
+<!--            <td colspan="3" style="padding-top: 20px">-->
+<!--              <button class="btn btn-success" style="width: 100%" (click)="createExcludeFilterGroup()">Add Group</button>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td colspan="2"></td>-->
+<!--          </tr>-->
+<!--        </table>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-sm-12">-->
+<!--      <div class="w3-panel w3-card">-->
+<!--        <h5>My Groups</h5>-->
+<!--        <table class="table">-->
+<!--          <thead class="thead-dark fixedHeader">-->
+<!--          <tr>-->
+<!--            <th>Group Name</th>-->
+<!--            <th>User Details</th>-->
+<!--            <th>Add</th>-->
+<!--            <th>Delete Group</th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--          <tr *ngIf="!userConfigurationsLoaded">-->
+<!--            <td><p class="loading">Loading</p></td>-->
+<!--          </tr>-->
+<!--          <tr *ngFor="let group of userGroups.slice().reverse()">-->
+<!--            <td>{{group[0][0]}}</td>-->
+<!--            <td>-->
+<!--              &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+<!--              <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#customGroupNames">-->
+<!--                View Users-->
+<!--              </button>-->
+
+<!--              &lt;!&ndash; Modal &ndash;&gt;-->
+<!--              <div class="modal fade" id="customGroupNames" tabindex="-1" role="dialog" aria-labelledby="customGroupNamesTitle" aria-hidden="true">-->
+<!--                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">-->
+<!--                  <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                      <h5 class="modal-title" id="customGroupNamesTitle">{{group[0][0]}} Users</h5>-->
+<!--                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                      </button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+<!--                      <p *ngFor="let email of group[1]">{{email}}</p>-->
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                      <button type="button" class="btn btn-warning btn-xs" data-dismiss="modal">Close</button>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            &lt;!&ndash;            <td style="max-height: 100px">&ndash;&gt;-->
+<!--            &lt;!&ndash;              <p *ngFor="let email of group[1]">{{email}}</p>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </td>&ndash;&gt;-->
+<!--            <td><button class="btn btn-success btn-xs" (click)="addToFilterEmails(group[0][0],group[0][1])">Exclude</button></td>-->
+<!--            <td><button class="btn btn-danger btn-xs" (click)="deleteConfirmation(group[0][1])">Delete</button></td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col-sm-6">-->
+<!--    <div class="w3-panel w3-card">-->
+<!--      <h5>Default Groups [Projects]</h5>-->
+<!--      <table class="table">-->
+<!--        <thead class="fixedHeader">-->
+<!--        <tr>-->
+<!--          <th scope="col" width="8%" style="text-align: center">Group Name [Project]-->
+<!--            <i class="fa fa-sort" aria-hidden="true" (click)="sortByNameAsc()"  *ngIf="!nameAsc && !nameDsc"></i>-->
+<!--            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByNameDsc()" *ngIf="nameAsc"></i>-->
+<!--            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByNameAsc()" *ngIf="nameDsc"></i>-->
+<!--          </th>-->
+<!--          <th>Add to Exclude</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr *ngIf="!userConfigurationsLoaded">-->
+<!--          <td><p class="loading">Loading</p></td>-->
+<!--        </tr>-->
+<!--        <tr *ngFor="let data of projects">-->
+<!--          <td>{{data["project_name"]}}</td>-->
+<!--          <td><button class="btn btn-warning btn-xs" (click)="addToFilterEmails(data.project_name,-1)">Add</button></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="workeffort-page__configuration-content">
+
+  <section class="workeffort-page__configuration--header">
+    <div class="workeffort-card__hour--analysis">
+      <h2 class="workeffort-card__main--text">Worked hour analysis</h2>
+
+      <div class="workeffort-card__group--name-wrapper">
+        <h2 class="workeffort-card__group--name">Group Name</h2>
+        <h3 class="workeffort-card__remove--action">Remove</h3>
+      </div>
+      <h3 class="workeffort-card__bottom--text">Currently All Users Are Includeds</h3>
+    </div>
+
+    <!---Selected Time Gaps-->
+
+    <div class="workeffort-card__hour--analysis">
+      <h2 class="workeffort-card__main--text">Selected Time Gaps</h2>
+
+      <div class="workeffort-card__time--gap-wrapper">
+        <h2 class="workeffort-card__group--name">Default Time Gap Filters</h2>
+        <div class="workeffort-card__switch-wrapper">
+          <label class="workeffort-card__switch"><input type="checkbox" />    <div class="workeffort-card__checked"></div>
+          </label>
+        </div>
+        <h2 class="workeffort-card__group--name">My Time Gap Filters</h2>
+      </div>
+    </div>
+
+    <div class="workeffort-card__range">
+      <h3 class="workeffort-card__bottom--text">Range : Yesterday</h3>
+      <div class="workeffort-card__bottom-btn">
+        <button class="save-configuration-btn">Save These Configurations</button>
+        <button class="generate-summary__report--btn">Generate the summary report</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="workeffort-define__gaps--wrapper">
+    <div class="workeffort-define__gaps--card">
+      <h2 class="workeffort-define__gaps--text">Define Time Gaps</h2>
+
+      <div class="m-form-field-inline">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label--medium" for="f-name">From</label>
+        </div>
+
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" id="f-name" type="text" minlength="0" maxlength="524288" placeholder="text" value="">
+          </div>
+        </div>
+
+        <span class="m-form-field__error">error</span>
+      </div>
+
+      <div class="m-form-field-inline">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label--medium" for="f-name">To</label>
+        </div>
+
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" id="f-name" type="text" minlength="0" maxlength="524288" placeholder="text" value="">
+          </div>
+        </div>
+
+        <span class="m-form-field__error">error</span>
+      </div>
+
+
+    </div>
+
+    <div class="workeffort-define__gaps--card">
+      <div class="workeffort-define__gaps--header">
+        <h2 class="workeffort-define__gaps--text">Time Gaps</h2>
+        <h2 class="workeffort-define__gaps--text-delete">Delete All</h2>
+      </div>
+
+
+      <!--table-->
+
+      <table class="c-kriyo-deta__table">
+        <thead class="c-kriyo-deta__table--header">
+        <tr>
+          <th>Time Gap</th>
+          <th>From</th>
+          <th>to</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody class="c-kriyo-deta__table--body ">
+        <tr>
+          <td>01</td>
+          <td>01</td>
+          <td>05</td>
+          <td><a href="" class="leave-view__user--link">Update</a></td>
+          <td>
+
+            <svg class="a-link-btn a-icon time-gap__table--bin">
+              <use xlink:href="#bin"></use>
+            </svg>
+          </td>
+        </tr>
+
+        <tr>
+          <td>01</td>
+          <td>01</td>
+          <td>05</td>
+          <td><a href="" class="leave-view__user--link">Update</a></td>
+          <td>
+
+            <svg class="a-link-btn a-icon time-gap__table--bin">
+              <use xlink:href="#bin"></use>
+            </svg>
+          </td>
+        </tr>
+
+        <tr>
+          <td>01</td>
+          <td>01</td>
+          <td>05</td>
+          <td><a href="" class="leave-view__user--link">Update</a></td>
+          <td>
+
+            <svg class="a-link-btn a-icon time-gap__table--bin">
+              <use xlink:href="#bin"></use>
+            </svg>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="workeffort-define__gaps--wrapper">
+
+    <div class="workeffort-define__gaps--exclude">
+      <div class="workeffort-define__gaps--card">
+        <h2 class="workeffort-define__gaps--text">Pick Users to Exclude</h2>
+
+        <div class="m-form-field__field">
+          <select class="m-form-field__select ">
+            <option value="undefined" disabled="" selected="" hidden="">All</option>
+            <option value="Week">PM NAME</option>
+            <option value="Month">PM NAME</option>
+            <option value="Quarter">PM NAME</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="workeffort-define__gaps--card workeffort-card__my-group">
+        <h2 class="workeffort-define__gaps--text">My Groups</h2>
+
+        <!---table-->
+
+        <table class="c-kriyo-deta__table">
+          <thead class="c-kriyo-deta__table--header">
+          <tr>
+            <th>Group Name</th>
+            <th>User Details</th>
+            <th>Add</th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody class="c-kriyo-deta__table--body c-kriyo-table__max--height">
+          <tr>
+            <td>Test Group</td>
+            <td  class="default-group__add"><a href="" class="leave-view__user--link">View Users</a></td>
+            <td  class="default-group__add"><a href="" class="leave-view__user--exclude">Exclude</a></td>
+            <td>
+              <svg class="a-link-btn a-icon time-gap__table--bin">
+                <use xlink:href="#bin"></use>
+              </svg>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Test Group</td>
+            <td  class="default-group__add"><a href="" class="leave-view__user--link">View Users</a></td>
+            <td  class="default-group__add"><a href="" class="leave-view__user--exclude">Exclude</a></td>
+            <td>
+              <svg class="a-link-btn a-icon time-gap__table--bin">
+                <use xlink:href="#bin"></use>
+              </svg>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Test Group</td>
+            <td  class="default-group__add"><a href="" class="leave-view__user--link">View Users</a></td>
+            <td  class="default-group__add"><a href="" class="leave-view__user--exclude">Exclude</a></td>
+            <td>
+              <svg class="a-link-btn a-icon time-gap__table--bin">
+                <use xlink:href="#bin"></use>
+              </svg>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Test Group</td>
+            <td  class="default-group__add"><a href="" class="leave-view__user--link">View Users</a></td>
+            <td  class="default-group__add"><a href="" class="leave-view__user--exclude">Exclude</a></td>
+            <td>
+              <svg class="a-link-btn a-icon time-gap__table--bin">
+                <use xlink:href="#bin"></use>
+              </svg>
+            </td>
+          </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="workeffort-define__gaps--card">
+
+      <h2 class="workeffort-define__gaps--text">Default Groups ( Projects )</h2>
+
+      <!--table-->
+
+      <table class="c-kriyo-deta__table">
+        <thead class="c-kriyo-deta__table--header">
+        <tr>
+          <th>Group Names ( Projects )</th>
+          <th class="default-group__add">Add to Exclude</th>
+        </tr>
+        </thead>
+
+        <tbody class="c-kriyo-deta__table--body c-kriyo-table__max--height">
+        <tr>
+          <td>Yas</td>
+          <td  class="default-group__add"><a href="" class="leave-view__user--link">Add</a></td>
+        </tr>
+
+        <tr>
+          <td>RCL US</td>
+          <td  class="default-group__add"><a href="" class="leave-view__user--link">Add</a></td>
+        </tr>
+
+        <tr>
+          <td>Restaurant Management System</td>
+          <td  class="default-group__add"><a href="" class="leave-view__user--link">Add</a></td>
+        </tr>
+
+        <tr>
+          <td>Demaze</td>
+          <td  class="default-group__add"><a href="" class="leave-view__user--link">Add</a></td>
+        </tr>
+
+        <tr>
+          <td>Dubai Holdings</td>
+          <td  class="default-group__add"><a href="" class="leave-view__user--link">Add</a></td>
+        </tr>
+
+        <tr>
+          <td>FDM</td>
+          <td  class="default-group__add"><a href="" class="leave-view__user--link">Add</a></td>
+        </tr>
+
+        <tr>
+          <td>Quick Application - Unilever</td>
+          <td class="default-group__add"><a href="" class="leave-view__user--link">Add</a></td>
+        </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>
+
+

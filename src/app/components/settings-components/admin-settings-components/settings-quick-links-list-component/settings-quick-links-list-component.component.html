@@ -1,0 +1,79 @@
+<!--new implementation-->
+<div class="quick-link__wrapper--list" *ngIf="showAllQuickLinks">
+  <!--search input-->
+
+  <div class="welfare-header-input__wraper">
+    <div class="m-form-field__field">
+      <div class="m-form-field__field-item">
+        <svg class="a-icon m-form-field__pre-icon">
+          <use xlink:href="#search"></use>
+        </svg>
+        <input class="m-form-field__input" id="f-name" type="text" minlength="0" maxlength="524288"
+               placeholder="Search name or category" value="" [(ngModel)]="searchTerm">
+      </div>
+    </div>
+  </div>
+
+  <!--card list wrapper for unfiltered-->
+
+  <div class="quick-link__wrapper--cards" *ngIf="searchTerm == '' || searchTerm == undefined">
+    <ul class="quick-link__wrapper--groups" *ngFor="let quickLinkGroup of allQuickLinks">
+      <h3 class="quick-link__group--name" >{{quickLinkGroup.type}}</h3>
+      <li class="quick-link__group--item">
+
+        <!--card-->
+
+        <div class="quick-link__action--card" *ngFor="let quickLink of quickLinkGroup.quickLinks | quicklinkFilterPipe:searchTerm">
+          <div class="quick-link__action--card-header">
+            <div class="quick-link__action--card-details">
+              <img src="{{quickLink.icon}}" class="quick-link__project--image-sm" alt="">
+              <h2 class="quick-link__action--project-name">{{quickLink.name}}</h2>
+            </div>
+            <div class="quick-link__action--card-delete">
+              <svg class="a-link-btn a-icon " (click)="editQuickLink(quickLink)">
+                <use xlink:href="#edit"></use>
+              </svg>
+
+              <svg class="a-link-btn a-icon project-setting__action-delete" (click)="deleteQuickLink(quickLink.id)">
+                <use xlink:href="#bin"></use>
+              </svg>
+            </div>
+          </div>
+
+          <h2 class="quick-link-created__by">{{quickLink.url}}</h2>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+<!--  card list wrapper for filtered-->
+  <div class="quick-link__wrapper--cards" *ngIf="searchTerm !== ''">
+    <ul class="quick-link__wrapper--groups" *ngFor="let quickLinkGroup of allQuickLinks">
+<!--      <h3 class="quick-link__group&#45;&#45;name" >{{quickLinkGroup.type}}</h3>-->
+      <li class="quick-link__group--item">
+
+        <!--card-->
+
+        <div class="quick-link__action--card" *ngFor="let quickLink of quickLinkGroup.quickLinks | quicklinkFilterPipe:searchTerm">
+          <div class="quick-link__action--card-header">
+            <div class="quick-link__action--card-details">
+              <img src="{{quickLink.icon}}" class="quick-link__project--image-sm" alt="">
+              <h2 class="quick-link__action--project-name">{{quickLink.name}}</h2>
+            </div>
+            <div class="quick-link__action--card-delete">
+              <svg class="a-link-btn a-icon " (click)="editQuickLink(quickLink)">
+                <use xlink:href="#edit"></use>
+              </svg>
+
+              <svg class="a-link-btn a-icon project-setting__action-delete" (click)="deleteQuickLink(quickLink.id)">
+                <use xlink:href="#bin"></use>
+              </svg>
+            </div>
+          </div>
+
+          <h2 class="quick-link-created__by">{{quickLink.url}}</h2>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

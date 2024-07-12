@@ -1,0 +1,254 @@
+<app-error-modal></app-error-modal>
+
+<div class="o-modal" id="uploadPicture">
+  <div class="o-modal__content">
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header">
+        <button class="a-btn a-btn--link o-modal__inner-close" (click)="closeUploadModal()">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+      </div>
+<!--      <h3 *ngIf="showEditImage" class="t1 ts-dark">Upload Profile Picture</h3>-->
+      <h3 *ngIf="showOtherImage" class="t1 ts-dark">View Profile Picture</h3>
+      <span>
+<!--        <div *ngIf="showUploadingAnimation" style="text-align: center">-->
+<!--          <img src="assets/image/loading/file-uploading.svg"-->
+<!--               style="padding-top: 10%; padding-bottom: 10%; width: 180px !important;">-->
+<!--        </div>-->
+
+        <div *ngIf="showUploadedImage">
+          <img src="{{uploadedProfilePicture}}" style="width: 100%">
+        </div>
+
+<!--        <image-upload (uploadFinished)="uploadFinish($event)" *ngIf="showUploader && showEditImage"-->
+<!--                      [extensions]="['jpg','png','gif','JPEG', '.jpg']"-->
+<!--                      [headers]="{Accept: '*/*'}"-->
+<!--                      [maxFileSize]="uploadImageSize"-->
+<!--                      [max]="1"-->
+<!--                      [style]="customStyle"-->
+<!--                      [url]="imageUploadUrl"-->
+<!--                      buttonCaption="Browse to upload "-->
+<!--                      dropBoxMessage=" or Drag and Drop to upload (max size 5MB)"></image-upload>-->
+      </span>
+
+<!--      <div *ngIf="showEditImage" class="o-modal__footer">-->
+<!--        &lt;!&ndash;        <button class="a-btn a-btn&#45;&#45;trinity u-mr">Cancel</button>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <button class="a-btn a-btn&#45;&#45;primary">Send</button>&ndash;&gt;-->
+<!--        <button *ngIf="showUploadedImage" (click)="deleteUploadedImage()" class="a-btn a-btn&#45;&#45;trinity u-mr">-->
+<!--          Change Photo-->
+<!--        </button>-->
+<!--        <button *ngIf="showRemove" (click)="removeProfilePic()" class="a-btn a-btn&#45;&#45;primary a-btn&#45;&#45;hide">Remove</button>-->
+
+<!--        <button *ngIf="showUploader || showSave" (click)="this.saveProfilePicture('save')" class="a-btn a-btn&#45;&#45;primary">-->
+<!--          Save-->
+<!--        </button>-->
+<!--      </div>-->
+    </div>
+  </div>
+</div>
+
+<div *ngIf="dataLoaded" class="c-profile-card">
+  <div class="c-profile-card__summary">
+    <div class="c-profile-card__media">
+      <img class="c-profile-card__img {{headerData.activeStatus}}" alt="{{this.headerData.name}}" src="{{this.headerData.profileImage}}"
+           (click)="showSaveQuoteModal('uploadPicture')">
+    </div>
+
+    <span class="c-profile-card__username {{convertUppercaseToLowercase(headerData.activeStatus)}}" style="text-align: center;">{{this.headerData.name}}</span>
+
+    <div class="c-profile-card__userdetails" style="text-align: center;">
+      <span class="c-profile-card__designation {{convertUppercaseToLowercase(headerData.activeStatus)}}">{{this.headerData.designation}}</span>
+      <span class="c-profile-card__designation {{convertUppercaseToLowercase(headerData.activeStatus)}}">&nbsp;|&nbsp;{{employeeIdToLoad}}</span>
+    </div>
+
+
+
+    <div class="c-profile__ratings-section" (click)="redirect('review')">
+      <div style="color: #EFCE4A; margin-bottom: 5px; margin-top: 15px; cursor:pointer; font-size: 1.2em; display: flex; justify-content: center;" title="Add a rating">
+        <img *ngIf="headerData.activeStatus === 'ACTIVE'" src="assets/image/starRatings/{{generalOps.roundFloatToNearestHalf(headerData.averageStarRating)}}.png"
+             class="c-profile__ratings-section-icon" alt="stars" style="width: 100px"/>
+        <img *ngIf="headerData.activeStatus === 'INACTIVE'" src="assets/image/starRatings/D{{generalOps.roundFloatToNearestHalf(headerData.averageStarRating)}}.png"
+             class="c-profile__ratings-section-icon" alt="stars" style="width: 100px"/>
+
+      </div>
+      <p class="c-profile__ratings-section-para"><span class="{{convertUppercaseToLowercase(headerData.activeStatus)}}">{{generalOps.roundFloatToNearestHalf(headerData.averageStarRating)}}</span> &nbsp;/ 5.0</p>
+    </div>
+
+    <div class="c-profile-card__stats">
+      <div class="c-profile-card__stat-item c-profile-card__border-view">
+        <span class="c-profile-card__stat-lbl">Views</span>
+        <span class="c-profile-card__stat-value {{convertUppercaseToLowercase(headerData.activeStatus)}}"> {{this.headerData.noOfProfViews}}</span>
+      </div>
+      <div class="c-profile-card__stat-item c-profile-card__border-review">
+        <span class="c-profile-card__stat-lbl">Reviews</span>
+        <span class="c-profile-card__stat-value {{convertUppercaseToLowercase(headerData.activeStatus)}}">{{this.headerData.noOfReviews}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="c-profile-card-contact__wrapper">
+    <div class="c-profile-card__contact-item">
+      <div class="c-profile-card__contact-icon {{convertUppercaseToLowercase(headerData.activeStatus)}}">
+        <svg class="a-icon">
+          <use xlink:href="#mobile"></use>
+        </svg>
+      </div>
+      <div *ngIf="showContact" class="c-profile-card__contact-text {{convertUppercaseToLowercase(headerData.activeStatus)}}">
+        <div>{{this.headerData.employeeHeaderContactData.phoneNo}}</div>
+      </div>
+    </div>
+
+    <div class="c-profile-card__contact-item">
+      <div class="c-profile-card__contact-icon {{convertUppercaseToLowercase(headerData.activeStatus)}}">
+        <svg class="a-icon">
+          <use xlink:href="#mail"></use>
+        </svg>
+      </div>
+      <div *ngIf="showContact" class="c-profile-card__contact-text {{convertUppercaseToLowercase(headerData.activeStatus)}}">
+        <div>{{this.headerData.employeeHeaderContactData.workEmail}}</div>
+      </div>
+    </div>
+  </div>
+<!--  <button (click)="redirect('resume')" class="a-btn a-btn&#45;&#45;trinity  c-profile-card__full-profile-btn">View Full-->
+<!--    Profile-->
+<!--  </button>-->
+  <button class="a-btn a-btn--trinity  c-profile-card__full-profile-btn" *ngIf="changePwd"
+          (click)="showSaveQuoteModal('changePwd')">
+    Change Password
+  </button>
+  <button class="a-btn a-btn--trinity  c-profile-card__full-profile-btn" *ngIf="permissionToResetPwd && headerData.loginType === 'DB'"
+          (click)="showSaveQuoteModal('passwordResetModal')">
+    Reset Password
+  </button>
+
+
+</div>
+
+<div class="o-modal" id="passwordResetModal">
+  <div class="o-modal__content-sm profile-summary-modal">
+    <div class="o-modal__inner-header">
+      <h3 class="o-modal__inner-header-title">Reset Password</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('passwordResetModal')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#closee"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body">
+      <p class="u-mb0">Are you sure want to reset the password of this user?</p>
+    </div>
+
+    <div class="o-modal__footer justify-content-end">
+      <div class="">
+        <button class="a-btn a-btn--secondary u-mr+" (click)="hideModal('passwordResetModal')">Cancel</button>
+        <button class="a-btn a-btn--primary" (click)="resetEmployeePwd()">Reset Password</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="reviewProfileModal" class="o-modal review-modal" *ngIf="dataLoaded">
+
+  <div class="o-modal__content-sm edit-personal-details">
+
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header" style="display: flex;">
+        <!--        <h3 class="o-modal__inner-header-title o-header-title__align">Review {{this.headerData.name}}</h3>-->
+        <h3 class="o-header-title__align">Review {{this.headerData.name}}</h3>
+        <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('reviewProfileModal')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+        <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm">
+          <svg class="a-icon u-mr">
+            <use xlink:href="#previous"></use>
+          </svg>
+          Back
+        </button>
+      </div>
+
+      <div class="o-modal-review__wraper">
+        <div class="person-image__circle" style="display: flex; flex-direction: column; align-items: center;">
+          <img src="{{this.headerData.profileImage}}" class="image__circle" alt="profile image">
+
+          <div class="review-modal__rating">
+            <p class="review-modal__rating-title">Rate {{headerData.firstName}} <span class="required">*</span></p>
+            <div style = "color: #EFCE4A; margin-bottom: 20px; margin-top: 0; cursor:pointer; font-size: 1.2em;"
+                 title="Add a rating">
+            <span (click)="setGroupStar(0)" *ngIf="reviewStarRating >= 1" class="review-modal__rating-star">
+              <i class="fa fa-star"></i>
+            </span>
+              <span (click)="setGroupStar(1)" *ngIf="reviewStarRating === 0" class="review-modal__rating-star">
+              <i class="fa fa-star-o"></i>
+            </span>
+              <span (click)="setGroupStar(1)" *ngIf="reviewStarRating >= 2" class="review-modal__rating-star">
+              <i class="fa fa-star"></i>
+            </span>
+              <span (click)="setGroupStar(2)" *ngIf="reviewStarRating <= 1" class="review-modal__rating-star">
+              <i class="fa fa-star-o"></i>
+            </span>
+              <span (click)="setGroupStar(2)" *ngIf="reviewStarRating >= 3" class="review-modal__rating-star">
+              <i class="fa fa-star"></i>
+            </span>
+              <span (click)="setGroupStar(3)" *ngIf="reviewStarRating <= 2" class="review-modal__rating-star">
+              <i class="fa fa-star-o"></i>
+            </span>
+              <span (click)="setGroupStar(3)" *ngIf="reviewStarRating >= 4" class="review-modal__rating-star">
+              <i class="fa fa-star"></i>
+            </span>
+              <span (click)="setGroupStar(4)" *ngIf="reviewStarRating <= 3" class="review-modal__rating-star">
+              <i class="fa fa-star-o"></i>
+            </span>
+              <span (click)="setGroupStar(4)" *ngIf="reviewStarRating === 5" class="review-modal__rating-star">
+              <i class="fa fa-star"></i>
+            </span>
+              <span (click)="setGroupStar(5)" *ngIf="reviewStarRating <= 4" class="review-modal__rating-star">
+              <i class="fa fa-star-o"></i>
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="m-form-field u-mb+">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label" for="reviewTitle">Review Title<span class="required">*</span></label>
+        </div>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" id="reviewTitle" type="text" minlength="0" maxlength="524288" value="">
+          </div>
+        </div>
+        <span class="m-form-field__error">error</span>
+      </div>
+
+      <div class="m-form-field">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label" for="reviewComment">Review Comment</label>
+        </div>
+        <textarea id="reviewComment" name="review-comment" placeholder="" rows="5" cols="95" spellcheck="false"
+                  [(ngModel)]="comment" style="padding: 10px 14px;">                                   </textarea>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <span style="font-size: 14px; font-weight: normal; color: red;">{{errorMsg}}</span>
+      </div>
+
+      <div class="o-modal__footer">
+        <div class="o-modal__footer__add"><label class="a-checkbox">
+          <input id="reviewPostOnFeed" type="checkbox" class="a-checkbox__check">
+          <span class="a-checkbox__label">Post on Feed</span>
+        </label>
+        </div>
+        <!--      <button (click)="hideModal('reviewProfileModal')" class="a-btn a-btn&#45;&#45;trinity u-mr">Cancel</button>-->
+        <button (click)="saveReview()" class="a-btn a-btn--primary">Send</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

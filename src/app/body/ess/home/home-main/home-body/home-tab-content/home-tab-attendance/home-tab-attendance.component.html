@@ -1,0 +1,21 @@
+<div class="l-page__main profile-page" *ngIf="componentPermission.checkUserHavePermissionForSection('AttendanceDashboard')">
+  <div class="profile-page__nav">
+    <div class="c-page-nav">
+      <nav class="c-page-nav__wrapper">
+<!--        <a class="c-page-nav__item" [ngClass]="{'is-selected': activeTab === 'dashboard'}"-->
+<!--          (click)="changeActiveTab('dashboard')">-->
+<!--          Attendance Dashboard</a>-->
+        <a class="c-page-nav__item " [ngClass]="{'is-selected': activeTab === 'projects'}"
+           (click)="changeActiveTab('projects')">
+          Project Wise Attendance</a>
+      </nav>
+    </div>
+  </div>
+
+<!--  <div class="l-wrapper profile-page__wrapper" *ngIf="activeTab === 'dashboard'">-->
+<!--    <app-attendance-dashboard></app-attendance-dashboard>-->
+<!--  </div>-->
+  <div class="l-wrapper profile-page__wrapper" *ngIf="activeTab === 'projects'">
+    <app-projects-attendance></app-projects-attendance>
+  </div>
+</div>

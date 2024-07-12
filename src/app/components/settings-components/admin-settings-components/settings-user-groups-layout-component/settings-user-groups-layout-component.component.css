@@ -1,0 +1,350 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background-color: #ffffff !important;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.top-card-class-custom {*/
+/*  background-color: transparent !important;*/
+/*  padding: 0 !important;*/
+/*  box-shadow: none !important;*/
+/*  margin: 0 !important;*/
+/*}*/
+
+/*.scrollbar {*/
+/*  float: left;*/
+/*  height: 180px;*/
+/*  overflow-y: scroll;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.force-overflow {*/
+/*  min-height: 160px;*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar-track {*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar {*/
+/*  width: 3px;*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar-thumb {*/
+/*  background-color: rgba(0, 0, 0, .1);*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+
+/*.card-containing-div {*/
+/*  margin: 0 -15px;*/
+/*}*/
+
+/*.header-title-div {*/
+/*  height: 55px;*/
+/*}*/
+
+/*.card-title-h5 {*/
+/*  margin: 0 0 5px 0;*/
+/*  font-size: 14px;*/
+/*  color: #2d2f32;*/
+/*  font-weight: 600 !important;*/
+/*}*/
+
+/*.card-content-div {*/
+/*  height: 180px;*/
+/*}*/
+
+/*.card-super-user-h6 {*/
+/*  margin: 0 !important;*/
+/*  color: #333333;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+
+/*.user-avatar-image {*/
+/*  width: 35px;*/
+/*  height: 35px;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.user-name-h4 {*/
+/*  font-size: 14px;*/
+/*  color: #2d2f32;*/
+/*  margin: 0 !important;*/
+/*}*/
+
+/*.user-designation-h6 {*/
+/*  font-size: 12px;*/
+/*  color: #858585;*/
+/*  margin: 5px 0 0 0 !important;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+
+/*.card-containing-div {*/
+/*  margin: 0 -15px;*/
+/*}*/
+
+/*.group-type-title-h4 {*/
+/*  color: #858585;*/
+/*  font-size: 14px;*/
+/*  margin: 0 0 10px 0;*/
+/*}*/
+
+/*.title-header-h4 {*/
+/*  font-size: 14px;*/
+/*  color: #2d2f32;*/
+/*  margin: 0 !important;*/
+/*  font-weight: 600 !important;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+
+/*.edit-project-button {*/
+/*  text-decoration: none;*/
+/*  padding: 0;*/
+/*  border: none;*/
+/*  color: #006eff;*/
+/*}*/
+
+/*.edit-project-button:focus,*/
+/*.edit-project-button:active:focus {*/
+/*  outline: none;*/
+/*}*/
+
+/*!*-------------------------------------------------------------------------------------------------------------------*!*/
+
+/*.card-containing-div {*/
+/*  margin: 0 -15px;*/
+/*}*/
+
+/*.group-type-title-h4 {*/
+/*  color: #858585;*/
+/*  font-size: 14px;*/
+/*  margin: 0 0 10px 0;*/
+/*}*/
+
+/*.title-header-h4 {*/
+/*  font-size: 14px;*/
+/*  color: #2d2f32;*/
+/*  margin: 0 !important;*/
+/*  font-weight: 600 !important;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.header-create-button {*/
+/*  border-radius: 4px;*/
+/*  background-color: #006eff;*/
+/*  padding: 4px 12px;*/
+/*  color: #FFFFFF;*/
+/*}*/
+
+/*.header-line-button {*/
+/*  border-radius: 4px;*/
+/*  border: 1px solid #006eff;*/
+/*  padding: 4px 12px;*/
+/*  color: #006eff;*/
+/*  background: #ffffff;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.permission-groups-list-title-h5 {*/
+/*  color: #333333;*/
+/*  font-weight: 600 !important;*/
+/*  font-size: 14px !important;*/
+/*  margin: 0 0 10px 0;*/
+/*}*/
+
+/*.permission-group-list-container {*/
+/*  width: 45% !important;*/
+/*  max-width: 100%;*/
+/*  margin: 0 2.5%;*/
+/*  display: inline-block;*/
+/*  vertical-align: top;*/
+/*}*/
+
+/*.permission-group-list-div {*/
+/*  border: solid 1px #eaeaea;*/
+/*  min-height: 60px;*/
+/*  background: white;*/
+/*  border-radius: 2px;*/
+/*  overflow: hidden;*/
+/*  display: block;*/
+/*  height: 180px;*/
+/*}*/
+
+/*.permission-group-item {*/
+/*  padding: 8px 10px;*/
+/*  border-bottom: solid 1px #eaeaea;*/
+/*  color: #383838;*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  align-items: center;*/
+/*  justify-content: space-between;*/
+/*  box-sizing: border-box;*/
+/*  cursor: move;*/
+/*  font-size: 13px !important;*/
+/*}*/
+
+/*.permission-group-item-assigned {*/
+/*  background: #f9f9f9;*/
+/*}*/
+
+/*.permission-group-item-other {*/
+/*  background: white;*/
+/*}*/
+
+/*.cdk-drag-preview {*/
+/*  box-sizing: border-box;*/
+/*  border-radius: 4px;*/
+/*  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),*/
+/*  0 8px 10px 1px rgba(0, 0, 0, 0.14),*/
+/*  0 3px 14px 2px rgba(0, 0, 0, 0.12);*/
+/*}*/
+
+/*.cdk-drag-placeholder {*/
+/*  opacity: 0;*/
+/*}*/
+
+/*.cdk-drag-animating {*/
+/*  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);*/
+/*}*/
+
+/*.permission-group-item:last-child {*/
+/*  border: none;*/
+/*}*/
+
+/*.permission-group-list-div.cdk-drop-list-dragging .permission-group-item:not(.cdk-drag-placeholder) {*/
+/*  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);*/
+/*}*/
+
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+
+/*!*Scrollbar*!*/
+/*.scrollbar {*/
+/*  float: left;*/
+/*  height: 180px;*/
+/*  overflow-y: scroll;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.force-overflow {*/
+/*  min-height: 160px;*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar-track {*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar {*/
+/*  width: 3px;*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar-thumb {*/
+/*  background-color: rgba(0, 0, 0, .1);*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.permission-group-update-warning {*/
+/*  color: #858585;*/
+/*  font-size: 12px;*/
+/*  margin: 10px 20px 0 20px !important;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.custom-search-input-div {*/
+/*  margin-top: 15px !important;*/
+/*}*/
+
+/*.custom-well {*/
+/*  padding: 15px 0;*/
+/*}*/
+
+/*.custom-search-input {*/
+/*  font-size: 13px;*/
+/*  box-shadow: none !important;*/
+/*}*/
+
+/*.stylish-input-group .input-group-addon {*/
+/*  background: white !important;*/
+/*}*/
+
+/*.stylish-input-group .form-control {*/
+/*  border-right: 0;*/
+/*  !*box-shadow: 0 0 0;*!*/
+/*  !*border-color: #ccc;*!*/
+/*}*/
+
+/*.stylish-input-group button {*/
+/*  border: 0;*/
+/*  background: transparent;*/
+/*}*/
+
+/*input::-webkit-calendar-picker-indicator {*/
+/*  display: none !important;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.chip-div {*/
+/*  padding: 0 15px;*/
+/*  margin-bottom: 15px;*/
+/*}*/
+
+/*!*Chips*!*/
+/*.chip-custom {*/
+/*  text-align: center;*/
+/*  margin: 0 10px 3px 0;*/
+/*  display: inline-block;*/
+/*  padding: 5px 8px;*/
+/*  border-radius: 20px;*/
+/*  background-color: #FFFFFF;*/
+/*  !*box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12);*!*/
+/*  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+/*  font-weight: 300;*/
+/*  font-size: 12px;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.chip-selected-privacy {*/
+/*  border: solid 1px #5d92ff;*/
+/*  background-color: #5d92ff;*/
+/*  color: #ffffff !important;*/
+/*}*/
+
+/*.chip-privacy {*/
+/*  border: solid 1px #5d92ff;*/
+/*  color: #5d92ff !important;*/
+/*}*/
+
+
+/*.form-control-select-graph {*/
+/*  padding: 2px 4px;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.permission-grant-h6 {*/
+/*  margin: 0 !important;*/
+/*  color: #333333;*/
+/*}*/
+
+/*.permission-grant-checkbox {*/
+/*  width: 15px;*/
+/*  height: 15px;*/
+/*}*/

@@ -1,0 +1,14 @@
+<h5 style="margin-top: 0">Interested in your search</h5>
+<div *ngFor="let interestedResult of interestedResultSet">
+  <div class="w3-panel w3-card">
+    <div class="media">
+      <div (click)="profileRedirect(interestedResult.empNo)" class="media-left">
+        <img class="media-object img-circle search-interested-avatar" src="{{interestedResult.image}}">
+      </div>
+      <div class="media-body">
+        <h5 class="media-heading">{{interestedResult.name}}</h5>
+        <h6 style="margin-top: 0; color: #4a90e2;">{{interestedResult.designation}}</h6>
+      </div>
+    </div>
+  </div>
+</div>

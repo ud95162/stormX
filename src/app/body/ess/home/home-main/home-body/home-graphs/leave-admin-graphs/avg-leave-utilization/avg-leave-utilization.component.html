@@ -1,0 +1,239 @@
+
+<div class="c-leave-dashboard__middle--wrraper">
+
+  <div class="leave-dashboard__main-header">
+    <div class="leave-dashboard-page__right">
+      <div class="m-form-field leave-dashboard__form--lg">
+        <div class="m-form-field__field">
+          <select class="m-form-field__select " (change)="changeActiveOption($event)">
+            <option value="day" >Daily average utilization</option>
+            <option value="week" >Weekly average utilization</option>
+            <option value="month" >Monthly average utilization</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="c-kriyo-deta__table" *ngIf="dailyUtilizationClicked && dailyUtilizeDataLoaded">
+    <thead class="c-kriyo-deta__table--header ">
+    <tr>
+      <th> Leave Type </th>
+      <th> No.of leaves utilized</th>
+      <th> No.of working  days</th>
+      <th> Average daily utilization</th>
+    </tr>
+    </thead>
+
+    <tbody class="c-kriyo-deta__table--body c-pending__leave--body">
+    <tr>
+      <td >Annual</td>
+      <td >{{dailyStandardUtilize.annualLeaveUtilizeCount}}</td>
+      <td >{{dailyAvgUtilizeResponse.workDays}}</td>
+      <td >{{dailyStandardUtilize.annualLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td >Casual</td>
+      <td >{{dailyStandardUtilize.casualLeaveUtilizeCount}}</td>
+      <td >{{dailyAvgUtilizeResponse.workDays}}</td>
+      <td >{{dailyStandardUtilize.casualLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td >Lieu</td>
+      <td >{{dailySpecialUtilize.lieuLeaveUtilization}}</td>
+      <td >{{dailyAvgUtilizeResponse.workDays}}</td>
+      <td >{{dailySpecialUtilize.lieuLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Maternity</td>
+      <td >{{dailySpecialUtilize.maternityLeaveUtilization}}</td>
+      <td >{{dailyAvgUtilizeResponse.workDays}}</td>
+      <td >{{dailySpecialUtilize.maternityLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Medical</td>
+      <td >{{dailyStandardUtilize.medicalLeaveUtilizeCount}}</td>
+      <td >{{dailyAvgUtilizeResponse.workDays}}</td>
+      <td >{{dailyStandardUtilize.medicalLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>No Pay</td>
+      <td >{{dailySpecialUtilize.noPayLeaveUtilization}}</td>
+      <td >{{dailyAvgUtilizeResponse.workDays}}</td>
+      <td >{{dailySpecialUtilize.noPayLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Official</td>
+      <td >{{dailySpecialUtilize.officialLeaveUtilization}}</td>
+      <td >{{dailyAvgUtilizeResponse.workDays}}</td>
+      <td >{{dailySpecialUtilize.officialLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>On Site Travel</td>
+      <td >{{dailySpecialUtilize.onSiteLeaveUtilization}}</td>
+      <td >{{dailyAvgUtilizeResponse.workDays}}</td>
+      <td >{{dailySpecialUtilize.onSiteLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Short Leave</td>
+      <td >{{dailyShortLeaveUtilize.shortLeaveUtilization}}</td>
+      <td >{{dailyAvgUtilizeResponse.workDays}}</td>
+      <td >{{dailyShortLeaveUtilize.shortLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td class="leave-table__bottom-text">Daily average utilization</td>
+      <td class="leave-table__bottom-text">{{dailyTotalUtilize}}</td>
+      <td class="leave-table__bottom-text">{{dailyAvgUtilizeResponse.workDays}}</td>
+      <td class="leave-table__bottom-text">{{dailyTotalAverage}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="c-kriyo-deta__table" *ngIf="weeklyUtilizationClicked && weeklyUtilizeDataLoaded">
+    <thead class="c-kriyo-deta__table--header ">
+    <tr>
+      <th> Leave Type </th>
+      <th> No.of leaves utilized</th>
+      <th> No.of weeks</th>
+      <th> Average weekly utilization</th>
+    </tr>
+    </thead>
+
+    <tbody class="c-kriyo-deta__table--body c-pending__leave--body">
+    <tr>
+      <td >Annual</td>
+      <td >{{weeklyStandardUtilize.annualLeaveUtilizeCount}}</td>
+      <td >{{weeklyAvgUtilizeResponse.workDays}}</td>
+      <td >{{weeklyStandardUtilize.annualLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td >Casual</td>
+      <td >{{weeklyStandardUtilize.casualLeaveUtilizeCount}}</td>
+      <td >{{weeklyAvgUtilizeResponse.workDays}}</td>
+      <td >{{weeklyStandardUtilize.casualLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td >Lieu</td>
+      <td >{{weeklySpecialUtilize.lieuLeaveUtilization}}</td>
+      <td >{{weeklyAvgUtilizeResponse.workDays}}</td>
+      <td >{{weeklySpecialUtilize.lieuLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Maternity</td>
+      <td >{{weeklySpecialUtilize.maternityLeaveUtilization}}</td>
+      <td >{{weeklyAvgUtilizeResponse.workDays}}</td>
+      <td >{{weeklySpecialUtilize.maternityLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Medical</td>
+      <td >{{weeklyStandardUtilize.medicalLeaveUtilizeCount}}</td>
+      <td >{{weeklyAvgUtilizeResponse.workDays}}</td>
+      <td >{{weeklyStandardUtilize.medicalLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>No Pay</td>
+      <td >{{weeklySpecialUtilize.noPayLeaveUtilization}}</td>
+      <td >{{weeklyAvgUtilizeResponse.workDays}}</td>
+      <td >{{weeklySpecialUtilize.noPayLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Official</td>
+      <td >{{weeklySpecialUtilize.officialLeaveUtilization}}</td>
+      <td >{{weeklyAvgUtilizeResponse.workDays}}</td>
+      <td >{{weeklySpecialUtilize.officialLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>On Site Travel</td>
+      <td >{{weeklySpecialUtilize.onSiteLeaveUtilization}}</td>
+      <td >{{weeklyAvgUtilizeResponse.workDays}}</td>
+      <td >{{weeklySpecialUtilize.onSiteLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Short Leave</td>
+      <td >{{weeklyShortLeaveUtilize.shortLeaveUtilization}}</td>
+      <td >{{weeklyAvgUtilizeResponse.workDays}}</td>
+      <td >{{weeklyShortLeaveUtilize.shortLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td class="leave-table__bottom-text">Weekly average utilization</td>
+      <td class="leave-table__bottom-text">{{weeklyTotalUtilize}}</td>
+      <td class="leave-table__bottom-text">{{weeklyAvgUtilizeResponse.workDays}}</td>
+      <td class="leave-table__bottom-text">{{weeklyTotalAverage}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="c-kriyo-deta__table" *ngIf="monthlyUtilizationClicked && monthlyUtilizeDataLoaded">
+    <thead class="c-kriyo-deta__table--header ">
+    <tr>
+      <th> Leave Type </th>
+      <th> No.of leaves utilized</th>
+      <th> No.of months</th>
+      <th> Average monthly utilization</th>
+    </tr>
+    </thead>
+
+    <tbody class="c-kriyo-deta__table--body c-pending__leave--body">
+    <tr>
+      <td >Annual</td>
+      <td >{{monthlyStandardUtilize.annualLeaveUtilizeCount}}</td>
+      <td >{{monthlyAvgUtilizeResponse.workDays}}</td>
+      <td >{{monthlyStandardUtilize.annualLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td >Casual</td>
+      <td >{{monthlyStandardUtilize.casualLeaveUtilizeCount}}</td>
+      <td >{{monthlyAvgUtilizeResponse.workDays}}</td>
+      <td >{{monthlyStandardUtilize.casualLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td >Lieu</td>
+      <td >{{monthlySpecialUtilize.lieuLeaveUtilization}}</td>
+      <td >{{monthlyAvgUtilizeResponse.workDays}}</td>
+      <td >{{monthlySpecialUtilize.lieuLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Maternity</td>
+      <td >{{monthlySpecialUtilize.maternityLeaveUtilization}}</td>
+      <td >{{monthlyAvgUtilizeResponse.workDays}}</td>
+      <td >{{monthlySpecialUtilize.maternityLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Medical</td>
+      <td >{{monthlyStandardUtilize.medicalLeaveUtilizeCount}}</td>
+      <td >{{monthlyAvgUtilizeResponse.workDays}}</td>
+      <td >{{monthlyStandardUtilize.medicalLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>No Pay</td>
+      <td >{{monthlySpecialUtilize.noPayLeaveUtilization}}</td>
+      <td >{{monthlyAvgUtilizeResponse.workDays}}</td>
+      <td >{{monthlySpecialUtilize.noPayLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Official</td>
+      <td >{{monthlySpecialUtilize.officialLeaveUtilization}}</td>
+      <td >{{monthlyAvgUtilizeResponse.workDays}}</td>
+      <td >{{monthlySpecialUtilize.officialLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>On Site Travel</td>
+      <td >{{monthlySpecialUtilize.onSiteLeaveUtilization}}</td>
+      <td >{{monthlyAvgUtilizeResponse.workDays}}</td>
+      <td >{{monthlySpecialUtilize.onSiteLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td>Short Leave</td>
+      <td >{{monthlyShortLeaveUtilize.shortLeaveUtilization}}</td>
+      <td >{{monthlyAvgUtilizeResponse.workDays}}</td>
+      <td >{{monthlyShortLeaveUtilize.shortLeaveAvgUtilization}}</td>
+    </tr>
+    <tr>
+      <td class="leave-table__bottom-text">Monthly average utilization</td>
+      <td class="leave-table__bottom-text">{{monthlyTotalUtilize}}</td>
+      <td class="leave-table__bottom-text">{{monthlyAvgUtilizeResponse.workDays}}</td>
+      <td class="leave-table__bottom-text">{{monthlyTotalAverage}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>

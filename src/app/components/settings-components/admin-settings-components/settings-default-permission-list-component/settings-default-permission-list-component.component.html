@@ -1,0 +1,227 @@
+<!--<button class="hide" data-target="#addPermissionGroupModal" data-toggle="modal" id="openAddPermissionDialog"-->
+<!--        type="button"></button>-->
+<!--<div class="modal fade" id="addPermissionGroupModal" role="dialog">-->
+<!--  <div class="modal-dialog modal-sm">-->
+
+<!--    &lt;!&ndash; Modal content&ndash;&gt;-->
+<!--    <div class="modal-content">-->
+
+<!--      <div class="modal-header">-->
+<!--        <button class="close" data-dismiss="modal" id="closePermissionSave" type="button">&times;</button>-->
+<!--        <h4 class="modal-title title-header-h4">Save Permission Group</h4>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <form>-->
+<!--          <div class="form-group">-->
+<!--            <label for="permissionGroupName">Permission Group Name</label>-->
+<!--            <input [(ngModel)]="permissionGroupSaveObject.permissionGroup" class="form-control" id="permissionGroupName"-->
+<!--                   name="permissionGroupName"-->
+<!--                   type="text">-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label for="permissionGroupDescription">Description</label>-->
+<!--            <textarea [(ngModel)]="permissionGroupSaveObject.description" class="form-control"-->
+<!--                      id="permissionGroupDescription" name="permissionGroupDescription"-->
+<!--                      rows="2" style="resize: vertical"></textarea>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button (click)="savePermissionGroup()" class="btn btn-action-fill" type="button">Save</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--new implementation-->
+<app-error-modal></app-error-modal>
+<div class="o-modal settings-modal" id="addPermissionGroupModal">
+
+  <div class="o-modal__content">
+
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header">
+        <h3 class="o-modal__inner-header-title">Save Permission Group</h3>
+        <button class="a-btn a-btn--link" (click)="hideModal('addPermissionGroupModal')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="o-modal__content-section">
+        <div class="m-form-field permission-setting-modal__form">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label" for="permissionGroupName">Permission Group Name</label>
+          </div>
+          <div class="m-form-field__field">
+            <input class="m-form-field__input" type="text" minlength="0" id="permissionGroupName"
+                   maxlength="524288" placeholder="" value="" [(ngModel)]="permissionGroupSaveObject.permissionGroup" >
+          </div>
+        </div>
+
+        <div class="m-form-field permission-setting-modal__form">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label" for="permissionGroupDescription">Description</label>
+          </div>
+          <textarea id="permissionGroupDescription" name="test" rows="8" cols="95" placeholder="Type here"
+                    class="permission-setting-modal__form-textarea" [(ngModel)]="permissionGroupSaveObject.description"></textarea>
+        </div>
+
+
+      </div>
+
+      <div class="o-modal__footer">
+        <button class="a-btn o-modal__button o-modal__button--primary" (click)="savePermissionGroup()">Save</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="permission-setting__tree" id="defaultPermissionGrantView">
+  <div class="permission-setting__tree-cover">
+    <ul class="permission-setting__tree--main">
+    <li class="permission-setting__tree--child" *ngFor="let permission of defaultPermissionList">
+      <label class="a-checkbox" for="checkbox{{permission.permName}}">
+        <input class="a-checkbox__check" (click)="changePermissionGroup(permission.permName, permission.subPerms, null);
+            setParentsPermission(null,null,null,
+            null,null,null,null,0)"
+               [(ngModel)]="permission.grantedToGroup"
+               checked="{{checkPermissionAvailable(permission.grantedToGroup)}}"
+               id="checkbox{{permission.permName}}"
+               type="checkbox">
+        <span class="a-checkbox__label permission-setting__checkbox--label">{{permission.permName}}</span>
+      </label>
+
+      <ul class="permission-setting__tree--subparent">
+
+        <li class="permission-setting__tree--subchild" *ngFor="let subPermissionLevel1 of permission.subPerms">
+          <label class="a-checkbox" for="checkbox{{subPermissionLevel1.permName}}">
+            <input class="a-checkbox__check"
+              (click)="changePermissionGroup(subPermissionLevel1.permName, subPermissionLevel1.subPerms, permission.permCode);
+                  setParentsPermission(null,null,null,
+            null,null,null,permission,1)"
+              [(ngModel)]="subPermissionLevel1.grantedToGroup"
+              checked="{{checkPermissionAvailable(subPermissionLevel1.grantedToGroup)}}"
+              id="checkbox{{subPermissionLevel1.permName}}"
+              type="checkbox">
+            <span class="a-checkbox__label permission-setting__checkbox--label">{{subPermissionLevel1.permName}}</span>
+          </label>
+          <ul class="permission-setting__tree--subparent">
+
+            <li class="permission-setting__tree--subchild" *ngFor="let subPermissionLevel2 of subPermissionLevel1.subPerms">
+              <label class="a-checkbox" for="checkbox{{subPermissionLevel2.permName}}">
+                <input class="a-checkbox__check"
+                       (click)="changePermissionGroup(subPermissionLevel2.permName, subPermissionLevel2.subPerms, subPermissionLevel1.permCode);
+                      setParentsPermission(null,null,null,
+            null,null,subPermissionLevel1,permission,2)"
+                       [(ngModel)]="subPermissionLevel2.grantedToGroup"
+                       checked="{{checkPermissionAvailable(subPermissionLevel2.grantedToGroup)}}"
+                       id="checkbox{{subPermissionLevel2.permName}}"
+                       type="checkbox">
+                <span class="a-checkbox__label permission-setting__checkbox--label">{{subPermissionLevel2.permName}}</span>
+              </label>
+              <ul class="permission-setting__tree--subparent">
+
+                <li class="permission-setting__tree--subchild" *ngFor="let subPermissionLevel3 of subPermissionLevel2.subPerms">
+                  <label class="a-checkbox" for="checkbox{{subPermissionLevel3.permName}}">
+                    <input class="a-checkbox__check"
+                           (click)="changePermissionGroup(subPermissionLevel3.permName, subPermissionLevel3.subPerms, subPermissionLevel2.permCode);
+                          setParentsPermission(null,null,null,
+            null,subPermissionLevel2,subPermissionLevel1,permission,3)"
+                           [(ngModel)]="subPermissionLevel3.grantedToGroup"
+                           checked="{{checkPermissionAvailable(subPermissionLevel3.grantedToGroup)}}"
+                           id="checkbox{{subPermissionLevel3.permName}}"
+                           type="checkbox">
+                    <span class="a-checkbox__label permission-setting__checkbox--label">{{subPermissionLevel3.permName}}</span>
+                  </label>
+                  <ul class="permission-setting__tree--subparent">
+
+                    <li class="permission-setting__tree--subchild" *ngFor="let subPermissionLevel4 of subPermissionLevel3.subPerms">
+                      <label class="a-checkbox" for="checkbox{{subPermissionLevel4.permName}}">
+                        <input class="a-checkbox__check"
+                               (click)="changePermissionGroup(subPermissionLevel4.permName, subPermissionLevel4.subPerms, subPermissionLevel3.permCode);
+                              setParentsPermission(null,null,null,
+                              subPermissionLevel3,subPermissionLevel2,subPermissionLevel1,permission,4)"
+                               [(ngModel)]="subPermissionLevel4.grantedToGroup"
+                               checked="{{checkPermissionAvailable(subPermissionLevel4.grantedToGroup)}}"
+                               id="checkbox{{subPermissionLevel4.permName}}"
+                               type="checkbox">
+                        <span class="a-checkbox__label permission-setting__checkbox--label">{{subPermissionLevel4.permName}}</span>
+                      </label>
+                      <ul class="permission-setting__tree--subparent">
+
+                        <li class="permission-setting__tree--subchild" *ngFor="let subPermissionLevel5 of subPermissionLevel4.subPerms">
+                          <label class="a-checkbox" for="checkbox{{subPermissionLevel5.permName}}">
+                            <input class="a-checkbox__check"
+                                   (click)="changePermissionGroup(subPermissionLevel5.permName, subPermissionLevel5.subPerms, subPermissionLevel4.permCode);
+                                  setParentsPermission(null,null,subPermissionLevel4,
+                                  subPermissionLevel3,subPermissionLevel2,subPermissionLevel1,permission,5)"
+                                   [(ngModel)]="subPermissionLevel5.grantedToGroup"
+                                   checked="{{checkPermissionAvailable(subPermissionLevel5.grantedToGroup)}}"
+                                   id="checkbox{{subPermissionLevel5.permName}}"
+                                   type="checkbox">
+                            <span class="a-checkbox__label permission-setting__checkbox--label">{{subPermissionLevel5.permName}}</span>
+                          </label>
+                          <ul class="permission-setting__tree--subparent">
+
+                            <li class="permission-setting__tree--subchild" *ngFor="let subPermissionLevel6 of subPermissionLevel5.subPerms">
+                              <label class="a-checkbox" for="checkbox{{subPermissionLevel6.permName}}">
+                                <input class="a-checkbox__check"
+                                       (click)="changePermissionGroup(subPermissionLevel6.permName, subPermissionLevel6.subPerms, subPermissionLevel5.permCode);
+                                      setParentsPermission(null,subPermissionLevel5,subPermissionLevel4,
+                                      subPermissionLevel3,subPermissionLevel2,subPermissionLevel1,permission,6)"
+                                       [(ngModel)]="subPermissionLevel6.grantedToGroup"
+                                       checked="{{checkPermissionAvailable(subPermissionLevel6.grantedToGroup)}}"
+                                       id="checkbox{{subPermissionLevel6.permName}}"
+                                       type="checkbox">
+                                <span class="a-checkbox__label permission-setting__checkbox--label">{{subPermissionLevel6.permName}}</span>
+                              </label>
+                              <!--        last child start-->
+<!--                            <li class="permission-setting__tree--subchild">-->
+                              <ul class="permission-setting__tree--inline">
+                                <li class="permission-setting__tree--inline-item" *ngFor="let subPermissionLevel7 of subPermissionLevel6.subPerms">
+                                  <label class="a-checkbox" for="checkbox{{subPermissionLevel7.permName}}">
+                                    <input class="a-checkbox__check"
+                                           (click)="changePermissionGroup(subPermissionLevel7.permName, [], subPermissionLevel6.permCode);
+                                           setParentsPermission(subPermissionLevel6,subPermissionLevel5,subPermissionLevel4,
+                                           subPermissionLevel3,subPermissionLevel2,subPermissionLevel1,permission,7)"
+                                    [(ngModel)]="subPermissionLevel6.grantedToGroup"
+                                    checked="{{checkPermissionAvailable(subPermissionLevel7.grantedToGroup)}}"
+                                    id="checkbox{{subPermissionLevel7.permName}}"
+                                    type="checkbox">
+                                    <span class="a-checkbox__label permission-setting__checkbox--label">{{subPermissionLevel7.permName}}</span>
+                                  </label>
+                                </li>
+                              </ul>
+<!--                            </li>-->
+                            <!--        last child end-->
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+    </li>
+  </ul>
+  </div>
+  <div class="permission-setting-action">
+    <button (click)="loadDefaultPermissionObject()"
+            class="permission-setting-action__button permission-setting-action__button--reset">Reset</button>
+    <button (click)="clickOnSavePermissionGroup()" *ngIf="showSaveButton"
+            class="permission-setting-action__button permission-setting-action__button--save u-ml">Save Permission Group</button>
+    <button (click)="editPermissionGroup()" *ngIf="showEditButton"
+            class="permission-setting-action__button permission-setting-action__button--save u-ml">Edit Permission Group</button>
+  </div>
+</div>
+

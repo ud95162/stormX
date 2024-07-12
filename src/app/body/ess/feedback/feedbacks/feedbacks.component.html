@@ -1,0 +1,79 @@
+
+
+<mat-horizontal-stepper [linear]="true" #stepper>
+
+  <mat-step label="Step 1" >
+
+    <p id="itext">You can select a service and take the survey!</p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Service</mat-label>
+        <mat-select [(ngModel)]='service'>
+          <mat-option *ngFor="let service of services" [value]="service.id" >{{service.title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <!-- <form [formGroup]="firstFormGroup"></form> -->
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Your Name (Optional)</mat-label>
+        <input matInput placeholder="Your Name " [(ngModel)]='name' >
+      </mat-form-field>
+
+    </p>
+<!--    <p>-->
+<!--      <mat-form-field appearance="outline" >-->
+<!--        <mat-label>E-Mail Address (Optional)</mat-label>-->
+<!--        <input matInput placeholder="Your Email Address" [(ngModel)]='email' >-->
+<!--      </mat-form-field>-->
+<!--    </p>-->
+<!--    <p>-->
+<!--      <mat-form-field appearance="outline">-->
+<!--        <mat-label>Telephone Number (Optional)</mat-label>-->
+<!--        <input matInput placeholder="Your Telephone Number" [(ngModel)]='tele' >-->
+<!--      </mat-form-field>-->
+<!--    </p>-->
+    <!-- </form> -->
+    <button id="nextButton" mat-raised-button matStepperNext color="primary">Next</button>
+<!--    <i class="fa fa-spinner fa-spin"></i>-->
+  </mat-step>
+
+  <mat-step label="Step 2">
+    <mat-list>
+      <div *ngFor="let question of questions">
+        <mat-list-item > {{question.quiz.quiz}} </mat-list-item>
+        <div class="rating">
+          <mat-icon class='star' (mouseover)="question.rating.setRating(1)">{{question.rating.getRating(0)}}</mat-icon>
+          <mat-icon class='star' (mouseover)="question.rating.setRating(2)">{{question.rating.getRating(1)}}</mat-icon>
+          <mat-icon class='star' (mouseover)="question.rating.setRating(3)">{{question.rating.getRating(2)}}</mat-icon>
+          <mat-icon class='star' (mouseover)="question.rating.setRating(4)">{{question.rating.getRating(3)}}</mat-icon>
+          <mat-icon class='star' (mouseover)="question.rating.setRating(5)">{{question.rating.getRating(4)}}</mat-icon>
+        </div>
+      </div>
+      <mat-list-item><b>What is the Overall rating you would provide?</b> </mat-list-item>
+      <div class="rating">
+        <mat-icon class='star' (mouseover)="overallRating.setRating(1)">{{overallRating.getRating(0)}}</mat-icon>
+        <mat-icon class='star' (mouseover)="overallRating.setRating(2)">{{overallRating.getRating(1)}}</mat-icon>
+        <mat-icon class='star' (mouseover)="overallRating.setRating(3)">{{overallRating.getRating(2)}}</mat-icon>
+        <mat-icon class='star' (mouseover)="overallRating.setRating(4)">{{overallRating.getRating(3)}}</mat-icon>
+        <mat-icon class='star' (mouseover)="overallRating.setRating(5)">{{overallRating.getRating(4)}}</mat-icon>
+      </div>
+    </mat-list>
+    <div id="ratingNext">
+      <button id="nextButton" mat-raised-button matStepperNext color="primary" style="padding-left: 5px;">Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step label="Step 3">
+    <mat-list>
+      <mat-list-item> Please mention further thoughts (Optional)</mat-list-item>
+      <textarea id="furtherText" [(ngModel)]='feedback'></textarea>
+
+    </mat-list>
+    <div id="finishDiv">
+      <button id="finishButton" [class.spinner]="loading" [disabled]="loading" mat-raised-button (click)="submitFeedback()" color="primary" >Submit Feedback</button>
+    </div>
+  </mat-step>
+
+</mat-horizontal-stepper>
+

@@ -1,0 +1,43 @@
+<div class="overall-performance__card">
+  <div class="overall-performance__card-header">
+    <div class="card-header__section">
+      <div class="card-header__section-titles">
+        <h3 class="card-header__section-titles-main card-header__section-titles-main--active">Overall Work Complete / Timelog</h3>
+      </div>
+    </div>
+    <div class="m-form-field__field card-header__select m-form-field__min-height">
+      <select class="m-form-field__select" [(ngModel)]="selectedMonthFilter" (change)="changeActiveMonth()">
+        <option *ngFor="let filter of loadedMonthFilters">{{filter}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="overall-performance__body">
+    <div class="overall-performance-row" *ngIf="expectedHrsDataLoaded">
+      <div class="overall-performance-row__left">
+        <svg class="a-icon overall-performance-row__left-icon overall-performance-row__left-icon--plus">
+          <use xlink:href="#plus-circle-outline"></use>
+        </svg>
+        <p class="overall-performance-row__left-text overall-performance-row__left-text--bold">Expected Hrs</p>
+      </div>
+      <div class="overall-performance-row__right">
+        <p class="overall-performance-row__right-value">{{monthExpectedProjectHrs}}</p>
+      </div>
+    </div>
+    <div class="overall-performance-row" *ngIf="actualHrsDataLoaded">
+      <div class="overall-performance-row__left">
+        <svg class="a-icon overall-performance-row__left-icon overall-performance-row__left-icon--minus">
+          <use xlink:href="#minus-circle-outline"></use>
+        </svg>
+        <p class="overall-performance-row__left-text overall-performance-row__left-text--bold">Actual Hrs</p>
+      </div>
+      <div class="overall-performance-row__right">
+        <p class="overall-performance-row__right-value">{{monthActualProjectHrs}}</p>
+      </div>
+    </div>
+
+<!--    <div class="overall-performance__empty">-->
+<!--      <img src="assets/images/empty-img.png" alt="Image" class="overall-performance__empty-img">-->
+<!--      <p class="overall-performance__empty-text">No Data Available</p>-->
+<!--    </div>-->
+  </div>
+</div>

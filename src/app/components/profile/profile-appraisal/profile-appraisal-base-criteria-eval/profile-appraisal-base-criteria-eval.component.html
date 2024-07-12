@@ -1,0 +1,166 @@
+<div class="o-tabs__pane review-page-tabs__pane is-active" id="tab-b" style="padding-top: 0">
+  <div class="c-accomplishment__header" style="padding-top: 0">
+    <div class="c-accomplishment__header-back" style="cursor: pointer" *ngIf="currentLocation === '#/profile/_search'"
+         (click)="profileRedirect()">
+      <svg class="a-icon header-back-icon">
+        <use xlink:href="#long-arrow--back"></use>
+      </svg>
+      <span class="c-accomplishment__header-back--text">Back to Profile</span>
+    </div>
+  </div>
+  <div class="l-grid__item reservation-content__form">
+    <div class="profile-page__nav" style="margin-top: 20px">
+      <div class="c-page-nav" style="justify-content: flex-start">
+        <nav class="c-page-nav__wrapper">
+          <a class="c-page-nav__item " [ngClass]="{'is-selected': selectedTab === 'kpiEvaluation'}"
+             (click)="changeActiveTab('kpiEvaluation')" style="margin-left: 10px">
+            <i class="fa fa-code a-icon reservation-content__form-icon u-mr2-"
+               aria-hidden="true"></i>
+            KPI Evaluation
+          </a>
+          <a class="c-page-nav__item " [ngClass]="{'is-selected': selectedTab === 'monthCriteria'}"
+             (click)="changeActiveTab('monthCriteria')">
+            <i class="fa fa-check-square-o a-icon reservation-content__form-icon u-mr2-"
+               aria-hidden="true"></i>
+            Monthly Criteria Evaluation
+          </a>
+        </nav>
+      </div>
+    </div>
+    <div class="l-wrapper profile-page__wrapper">
+      <div *ngIf="selectedTab === 'kpiEvaluation'">
+        <div style="display: flex">
+          <div class="c-accomplishment__header-filter">
+            <div class="m-form-field c-accomplishment__form-field">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">From Date</label>
+              </div>
+              <div class="m-form-field__field">
+                <div class="m-form-field__field-item">
+                  <input class="m-form-field__input" type="date" [(ngModel)]="fromDate" (change)="changeDate()">
+                </div>
+              </div>
+            </div>
+            <div class="m-form-field c-accomplishment__form-field">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">To Date</label>
+              </div>
+              <div class="m-form-field__field">
+                <div class="m-form-field__field-item">
+                  <input class="m-form-field__input" type="date" [(ngModel)]="toDate" (change)="changeDate()">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="evaluation-content" *ngIf="baseCriteriaResponseLoaded && baseCriteriaResponse.length > 0">
+          <div class="c-accordion-section" *ngFor="let data of baseCriteriaResponse">
+            <div class="c-accordion-section__center" (click)="data.expanded = !data.expanded">
+              <div class="c-accordion-section__header c-accordion-section__header--top">
+                <h2 class="c-accordion-section__header-title">{{data.kpi}}
+                  <span style="color: #979797; font-weight: 500 !important;" *ngIf="data.kpiWeight > 0">  &nbsp;({{data.kpiWeight}})</span>
+                </h2>
+              </div>
+              <div class="c-accordion-section__icons">
+                <div class="c-accordion-section__icons-collapse">
+                  <svg class="a-link-btn a-icon c-accordion-section__icons-collapse-icon "
+                       [ngClass]="{'is-collapse': !data.expanded}">
+                    <use xlink:href="#circle-down-arrow"></use>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="c-accordion-section__body" *ngIf="data.expanded">
+              <div class="evaluation-month" style="padding: 0 !important;">
+                <div class="evaluation-month__item" *ngFor="let subData of data.kpiMeasureList">
+                  <p class="evaluation-month__item-title">{{displayMonthAndYear(subData.kpiUniId)}}</p>
+                  <p class="evaluation-month__item-value">{{subData.measure || 'NA'}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="evaluation-content" *ngIf="baseCriteriaResponse.length === 0"
+             style="display: flex !important; justify-content: center !important; align-items: center !important">
+          <div class="c-data__empty" style="display: grid; justify-content: center">
+            <img src="/assets/new-design-images/no-data.png" alt="no data">
+            <div class="gray-500 s-small-default c-data__empty-sub">
+              Evaluation Data Not Available!
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab === 'monthCriteria'">
+        <div>
+          <div style="display: flex">
+            <div class="c-accomplishment__header-filter">
+              <div class="m-form-field c-accomplishment__form-field">
+                <div class="m-form-field__label-wrap">
+                  <label class="m-form-field__label">From Date</label>
+                </div>
+                <div class="m-form-field__field">
+                  <div class="m-form-field__field-item">
+                    <input class="m-form-field__input" type="date" [(ngModel)]="fromDateForMonthlyCriteria" (change)="changeDateForMonthlyCriteria()">
+                  </div>
+                </div>
+              </div>
+              <div class="m-form-field c-accomplishment__form-field">
+                <div class="m-form-field__label-wrap">
+                  <label class="m-form-field__label">To Date</label>
+                </div>
+                <div class="m-form-field__field">
+                  <div class="m-form-field__field-item">
+                    <input class="m-form-field__input" type="date" [(ngModel)]="toDateForMonthlyCriteria" (change)="changeDateForMonthlyCriteria()">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="evaluation-content" *ngIf="monthlyCriteriaResponseLoaded && monthlyCriteriaResponse.length > 0">
+            <div class="c-accordion-section" *ngFor="let data of monthlyCriteriaResponse">
+              <div class="c-accordion-section__center" (click)="data.expanded = !data.expanded">
+                <div class="c-accordion-section__header c-accordion-section__header--top">
+                  <h2 class="c-accordion-section__header-title">{{data.kpi}}
+                    <span style="color: #979797; font-weight: 500 !important;" *ngIf="data.weight > 0">  &nbsp;({{data.weight}})</span>
+                  </h2>
+                </div>
+                <div class="c-accordion-section__icons">
+                  <div class="c-accordion-section__icons-collapse">
+                    <svg class="a-link-btn a-icon c-accordion-section__icons-collapse-icon "
+                         [ngClass]="{'is-collapse': !data.expanded}">
+                      <use xlink:href="#circle-down-arrow"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="c-accordion-section__body" *ngIf="data.expanded">
+                <div class="evaluation-month" style="padding: 0 !important;">
+                  <div class="evaluation-month__item" *ngFor="let subData of data.kpiMeasureList">
+                    <p class="evaluation-month__item-title">{{displayMonthAndYear(subData.kpiUniId)}}</p>
+                    <p class="evaluation-month__item-value">{{subData.measure || 'NA'}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="evaluation-content" *ngIf="monthlyCriteriaResponse.length === 0"
+               style="display: flex !important; justify-content: center !important; align-items: center !important">
+            <div class="c-data__empty" style="display: grid; justify-content: center">
+              <img src="/assets/new-design-images/no-data.png" alt="no data">
+              <div class="gray-500 s-small-default c-data__empty-sub">
+                Evaluation Data Not Available!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

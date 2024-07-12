@@ -1,0 +1,569 @@
+
+
+body {
+  background-color: #f2f4f4;
+  padding: 30px;
+  font-family: Droid Serif;
+}
+
+.bottom-bar {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-left: -42px;
+  max-width: 62vmax;
+}
+
+.bottom-element {
+  width: 30vmax;
+  background: white;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding-left: 25px;
+  padding-top: 15px;
+  box-shadow: 0px -2px 3px -1px #a3aab1
+}
+
+
+/*@keyframes shadow-animation*/
+/*{*/
+/*  0% {*/
+/*    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);*/
+/*  }*/
+/*  100% {*/
+/*    box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);*/
+/*  }*/
+/*}*/
+
+/*.icon-animation {*/
+/*  animation: shadow-animation 1s 5;*/
+/*  !*animation: shadow-animation 1s infinite;*!*/
+/*  color: white;*/
+/*  font-size: 25px;*/
+/*  border-radius: 50%;*/
+/*}*/
+
+/*!*---------- radio button ------------*!*/
+/*!* The radio_container *!*/
+/*.radio_container {*/
+/*  display: inline;*/
+/*  position: relative;*/
+/*  padding-left: 35px;*/
+/*  margin-right: 12px;*/
+/*  cursor: pointer;*/
+/*  font-size: 20px;*/
+/*  color: #545E66;*/
+
+/*}*/
+
+/*!* Hide the browser's default radio button *!*/
+/*.radio_container input {*/
+/*  position: absolute;*/
+/*  opacity: 0;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*!* Create a custom radio button *!*/
+/*.checkmark {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  height: 20px;*/
+/*  width: 20px;*/
+/*  background-color: #eee;*/
+/*  border: solid 1px #2196F3;*/
+/*  border-radius: 50%;*/
+/*}*/
+
+/*!* On mouse-over, add a grey background color *!*/
+/*.radio_container:hover input ~ .checkmark {*/
+/*  background-color: #ccc;*/
+/*}*/
+
+/*!* When the radio button is checked, add a blue background *!*/
+/*.radio_container input:checked ~ .checkmark {*/
+/*  background-color: #2196F3;*/
+/*}*/
+
+/*!* Create the indicator (the dot/circle - hidden when not checked) *!*/
+/*.checkmark:after {*/
+/*  content: "";*/
+/*  position: absolute;*/
+/*  display: none;*/
+/*}*/
+
+/*!* Show the indicator (dot/circle) when checked *!*/
+/*.radio_container input:checked ~ .checkmark:after {*/
+/*  display: block;*/
+/*}*/
+
+/*!* Style the indicator (dot/circle) *!*/
+/*.radio_container .checkmark:after {*/
+/*  top: -0.5px;*/
+/*  left: -0.5px;*/
+/*  width: 20px;*/
+/*  height: 20px;*/
+/*  border-radius: 50%;*/
+/*  border: solid 2px white;*/
+/*}*/
+
+/*!*---------- time selector row -----------*!*/
+/*.time_selector {*/
+
+/*}*/
+
+/*!*------------ top-row ---------------*!*/
+
+/*.vl {*/
+/*  margin-top: 50px;*/
+/*  border-left: 2px solid white;*/
+/*  height: 100px;*/
+/*}*/
+
+/*.top-row {*/
+/*  display: flex;*/
+/*  text-align: center;*/
+/*  justify-content: space-between;*/
+/*  margin: 10px -9px;*/
+/*}*/
+
+/*.top-data {*/
+/*  background-color: #fff;*/
+/*  padding: 15px;*/
+/*  color: #fff;*/
+/*  !*max-width: 20%;*!*/
+/*}*/
+
+/*.top-title {*/
+/*  !* font-weight: bold; *!*/
+/*  font-size: 3vmin;*/
+/*}*/
+
+/*.top-value {*/
+/*  font-size: 2vmin;*/
+/*}*/
+
+/*.wrapper {*/
+/*  text-align: center;*/
+/*  display: flex;*/
+/*  justify-content: space-around;*/
+/*}*/
+
+/*.sub-title {*/
+/*  font-size: 1.5vmax;*/
+/*}*/
+
+/*.sub-val {*/
+/*  font-size: 1.5vmax;*/
+/*  font-weight: bold;*/
+/*}*/
+
+/*.bg {*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*!*--------------- project-contribution ---------*!*/
+/*.project-chart-row {*/
+/*  display: flex;*/
+/*  margin-bottom: 5px;*/
+/*  justify-content: space-between;*/
+/*}*/
+
+/*.project-title {*/
+/*  padding-top: 10px;*/
+/*  padding-left: 10px;*/
+/*  margin-right: 0;*/
+/*  margin-left: 0;*/
+/*}*/
+
+/*.project-contribution {*/
+/*  background-color: #fff;*/
+/*  margin-top: 4px;*/
+/*  !*max-width: 30%;*!*/
+/*}*/
+/*.projects {*/
+/*  display: flex;*/
+/*  flex-wrap: wrap;*/
+/*}*/
+
+/*.project-img {*/
+/*  display: block;*/
+/*  margin: 10px;*/
+/*}*/
+
+/*.project-name {*/
+/*  color: #059df9;*/
+/*  font-size: 2vmin;*/
+/*  margin: 5px;*/
+/*  !* background-color: aliceblue; *!*/
+/*  padding: 5px;*/
+/*  border-radius: 40px;*/
+/*  border-color: #059df9;*/
+/*  border-width: 1px;*/
+/*  border-style: solid;*/
+/*}*/
+
+/*!* images of projects *!*/
+/*img {*/
+/*  width: 60px;*/
+/*}*/
+
+/*.charts {*/
+/*  max-width: 70%;*/
+/*}*/
+
+/*.charts-row {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  margin-right: -20px;*/
+/*  margin-left: -20px;*/
+/*}*/
+
+/*#codeLineDiv {*/
+/*  display: block;*/
+/*}*/
+
+/*.skill-chart {*/
+/*  background-color: #fff;*/
+/*  max-width: 48%;*/
+/*  width: 56%;*/
+/*  margin-left: 6px;*/
+/*}*/
+
+/*.code-line-chart {*/
+/*  background-color: #fff;*/
+/*  max-width: 48%;*/
+/*  width: 100%;*/
+/*}*/
+
+/*!*----------- achivement, extra, other data ----------------*!*/
+/*.other-data-row {*/
+/*  display: flex;*/
+
+/*  background-color: #f2f4f4;*/
+/*  justify-content: space-between;*/
+/*}*/
+
+/*.achivement-extra-panel {*/
+/*  background-color: #f2f4f4;*/
+/*  max-width: 50%;*/
+/*  padding-right: 10px;*/
+/*}*/
+
+/*.overflow {*/
+/*  overflow-x: hidden;*/
+/*  overflow-y: auto;*/
+/*  padding-top: 10px;*/
+/*}*/
+
+/*.achivement-part {*/
+/*  margin-bottom: 5px;*/
+/*  max-height: 200px;*/
+/*}*/
+
+/*.extra-part {*/
+/*  !*overflow: auto;*!*/
+/*  max-height: 100px;*/
+/*}*/
+
+/*.achivement-extra-title, .project-title {*/
+/*  color: #999999;*/
+/*  !* font-weight: bold; *!*/
+/*  font-size: 2.3vmin;*/
+/*}*/
+
+/*.achivement-values {*/
+/*  color: #86919b;*/
+/*  margin-left: 20px;*/
+/*  !* background-color: aliceblue; *!*/
+/*  margin-bottom: 5px;*/
+/*  padding-left: 8px;*/
+/*  margin-top: -19px;*/
+/*  font-size: 1.5vmin;*/
+/*}*/
+
+
+/*.extra-values {*/
+/*  color: #86919b;*/
+/*  margin-left: 20px;*/
+/*  background-color: #fbf7fb;*/
+/*  padding-left: 8px;*/
+/*  margin-bottom: 5px;*/
+/*}*/
+
+/*!* for both extra & achivement *!*/
+/*.left-middle {*/
+/*  background-color: #fff;*/
+/*  padding: 10px;*/
+/*}*/
+
+/*.other-data {*/
+/*  background-color: #fff;*/
+/*  text-align: center;*/
+/*  padding-top: 10px;*/
+/*}*/
+
+
+/*.training-hr {*/
+/*  margin-bottom: 23px;*/
+/*}*/
+
+/*.title-1 {*/
+/*  color: #b7b7b7;*/
+/*}*/
+
+/*.value-1 {*/
+/*  color: #51d617;*/
+/*  font-size: 30px;*/
+/*}*/
+
+/*.contrib {*/
+/*  margin-top: 10px;*/
+/*  margin-bottom: 15px;*/
+/*}*/
+
+/*.value-2 {*/
+/*  font-size: 20px;*/
+/*}*/
+
+/*.title-2 {*/
+/*  color: #b7b7b7;*/
+/*}*/
+
+/*.right-middle {*/
+/*  padding: 10px;*/
+/*  margin-top: 16px;*/
+/*}*/
+
+/*.right-middel-top {*/
+/*  margin-bottom: 17px;*/
+/*}*/
+
+/*!*----------- reviews row--------------- *!*/
+/*.review-row {*/
+/*  margin-top: 20px;*/
+/*  background-color: #fff;*/
+/*  margin-left: -3px;*/
+/*  margin-right: -3px;*/
+/*}*/
+
+/*.review-panel {*/
+/*  margin-top: 20px;*/
+/*  margin-bottom: 30px;*/
+/*  background-color: #fff;*/
+/*  padding-left: 10vmin;*/
+/*  padding-bottom: 20px;*/
+/*  padding-top: 10px;*/
+/*}*/
+
+/*.review-title {*/
+/*  padding: 10px;*/
+/*  margin-bottom: 0;*/
+/*  margin-left: 0;*/
+/*}*/
+
+/*.review-contents {*/
+/*  padding-left: 35px;*/
+/*  margin-bottom: 30px;*/
+/*}*/
+
+/*!* chatbox *!*/
+/*.review-content {*/
+/*  position: relative;*/
+/*  display: block;*/
+/*  float: top;*/
+/*  !* width: 50vmin; *!*/
+/*  width: 100%;*/
+/*  padding: 8px 15px;*/
+/*  margin: 0 20px 10px 0;*/
+/*  clear: both;*/
+/*  color: #fff;*/
+/*  background-color: #67b3fb;*/
+/*  border-radius: 4px;*/
+/*  -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);*/
+/*  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);*/
+
+/*  text-align: center;*/
+/*}*/
+
+/*!*  small trangle*!*/
+/*.review-content:before {*/
+/*  position: absolute;*/
+/*  top: 10px;*/
+/*  right: -10px;*/
+/*  width: 0;*/
+/*  height: 0;*/
+/*  content: '';*/
+/*  border: 5px solid transparent;*/
+/*  border-left-color: #67b3fb*/
+/*}*/
+
+/*.review-title {*/
+/*  color: #0d98ba;*/
+/*  margin-bottom: 25px;*/
+/*  font-weight: bold;*/
+/*  font-size: 28px;*/
+/*  margin-left: 50px;*/
+/*}*/
+
+
+/*!* @media screen and (max-width: 990px) {*/
+/*  .top-row {*/
+/*    background-color: red;*/
+/*  }*/
+/*} *!*/
+
+/*!*--------------------------------------------- mobile ----------------------------------------*!*/
+/*.mobile-container {*/
+/*  margin-left: -8px;*/
+/*  background-color: white;*/
+/*}*/
+
+/*.mobile-vertical-bar {*/
+/*  border-right: solid 2px white;*/
+/*  padding: 2px;*/
+/*}*/
+
+/*.mobile-row {*/
+/*  margin-top: 10px;*/
+/*  !* margin-left: 10px; *!*/
+/*}*/
+
+/*.mobile-top-data {*/
+/*  width: 100%;*/
+/*  color: white;*/
+/*  padding: 10px;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.mobile-top-title {*/
+/*  font-size: 5.5vmin;*/
+/*  font-weight: bold;*/
+/*}*/
+
+/*.mobile-top-value {*/
+/*  font-size: 13px;*/
+/*}*/
+
+/*.mobile-sub-title {*/
+/*  font-size: 1.5vmax;*/
+/*}*/
+
+/*.mobile-bg {*/
+/*  margin-top: 5px;*/
+/*}*/
+
+/*.mobile-sub-val {*/
+/*  font-size: 4vmin;*/
+/*  font-weight: bold;*/
+/*}*/
+
+/*.moblie-skill-chart, .mobile-code-line-chart {*/
+/*  !* margin-left: 27px; *!*/
+/*  margin-top: 13px;*/
+/*}*/
+
+/*.mobile-project-contribution {*/
+/*  !* max-width: 95%; *!*/
+/*}*/
+
+/*.mobile-projects {*/
+/*  margin-left: 10px;*/
+/*  display: flex;*/
+/*  flex-wrap: wrap;*/
+/*}*/
+
+/*.mobile-project-name {*/
+/*  color: #059df9;*/
+/*  font-size: 3.8vmin;*/
+/*  padding: 14px;*/
+/*  background-color: white;*/
+/*  margin: 3px 15px 3px 3px;*/
+/*  border-radius: 28px;*/
+/*  border: 1px solid #059df9;*/
+/*}*/
+
+
+/*.mobile-project-title, .mobile-achivement-extra-title, .mobile-review-title {*/
+/*  color: #8fadb5;*/
+/*  font-weight: bold;*/
+/*  font-size: 4.5vmin;*/
+/*}*/
+/*.mobile-achivement-extra-title, .mobile-review-title {*/
+/*  margin-left: 10px;*/
+/*}*/
+
+/*.mobile-achivement-values, .mobile-extra-values {*/
+/*  background-color: #fff;*/
+/*  text-align: left;*/
+/*  margin: 7px 10px 10px;*/
+/*  padding: 10px;*/
+
+/*  !* margin-left: 31px;  *!*/
+/*  border-radius: 28px;*/
+/*  !* border-color: #059df9; *!*/
+/*  border: 1px solid;*/
+/*  font-size: 12px;*/
+/*}*/
+
+/*.moblie-middle-row {*/
+/*  display: flex;*/
+/*  justify-content: space-evenly;*/
+/*  !* max-width: 100%; *!*/
+/*  margin-top: 15px;*/
+/*  text-align: center;*/
+/*}*/
+
+
+/*.mobile-value-1 {*/
+/*  font-size: 30px;*/
+/*  margin-left: -25px;*/
+/*}*/
+
+/*.mobile-value-2 {*/
+/*  font-size: 25px;*/
+/*}*/
+
+/*.mobile-higlight-row {*/
+/*  background-color: white;*/
+/*  padding-top: 10px;*/
+/*  padding-bottom: 10px;*/
+/*}*/
+
+
+
+/*.mobile-review-contents {*/
+/*  padding-left: 35px;*/
+/*  margin-bottom: 5px;*/
+/*  margin-left: 10px;*/
+/*}*/
+
+/*.mobile-review-content {*/
+/*  position: relative;*/
+/*  display: block;*/
+/*  float: top;*/
+/*  width: 25vmin;*/
+/*  padding: 8px 15px;*/
+/*  !* margin: 0 20px 10px 0; *!*/
+/*  clear: both;*/
+/*  color: #fff;*/
+/*  background-color: #67b3fb;*/
+/*  border-radius: 4px;*/
+/*  -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);*/
+/*  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);*/
+
+/*  text-align: center;*/
+/*}*/
+
+/*!*  small trangle*!*/
+/*.mobile-review-content:before {*/
+/*  position: absolute;*/
+/*  top: 10px;*/
+/*  right: -10px;*/
+/*  width: 0;*/
+/*  height: 0;*/
+/*  content: '';*/
+/*  border: 5px solid transparent;*/
+/*  border-left-color: #67b3fb*/
+/*}*/

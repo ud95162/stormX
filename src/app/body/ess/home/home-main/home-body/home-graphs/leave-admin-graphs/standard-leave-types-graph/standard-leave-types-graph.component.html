@@ -1,0 +1,20 @@
+
+<div *ngIf="isDataLoaded">
+  <div class="dashboard-page @@class">
+    <div class="dashboard-page__block-main">
+      <div class="leave-dashboard__main-header">
+        <div class="leave-dashboard-page__right">
+          <div class="m-form-field leave-dashboard-form">
+            <div class="m-form-field__field">
+              <select class="m-form-field__select " [(ngModel)]="year" (change)="loadYearList()">
+                <option *ngFor="let year of yearList" value="{{year}}">{{year}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div id="standardLeaveTypeGraph" style="height: 500px;"></div>
+    </div>
+  </div>
+</div>

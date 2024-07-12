@@ -1,0 +1,22 @@
+<div class="overall-performance__card">
+  <div class="overall-performance__card-header">
+    <div class="card-header__section">
+      <div class="card-header__section-titles">
+        <h3 class="card-header__section-titles-main card-header__section-titles-main--active">Overall Work Complete / Backlog</h3>
+      </div>
+    </div>
+    <div class="m-form-field__field card-header__select m-form-field__min-height">
+      <select class="m-form-field__select" [(ngModel)]="overallPerformanceMonthFilter">
+        <option *ngFor="let filter of loadedMonthFilters">{{filter}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="overall-performance__body">
+    <div id="project-backlog-perform">
+    </div>
+<!--    <div class="overall-performance__empty">-->
+<!--      <img src="assets/images/empty-img.png" alt="Image" class="overall-performance__empty-img">-->
+<!--      <p class="overall-performance__empty-text">No Data Available</p>-->
+<!--    </div>-->
+  </div>
+</div>

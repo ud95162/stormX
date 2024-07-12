@@ -1,0 +1,24 @@
+<div class="c-overview-card">
+  <div class="c-overview-card__header">
+    <div class="c-overview-card__title">
+      Projects
+    </div>
+    <div class="c-overview-card__more">
+      <a (click)="redirect('resume')" class="a-link-btn c-overview-card__nav">View More</a>
+    </div>
+
+  </div>
+  <div *ngFor="let project of projects" class="c-overview-card__project c-overview-card__project--secondary">
+    <div class="c-overview-card__media">
+      <img class="c-overview-card__img" src='../../../../../assets/image/rocket.svg'>
+    </div>
+    <div class="c-overview-card__content">
+      <div class="c-overview-card__content-label">
+        {{ project[1] }}
+      </div>
+      <div class="c-overview-card__content-text">
+        From {{ project[0] }}
+      </div>
+    </div>
+  </div>
+</div>

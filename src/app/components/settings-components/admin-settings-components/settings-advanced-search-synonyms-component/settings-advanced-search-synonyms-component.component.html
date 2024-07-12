@@ -1,0 +1,101 @@
+<!--<button class="hide" data-target="#deleteDialog" data-toggle="modal" id="openDeleteDialog" type="button"></button>-->
+<!--<div class="modal fade" id="deleteDialog" role="dialog">-->
+<!--  <div class="modal-dialog modal-sm">-->
+
+<!--    &lt;!&ndash; Modal content&ndash;&gt;-->
+<!--    <div class="modal-content">-->
+
+<!--      <div *ngIf="currentDeleteId" class="modal-header">-->
+<!--        <button class="close" data-dismiss="modal" id="dismissDeleteDialog" type="button">&times;</button>-->
+<!--        <h4 class="modal-title card-title-h5">Confirm Delete #{{currentDeleteId}}-->
+<!--          [{{synonymsModelList[currentDeleteId].value}}]</h4>-->
+<!--      </div>-->
+
+<!--      <p class="padding-left">Are you sure you want to delete this Synonym Model.</p>-->
+
+<!--      <div class="modal-footer">-->
+<!--        <button (click)="confirmDelete()" class="btn btn-delete-synonym btn-confirm" type="button">Delete</button>-->
+<!--        <button (click)="closeModel()" class="btn btn-sm btn-update-synonym btn-confirm" type="button">Cancel</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="w3-panel w3-card" id="synonymPanel">-->
+<!--  <div>-->
+<!--    <h5 class="card-title-h5">-->
+<!--      Advanced search synonyms-->
+<!--    </h5>-->
+<!--    <div *ngIf="showScroll" class="scrollbar" id="style-1">-->
+<!--      <div class="force-overflow">-->
+<!--        <div (scroll)="onScroll($event)" id="scroll">-->
+<!--          <div *ngFor="let synonymModel of synonymsModelList; let j= index" class="repeat-card" id="card_{{j}}">-->
+<!--            <h6 *ngIf="j === 0">Create new synonym model</h6>-->
+<!--            <div class="row no-margin">-->
+<!--              <div class="col-sm-6">-->
+<!--                <div class="row">-->
+<!--                  <div class="col-sm-12 form-group input-group input-value">-->
+<!--                    <input (keyup.enter)="onAddValue(j)" [(ngModel)]="synonymModel.value" class="form-control"-->
+<!--                           id="valueInputField_{{j}}" name="text" placeholder="text" type="text">-->
+<!--                    <span (click)="onAddValue(j)" class="input-group-addon span-button">-->
+<!--                      <i class="fa fa-arrow-right"></i>-->
+<!--                    </span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-sm-6">-->
+<!--                <div class="row">-->
+<!--                  <div class="col-sm-11 div-input-synonym">-->
+<!--                    <div class="form-group input-group input-synonym">-->
+<!--                      <input (focus)="onFocusSynonymsField(j)"-->
+<!--                             (keyup.enter)="onAddSynonym(j)" class="form-control"-->
+<!--                             id="synonymInputField_{{j}}" name="synonym" placeholder="synonym" type="text">-->
+<!--                      <span (click)="onAddSynonym(j)" class="input-group-addon span-button">-->
+<!--                        <i class="fa fa-plus"></i>-->
+<!--                      </span>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="div-btn-remove col-sm-1">-->
+<!--                    <button (click)="onRemoveSynonymModel(j)" *ngIf="j > 0" class="btn btn-sm btn-remove-synonym-model">-->
+<!--                      <i class="fa fa-trash"></i>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="row no-margin">-->
+<!--              <div class="col-sm-offset-6 col-sm-6">-->
+<!--                <div *ngIf="synonymModel.synonyms" class="chip-div">-->
+<!--                  <div *ngFor="let synonym of synonymModel.synonyms; let i = index" class="chip-custom"-->
+<!--                       id="chip_{{j}}_{{i}}">{{synonym.synonym}} <i-->
+<!--                    (click)="onRemoveSynonym(j, i)" class="fa fa-remove"></i></div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="row no-margin">-->
+<!--              <div class="col-12">-->
+<!--                <button (click)="onSave(j)" *ngIf="j > 0" class="btn btn-update-synonym" id="btn_{{j}}">-->
+<!--                  <i class="fa fa-refresh"></i><span> Update</span>-->
+<!--                </button>-->
+<!--                <button (click)="onSave(j)" *ngIf="j == 0" class="btn btn-save-synonym" id="btn_{{j}}">-->
+<!--                  <i class="fa fa-floppy-o"></i><span> Save</span>-->
+<!--                </button>-->
+<!--                <img id="loading_{{j}}" src="assets/image/loading/loading-stripe.svg" style="display: none">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <p class="err-msg" id="errMsg_{{j}}"></p>-->
+<!--            <hr *ngIf="j>0">-->
+<!--          </div>-->
+<!--          <div class="finish-text">-->
+<!--            <a (click)="pushSynonymModelsByOffset()" *ngIf="!showFinish" id="loadMore"></a>-->
+<!--            <p *ngIf="showFinish">No more synonym records.</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div (click)="closeSnackbar()" id="snackbar">-->
+<!--  <p>{{snackbarMsg}}</p>-->
+<!--</div>-->

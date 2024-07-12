@@ -1,0 +1,89 @@
+<!--new implementation-->
+
+
+<!--main-->
+
+<div *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortTaskTimeAnalysis')">
+  <div class="dashboard-page @@class">
+    <div class="dashboard-page__block-main">
+      <div class="dashboard-page__block-wrapper-main">
+
+        <!--work effort filters--->
+        <div class="workeffort-filter_section">
+          <div class="m-form-field-inline d-hide"></div>
+          <div class="m-form-field-inline d-hide"></div>
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--workflow" for="f-name">From</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="date" minlength="0" maxlength="524288" placeholder="Days"
+                       value=""
+                       [(ngModel)]="fromDate" (change)="taskTimeAnalysisObj()">
+              </div>
+            </div>
+
+            <span class="m-form-field__error">error</span>
+          </div>
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--workflow" for="f-name">To</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="date" minlength="0" maxlength="524288" placeholder="Days"
+                       value=""
+                       [(ngModel)]="toDate" (change)="taskTimeAnalysisObj()">
+              </div>
+            </div>
+
+            <span class="m-form-field__error">error</span>
+          </div>
+
+        </div>
+
+        <!--table--->
+
+        <div class="time-analysis__table--wraper" *ngIf="responseDataLoaded && !noDataAvailable">
+          <table class="task-time__table">
+            <thead class="task-time__table-header">
+            <tr>
+              <th></th>
+              <th>Estimated</th>
+              <th>Task Count</th>
+              <th>Actual</th>
+              <th>Completed</th>
+              <th>In-Complete</th>
+              <th>On-hold</th>
+            </tr>
+            </thead>
+
+            <tbody class="task-time__table-body">
+            <tr *ngFor="let data of taskAnalysisData">
+              <td class="task-time__table-body-name">{{data.projectName}}</td>
+              <td>{{data.estimateTime}}</td>
+              <td>{{data.taskCount}}</td>
+              <td>{{data.actualTime}}</td>
+              <td>{{data.completedTasks}}</td>
+              <td>{{data.inCompletedTasks}}</td>
+              <td>{{data.onHoldTasks}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="time-analysis__table--wraper" *ngIf="!responseDataLoaded" style="text-align: center">
+          <img src="assets/image/loading/spinner-loading.svg" style="width: 160px;" alt="loading">
+        </div>
+        <div class="time-analysis__table--wraper" *ngIf="responseDataLoaded && noDataAvailable"
+             style="text-align: center; top: 25%; margin-top: 20px">
+          <img src="assets/image/bad_face.svg" alt="no-data">
+          <h4 style="color: #838383">No data available!!</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

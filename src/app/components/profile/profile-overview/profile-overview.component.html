@@ -1,0 +1,56 @@
+<div class="c-profile-overview">
+
+  <div class="c-profile-overview__wrapper">
+    <div class="c-profile-overview__item">
+      <app-profile-skill-chart *ngIf="
+      this.componentPermission.includes('OverviewUserSkillChart')" ></app-profile-skill-chart>
+    </div>
+    <div class="c-profile-overview__item">
+      <app-profile-codeline-issue-chart *ngIf="isCodelineVisible">
+
+      </app-profile-codeline-issue-chart>
+
+      <app-profile-extra-activities *ngIf="!isCodelineVisible"
+                                    (profileBodyEventEmitter)="redirectFromChild($event)"></app-profile-extra-activities>
+
+      <app-profile-user-projects *ngIf="!isCodelineVisible"
+                                 (profileBodyEventEmitter)="redirectFromChild($event)"></app-profile-user-projects>
+    </div>
+
+  </div>
+
+
+  <div class="c-profile-overview__wrapper c-profile-overview__wrapper--secondary">
+
+    <div class="c-profile-overview__item">
+
+      <div class="c-overview-card__header" *ngIf="this.componentPermission.includes('MatricPermission')">
+        <div class="c-overview-card__title">
+          Matrices
+        </div>
+        <div class="c-overview-card__filter">
+          <app-time-range-selector (timeRange)="updateDataWithTimeRange($event)"></app-time-range-selector>
+        </div>
+      </div>
+
+      <app-git-jira-dashboard *ngIf="this.componentPermission.includes('OverviewUserGitJiraDashboard')"></app-git-jira-dashboard>
+        <app-daily-dashboard *ngIf="this.componentPermission.includes('OverviewUserDailyDashboard')"></app-daily-dashboard>
+
+    </div>
+    <div class="c-profile-overview__item">
+      <app-profile-achievements *ngIf="this.componentPermission.includes('OverviewUserAchievement')"
+        (profileBodyEventEmitter)="redirectFromChild($event)"></app-profile-achievements>
+    </div>
+  </div>
+
+  <div class="c-profile-overview__wrapper">
+    <div *ngIf="isCodelineVisible" class="c-profile-overview__item">
+      <app-profile-extra-activities *ngIf="this.componentPermission.includes('OverviewUserExtra')"
+        (profileBodyEventEmitter)="redirectFromChild($event)"></app-profile-extra-activities>
+    </div>
+    <div *ngIf="isCodelineVisible" class="c-profile-overview__item">
+      <app-profile-user-projects *ngIf="this.componentPermission.includes('OverviewUserProjects')" (profileBodyEventEmitter)="redirectFromChild($event)"></app-profile-user-projects>
+    </div>
+  </div>
+
+</div>

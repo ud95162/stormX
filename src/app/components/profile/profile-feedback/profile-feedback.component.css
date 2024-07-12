@@ -1,0 +1,7 @@
+.feedback-inner-tab .nav-tabs .nav-link.active {
+  background-color: #ccddf9;
+}
+.feedback-inner-tab .nav-tabs .nav-link {
+  background-color: inherit;
+  color: #006EFF;
+}

@@ -1,0 +1,58 @@
+
+.Top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: darkgreen;
+  font-size: 3rem;
+  position: relative;
+  z-index: 10;
+  height: 100px;
+}
+
+.Container {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+  width: 100%;
+  backface-visibility: hidden;
+  will-change: auto;
+}
+
+
+.Left,
+.Middle,
+.Right {
+  overflow: auto;
+  height: auto;
+  padding-right: 0.85rem;
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
+  padding-left: 0.85rem;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+}
+
+
+.Left::-webkit-scrollbar,
+.Middle::-webkit-scrollbar,
+.Right::-webkit-scrollbar {
+  display: none;
+}
+
+
+.Left {
+  width: 22.8rem;
+  margin-top: 10px;
+}
+
+.Middle {
+  flex: 1;
+  margin-top: 10px;
+}
+
+.Right {
+  width: 27.5rem;
+  margin-top: 10px;
+}

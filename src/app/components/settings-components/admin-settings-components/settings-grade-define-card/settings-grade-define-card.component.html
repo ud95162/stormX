@@ -1,0 +1,60 @@
+<app-error-modal></app-error-modal>
+
+<!--new implementation -->
+<div class="c-designation-wrapper">
+  <div class="c-define-designation-group">
+    <h2 class="c-define-designation__text">{{cardTitle}}</h2>
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold" >Grade Name</label>
+      </div>
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="text"
+                 [(ngModel)]="gradeObj.gradeName"  (ngModelChange)="generateCode()">
+        </div>
+      </div>
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold">Grade Code</label>
+      </div>
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="text"
+                 [(ngModel)]="gradeObj.gradeCode">
+        </div>
+      </div>
+      <span class="m-form-field__error">error</span>
+    </div>
+
+
+
+    <div  class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold">Grade Description</label>
+      </div>
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="text"
+                 [(ngModel)]="gradeObj.description">
+        </div>
+      </div>
+      <span class="m-form-field__error">error</span>
+    </div>
+
+
+
+    <div class="c-define-designation__action">
+      <button class="c-define-designation__action--button" (click)="saveDesignationGrade()">
+        Save
+      </button>
+    </div>
+
+  </div>
+</div>
+
+

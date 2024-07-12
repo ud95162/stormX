@@ -1,0 +1,64 @@
+<div class="o-modal" id="editPrevWorkDetails">
+
+  <!--<div class="o-modal__header">-->
+  <!--<button class="a-btn a-btn&#45;&#45;trinity o-modal__close-btn"><i class="icon-close"></i></button>-->
+  <!--<button class="a-link-btn o-modal__back-btn u-visible-md"><i class="icon-arrow_back i-icon&#45;&#45;left"></i>Back</button>-->
+  <!--<h3 class="t1 o-modal__title">Modal title</h3>-->
+  <!--</div>-->
+
+  <div class="o-modal__content edit-personal-details">
+
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header">
+<!--        <h3 class="o-modal__inner-header-title">Edit Previous Employment Details</h3>-->
+        <h3 *ngIf="modalType == 'new'">Add Previous Employment Details</h3>
+        <h3 *ngIf="modalType == 'edit'" >Edit Previous Employment Details</h3>
+        <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('editPrevWorkDetails')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+        <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm" (click)="hideModal('editPrevWorkDetails')">
+          <svg class="a-icon u-mr">
+            <use xlink:href="#previous"></use>
+          </svg>
+          Back
+        </button>
+      </div>
+      <div class="o-tabs">
+        <div class="o-tabs__content">
+
+          <div *ngIf="modalType == 'new' && modalId=='editPrevWorkDetails'" id="prevWorkNew">
+            <app-prev-work-new [employeeNo]="employeeNo"
+                               [previousCompaniesList]="previousCompaniesList"
+                               [previousJobRoleList]="previousJobRoleList"
+                               (success)="emitSuccess($event)"></app-prev-work-new>
+
+          </div>
+          <div *ngIf="modalType == 'edit' && modalId=='editPrevWorkDetails'" id="prevWorkEdit">
+            <app-prev-work-edit [employeeNo]="employeeNo"
+                                [prevWorkDetails]="prevWorkDetailsToEdit"
+                                [previousJobRoleList]="previousJobRoleList"
+                                [previousCompaniesList]="previousCompaniesList"
+                                (success)="emitSuccess($event)"></app-prev-work-edit>
+          </div>
+        </div>
+        <!---delete this skill--->
+        <div *ngIf="modalType == 'edit'" class="delete-card__item" (click)="deletePrevWork()">
+          <svg class="a-link-btn a-icon c-pax-details__block-main-icon">
+            <use xlink:href="#bin"></use>
+          </svg>
+          <span class="class="m-form-field__label>Delete work experience</span>
+        </div>
+      </div>
+      <div class="o-modal__footer">
+        <div class="o-modal__footer__add">
+        </div>
+        <button class="a-btn a-btn--primary" (click)="save()">Save</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

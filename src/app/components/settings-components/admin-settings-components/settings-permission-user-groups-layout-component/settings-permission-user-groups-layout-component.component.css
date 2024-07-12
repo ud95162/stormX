@@ -1,0 +1,168 @@
+/*!*Card Styles*!*/
+/*.w3-panel:after, .w3-panel:before {*/
+/*  content: "";*/
+/*  display: table;*/
+/*  clear: both*/
+/*}*/
+
+/*.w3-panel {*/
+/*  padding: 15px;*/
+/*  margin-bottom: 20px;*/
+/*  border-radius: 2px;*/
+/*  background-color: #ffffff !important;*/
+/*}*/
+
+/*.w3-card, .w3-card-2 {*/
+/*  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)*/
+/*}*/
+
+/*.w3-card-4, .w3-hover-shadow:hover {*/
+/*  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.top-card-class-custom {*/
+/*  background-color: transparent !important;*/
+/*  padding: 0 !important;*/
+/*  box-shadow: none !important;*/
+/*  margin: 0 !important;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+
+/*.card-containing-div {*/
+/*  margin: 0 -15px;*/
+/*}*/
+
+/*.group-type-title-h4 {*/
+/*  color: #858585;*/
+/*  font-size: 14px;*/
+/*  margin: 0 0 10px 0;*/
+/*}*/
+
+/*.title-header-h4 {*/
+/*  font-size: 14px;*/
+/*  color: #2d2f32;*/
+/*  margin: 0 !important;*/
+/*  font-weight: 600 !important;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.header-create-button {*/
+/*  border-radius: 4px;*/
+/*  background-color: #006eff;*/
+/*  padding: 4px 12px;*/
+/*  color: #FFFFFF;*/
+/*}*/
+
+/*.header-line-button {*/
+/*  border-radius: 4px;*/
+/*  border: 1px solid #006eff;*/
+/*  padding: 4px 12px;*/
+/*  color: #006eff;*/
+/*  background: #ffffff;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.permission-groups-list-title-h5 {*/
+/*  color: #333333;*/
+/*  font-weight: 600 !important;*/
+/*  font-size: 14px !important;*/
+/*  margin: 0 0 10px 0;*/
+/*}*/
+
+/*.permission-group-list-container {*/
+/*  width: 45% !important;*/
+/*  max-width: 100%;*/
+/*  margin: 0 2.5%;*/
+/*  display: inline-block;*/
+/*  vertical-align: top;*/
+/*}*/
+
+/*.permission-group-list-div {*/
+/*  border: solid 1px #eaeaea;*/
+/*  min-height: 60px;*/
+/*  background: white;*/
+/*  border-radius: 2px;*/
+/*  overflow: hidden;*/
+/*  display: block;*/
+/*  height: 250px;*/
+/*}*/
+
+/*.permission-group-item {*/
+/*  padding: 8px 10px;*/
+/*  border-bottom: solid 1px #eaeaea;*/
+/*  color: #383838;*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  align-items: center;*/
+/*  justify-content: space-between;*/
+/*  box-sizing: border-box;*/
+/*  cursor: move;*/
+/*  font-size: 13px !important;*/
+/*}*/
+
+/*.permission-group-item-assigned {*/
+/*  background: #f9f9f9;*/
+/*}*/
+
+/*.permission-group-item-other {*/
+/*  background: white;*/
+/*}*/
+
+/*.cdk-drag-preview {*/
+/*  box-sizing: border-box;*/
+/*  border-radius: 4px;*/
+/*  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),*/
+/*  0 8px 10px 1px rgba(0, 0, 0, 0.14),*/
+/*  0 3px 14px 2px rgba(0, 0, 0, 0.12);*/
+/*}*/
+
+/*.cdk-drag-placeholder {*/
+/*  opacity: 0;*/
+/*}*/
+
+/*.cdk-drag-animating {*/
+/*  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);*/
+/*}*/
+
+/*.permission-group-item:last-child {*/
+/*  border: none;*/
+/*}*/
+
+/*.permission-group-list-div.cdk-drop-list-dragging .permission-group-item:not(.cdk-drag-placeholder) {*/
+/*  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);*/
+/*}*/
+
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+
+/*!*Scrollbar*!*/
+/*.scrollbar {*/
+/*  float: left;*/
+/*  height: 250px;*/
+/*  overflow-y: scroll;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.force-overflow {*/
+/*  min-height: 200px;*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar-track {*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar {*/
+/*  width: 3px;*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar-thumb {*/
+/*  background-color: rgba(0, 0, 0, .1);*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.permission-group-update-warning {*/
+/*  color: #858585;*/
+/*  font-size: 12px;*/
+/*  margin: 10px 20px 0 20px !important;*/
+/*}*/

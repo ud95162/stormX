@@ -1,0 +1,62 @@
+<div *ngIf="loadingOverlayView" class="overlay" id="myNav" style="text-align: center">
+  <img src="assets/image/loading/spinner-loading.svg" style="padding-top: 17%">
+</div>
+
+<div class="modal-dialog">
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <!-- <button class="close" data-dismiss="modal" type="button">&times;</button> -->
+      <a aria-label="close" class="close crossHover" data-dismiss="modal"
+             href="#">&times;</a>
+
+      <h4 class="modal-title">Add Family Details</h4>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- <div *ngIf="showFamilySuccessAlert" class="alert alert-success alert-dismissable">
+        <a (click)="familyWarningClose()" aria-label="close" class="close" data-dismiss="alert"
+           href="#">×</a>
+        Family member will be added to your profile in a while!
+      </div> -->
+
+      <div *ngIf="showFamilyFailedAlert" class="alert alert-danger alert-dismissable">
+        <a (click)="familyWarningClose()" aria-label="close" class="close" data-dismiss="alert"
+           href="#">×</a>
+        Family member update failed!
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input_familyBond" style="padding: 0">Bond</label>
+        <select class="form-control" id="input_familyBond">
+          <option>Parent</option>
+          <option>Sibling</option>
+          <option>Spouse</option>
+          <option>Child</option>
+          <option>In Law</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input_familyName" style="padding: 0">Name <span
+          style="color: red"> *</span></label>
+        <input class="form-control" id="input_familyName" name="input_familyName" placeholder=""
+               type="text">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="input_familyOccupation" style="padding: 0">Occupation</label>
+        <input class="form-control" id="input_familyOccupation" name="input_familyOccupation"
+               placeholder=""
+               type="text">
+      </div>
+
+      <div style="text-align: right">
+        <button (click)="onSubmitFamily()"  class="btn submit-but" data-dismiss="modal" type="button">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

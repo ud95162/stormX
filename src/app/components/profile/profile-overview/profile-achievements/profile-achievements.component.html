@@ -1,0 +1,25 @@
+<div class="c-overview-card">
+  <div class="c-overview-card__title">
+    Achievements
+  </div>
+  <div *ngFor="let value of achievements | slice: 0: 3"
+       class="c-overview-card__project c-overview-card__project--primary">
+    <div class="c-overview-card__media">
+      <img class="c-overview-card__img" src='../../../../../assets/image/trophy.svg'>
+    </div>
+    <div class="c-overview-card__content">
+      <div class="c-overview-card__content-label">
+        {{ value}}
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="achievements.length > 3" class="c-overview-card__more c-overview-card__more--secondary">
+    <a (click)="redirect('resume')" class="a-link-btn c-overview-card__nav">View all Achievements</a>
+  </div>
+  <div *ngIf="achievements.length == 0" class="c-overview-card__more c-overview-card__more--secondary">
+    <span class="a c-overview-card__nav">No Achievements Added</span>
+  </div>
+
+
+</div>

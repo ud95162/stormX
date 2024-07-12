@@ -1,0 +1,80 @@
+
+<div class="c-leave-dashboard__middle--wrraper">
+  <table class="c-kriyo-deta__table" *ngIf="leaveDataLoaded">
+    <thead class="c-kriyo-deta__table--header ">
+    <tr>
+      <th> Leave Type </th>
+      <th> Jan</th>
+      <th> Feb</th>
+      <th> Mar</th>
+      <th> Apr</th>
+      <th> May</th>
+      <th> Jun</th>
+      <th> Jul</th>
+      <th> Aug</th>
+      <th> Sep</th>
+      <th> Oct</th>
+      <th> Nov</th>
+      <th> Dec</th>
+      <th> Total</th>
+
+    </tr>
+
+    </thead>
+
+    <tbody class="c-kriyo-deta__table--body">
+
+    <tr>
+      <td>OnSite</td>
+      <td >{{onSiteTravelLeave.Jan}}</td>
+      <td >{{onSiteTravelLeave.Feb}}</td>
+      <td >{{onSiteTravelLeave.Mar}}</td>
+      <td >{{onSiteTravelLeave.Apr}}</td>
+      <td >{{onSiteTravelLeave.May}}</td>
+      <td >{{onSiteTravelLeave.Jun}}</td>
+      <td >{{onSiteTravelLeave.Jul}}</td>
+      <td >{{onSiteTravelLeave.Aug}}</td>
+      <td >{{onSiteTravelLeave.Sep}}</td>
+      <td >{{onSiteTravelLeave.Oct}}</td>
+      <td >{{onSiteTravelLeave.Nov}}</td>
+      <td >{{onSiteTravelLeave.Dec}}</td>
+      <td >{{onSiteTravelLeaveTotal}}</td>
+    </tr>
+
+    <tr>
+      <td>Official</td>
+      <td >{{officialLeave.Jan}}</td>
+      <td >{{officialLeave.Feb}}</td>
+      <td >{{officialLeave.Mar}}</td>
+      <td >{{officialLeave.Apr}}</td>
+      <td >{{officialLeave.May}}</td>
+      <td >{{officialLeave.Jun}}</td>
+      <td >{{officialLeave.Jul}}</td>
+      <td >{{officialLeave.Aug}}</td>
+      <td >{{officialLeave.Sep}}</td>
+      <td >{{officialLeave.Oct}}</td>
+      <td >{{officialLeave.Nov}}</td>
+      <td >{{officialLeave.Dec}}</td>
+      <td >{{officialLeaveTotal}}</td>
+    </tr>
+
+    <tr>
+      <td class="leave-table__bottom-text">Total</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Jan + officialLeave.Jan}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Feb + officialLeave.Feb}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Mar + officialLeave.Mar}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Apr + officialLeave.Apr}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.May + officialLeave.May}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Jun + officialLeave.Jun}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Jul + officialLeave.Jul}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Aug + officialLeave.Aug}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Sep + officialLeave.Sep}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Oct + officialLeave.Oct}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Nov + officialLeave.Nov}}</td>
+      <td class="leave-table__bottom-text">{{onSiteTravelLeave.Dec + officialLeave.Dec}}</td>
+      <td class="leave-table__bottom-text">{{officialLeaveTotal + onSiteTravelLeaveTotal}}</td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>

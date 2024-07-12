@@ -1,0 +1,262 @@
+<!--dropdown component-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label">Title</label>
+  </div>
+  <div class="m-form-field__field">
+
+    <!-- visible in mobile-->
+    <!--    <select class="m-form-field__select" hidden>-->
+    <!--      <option value="undefined" disabled selected hidden>Select</option>-->
+    <!--      <option value="Mr">Mr</option>-->
+    <!--      <option value="Master">Master</option>-->
+    <!--      <option value="Ms">Ms</option>-->
+    <!--      <option value="Doctor">Doctor</option>-->
+    <!--    </select>-->
+
+    <!-- visible in desktop-->
+    <select class="m-form-field__select" id="editTitle" [(ngModel)]="personalDetails.title">
+      <option *ngIf="personalDetails.title == null" value="undefined" disabled selected hidden>Select</option>
+      <option *ngFor="let title of titles" [value]="title.name">
+        {{title.name}}
+      </option>
+    </select>
+    <!-- visible in desktop end-->
+
+  </div>
+</div>
+
+
+<!-- initial -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editIntials">Intials</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" type="text" id="editIntials" disabled [(ngModel)]="personalDetails.initials"
+             #initials='ngModel' value="{{personalDetails.initials}}">
+    </div>
+  </div>
+</div>
+
+
+<!-- full name -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editFullName">Full Name</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="editFullName" type="text" minlength="0"
+             maxlength="524288" placeholder="-" disabled [(ngModel)]="personalDetails.full_name" #FullName="ngModel"
+             value="{{personalDetails.full_name}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- first name -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editFullName">Frist Name</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="editFirstName" type="text" minlength="0"
+             maxlength="524288" placeholder="-" disabled [(ngModel)]="personalDetails.first_name"
+             value="{{personalDetails.first_name}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- last name -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editFullName">Last Name</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="editLastName" type="text" minlength="0"
+             maxlength="524288" placeholder="-" disabled [(ngModel)]="personalDetails.last_name"
+             value="{{personalDetails.last_name}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- date of birth -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editDoB">Date of Birth</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" type="date" id="editDoB" disabled [(ngModel)]="personalDetails.dob" #dob='ngModel'
+             value="{{personalDetails.dob}}">
+    </div>
+  </div>
+</div>
+
+<!-- gender - dropdown component-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label">Gender</label>
+  </div>
+  <div class="m-form-field__field">
+
+    <!--    &lt;!&ndash; visible in mobile&ndash;&gt;-->
+    <!--    <select class="m-form-field__select" hidden>-->
+    <!--      <option value="undefined" disabled selected hidden>Select</option>-->
+    <!--      <option value="Male">Male</option>-->
+    <!--      <option value="Female">Female</option>-->
+    <!--    </select>-->
+
+    <!-- visible in desktop-->
+
+    <!-- native dropdown-->
+    <select class="m-form-field__select" [(ngModel)]="personalDetails.gender">
+      <option value="undefined" disabled selected hidden>Select</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+    <!-- visible in desktop end-->
+
+  </div>
+</div>
+
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editNIC">NIC Number</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="editNIC" type="text" minlength="0"
+             maxlength="524288" placeholder="98xxxxxxxv" disabled [(ngModel)]="personalDetails.nic" #nic='ngModel'
+             value="{{personalDetails.nic}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- passport number -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editPassportNumber">Passport Number</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="editPassportNumber" type="text" minlength="0"
+             maxlength="524288" placeholder="-" [(ngModel)]="personalDetails.passport" #passport='ngModel'
+             value="{{personalDetails.passport}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- passport expiry date -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editDoB">Passport Expiry Date</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" type="date" id="editPassportExpiryDate"
+             [(ngModel)]="personalDetails.passportExpDate" #dob='ngModel' value="{{personalDetails.passportExpDate}}">
+    </div>
+  </div>
+</div>
+
+<!-- martial status - dropdown -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label">Marital Status</label>
+  </div>
+  <div class="m-form-field__field">
+    <select class="m-form-field__select" [(ngModel)]="personalDetails.marital_status" disabled>
+      <option value="undefined" disabled selected hidden>Select</option>
+      <option *ngFor="let maritalStatus of maritalStatuses" [value]="maritalStatus.name">
+        {{maritalStatus.name}}
+      </option>
+    </select>
+
+  </div>
+</div>
+
+<!-- religion - dropdown -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label">Religion</label>
+  </div>
+  <div class="m-form-field__field">
+    <select class="m-form-field__select" [(ngModel)]="personalDetails.religion">
+      <option value="undefined" disabled selected hidden>Select</option>
+      <option *ngFor="let religion of religions" [value]="religion.name">
+      {{religion.name}}
+    </option>
+    </select>
+
+  </div>
+</div>
+
+<!-- food preference - dropdown -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label">Food Preference</label>
+  </div>
+  <div class="m-form-field__field">
+    <select class="m-form-field__select" [(ngModel)]="personalDetails.food_pref">
+      <option value="undefined" disabled selected hidden>Select</option>
+      <option value="Veg">Veg</option>
+      <option value="Non - Veg">Non - Veg</option>
+    </select>
+
+  </div>
+</div>
+
+<!-- nationality -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editPassportNumber">Nationality</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="editNationality" type="text" minlength="0"
+             maxlength="524288" placeholder="-" [(ngModel)]="personalDetails.nationality" #nationality='ngModel'
+             value="{{personalDetails.nationality}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- driving licence number -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editPassportNumber">Driving Licence Number</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="editDrivingLicence" type="text" minlength="0"
+             maxlength="524288" placeholder="-" [(ngModel)]="personalDetails.drivingLicNo" #drivingLicNo='ngModel'
+             value="{{personalDetails.drivingLicNo}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- race -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="editPassportNumber">Race</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="editRace" type="text" minlength="0"
+             maxlength="524288" placeholder="-" [(ngModel)]="personalDetails.race" #race='ngModel'
+             value="{{personalDetails.race}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>

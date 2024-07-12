@@ -1,0 +1,89 @@
+<div class="l-grid u-mt+" [ngClass]="{'l-grid--3-2': !isNotAWorkingDay}" >
+  <div class="project-wise-card">
+    <div class="project-wise-card__box project-wise-card__box--line"
+         style="cursor:pointer;">
+      <h5 class="project-wise-card__title project-wise-card__title--main">Present Count</h5>
+      <h2 class="project-wise-card__count">{{dailyPresentCount}}</h2>
+      <p class="project-wise-card__precentage">
+          <span class="project-wise-card__precentage-value project-wise-card__precentage-value--high"
+                *ngIf="dailyPresentPercentage >= 50">
+          {{dailyPresentPercentage}}%
+          </span>
+        <span class="project-wise-card__precentage-value project-wise-card__precentage-value--low"
+              *ngIf="dailyPresentPercentage < 50">
+          {{dailyPresentPercentage}}%
+          </span>
+        of total employees</p>
+    </div>
+
+    <div class="project-wise-card__box-sub"
+         style="cursor:pointer;">
+      <h5 class="project-wise-card__title">WFO Count</h5>
+      <h2 class="project-wise-card__count">{{dailyOfficeCount}}</h2>
+      <p class="project-wise-card__precentage">
+          <span class="project-wise-card__precentage-value project-wise-card__precentage-value--high"
+                *ngIf="dailyOfficePercentage >= 50">
+          {{dailyOfficePercentage}}%
+          </span>
+        <span class="project-wise-card__precentage-value project-wise-card__precentage-value--low"
+              *ngIf="dailyOfficePercentage < 50">
+          {{dailyOfficePercentage}}%
+          </span>
+        of total employees</p>
+    </div>
+
+    <div class="project-wise-card__box-sub"
+         style="cursor:pointer;">
+      <h5 class="project-wise-card__title">WFH Count</h5>
+      <h2 class="project-wise-card__count">{{dailyHomeCount}}</h2>
+      <p class="project-wise-card__precentage">
+          <span class="project-wise-card__precentage-value project-wise-card__precentage-value--high"
+                *ngIf="dailyHomePercentage >= 50">
+          {{dailyHomePercentage}}%
+          </span>
+        <span class="project-wise-card__precentage-value project-wise-card__precentage-value--low"
+              *ngIf="dailyHomePercentage < 50">
+          {{dailyHomePercentage}}%
+          </span>
+        of total employees</p>
+    </div>
+  </div>
+  <div class="l-grid__item" *ngIf="!isNotAWorkingDay">
+    <div class="l-grid l-grid--1-1">
+      <div class="project-wise-card"
+           style="cursor:pointer;">
+        <div class="project-wise-card__box project-wise-card__box--line">
+          <h5 class="project-wise-card__title">Absent Count</h5>
+          <h2 class="project-wise-card__count project-wise-card__count--error">{{dailyAbsentCount}}</h2>
+          <p class="project-wise-card__precentage">
+              <span class="project-wise-card__precentage-value project-wise-card__precentage-value--high"
+                    *ngIf="dailyAbsentPercentage < 50">
+          {{dailyAbsentPercentage}}%
+          </span>
+            <span class="project-wise-card__precentage-value project-wise-card__precentage-value--low"
+                  *ngIf="dailyAbsentPercentage >= 50">
+          {{dailyAbsentPercentage}}%
+          </span>
+            of total employees</p>
+        </div>
+      </div>
+      <div class="project-wise-card"
+           style="cursor:pointer;">
+        <div class="project-wise-card__box project-wise-card__box--line">
+          <h5 class="project-wise-card__title">Leave Count</h5>
+          <h2 class="project-wise-card__count project-wise-card__count--error">{{dailyLeaveCount}}</h2>
+          <p class="project-wise-card__precentage">
+              <span class="project-wise-card__precentage-value project-wise-card__precentage-value--high"
+                    *ngIf="dailyLeavePercentage < 50">
+          {{dailyLeavePercentage}}%
+          </span>
+            <span class="project-wise-card__precentage-value project-wise-card__precentage-value--low"
+                  *ngIf="dailyLeavePercentage >= 50">
+          {{dailyLeavePercentage}}%
+          </span>
+            of total employees</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

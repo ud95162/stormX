@@ -1,0 +1,63 @@
+
+<div class="l-wrapper profile-page__wrapper">
+  <div class="transport-header">
+    <div style="display: flex; align-items: center;">
+      <svg class="a-icon"
+           (click)="backToSummaryPage()" style="font-size: 16px; cursor: pointer">
+        <use xlink:href="#previous"></use>
+      </svg>
+      <h3 class="transport-header__title" style="margin-top: 0; margin-left: 12px">Attendance Dashboard</h3>
+    </div>
+    <div class="project-wise-date">
+      <div class="m-form-field u-mr+">
+        <div class="m-form-field__field project-wise-date__input">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input project-wise-date__input" id="f-name" type="date"
+                   [(ngModel)]="selectedDateForDashboard" [ngModelOptions]="{standalone: true }"
+                   (change)="dateChangedFromHeader()"
+                   minlength="0"
+                   maxlength="524288" placeholder="06/01/2022" value="06/01/2022">
+          </div>
+        </div>
+      </div>
+      <div class="project-wise-filter">
+        <button class="project-wise-filter__btn">
+          <svg class="a-icon m-form-field__pre-icon project-wise-filter__icon">
+            <use xlink:href="#filter"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!--<div class="l-grid__item"  *ngIf="attendanceDataLoaded && attendanceData !== undefined">-->
+<div class="l-grid__item">
+  <div>
+<!--    <app-daily-summary-cards-->
+<!--      [dailyPresentCount]="attendanceData.presentCount"-->
+<!--      [dailyAbsentCount]="attendanceData.absentCount"-->
+<!--      [dailyLeaveCount]="attendanceData.leaveCount"-->
+<!--      [dailyOfficeCount]="attendanceData.officeCount"-->
+<!--      [dailyHomeCount]="attendanceData.homeCount"-->
+<!--      [dailyPresentPercentage]="presentPercentage"-->
+<!--      [dailyAbsentPercentage]="absentPercentage"-->
+<!--      [dailyLeavePercentage]="leavePercentage"-->
+<!--      [dailyOfficePercentage]="officePercentage"-->
+<!--      [dailyHomePercentage]="homePercentage"-->
+<!--      [isNotAWorkingDay]="notAWorkingDay"-->
+<!--    ></app-daily-summary-cards>-->
+  </div>
+  <div class="l-grid l-grid--1-1 u-mt+">
+<!--    <app-attendance-summery-->
+<!--      [officeCount]="attendanceData.officeCount"-->
+<!--      [homeCount]="attendanceData.homeCount"-->
+<!--      [leaveCount]="attendanceData.leaveCount"-->
+<!--      [absentCount]="attendanceData.absentCount"></app-attendance-summery>-->
+    <app-emp-in-out-distribution></app-emp-in-out-distribution>
+<!--    <app-overall-attendance-summery></app-overall-attendance-summery>-->
+  </div>
+</div>
+

@@ -1,0 +1,43 @@
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align buttons to the right */
+}
+
+.pagination button {
+  padding: 10px 16px; /* Increased padding */
+  border: 2px solid #007bff; /* Blue border color */
+  background-color: transparent; /* Transparent background */
+  color: #007bff; /* Text color */
+  cursor: pointer;
+  margin-left: 5px; /* Add spacing between buttons */
+  font-size: 14px; /* Increased font size */
+}
+
+.pagination button:first-child {
+  margin-left: 10px; /* Adjust margin for first button */
+}
+
+.pagination span {
+  padding: 10px 16px; /* Increased padding */
+  background-color: #f7f7f7;
+  color: #333;
+  font-weight: bold;
+}
+
+.pagination button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination button:hover {
+  background-color: #007bff; /* Blue background color on hover */
+  color: white; /* Text color on hover */
+}
+
+.data-table {
+  vertical-align: middle;
+  height: 50px;
+  display: block;
+}

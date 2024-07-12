@@ -1,0 +1,86 @@
+.opd-settings-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.opd-settings__body{
+  background: #ffffff;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.opd-settings-filter{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-auto-flow: row;
+}
+
+
+.btn-remove-synonym-model {
+  border-radius: 4px;
+  padding: 0px 6px;
+  background-color: transparent;
+  border-color: #dc3545;
+  color: #dc3545;
+  font-size: 14px;
+  height: 25px;
+  width: 25px;
+  text-align: right;
+}
+
+
+.btn-add-synonym-model {
+  border-radius: 4px;
+  padding: 0px 6px;
+  background-color: transparent;
+  border-color: #007bff;
+  color: #007bff;
+  font-size: 14px;
+  height: 25px;
+  width: 25px;
+  text-align: right;
+}
+
+
+tr:nth-of-type(even) .opd-config-btn-group {
+  background-color: #fcfcfc;
+}
+
+tr:nth-of-type(odd) .opd-config-btn-group {
+  background-color: #FFFFFF;
+}
+
+.opd-config-btn-group {
+  width: 100px;
+  min-width: 100px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: sticky;
+  right: 0;
+  background-color: white;
+}
+
+
+.leave-type__user--dto::-webkit-scrollbar-track
+{
+  background-color: #e8e8e8;
+}
+
+.leave-type__user--dto::-webkit-scrollbar
+{
+  width: 10px;
+  height: 10px;
+  background-color: #F5F5F5;
+}
+
+.leave-type__user--dto::-webkit-scrollbar-thumb
+{
+  background-color: #a5a5a5;
+}
+
+.m-form-field__label--medium{
+  color: #222222;
+  font-weight: 600;
+}

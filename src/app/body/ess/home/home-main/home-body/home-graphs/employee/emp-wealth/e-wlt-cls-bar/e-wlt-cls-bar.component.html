@@ -1,0 +1,34 @@
+<div class="profile-page__main-content"
+     *ngIf="checkPermission.checkUserHavePermissionForSection('DegreeClassesGraph')">
+
+  <div>
+    <div class="dashboard-page @@class">
+      <div class="dashboard-page__block-main">
+        <div class="leave-dashboard__main-header">
+          <div class="leave-dashboard-page__right">
+
+            <button (click)="isDnutVisible = !isDnutVisible" class="a-link-btn c-dashboard-card__btn a-link-btn_lg">
+              <svg class="a-icon dashboard-chart__icon">
+                <use xlink:href="#pie_chart_outline"></use>
+              </svg>
+            </button>
+
+          </div>
+        </div>
+
+
+        <div class="dashboard-page__block-wrapper-main">
+          <div class="dashboard-page__block-wrapper" id="employeeDegreeClassBarChart">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isDnutVisible && checkPermission.checkUserHavePermissionForSection('DegreeClassesGraph')" class="c-people-dashboard__card--wrapper">
+  <h2 class="c-people-dashboard__card--text">University Distribution</h2>
+  <div class="c-people-dashboard__card--chart">
+    <app-e-wlt-uni-dnut></app-e-wlt-uni-dnut>
+  </div>
+</div>

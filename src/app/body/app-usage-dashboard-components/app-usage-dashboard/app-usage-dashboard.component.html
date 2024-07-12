@@ -1,0 +1,252 @@
+<div class="container">
+    <div class="w3-card w3-panel" style="margin-top:20px;color: gray;">
+        <h3>Usage Dashboard</h3>
+    </div>
+
+
+    <div class="w3-card w3-panel" style="margin-top:20px">
+        <div class="row no-padding no-margin">
+            <div>
+                <div class="attendance-admin-date-select" style="padding-left: 20px;">
+                    <div *ngFor="let button of dateButtonOptions" class="radio radio-primary radio-inline ">
+                        <input
+                                (click)="updateRequest()" checked="{{setRadioChecked(button, dateButtonOptions)}}"
+                                id="dateRangeRadio{{removeSpace(button)}}"
+                                name="radioInline" type="radio"
+                                value="option{{removeSpace(button)}}" style="margin: 0;">
+                        <label for="dateRangeRadio{{removeSpace(button)}}"> {{button}}&nbsp;</label>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="showDatePickers" class="col-sm-7 no-padding">
+                <div>
+                    <div class="col-sm-6 select-container">
+                        <div class="input-group date-selector-container" title="From Date">
+                <span class="input-group-addon date-range-select-span">
+                  <i aria-hidden="true" class="fa fa-calendar"></i>
+                </span>
+                            <input
+                                    (change)="updateRequest()" [(ngModel)]="customDateRange.dateRangeFromDate"
+                                    class="form-control date-range-select-input" id="dateRangeFromDate" name="dateRangeFromDate"
+                                    type="date" value="{{today}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 select-container">
+                        <div class="input-group date-selector-container" title="To Date">
+                <span class="input-group-addon date-range-select-span">
+                  <i aria-hidden="true" class="fa fa-calendar"></i>
+                </span>
+                            <input
+                                    (change)="updateRequest()" [(ngModel)]="customDateRange.dateRangeToDate"
+                                    class="form-control date-range-select-input" id="dateRangeToDate" name="dateRangeToDate"
+                                    type="date" value="{{today}}">
+                        </div>
+                    </div>
+                    <p class="pull-right" *ngIf="dateRangeError" style="color: red">Invalid Date DateRange</p>
+                </div>
+            </div>
+
+            <div *ngIf="showMonthSelectDropdown" class="col-sm-7 no-padding">
+                <div>
+                    <div class="col-sm-6 select-container" *ngIf="isMonthFilter">
+                        <select
+                                (change)="changeFilter()" [(ngModel)]="selectedMonthFilter"
+                                class="form-control pull-right attendance-admin-project-select"
+                                id="filterSelect" name="filterSelect">
+                            <!--<option *ngFor="let filter of monthFilters.monthList">{{filter}}</option>-->
+                            <option *ngFor="let filter of loadedMonthFilters">{{filter}}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-sm-6 select-container"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-sm-12 no-padding">
+        <div class="col-sm-6">
+            <div class="w3-panel w3-card">
+                <table width="100%">
+                    <tr>
+                        <td width="90%">
+                            <h4 class="card-title recruitment-label">Total Logins</h4>
+                            <h4 class="card-title recruitment-label" style="font-size: 4em;">{{totalLogins}}</h4>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="w3-panel w3-card">
+                <table width="100%">
+                    <tr>
+                        <td width="90%">
+                            <h4 class="card-title recruitment-label">Total API Usage</h4>
+                            <h4 class="card-title recruitment-label" style="font-size: 4em;">{{totalApiUsage}}</h4>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 no-padding">
+        <div class="col-sm-6">
+            <div class="w3-panel w3-card">
+
+                <table width="100%">
+                    <tr>
+                        <td width="90%">
+                            <h4 class="card-title recruitment-label">Daily Logins Distribution</h4>
+                        </td>
+
+
+                    </tr>
+                </table>
+
+                <div class="recruitment-graph" *ngIf="true">
+                    <canvas
+                            baseChart
+                            [type]="barChartType"
+                            [datasets]="[{
+                              label: 'Logins Count',
+                              data: barChartLoginsDailyData[0].data,
+                              backgroundColor: barChartLoginsDailyColors[0].backgroundColor,
+                              borderColor: barChartLoginsDailyColors[0].borderColor,
+                              pointBackgroundColor: barChartLoginsDailyColors[0].pointBackgroundColor,
+                              pointBorderColor: barChartLoginsDailyColors[0].pointBorderColor,
+                              pointHoverBackgroundColor: barChartLoginsDailyColors[0].pointHoverBackgroundColor,
+                              pointHoverBorderColor: barChartLoginsDailyColors[0].pointHoverBorderColor
+                           }]"
+                            [labels]="barChartLoginsDailyLabels"
+                            [options]="barChartOptions"
+                            [legend]="barChartLegend">
+                    </canvas>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-6">
+            <div class="w3-panel w3-card">
+
+                <table width="100%">
+                    <tr>
+                        <td width="90%">
+                            <h4 class="card-title recruitment-label">Daily API Usage Distribution</h4>
+                        </td>
+
+
+                    </tr>
+                </table>
+
+                <div class="recruitment-graph" *ngIf="true">
+                    <canvas
+                            baseChart
+                            [type]="barChartType"
+                            [datasets]="[{
+                              label: 'API Usage Count',
+                              data: barChartApiUsagesDailyData[0].data,
+                              backgroundColor: barChartApiUsagesDailyColors[0].backgroundColor,
+                              borderColor: barChartApiUsagesDailyColors[0].borderColor,
+                              pointBackgroundColor: barChartApiUsagesDailyColors[0].pointBackgroundColor,
+                              pointBorderColor: barChartApiUsagesDailyColors[0].pointBorderColor,
+                              pointHoverBackgroundColor: barChartApiUsagesDailyColors[0].pointHoverBackgroundColor,
+                              pointHoverBorderColor: barChartApiUsagesDailyColors[0].pointHoverBorderColor
+                            }]"
+                            [labels]="barChartApiUsagesDailyLabels"
+                            [options]="barChartOptions"
+                            [legend]="barChartLegend">
+                    </canvas>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-sm-12 no-padding">
+        <div class="col-sm-6">
+            <div class="w3-panel w3-card">
+
+                <table width="100%">
+                    <tr>
+                        <td width="90%">
+                            <h4 class="card-title recruitment-label">Hourly Logins Distribution</h4>
+                        </td>
+
+
+                    </tr>
+                </table>
+
+                <div class="recruitment-graph" *ngIf="true">
+                    <canvas
+                            baseChart
+                            [type]="barChartType"
+                            [datasets]="[{
+                              label: 'Logins Count',
+                              data: barChartLoginsHourlyData[0].data,
+                              backgroundColor: barChartLoginsHourlyColors[0].backgroundColor,
+                              borderColor: barChartLoginsHourlyColors[0].borderColor,
+                              pointBackgroundColor: barChartLoginsHourlyColors[0].pointBackgroundColor,
+                              pointBorderColor: barChartLoginsHourlyColors[0].pointBorderColor,
+                              pointHoverBackgroundColor: barChartLoginsHourlyColors[0].pointHoverBackgroundColor,
+                              pointHoverBorderColor: barChartLoginsHourlyColors[0].pointHoverBorderColor
+                            }]"
+                            [labels]="barChartLoginsHourlyLabels"
+                            [options]="barChartOptions"
+                            [legend]="barChartLegend">
+                    </canvas>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-6">
+            <div class="w3-panel w3-card">
+
+                <table width="100%">
+                    <tr>
+                        <td width="90%">
+                            <h4 class="card-title recruitment-label">Hourly API Usage Distribution</h4>
+                        </td>
+
+
+                    </tr>
+                </table>
+
+                <div class="recruitment-graph" *ngIf="true">
+                    <canvas
+                            baseChart
+                            [type]="barChartType"
+                            [datasets]="[{
+                              label: 'API Usage Count',
+                              data: barChartApiUsagesHourlyData[0].data,
+                              backgroundColor: barChartApiUsagesHourlyColors[0].backgroundColor,
+                              borderColor: barChartApiUsagesHourlyColors[0].borderColor,
+                              pointBackgroundColor: barChartApiUsagesHourlyColors[0].pointBackgroundColor,
+                              pointBorderColor: barChartApiUsagesHourlyColors[0].pointBorderColor,
+                              pointHoverBackgroundColor: barChartApiUsagesHourlyColors[0].pointHoverBackgroundColor,
+                              pointHoverBorderColor: barChartApiUsagesHourlyColors[0].pointHoverBorderColor
+    }                       ]"
+                            [labels]="barChartApiUsagesHourlyLabels"
+                            [options]="barChartOptions"
+                            [legend]="barChartLegend">
+                    </canvas>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

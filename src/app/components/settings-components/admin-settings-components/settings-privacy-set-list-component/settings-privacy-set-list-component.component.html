@@ -1,0 +1,241 @@
+<!--<div class="w3-panel w3-card">-->
+<!--  <div *ngIf="loadingOverlayView" class="overlay" id="myNav" style="text-align: center">-->
+<!--    <img src="assets/image/loading/loading-stripe.svg" style="padding-top: 30%; width: 150px">-->
+<!--  </div>-->
+
+<!--  <div class="panel-group">-->
+<!--    <div *ngFor="let result of resultset" class="panel custom-panel">-->
+<!--      <div class="panel-heading">-->
+<!--        <h4 class="panel-title">-->
+<!--          <a class="custom-hyperlink" data-toggle="collapse"-->
+<!--             href="#collapse{{setIdName(result.userGroup.userGroupName)}}">-->
+<!--            {{result.userGroup.userGroupName}} <i aria-hidden="true" class="fa fa-chevron-down pull-right"></i>-->
+<!--          </a>-->
+<!--        </h4>-->
+<!--      </div>-->
+<!--      <div class="panel-collapse collapse" id="collapse{{setIdName(result.userGroup.userGroupName)}}">-->
+<!--        <div *ngFor="let subresult of result.permAndSubPermAvailabilities" class="panel-body">-->
+<!--          <div class="checkbox">-->
+<!--            <input-->
+<!--              (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName + subresult.permName), subresult.permName, result.userGroup.userGroupName)"-->
+<!--              checked={{checkPermissionAvailable(subresult.permAvailableForUserGroup)}}-->
+<!--              disabled={{checkDisabled(subresult.permRemovableFromUserGroup)}}-->
+<!--              id="checkbox{{setIdName(result.userGroup.userGroupName + subresult.permName)}}"-->
+<!--              type="checkbox">-->
+<!--            <label for="checkbox{{setIdName(result.userGroup.userGroupName + subresult.permName)}}">-->
+<!--              <h5 style="margin-top: 0; font-weight: 600 !important;">{{subresult.permName}}</h5>-->
+<!--            </label>-->
+<!--          </div>-->
+<!--          <div>-->
+<!--            <div *ngFor="let nestedlevel1subresultset of subresult.permAndPermAvailabilitiesForSubPermissions"-->
+<!--                 class="col-sm-12">-->
+<!--              <div class="checkbox">-->
+<!--                <input-->
+<!--                  (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName), nestedlevel1subresultset.permName, result.userGroup.userGroupName)"-->
+<!--                  checked={{checkPermissionAvailable(nestedlevel1subresultset.permAvailableForUserGroup)}}-->
+<!--                  disabled={{checkDisabled(nestedlevel1subresultset.permRemovableFromUserGroup)}}-->
+<!--                  id="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName)}}"-->
+<!--                  type="checkbox">-->
+<!--                <label-->
+<!--                  for="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName)}}">-->
+<!--                  {{nestedlevel1subresultset.permName}}-->
+<!--                </label>-->
+<!--              </div>-->
+<!--              <div>-->
+<!--                <div-->
+<!--                  *ngFor="let nestedlevel2subresultset of nestedlevel1subresultset.permAndPermAvailabilitiesForSubPermissions"-->
+<!--                  class="col-sm-12">-->
+<!--                  <div class="checkbox">-->
+<!--                    <input-->
+<!--                      (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName), nestedlevel2subresultset.permName, result.userGroup.userGroupName)"-->
+<!--                      checked={{checkPermissionAvailable(nestedlevel2subresultset.permAvailableForUserGroup)}}-->
+<!--                      disabled={{checkDisabled(nestedlevel2subresultset.permRemovableFromUserGroup)}}-->
+<!--                      id="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName)}}"-->
+<!--                      type="checkbox">-->
+<!--                    <label-->
+<!--                      for="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName)}}">-->
+<!--                      {{nestedlevel2subresultset.permName}}-->
+<!--                    </label>-->
+<!--                  </div>-->
+<!--                  <div>-->
+<!--                    <div-->
+<!--                      *ngFor="let nestedlevel3subresultset of nestedlevel2subresultset.permAndPermAvailabilitiesForSubPermissions"-->
+<!--                      class="{{setClass(nestedlevel3subresultset.permAndPermAvailabilitiesForSubPermissions)}}">-->
+<!--                      <div class="checkbox">-->
+<!--                        <input-->
+<!--                          (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName), nestedlevel3subresultset.permName, result.userGroup.userGroupName)"-->
+<!--                          checked={{checkPermissionAvailable(nestedlevel3subresultset.permAvailableForUserGroup)}}-->
+<!--                          disabled={{checkDisabled(nestedlevel3subresultset.permRemovableFromUserGroup)}}-->
+<!--                          id="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName)}}"-->
+<!--                          type="checkbox">-->
+<!--                        <label-->
+<!--                          for="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName)}}">-->
+<!--                          {{nestedlevel3subresultset.permName}}-->
+<!--                        </label>-->
+<!--                      </div>-->
+<!--                      <div>-->
+<!--                        <div-->
+<!--                          *ngFor="let nestedlevel4subresultset of nestedlevel3subresultset.permAndPermAvailabilitiesForSubPermissions"-->
+<!--                          class="{{setClass(nestedlevel4subresultset.permAndPermAvailabilitiesForSubPermissions)}}">-->
+<!--                          <div class="checkbox">-->
+<!--                            <input-->
+<!--                              (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName), nestedlevel4subresultset.permName, result.userGroup.userGroupName)"-->
+<!--                              checked={{checkPermissionAvailable(nestedlevel4subresultset.permAvailableForUserGroup)}}-->
+<!--                              disabled={{checkDisabled(nestedlevel4subresultset.permRemovableFromUserGroup)}}-->
+<!--                              id="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName)}}"-->
+<!--                              type="checkbox">-->
+<!--                            <label-->
+<!--                              for="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName)}}">-->
+<!--                              {{nestedlevel4subresultset.permName}}-->
+<!--                            </label>-->
+<!--                          </div>-->
+<!--                          <div>-->
+<!--                            <div-->
+<!--                              *ngFor="let nestedlevel5subresultset of nestedlevel4subresultset.permAndPermAvailabilitiesForSubPermissions"-->
+<!--                              class="{{setClass(nestedlevel5subresultset.permAndPermAvailabilitiesForSubPermissions)}}">-->
+<!--                              <div class="checkbox">-->
+<!--                                <input-->
+<!--                                  (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName+nestedlevel5subresultset.permName), nestedlevel5subresultset.permName, result.userGroup.userGroupName)"-->
+<!--                                  checked={{checkPermissionAvailable(nestedlevel5subresultset.permAvailableForUserGroup)}}-->
+<!--                                  disabled={{checkDisabled(nestedlevel5subresultset.permRemovableFromUserGroup)}}-->
+<!--                                  id="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName+nestedlevel5subresultset.permName)}}"-->
+<!--                                  type="checkbox">-->
+<!--                                <label-->
+<!--                                  for="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName+nestedlevel5subresultset.permName)}}">-->
+<!--                                  {{nestedlevel5subresultset.permName}}-->
+<!--                                </label>-->
+<!--                              </div>-->
+<!--                              <div>-->
+<!--                                <div-->
+<!--                                  *ngFor="let nestedlevel6subresultset of nestedlevel5subresultset.permAndPermAvailabilitiesForSubPermissions"-->
+<!--                                  class="{{setClass(nestedlevel6subresultset.permAndPermAvailabilitiesForSubPermissions)}}">-->
+<!--                                  <div class="checkbox">-->
+<!--                                    <input-->
+<!--                                      (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName+nestedlevel5subresultset.permName+nestedlevel6subresultset.permName), nestedlevel6subresultset.permName, result.userGroup.userGroupName)"-->
+<!--                                      checked={{checkPermissionAvailable(nestedlevel6subresultset.permAvailableForUserGroup)}}-->
+<!--                                      disabled={{checkDisabled(nestedlevel6subresultset.permRemovableFromUserGroup)}}-->
+<!--                                      id="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName+nestedlevel5subresultset.permName+nestedlevel6subresultset.permName)}}"-->
+<!--                                      type="checkbox">-->
+<!--                                    <label-->
+<!--                                      for="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName+nestedlevel5subresultset.permName+nestedlevel6subresultset.permName)}}">-->
+<!--                                      {{nestedlevel6subresultset.permName}}-->
+<!--                                    </label>-->
+<!--                                  </div>-->
+<!--                                  <div>-->
+<!--                                    <div-->
+<!--                                      *ngFor="let nestedlevel7subresultset of nestedlevel6subresultset.permAndPermAvailabilitiesForSubPermissions"-->
+<!--                                      class="col-sm-2 col-sm-2-height">-->
+<!--                                      <div class="checkbox">-->
+<!--                                        <input-->
+<!--                                          (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName+nestedlevel5subresultset.permName+nestedlevel6subresultset.permName+nestedlevel7subresultset.permName), nestedlevel7subresultset.permName, result.userGroup.userGroupName)"-->
+<!--                                          checked={{checkPermissionAvailable(nestedlevel7subresultset.permAvailableForUserGroup)}}-->
+<!--                                          disabled={{checkDisabled(nestedlevel7subresultset.permRemovableFromUserGroup)}}-->
+<!--                                          id="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName+nestedlevel5subresultset.permName+nestedlevel6subresultset.permName+nestedlevel7subresultset.permName)}}"-->
+<!--                                          type="checkbox">-->
+<!--                                        <label-->
+<!--                                          for="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName+nestedlevel4subresultset.permName+nestedlevel5subresultset.permName+nestedlevel6subresultset.permName+nestedlevel7subresultset.permName)}}">-->
+<!--                                          {{nestedlevel7subresultset.permName}}-->
+<!--                                        </label>-->
+<!--                                      </div>-->
+<!--                                    </div>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<div class="page-privacy-settings-group">-->
+<!--  <div class="c-accordion-section page-privacy-settings-group__accordion" *ngFor="let result of resultset; let index = index">-->
+<!--    <div class="c-accordion-section__center">-->
+<!--      <div class="c-accordion-section__header c-accordion-section__header&#45;&#45;top">-->
+<!--        <h2 class="c-accordion-section__header-title">{{result.userGroup.userGroupName}}</h2>-->
+<!--      </div>-->
+<!--      <div class="c-accordion-section__icons">-->
+<!--        <div class="c-accordion-section__icons-collapse">-->
+<!--          <svg class="a-link-btn a-icon c-accordion-section__icons-collapse-icon" (click)="showPrivacyResponses(index)">-->
+<!--            <use xlink:href="#pointer-down-circle"></use>-->
+<!--          </svg>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="c-accordion-section__body" *ngIf="visibleIndex === index">-->
+<!--      <div class="permission-setting__tree">-->
+<!--        <div class="permission-setting__tree-cover">-->
+<!--          <ul class="permission-setting__tree&#45;&#45;main">-->
+<!--            <li class="permission-setting__tree&#45;&#45;child" *ngFor="let subresult of result.permAndSubPermAvailabilities">-->
+<!--              <label class="a-checkbox" for="checkbox{{setIdName(result.userGroup.userGroupName + subresult.permName)}}">-->
+<!--                <input type="checkbox" class="a-checkbox__check"-->
+<!--                       (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName + subresult.permName), subresult.permName, result.userGroup.userGroupName)"-->
+<!--                       checked={{checkPermissionAvailable(subresult.permAvailableForUserGroup)}}-->
+<!--                       disabled={{checkDisabled(subresult.permRemovableFromUserGroup)}}-->
+<!--                       id="checkbox{{setIdName(result.userGroup.userGroupName + subresult.permName)}}">-->
+<!--                <span class="a-checkbox__label permission-setting__checkbox&#45;&#45;label">{{subresult.permName}}</span>-->
+<!--              </label>-->
+
+
+<!--              <ul class="permission-setting__tree&#45;&#45;subparent">-->
+<!--                <li class="permission-setting__tree&#45;&#45;subchild" *ngFor="let nestedlevel1subresultset of subresult.permAndPermAvailabilitiesForSubPermissions">-->
+<!--                  <label class="a-checkbox" for="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName)}}">-->
+<!--                    <input type="checkbox" class="a-checkbox__check"-->
+<!--                           (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName), nestedlevel1subresultset.permName, result.userGroup.userGroupName)"-->
+<!--                           checked={{checkPermissionAvailable(nestedlevel1subresultset.permAvailableForUserGroup)}}-->
+<!--                           disabled={{checkDisabled(nestedlevel1subresultset.permRemovableFromUserGroup)}}-->
+<!--                           id="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName)}}">-->
+<!--                    <span class="a-checkbox__label permission-setting__checkbox&#45;&#45;label">{{nestedlevel1subresultset.permName}}</span>-->
+<!--                  </label>-->
+
+<!--                  <ul class="permission-setting__tree&#45;&#45;subparent">-->
+<!--                    <li class="permission-setting__tree&#45;&#45;subchild" *ngFor="let nestedlevel2subresultset of nestedlevel1subresultset.permAndPermAvailabilitiesForSubPermissions">-->
+<!--                      <label class="a-checkbox" for="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName)}}">-->
+<!--                        <input type="checkbox" class="a-checkbox__check"-->
+<!--                               (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName), nestedlevel2subresultset.permName, result.userGroup.userGroupName)"-->
+<!--                               checked={{checkPermissionAvailable(nestedlevel2subresultset.permAvailableForUserGroup)}}-->
+<!--                               disabled={{checkDisabled(nestedlevel2subresultset.permRemovableFromUserGroup)}}-->
+<!--                               id="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName)}}">-->
+<!--                        <span class="a-checkbox__label permission-setting__checkbox&#45;&#45;label">{{nestedlevel2subresultset.permName}}</span>-->
+<!--                      </label>-->
+<!--&lt;!&ndash;                          <ul>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <li class="permission-setting__tree&#45;&#45;subchild">&ndash;&gt;-->
+<!--                              <ul class="permission-setting__tree&#45;&#45;inline">-->
+<!--                                <li class="permission-setting__tree&#45;&#45;inline-item"-->
+<!--                                    *ngFor="let nestedlevel3subresultset of nestedlevel2subresultset.permAndPermAvailabilitiesForSubPermissions">-->
+<!--                                  <label class="a-checkbox" for="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName)}}">-->
+<!--                                    <input type="checkbox" class="a-checkbox__check"-->
+<!--                                           (click)="changePermissionGroup(setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName), nestedlevel3subresultset.permName, result.userGroup.userGroupName)"-->
+<!--                                           checked={{checkPermissionAvailable(nestedlevel3subresultset.permAvailableForUserGroup)}}-->
+<!--                                           disabled={{checkDisabled(nestedlevel3subresultset.permRemovableFromUserGroup)}}-->
+<!--                                           id="checkbox{{setIdName(result.userGroup.userGroupName+subresult.permName+nestedlevel1subresultset.permName+nestedlevel2subresultset.permName+nestedlevel3subresultset.permName)}}">-->
+<!--                                    <span class="a-checkbox__label permission-setting__checkbox&#45;&#45;label">{{nestedlevel3subresultset.permName}}</span>-->
+<!--                                  </label>-->
+<!--                                </li>-->
+
+<!--                              </ul>-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                          </ul>&ndash;&gt;-->
+<!--                    </li>-->
+
+<!--                  </ul>-->
+
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

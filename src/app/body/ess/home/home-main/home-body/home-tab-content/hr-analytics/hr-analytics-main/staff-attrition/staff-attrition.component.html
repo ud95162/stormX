@@ -1,0 +1,232 @@
+<main class="l-page__main profile-page">
+  <div class="l-wrapper profile-page__wrapper hr-analytics-dashboard">
+    <div class="dashboard-page__block-main-header">
+      <div class="dashboard-page__left dashboard-page_previous">
+        <div class="previous-icon">
+          <svg class="a-icon">
+            <use xlink:href="#previous"></use>
+          </svg>
+        </div>
+        <div class="previous-text">HR Analytics Dashboard - Staff Attrition</div>
+      </div>
+      <div style="position: relative">
+        <a class="project-dashboard__filter" (click)="displayStaffAttritionFilters($event)">
+                <span class="m-form-field__pre">
+                    <svg class="a-icon project-dashboard__filter-icon">
+                        <use xlink:href="#filter"></use>
+                    </svg>
+                </span>
+        </a>
+        <div class="project-wise-filter-box " style="position: absolute; z-index: 9;" *ngIf="attritionFilterSectionDisplay" (click)="$event.stopPropagation()">
+          <div class="project-wise-filter-box__top">
+            <h6 class="project-wise-filter-box__title">Filter</h6>
+          </div>
+          <div class="project-wise-filter-box__body">
+            <div class="m-form-field" *ngIf="preInsertDataLoaded">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">Company</label>
+              </div>
+
+              <div class="m-form-field__field m-form-field__min-height">
+                <div class="m-form-field__field-item">
+                  <select class="m-form-field__select"
+                          [(ngModel)]="selectedCompanyID" [ngModelOptions]="{standalone: true}"
+                          (change)="getBusinessUnitsData();">
+                    <option value="0">All</option>
+                    <option *ngFor="let data of companiesList" value="{{data.id}}">{{data.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <span class="m-form-field__error">error</span>
+            </div>
+
+            <div class="m-form-field" *ngIf="businessUnitsDataLoaded">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">Business Unit</label>
+              </div>
+
+              <div class="m-form-field__field m-form-field__min-height">
+                <div class="m-form-field__field-item">
+                  <select class="m-form-field__select"
+                          [(ngModel)]="selectedBUID" [ngModelOptions]="{standalone: true}"
+                          (change)="getDepartmentsData();">
+                    <option value="0">All</option>
+                    <option *ngFor="let data of businessUnitList" value="{{data.id}}">{{data.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <span class="m-form-field__error">error</span>
+            </div>
+
+
+            <div class="m-form-field" *ngIf="departmentsDataLoaded">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">Department</label>
+              </div>
+              <div class="hr-analytics-filter-dropdown">
+                <mat-form-field appearance="none" class="genarate-employee-list" style="width: 100%">
+                  <mat-select multiple [formControl]='staffAttritionDepartments' [(ngModel)]="selectedDepIDs"
+                              (selectionChange)="changeAction('dep')" #departmentSelect style="height: 33px;">
+                    <mat-select-trigger style="padding-top: 10px">
+                      <span style="color: #23272b; font-size: 14px; padding-top: 10px" *ngIf="allDepartmentsChecked">
+                        All
+                      </span>
+                      <span style="color: #23272b; font-size: 14px" *ngIf="!allDepartmentsChecked">
+                        {{getNameFromId('dep', selectedDepIDs[0]) || ''}} {{selectedDepIDs.length === 2 ? '(+1 other)' : selectedDepIDs.length > 2 ? '(+' + returnArrayLength('dep') + ' others)' : ''}}
+                      </span>
+                    </mat-select-trigger>
+                    <mat-checkbox [(ngModel)]="allDepartmentsChecked"
+                                  (change)="onAllChanged('dep', $event.checked)"
+                                  style="padding-left:15px; font-size: medium">All
+                    </mat-checkbox>
+                    <mat-option *ngFor="let dep of selectedDepartments" [value]="dep.id">
+                      {{dep.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="m-form-field" *ngIf="preInsertDataLoaded">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">Cadre</label>
+              </div>
+              <div class="">
+                <mat-form-field appearance="none" class="genarate-employee-list" style="width: 100%">
+                  <mat-select multiple [formControl]='staffAttritionCadres' [(ngModel)]="selectedCadreIDs"
+                              (selectionChange)="changeAction('cadre')" #cadreSelect style="height: 33px">
+                    <mat-select-trigger style="padding-top: 10px">
+                      <span style="color: #23272b; font-size: 14px; padding-top: 10px" *ngIf="allCadresChecked">
+                        All
+                      </span>
+                      <span style="color: #23272b; font-size: 14px" *ngIf="!allCadresChecked">
+                        {{getNameFromId('cadre', selectedCadreIDs[0]) || ''}} {{selectedCadreIDs.length === 2 ? '(+1 other)' : selectedCadreIDs.length > 2 ? '(+' + returnArrayLength('cadre') + ' others)' : ''}}
+                      </span>
+                    </mat-select-trigger>
+                    <mat-checkbox [(ngModel)]="allCadresChecked"
+                                  (change)="onAllChanged('cadre', $event.checked)"
+                                  style="padding-left:15px; font-size: medium">All
+                    </mat-checkbox>
+                    <mat-option *ngFor="let cadre of selectedCadres" [value]="cadre.cadreID">
+                      {{cadre.cadreName}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+
+            <div class="m-form-field">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">Year</label>
+              </div>
+              <div class="">
+                <mat-form-field appearance="none" class="genarate-employee-list" style="width: 100%">
+                  <mat-select [formControl]="staffAttritionYears" multiple>
+                    <mat-option *ngFor="let year of yearsList" [value]="year">{{year}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="m-form-field">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">Month</label>
+              </div>
+              <div class="">
+                <mat-form-field appearance="none" class="genarate-employee-list" style="width: 100%">
+                  <mat-select [formControl]="staffAttritionMonths" multiple>
+                    <mat-option *ngFor="let month of monthList" [value]="month">{{month}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-wise-filter-box__footer">
+            <button class="a-btn a-btn--primary "
+                    [ngClass]="{'is-disabled': staffAttritionYears.value.length === 0 || staffAttritionMonths.value.length === 0}"
+                    (click)="filterAnalytics()">Filter
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+    <div class="analytics-projects-container u-mb+" *ngIf="companyWiseEmployeeSummaryDataLoaded">
+      <app-company-wise-employee-summary
+        [companySummary]="companyWiseEmployeeSummary"></app-company-wise-employee-summary>
+    </div>
+
+
+      <app-rec-res-growth-turn-summary *ngIf="summaryDataLoaded"
+        [recruitmentCount]="recruitmentResignationDataSummary.totalRecruitmentCount"
+        [resignationCount]="recruitmentResignationDataSummary.totalResignationCount"
+        [headGrowthCount]="headGrowthTurnOverDataSummary.totalHeadGrowth"
+        [turnOverCount]="headGrowthTurnOverDataSummary.totalTurnOver"></app-rec-res-growth-turn-summary>
+
+    <div class="l-grid l-grid--1-2">
+      <div class="analytics-graph-card">
+        <h6 class="analytics-graph-card__title u-mb+">Project Group Wise - Recruitment</h6>
+        <div *ngIf="summaryDataLoaded">
+          <app-project-type-wise-recruitment
+            [recruitmentData]="recruitmentResignationDataSummary.projectTypeWithRecruitmentsCount">
+          </app-project-type-wise-recruitment>
+        </div>
+      </div>
+      <div class="analytics-graph-card">
+        <h6 class="analytics-graph-card__title u-mb+">Recruitments vs Resignations</h6>
+        <div *ngIf="summaryDataLoaded">
+          <app-recruiment-vs-resignation
+          [summaryData]="recruitmentResignationDataSummary.monthWiseRecruitmentsAndResignations"></app-recruiment-vs-resignation>
+        </div>
+      </div>
+    </div>
+
+    <div class="l-grid l-grid--1-3">
+      <div class="analytics-graph-card">
+        <h6 class="analytics-graph-card__title u-mb+">Project Group Wise - HeadGrowth</h6>
+        <div *ngIf="summaryDataLoaded">
+          <app-project-type-wise-head-growth
+          [headGrowth]="headGrowthTurnOverDataSummary.projectTypeWiseHeadGrowth"></app-project-type-wise-head-growth>
+        </div>
+      </div>
+      <div class="analytics-graph-card">
+        <h6 class="analytics-graph-card__title u-mb+">Project Group Wise - Resignation</h6>
+        <div *ngIf="summaryDataLoaded">
+          <app-project-type-wise-resignation
+            [resignationData]="recruitmentResignationDataSummary.projectTypeWithResignationsCount">
+          </app-project-type-wise-resignation>
+        </div>
+      </div>
+      <div class="analytics-graph-card">
+        <h6 class="analytics-graph-card__title u-mb+">Project Group Wise - Turnover</h6>
+        <div *ngIf="summaryDataLoaded">
+          <app-project-type-wise-turn-over
+            [turnOver]="headGrowthTurnOverDataSummary.projectTypeWiseTurnOver"></app-project-type-wise-turn-over>
+        </div>
+      </div>
+    </div>
+
+    <div class="l-grid l-grid--2-1">
+      <div class="analytics-graph-card">
+        <h6 class="analytics-graph-card__title u-mb+">Cumulative - HeadGrowth vs Turnover</h6>
+        <div *ngIf="summaryDataLoaded">
+          <app-head-growth-turn-over-cumulative
+          [headGrowthVsTurnOverData]="headGrowthTurnOverDataSummary.monthWiseHeadGrowthAndTurnOver"></app-head-growth-turn-over-cumulative>
+        </div>
+      </div>
+      <div class="analytics-graph-card">
+        <h6 class="analytics-graph-card__title u-mb+">Years of Experience - Turnover</h6>
+        <div *ngIf="resignEmployeeSummaryDataLoaded">
+          <app-resign-emp-experience
+          [expSummaryCount]="resignEmployeesExperienceSummary"></app-resign-emp-experience>
+        </div>
+      </div>
+    </div>
+
+    <app-department-distribution *ngIf="preInsertDataLoaded"
+    [companies]="companiesList"></app-department-distribution>
+  </div>
+</main>

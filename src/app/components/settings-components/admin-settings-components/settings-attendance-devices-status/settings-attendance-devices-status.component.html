@@ -1,0 +1,95 @@
+<div class="kriyo-stories">
+  <div class="route-settings__header">
+    <h2 class="c-define-designation__text">Attendance Devices Status</h2>
+  </div>
+
+  <div class="c-form__content-body u-mt-20" *ngIf="!attendanceDevicesDataLoaded">
+    <div class="c-data__empty">
+      <img src="/assets/new-design-images/no-data.png" alt="no data">
+      <div class="gray-500 s-small-default c-data__empty-sub">
+        Employees Attendance Devices Details Not Available
+      </div>
+    </div>
+  </div>
+
+  <div class="l-grid l-grid--1x3" style="margin-top: 30px;" *ngIf="attendanceDevicesDataLoaded">
+    <div class="c-form__wrap-items">
+      <div class="m-form-field">
+        <label class="m-form-field__label">Device Type</label>
+        <div class="radio-group" style="margin-top: 15px;">
+          <div class="radio-inline" *ngFor="let data of deviceDetails">
+            <input type="radio" name="deviceType" [(ngModel)]="deviceType" [value]="data.syncSystem"
+                   (click)="changeDeviceType(data.syncSystem)">
+            <label style="font-size: 100%">{{data.syncSystem }}</label>
+          </div>
+        </div>
+        <div class="m-form-field__lbl">
+          <label class="m-form-field__error">Error text goes here</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-form__wrap-items">
+      <div class="m-form-field">
+        <label class="m-form-field__label">Location</label>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item m-list-input">
+            <select class="m-form-field__input" aria-label="Select Company" [(ngModel)]="deviceLocation"
+                    (click)="changeDeviceLocation()">
+              <option *ngFor="let data of deviceLocations">{{data}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="m-form-field__lbl">
+          <label class="m-form-field__error">Error text goes here</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-form__wrap-items">
+      <div class="m-form-field">
+        <label class="m-form-field__label">Date</label>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input project-wise-date__input" id="f-name" type="date"
+                   [(ngModel)]="selectedDate" [ngModelOptions]="{standalone: true }"
+                   (change)="changeDate()" [max]="maxDate"
+                   minlength="0"
+                   maxlength="524288" placeholder="06/01/2022" value="06/01/2022">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reservation-table">
+    <table aria-describedby="opd-config-with-marital-status" class="c-kriyo-deta__table " *ngIf="attendanceDevicesDataLoaded">
+      <thead>
+      <tr>
+        <th>
+          <div class="c-action-changes__header-wrap">
+            <h2 class="c-define-designation__text">{{deviceLocation}}</h2>
+          </div>
+        </th>
+        <th>
+          <button class="a-btn a-btn--secondary" style="background-color: #147AD6; float: right;" (click)="syncAllDevices()">
+            Sync All Failed
+          </button>
+        </th>
+      </tr>
+      </thead>
+      <tbody class="c-kriyo-deta__table--body" style="overflow-y: auto; height: 100%">
+      <tr *ngFor="let row of getTimeRows()">
+        <ng-container *ngFor="let hour of row; let i = index;">
+          <td [style.color]="deviceData.dataAvailabilityMap[hour] ? 'black' : '#EC6666'">
+            {{ getTimeLabel(hour) }}
+            <img *ngIf="!deviceData.dataAvailabilityMap[hour]" src="assets/image/sync.svg" alt="sync"
+                 (click)="syncSelectedHour(i)"/>
+          </td>
+        </ng-container>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

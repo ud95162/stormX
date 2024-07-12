@@ -1,0 +1,414 @@
+<div *ngIf="loadingOverlayView" class="overlay" id="myNav" style="text-align: center">
+  <img src="assets/image/loading/review-posting.svg" style="padding-top: 17%; width: 70px">
+</div>
+
+<div *ngIf="isMobile || isTablet" style="height: 20px !important;"></div>
+
+<div *ngIf="checkPermission.checkUserHavePermissionForSection('BreadCrumbs')"
+     style="margin-bottom: 10px">
+  <div>
+    <div style="width: 100%; margin-bottom: 10px;">
+      <div class="btn-group btn-breadcrumb">
+        <a (click)="searchBreadCrumb(breadCrumbValue)" *ngFor="let breadCrumbValue of searchKeyArrayForBreadcrumbs"
+           class="btn breadcrumb-btn">{{breadCrumbValue}}</a>
+      </div>
+    </div>
+  </div>
+
+  <!--Review Top bar-->
+  <table *ngIf="isDesktop" width="100%">
+    <tr>
+      <td width="70%">
+        <h4 style="margin-top: 0; margin-bottom: 0; font-weight: 600;">
+          <span style="color: #898989">Count : </span> {{searchCount}}
+        </h4>
+      </td>
+      <td *ngIf="checkPermission.checkUserHavePermissionForSection('GroupSelection')"
+          width="15%">
+        <div class="pull-right" data-toggle="buttons">
+          <label (click)="selectAll()" class="btn selectAllbtn">
+            <input autocomplete="off" checked id="selectAll" name="options" type="radio">
+            <i class="fa fa-check" style="font-size: 20px; padding: 2px 1px 0 0"></i>
+          </label>
+          <label (click)="deselectAll()" class="btn selectAllbtn active">
+            <input autocomplete="off" id="deselectAll" name="options" type="radio">
+            <i class="fa fa-times" style="font-size: 20px; padding: 2px 1px 0 0"></i>
+          </label>
+        </div>
+      </td>
+      <td *ngIf="checkPermission.checkUserHavePermissionForSection('GroupReviews')"
+          width="15%">
+        <div class="dropdown">
+          <button class="btn sltbtn dropdown-toggle pull-right" data-toggle="dropdown" type="button">
+            <i class="fa fa-caret-square-o-down" style="font-size: 20px; padding: 2px 1px 0 0"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right" style="margin-top: 22px;">
+            <li>
+              <a (click)="setReviewButtonActive()" class="btn dropdown-btn" data-target="#writeReview"
+                 data-toggle="modal"
+                 style="width: 100% !important; text-align: left; text-decoration: none"
+                 type="button">
+                Review
+              </a>
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!--Review Top bar-->
+  <table *ngIf="isMobile || isTablet" width="100%">
+    <tr>
+      <td align="left" style="padding-bottom: 10px;" width="40%">
+        <h4 style="margin-top: 0; margin-bottom: 0">
+          <span style="color: #898989">Count : </span>{{searchCount}}
+        </h4>
+      </td>
+      <td align="right" width="30%">
+        <div data-toggle="buttons">
+          <label (click)="selectAll()" class="btn selectAllbtn">
+            <input autocomplete="off" checked id="selectAll" name="options" type="radio">
+            <i class="fa fa-check" style="font-size: 20px; padding: 2px 1px 0 0"></i>
+          </label>
+          <label (click)="deselectAll()" class="btn selectAllbtn active">
+            <input autocomplete="off" id="deselectAll" name="options" type="radio">
+            <i class="fa fa-times" style="font-size: 20px; padding: 2px 1px 0 0"></i>
+          </label>
+        </div>
+      </td>
+      <td width="30%">
+        <div class="dropdown">
+          <button class="btn sltbtn dropdown-toggle pull-right" data-toggle="dropdown" type="button">
+            <i class="fa fa-caret-square-o-down" style="font-size: 20px; padding: 2px 1px 0 0"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right" style="margin-top: 22px;">
+            <li>
+              <a (click)="setReviewButtonActive()" class="btn dropdown-btn" data-target="#writeReview"
+                 data-toggle="modal"
+                 style="width: 100% !important; text-align: left; text-decoration: none"
+                 type="button">
+                Review
+              </a>
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--Review acknowledgement message-->
+<div class="col-sm-12" style="text-align: center">
+  <div class="alert alert-success alert-dismissable fade"
+       style="text-align: center; margin-top: 10px; margin-bottom: 10px">
+    <button aria-hidden="true" class="close" data-dismiss="alert" type="button">&times;</button>
+    <h5 style="margin: 0 !important;">Review sent Successfully!</h5>
+  </div>
+  <div class="alert alert-warning alert-dismissable fade"
+       style="text-align: center; margin-top: 10px; margin-bottom: 10px">
+    <button aria-hidden="true" class="close" data-dismiss="alert" type="button">&times;</button>
+    <h5 style="margin: 0 !important;">Please select at least one user to Review!</h5>
+  </div>
+  <div class="alert alert-danger alert-dismissable fade"
+       style="text-align: center; margin-top: 10px; margin-bottom: 10px">
+    <button aria-hidden="true" class="close" data-dismiss="alert" type="button">&times;</button>
+    <h5 style="margin: 0 !important;">Review failed!</h5>
+  </div>
+</div>
+
+<!--Review Modal-->
+<div class="modal fade" id="writeReview" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal" type="button">&times;</button>
+        <h4 class="modal-title">{{this.reviewType}}</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="multireviewtitle">Title</label>
+            <input class="form-control" id="multireviewtitle" type="text">
+          </div>
+
+          <div style="color: gold; margin-bottom: 10px; margin-top: 5px; cursor:pointer; font-size: 1.2em;"
+               title="Add a rating">
+            <span (click)="setGroupStar(0)" *ngIf="groupStarRating >= 1"><i class="fa fa-star"></i></span>
+            <span (click)="setGroupStar(1)" *ngIf="groupStarRating === 0"><i class="fa fa-star-o"></i></span>
+            <span (click)="setGroupStar(1)" *ngIf="groupStarRating >= 2"><i class="fa fa-star"></i></span>
+            <span (click)="setGroupStar(2)" *ngIf="groupStarRating <= 1"><i class="fa fa-star-o"></i></span>
+            <span (click)="setGroupStar(2)" *ngIf="groupStarRating >= 3"><i class="fa fa-star"></i></span>
+            <span (click)="setGroupStar(3)" *ngIf="groupStarRating <= 2"><i class="fa fa-star-o"></i></span>
+            <span (click)="setGroupStar(3)" *ngIf="groupStarRating >= 4"><i class="fa fa-star"></i></span>
+            <span (click)="setGroupStar(4)" *ngIf="groupStarRating <= 3"><i class="fa fa-star-o"></i></span>
+            <span (click)="setGroupStar(4)" *ngIf="groupStarRating === 5"><i class="fa fa-star"></i></span>
+            <span (click)="setGroupStar(5)" *ngIf="groupStarRating <= 4"><i class="fa fa-star-o"></i></span>
+          </div>
+
+          <div class="form-group">
+            <label for="multireviewcomment">Comment</label>
+            <textarea class="form-control" id="multireviewcomment" rows="5" style="resize: vertical"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <table width="100%">
+          <tr>
+            <td align="left" width="50%">
+              <form>
+                <label class="checkbox-inline">
+                  <input checked id="searchListReviewPostFeed" type="checkbox" value="">Post on Feed
+                </label>
+              </form>
+            </td>
+            <td align="right" width="50%">
+              <button (click)="this.postReviewMulti()" class="btn postReviewBut pull-right" data-dismiss="modal"
+                      id="postReview" title={{postReviewButtonTitle}} type="button">Submit
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Result not found-->
+<div *ngIf="showNoResultLable">
+  <div *ngIf="isDesktop" style="height: 100px !important;"></div>
+  <div *ngIf="isMobile || isTablet" style="height: 75px !important;"></div>
+  <div>
+    <div class="media">
+      <div class="media-left">
+        <img class="media-object" src="assets/image/bad_face.svg" style="width:100px">
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading" style="margin-top: 0">No results found.</h4>
+        <h5 style="margin-bottom: 3px;">Tips to get the most out of the search:</h5>
+        <ul>
+          <li>
+            <h6 style="margin-top: 0;margin-bottom: 0;">
+              Please make sure your keywords are spelled correctly
+            </h6>
+          </li>
+          <li>
+            <h6 style="margin-top: 0;margin-bottom: 0;">
+              Try different keywords for names, skills or titles
+            </h6>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="dataLoading" style="text-align: center">
+  <img class="loadingSvg" src="assets/image/loading/search-loading.svg">
+</div>
+
+<!--Search result cards-->
+<div *ngIf="dataLoaded" class="searchcardview">
+  <div *ngIf="isDesktop">
+    <!--Project card-->
+    <div *ngIf="projectLoaded" class="col-sm-12" style="padding: 0">
+      <div class="w3-panel w3-card" style="background-color: #ffffff !important; height: 120px">
+        <div class="media">
+          <div class="media-left">
+            <img (click)="this.projectRedirect(projectDetails.name)"
+                 class="media-object img-circle search-result-avatar" src="assets/image/project.png"
+                 style="border: 3px solid #006eff;">
+          </div>
+          <div class="media-body" style="padding-top: 10px; padding-left: 10px">
+            <h3 class="media-heading"><b>{{projectDetails.name}}</b></h3>
+            <h4 style="color: #ef3648; margin-top: 5px">{{projectDetails.member_count}} members </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let resultWithCategory of categorizedSearchResultResponse" class="col-sm-12"
+         style="padding-left: 0; padding-right: 0">
+      <div>
+        <h4 (click)="addToTheBreadCrumb(resultWithCategory.key)" style="color: #838383; cursor: pointer;">
+          {{resultWithCategory.key}}
+          <span style="float: right">{{resultWithCategory.employees.length}}</span>
+        </h4>
+
+        <div *ngFor="let item of resultWithCategory.employees" class="col-sm-3" style="text-align: center;">
+          <div *ngIf="responseType" class="w3-panel w3-card"
+               style="background-color: #ffffff !important; height: 300px">
+
+            <div>
+              <div *ngIf="regularSelectBtn" class="pull-right" data-toggle="buttons">
+                <label (click)="deselectItem(item.empNo)" class="btn cbtn-act active" style="color:#FFFFFF">
+                  <input autocomplete="off" checked class="chkbx" id="option1" name="options" type="radio">
+                  <i class="fa fa-dot-circle-o" style="font-size: 17px"></i>
+                </label>
+                <label (click)="selectItem(item.empNo)" class="btn cbtn-deact" style="color:#FD4E66">
+                  <input autocomplete="off" class="chkbx" id="option2" name="options" type="radio">
+                  <i class="fa fa-circle-o" style="font-size: 17px"></i>
+                </label>
+              </div>
+
+              <div *ngIf="selectAllBtn" class="pull-right" data-toggle="buttons">
+                <label (click)="selectItem(item.empNo)" class="btn cbtn-deact active" style="color:#FD4E66">
+                  <input autocomplete="off" class="chkbx" id="option2" name="options" type="radio">
+                  <i class="fa fa-circle-o" style="font-size: 17px"></i>
+                </label>
+                <label (click)="deselectItem(item.empNo)" class="btn cbtn-act" style="color:#FFFFFF">
+                  <input autocomplete="off" checked class="chkbx" id="option1" name="options" type="radio">
+                  <i class="fa fa-dot-circle-o" style="font-size: 17px"></i>
+                </label>
+              </div>
+
+              <div style="height: 250px !important;">
+                <div>
+                  <img
+                    (click)="this.imgRedirect(item.empNo)" alt="Avatar"
+                    class="img-circle search-result-avatar {{item.activeStatus}}" src={{item.image}}
+                    style="margin-left: 25px">
+                  <img class="profile-badge-web" src="assets/image/profile-rating/{{item.profile_level}}.svg"
+                       title="{{item.profile_level}}">
+                </div>
+
+                <div style="word-wrap: break-word !important; top: -15px !important;">
+                  <div style="color: gold">
+                <span *ngFor="let headerStar of item.starRatingAverage.fullStar">
+                  <span title={{headerStar}}><i class="fa fa-star"></i></span>
+                </span>
+                    <span *ngIf="item.starRatingAverage.showHalf"><i class="fa fa-star-half"></i></span>
+                  </div>
+                  <h4 style="margin-bottom: 5px; margin-top: 5px"><b>{{item.firstName}}</b></h4>
+                  <h4 style="margin-bottom: 5px; margin-top: 5px"><b>{{item.lastName}}</b></h4>
+                  <p style="color: #4a90e2; height: 42px">{{item.designation}}</p>
+                </div>
+              </div>
+
+              <div style="padding: 0; bottom: 0;">
+                <div class="btn-group btn-group-justified">
+                  <a class="btn btn-link result-card-icon" href="tel:{{item.contact.mobile}}"
+                     title="Call {{item.contact.mobile}}">
+                    <i aria-hidden="true" class="fa fa-phone"></i>
+                  </a>
+                  <a class="btn btn-link result-card-icon" href="skype:{{item.contact.skype}}?chat"
+                     title="Chat on Skype - {{item.contact.skype}}">
+                    <i aria-hidden="true" class="fa fa-commenting-o"></i>
+                  </a>
+                  <a class="btn btn-link result-card-icon" href="mailto:{{item.contact.email}}"
+                     title="Email {{item.contact.email}}">
+                    <i aria-hidden="true" class="fa fa-envelope-o"></i>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  <div *ngIf="isMobile || isTablet">
+
+    <!--Mobile project card-->
+    <div *ngIf="projectLoaded" class="col-sm-12" style="padding: 0 !important;">
+      <div class="w3-panel w3-card" style="background-color: #ffffff !important; padding: 15px !important;">
+        <div (click)="this.projectRedirect(projectDetails.name)" class="media">
+          <div class="media-left">
+            <img class="media-object img-circle search-result-avatar-mobile"
+                 src="assets/image/project.png"
+                 style="width:60px; border: 3px solid #006eff;">
+          </div>
+          <div class="media-body">
+            <h3 style="margin-top: 0"><b>{{projectDetails.name}}</b></h3>
+            <h4 style="color: #ef3648; margin: 0px">{{projectDetails.member_count}} members </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Search result cards-->
+    <div *ngFor="let resultWithCategory of categorizedSearchResultResponse" class="col-sm-12"
+         style="padding: 0 !important;">
+      <div>
+        <h4 (click)="addToTheBreadCrumb(resultWithCategory.key)" style="color: #838383">
+          {{resultWithCategory.key}}
+          <span style="float: right">
+            {{resultWithCategory.employees.length}}
+          </span>
+        </h4>
+        <div *ngFor="let item of resultWithCategory.employees" class="col-sm-12"
+             style="padding-left: 0; padding-right: 0">
+          <div *ngIf="responseType" class="w3-panel w3-card"
+               style="background-color: #ffffff !important; padding: 15px !important;">
+
+            <div *ngIf="regularSelectBtn" class="pull-right" data-toggle="buttons">
+              <label (click)="deselectItem(item.empNo)" class="btn cbtn-act active" style="color:#FFFFFF">
+                <input autocomplete="off" checked class="chkbx" id="mob-option1" name="options" type="radio">
+                <i class="fa fa-dot-circle-o" style="font-size: 17px"></i>
+              </label>
+              <label (click)="selectItem(item.empNo)" class="btn cbtn-deact" style="color:#FD4E66">
+                <input autocomplete="off" class="chkbx" id="mob-option2" name="options" type="radio">
+                <i class="fa fa-circle-o" style="font-size: 17px"></i>
+              </label>
+            </div>
+
+            <div *ngIf="selectAllBtn" class="pull-right" data-toggle="buttons">
+              <label (click)="selectItem(item.empNo)" class="btn cbtn-deact active" style="color:#FD4E66">
+                <input autocomplete="off" class="chkbx" id="mob-option2" name="options" type="radio">
+                <i class="fa fa-circle-o" style="font-size: 17px"></i>
+              </label>
+              <label (click)="deselectItem(item.empNo)" class="btn cbtn-act" style="color:#FFFFFF">
+                <input autocomplete="off" checked class="chkbx" id="mob-option1" name="options" type="radio">
+                <i class="fa fa-dot-circle-o" style="font-size: 17px"></i>
+              </label>
+            </div>
+
+            <div (click)="this.imgRedirect(item.empNo)" class="media" style="margin-top: 0">
+              <div class="media-left">
+                <img class="media-object img-circle search-result-avatar-mobile {{item.activeStatus}}"
+                     src={{item.image}}>
+                <img class="profile-badge-mobile" src="assets/image/profile-rating/{{item.profile_level}}.svg"
+                     title="{{item.profile_level}}">
+              </div>
+              <div class="media-body">
+                <div style="color: gold">
+                    <span *ngFor="let headerStar of item.starRatingAverage.fullStar">
+                      <span title={{headerStar}}><i class="fa fa-star"></i></span>
+                    </span>
+                  <span *ngIf="item.starRatingAverage.showHalf"><i class="fa fa-star-half"></i></span>
+                </div>
+                <h4 style="margin-bottom: 0; margin-top: 0"><b>{{item.firstName}} {{item.lastName}}</b></h4>
+                <h6 style="color: #4a90e2; margin-top: 2px; margin-bottom: 0">{{item.designation}}</h6>
+              </div>
+            </div>
+
+            <hr style="margin-top: 10px; margin-bottom: 10px">
+
+            <div>
+              <div class="btn-group btn-group-justified">
+                <a class="btn btn-link result-card-icon" href="tel:{{item.contact.mobile}}"
+                   title="Call {{item.contact.mobile}}">
+                  <i aria-hidden="true" class="fa fa-phone"></i>
+                </a>
+                <a class="btn btn-link result-card-icon" href="skype:{{item.contact.skype}}?chat"
+                   title="Chat on Skype {{item.contact.skype}}">
+                  <i aria-hidden="true" class="fa fa-commenting-o"></i>
+                </a>
+                <a class="btn btn-link result-card-icon" href="mailto:{{item.contact.email}}"
+                   title="Email {{item.contact.email}}">
+                  <i aria-hidden="true" class="fa fa-envelope-o"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>

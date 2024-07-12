@@ -1,0 +1,246 @@
+<div class="workeffort-page__summary--view-content"
+     *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortSummaryView')">
+  <div class="advance-attendace__summary-sidebar">
+    <app-home-tab-work-from-home-header></app-home-tab-work-from-home-header>
+  </div>
+
+  <div class="advance-attendace__summary-content" id="summaryReportContent" #summaryReportContent>
+    <div class="advance-attendace__report">
+      <!---report table-->
+      <h2 class="workeffort-summary__chart--text">Excluding Leaves and All Users are Considered</h2>
+
+      <div class="advance-attendace__report--table" *ngIf="summaryDataLoaded">
+
+        <table class="c-kriyo-deta__table advance-attendace__report--border">
+          <thead class="c-kriyo-deta__table--header">
+          <tr>
+            <th *ngFor="let timeGap of timeGaps">{{timeGap[0].split('-')[0]}}hrs - {{timeGap[0].split('-')[1]}}hrs</th>
+            <th>Total Working</th>
+            <th>On Leave</th>
+            <th>Offline</th>
+            <th>Total Registered</th>
+
+          </tr>
+          </thead>
+
+          <tbody class="c-kriyo-deta__table--body">
+          <tr *ngIf="summaryDataLoaded">
+            <td *ngFor="let timeGap of timeGaps">{{timeGap[1]}}</td>
+            <td>{{total}}</td>
+            <td>{{totalLeaves}}</td>
+            <td>{{absentCount}}</td>
+            <td>{{totalRegistered}}</td>
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+      <div class="advance-attendace__report--table" *ngIf="!summaryDataLoaded">
+        <div style="text-align: center">
+          <img src="assets/image/loading/spinner-loading.svg" style="width: 150px">
+        </div>
+      </div>
+
+      <!---button-->
+      <div class="advance-attendace__download--report" *ngIf="summaryDataLoaded">
+        <button class="advance-attendace__download--btn" *ngIf="!printing" (click)="downloadAsPDF()">Download the report
+          as PDF
+        </button>
+        <button *ngIf="printing" class="advance-attendace__download--btn">
+          <i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;Downloading
+        </button>
+      </div>
+    </div>
+
+
+    <!--chart section-->
+
+    <div class="workeffort-summary__chart--wrapper">
+      <div class="workeffort-summary__time--distribution">
+        <h2 class="workeffort-summary__chart--text">User Work Time Distribution</h2>
+
+        <div *ngIf="doughnutChartDataLoaded">
+          <app-wfh-user-work-time-dnut [userWorkTimeDoughnutChartLabels]="userWorkTimeDoughnutChartLabels"
+                                       [userWorkTimeDoughnutChartData]="userWorkTimeDoughnutChartData"></app-wfh-user-work-time-dnut>
+        </div>
+        <div *ngIf="!doughnutChartDataLoaded">
+          <div style="text-align: center">
+            <img src="assets/image/loading/spinner-loading.svg" style="width: 150px">
+          </div>
+        </div>
+      </div>
+
+      <div class="workeffort-summary__leave--count">
+        <h2 class="workeffort-summary__chart--text">Approved Leaves Count</h2>
+
+        <!---table-->
+
+        <table class="c-kriyo-deta__table" *ngIf="summaryDataLoaded">
+          <thead class="c-kriyo-deta__table--header">
+          <tr>
+            <th>Leave Name</th>
+            <th>Count</th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody class="c-kriyo-deta__table--body" *ngIf="totalLeaves != 0">
+
+          <tr *ngFor="let data of leaveDetails" #dataRow>
+            <td>{{data[0]}}</td>
+            <td>{{data[2]}}</td>
+            <td style="cursor: pointer"><a class="leave-view__user--link" *ngIf="!printing"
+                   (click)="showSaveQuoteModal('userLeaveDetails', data)">View Users</a></td>
+          </tr>
+          </tbody>
+          <tr>
+            <td style="text-align: center; font-weight: bold">Total Leaves</td>
+            <td style="font-weight: bold">{{totalLeaves}}</td>
+            <td></td>
+          </tr>
+        </table>
+
+        <div class="advance-attendace__report--table" *ngIf="!summaryDataLoaded">
+          <div style="text-align: center">
+            <img src="assets/image/loading/spinner-loading.svg" style="width: 150px">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!--Projects with user - work - time less than 6.5 hrs--->
+
+    <div class="projecvt-with__user--wrapper">
+      <h2 class="workeffort-summary__chart--text">Projects with user - work - time less than 6.5 hrs</h2>
+      <div *ngIf="barChartDataLoaded">
+        <app-wfh-project-low-time-user-work-count-bar
+          [projectWiseUserCountBarChartLabels]="projectWiseUserCountBarChartLabels"
+          [projectWiseUserCountBarChartData]="projectWiseUserCountBarChartData"
+          [projectWiseUserCountBarChartResponse]="projectWiseUserCountBarChartResponse"></app-wfh-project-low-time-user-work-count-bar>
+      </div>
+
+      <div *ngIf="!barChartDataLoaded">
+        <div style="text-align: center">
+          <img src="assets/image/loading/spinner-loading.svg" style="width: 150px">
+        </div>
+      </div>
+
+    </div>
+
+    <!--chart section-->
+
+    <div class="workeffort-summary__chart--wrapper">
+      <div class="workeffort-summary__time--distribution" *ngIf="summaryDataLoaded">
+        <h2 class="workeffort-summary__chart--text">Project with users - work time < 6.5hrs</h2>
+        <!---table-->
+
+        <table class="c-kriyo-deta__table" [ngClass]="{'table-wrap_printing': printing, 'table-wrap': !printing }">
+          <thead class="c-kriyo-deta__table--header">
+          <tr>
+            <th>Project Name</th>
+            <th>Count of users with work time < 6.5hrs</th>
+
+          </tr>
+          </thead>
+
+          <tbody class="c-kriyo-deta__table--body c-kriyo-table__max--height">
+
+          <tr *ngFor="let data of lessThanSixAndHalfTimeCompleteData">
+            <td>{{data[0]}}</td>
+            <td (click)="displayUsersWithLessTime(data[1],data[0])" style="text-align: right">{{data[2]}}</td>
+
+          </tr>
+          </tbody>
+          <tr style="background: #eff8ff">
+            <td style="font-weight: bold;text-align: left">Total Instances</td>
+            <td style="font-weight: bold;text-align: right;padding-right: 30px;">{{totalUsersProjectWise}}</td>
+          </tr>
+        </table>
+
+
+      </div>
+
+      <div class="workeffort-summary__leave--count" *ngIf="summaryDataLoaded && !printing">
+        <h2 class="workeffort-summary__chart--text">Users with working hours less than 6.5 hrs
+          - {{selectedProjectName}}</h2>
+        <!---table-->
+
+        <table class="c-kriyo-deta__table">
+          <thead class="c-kriyo-deta__table--header">
+          <tr>
+            <th>Email</th>
+            <th>Full Name</th>
+
+          </tr>
+          </thead>
+
+          <tbody class="c-kriyo-deta__table--body">
+
+          <tr *ngFor="let data of usersWithProjectTimeFilter">
+            <td>{{data[0]}}</td>
+            <td *ngIf="data[1] == null">Data not Available</td>
+            <td *ngIf="data[1] != null">{{data[1]}}</td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!--Start modal-->
+
+<div class="o-modal" id="userLeaveDetails">
+
+  <div class="o-modal__content edit-personal-details">
+
+    <div class="o-modal__body">
+
+      <div class="o-modal__inner-header">
+        <h2 class="c-define-designation__text">User details of leave type = {{selectedLeaveTypeDetails[0]}}</h2>
+        <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('userLeaveDetails')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+        <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm">
+          <svg class="a-icon u-mr">
+            <use xlink:href="#previous"></use>
+          </svg>
+          Back
+        </button>
+      </div>
+
+
+      <div class="leave-type__user--dto">
+        <table class="c-kriyo-deta__table">
+          <thead class="c-kriyo-deta__table--header">
+          <tr>
+            <th style="text-align: left; min-width: 250px">Name</th>
+            <th style="text-align: left; min-width: 250px">Email</th>
+            <th style="text-align: left">Emp No</th>
+            <th style="text-align: right">Leave Amount</th>
+          </tr>
+          </thead>
+
+          <tbody class="c-kriyo-deta__table--body c-kriyo-table__max--height">
+          <tr *ngFor="let subData of selectedLeaveTypeDetails[1]">
+            <td style="text-align: left; min-width: 250px">{{subData[0]}}</td>
+            <td style="text-align: left; min-width: 250px">{{subData[1]}}</td>
+            <td style="text-align: left">{{subData[2]}}</td>
+            <td style="text-align: right">{{subData[3]}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--end modal-->

@@ -1,0 +1,26 @@
+<div *ngIf="showAppraisees">
+  <div class="w3-panel w3-card">
+
+    <div *ngFor="let appraisee of appraiseeList" class="appraisee-div">
+
+      <div class="media showing-hand" (click)="profileRedirect(appraisee.empNo, 0, null)">
+        <div class="media-left">
+          <img class="media-object img-circle appraisee-image"
+               src="{{appraisee.image}}">
+        </div>
+        <div class="media-body">
+          <div *ngIf="false" style="color: #F1BE03">
+            <span *ngFor="let headerStar of appraisee.starRatingAverage.fullStar">
+              <span title={{headerStar}}><i class="fa fa-star"></i></span>
+            </span>
+            <span *ngIf="appraisee.starRatingAverage.showHalf"><i class="fa fa-star-half"></i></span>
+          </div>
+          <h4 class="media-heading popup-name">{{appraisee.name}}</h4>
+          <h5 class="popup-designation">{{appraisee.designation}}</h5>
+          <!--<h6 class="popup-project">{{appraisee.project}}</h6>-->
+        </div>
+      </div>
+
+  </div>
+</div>
+</div>

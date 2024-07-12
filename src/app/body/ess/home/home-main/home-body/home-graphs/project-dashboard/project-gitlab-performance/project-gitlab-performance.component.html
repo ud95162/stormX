@@ -1,0 +1,39 @@
+<div class="overall-performance__card">
+  <div class="overall-performance__card-header">
+    <div class="card-header__section">
+      <img src="assets/images/gitlab-logo.png" alt="Image" class="card-header__section-img">
+      <div class="card-header__section-titles">
+        <h3 class="card-header__section-titles-main card-header__section-titles-main--active">GitLab</h3>
+      </div>
+    </div>
+    <div class="m-form-field__field card-header__select m-form-field__min-height">
+      <select class="m-form-field__select" [(ngModel)]="selectedMonthFilter" (change)="changeRecordCount()">
+        <option *ngFor="let filter of loadedMonthFilters">{{filter}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="overall-performance__body" *ngIf="gitlabDataLoaded">
+    <div class="overall-performance-row">
+      <div class="overall-performance-row__left">
+        <svg class="a-icon overall-performance-row__left-icon overall-performance-row__left-icon--plus">
+          <use xlink:href="#plus-circle-outline"></use>
+        </svg>
+        <p class="overall-performance-row__left-text overall-performance-row__left-text--bold">Additions</p>
+      </div>
+      <div class="overall-performance-row__right">
+        <p class="overall-performance-row__right-value">{{Additions}}</p>
+      </div>
+    </div>
+    <div class="overall-performance-row">
+      <div class="overall-performance-row__left">
+        <svg class="a-icon overall-performance-row__left-icon overall-performance-row__left-icon--minus">
+          <use xlink:href="#minus-circle-outline"></use>
+        </svg>
+        <p class="overall-performance-row__left-text overall-performance-row__left-text--bold">Deletions</p>
+      </div>
+      <div class="overall-performance-row__right">
+        <p class="overall-performance-row__right-value">{{Deletions}}</p>
+      </div>
+    </div>
+  </div>
+</div>

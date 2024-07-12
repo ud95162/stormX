@@ -1,0 +1,119 @@
+<div class="reservtion-page__content">
+  <div class="transport-header">
+    <h3 class="transport-header__title">Work From Home Request Details</h3>
+  </div>
+
+  <div class="reservation-filter">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div class="m-form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label">Approved Status</label>
+      </div>
+
+      <div class="m-form-field__label-wrap">
+        <div class="m-form-field__radio u-mr3+">
+          <input id="radio-wfh-all" name="m-form-radio__input-for-wfh-all" type="radio"
+                 [checked]="selectedApprovedStatus === 0" (click)="changeApprovedStatus(0)">
+          <label for="radio-wfh-all" class="m-form-radio__label-wrap">All</label>
+        </div>
+        <div class="m-form-field__radio u-mr3+">
+          <input id="radio-wfh-pending" name="m-form-radio__input-for-wfh-pending" type="radio"
+                 [checked]="selectedApprovedStatus === 1" (click)="changeApprovedStatus(1)">
+          <label for="radio-wfh-pending" class="m-form-radio__label-wrap">Pending</label>
+        </div>
+
+        <div class="m-form-field__radio u-mr3+">
+          <input id="radio-wfh-approved" name="m-form-radio__input-for-wfh-approved" type="radio"
+                 [checked]="selectedApprovedStatus === 2" (click)="changeApprovedStatus(2)">
+          <label for="radio-wfh-approved" class="m-form-radio__label-wrap">Approved</label>
+        </div>
+        <div class="m-form-field__radio u-mr3+">
+          <input id="radio-wfh-declined" name="m-form-radio__input-for-wfh-declined" type="radio"
+                 [checked]="selectedApprovedStatus === 3" (click)="changeApprovedStatus(3)">
+          <label for="radio-wfh-declined" class="m-form-radio__label-wrap">Declined</label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="reservation-table">
+    <table class="c-kriyo-deta__table " *ngIf="assignedWfhRequestsDataLoaded && assignedWfhRequests.length > 0"
+           aria-describedby="transport-data">
+      <thead class="c-kriyo-deta__table--header ">
+      <tr>
+        <th id="employeeDetailsTransportHr">Employee Details</th>
+        <th id="routeTransportHr">Date</th>
+        <th id="dateTransportHr">Notify Member</th>
+        <th id="timeSlotTransportHr">Status</th>
+        <th id="projectTransportHr">Reason for Request</th>
+        <th id="transportHr"></th>
+      </tr>
+
+      </thead>
+
+      <tbody class="c-kriyo-deta__table--body" style="overflow-y: auto">
+      <tr *ngFor="let data of assignedWfhRequests">
+        <td class="reservation-table__row">
+          <p class="reservation-table__main">{{data.requestedEmpName}}</p>
+          <span class="reservation-table__sub">{{data.requestedEmpNo}}</span>
+        </td>
+        <td class="reservation-table__row">
+          <p class="reservation-table__main">{{data.requestedDate}}</p>
+        </td>
+        <td class="reservation-table__row">
+          <p class="reservation-table__main">{{ data.notifyMemberEmpName ? data.notifyMemberEmpName : '-' }}</p>
+          <span class="reservation-table__sub" *ngIf="data.notifyMemberEmpNo !== null">{{data.notifyMemberEmpNo}}</span>
+
+        </td>
+        <td class="reservation-table__row">
+          <span
+            class="reservation-table__tag reservation-table__tag--{{generalOps.getApproveStatusNameFromId(data.approvedStatus).toLowerCase()}}">
+            {{generalOps.getApproveStatusNameFromId(data.approvedStatus)}}
+          </span>
+        </td>
+        <td class="reservation-table__row">
+          <p class="reservation-table__main">{{data.reason}}</p>
+        </td>
+        <td class="reservation-table__icons">
+          <a class="reservation-table__icons-link" *ngIf="data.approvedStatus === 1">
+            <svg class="a-icon c-global-header__nav-icon reservation-table__icons-check" style="cursor: pointer"
+            (click)="updateApprovedStatusOnClick(data.requestId, 2)">
+              <use xlink:href="#tick"></use>
+            </svg>
+          </a>
+          <a class="reservation-table__icons-link" *ngIf="data.approvedStatus === 1">
+            <svg class="a-icon c-global-header__nav-icon reservation-table__icons-close" style="cursor: pointer"
+            (click)="getConfirmationToDeclineRequest(data.requestId)">
+              <use xlink:href="#close"></use>
+            </svg>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="assignedWfhRequestsDataLoaded && assignedWfhRequests.length === 0">
+      <div class="profile-summary__block-main u-mt">
+        <div class="c-data__empty" style="display: grid; justify-content: center">
+          <img src="/assets/new-design-images/no-data.png" alt="no data">
+          <div class="gray-500 s-small-default c-data__empty-sub">
+            Wfh Requests Not Available!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<app-confirmation-modal
+  [modalType]="'DECLINE'"
+  [headerText]="'Confirm Decline'"
+  [subText]="'Are you sure want to decline this record?'"
+  (performActionOnConfirmationButton)="declineWfhRequest($event)">
+</app-confirmation-modal>

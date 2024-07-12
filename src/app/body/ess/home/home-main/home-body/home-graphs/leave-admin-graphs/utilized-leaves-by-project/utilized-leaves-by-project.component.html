@@ -1,0 +1,111 @@
+<div class="c-leave-dashboard__middle--wrraper" *ngIf="leaveDataLoaded">
+
+  <div class="leave-dashboard__main-header">
+    <div class="leave-dashboard-page__right" (click)="showSaveQuoteModal('utilLeaveProject')">
+      <a class="c-view-all__leave--details">View full table
+        <svg class="a-icon">
+          <use xlink:href="#lines-graf"></use>
+        </svg>
+
+      </a>
+    </div>
+  </div>
+
+  <table class="c-kriyo-deta__table">
+    <thead class="c-kriyo-deta__table--header ">
+    <tr>
+      <th> Project Name </th>
+      <th> Annual</th>
+      <th> Casual</th>
+      <th> Lieu</th>
+      <th> Maternity</th>
+      <th> Medical</th>
+      <th> No Pay</th>
+      <th> Total</th>
+    </tr>
+
+    </thead>
+
+    <tbody class="c-kriyo-deta__table--body c-pending__leave--body">
+    <tr *ngFor="let data of finalResponse">
+      <td>{{data.projectName}}</td>
+      <td>{{data.annualLeaveCount}}</td>
+      <td>{{data.casualLeaveCount}}</td>
+      <td>{{data.lieuLeaveCount}}</td>
+      <td>{{data.maternityLeaveCount}}</td>
+      <td>{{data.medicalLeaveCount}}</td>
+      <td>{{data.noPayLeaveCount}}</td>
+      <td  class="leave-table__bottom-text">{{data.annualLeaveCount + data.casualLeaveCount + data.lieuLeaveCount + data.maternityLeaveCount + data.medicalLeaveCount
+      + data.noPayLeaveCount + data.officialLeaveCount + data.onSiteLeaveCount}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!--Start modal-->
+
+<div class="o-modal" id="utilLeaveProject">
+
+  <div class="o-modal__content leave-vs-empl__role--modal">
+
+    <div class="o-modal__body">
+
+      <div class="o-modal__inner-header">
+        <h2 class="c-define-designation__text">Utilized Leaves by Project</h2>
+        <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('utilLeaveProject')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+        <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm">
+          <svg class="a-icon u-mr">
+            <use xlink:href="#previous"></use>
+          </svg>
+          Back
+        </button>
+      </div>
+
+
+      <div class="leave-type__user--dto">
+        <table class="c-kriyo-deta__table">
+          <thead class="c-kriyo-deta__table--header">
+          <tr>
+            <th> Project Name </th>
+            <th> Annual</th>
+            <th> Casual</th>
+            <th> Lieu</th>
+            <th> Maternity</th>
+            <th> Medical</th>
+            <th> No Pay</th>
+            <th> Official</th>
+            <th> On Site</th>
+            <th> Total</th>
+          </tr>
+          </thead>
+
+          <tbody class="c-kriyo-deta__table--body c-pending__leave--body">
+
+          <tr *ngFor="let data of finalResponse">
+            <td>{{data.projectName}}</td>
+            <td>{{data.annualLeaveCount}}</td>
+            <td>{{data.casualLeaveCount}}</td>
+            <td>{{data.lieuLeaveCount}}</td>
+            <td>{{data.maternityLeaveCount}}</td>
+            <td>{{data.medicalLeaveCount}}</td>
+            <td>{{data.noPayLeaveCount}}</td>
+            <td>{{data.officialLeaveCount}}</td>
+            <td>{{data.onSiteLeaveCount}}</td>
+            <td  class="utilized-leave__total--count">{{data.annualLeaveCount + data.casualLeaveCount + data.lieuLeaveCount + data.maternityLeaveCount + data.medicalLeaveCount
+            + data.noPayLeaveCount + data.officialLeaveCount + data.onSiteLeaveCount}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!--end modal-->

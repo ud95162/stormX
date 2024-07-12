@@ -1,0 +1,177 @@
+<!--&lt;!&ndash;Desktop&ndash;&gt;-->
+<!--<div *ngIf="isDesktop" class="graph-container">-->
+<!--  &lt;!&ndash;<div>&ndash;&gt;-->
+<!--  &lt;!&ndash;<h3>Project Overall Info</h3>&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="col-sm-6">&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="w3-panel w3-card">&ndash;&gt;-->
+<!--  &lt;!&ndash;<app-proj-cost></app-proj-cost>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="col-sm-6">&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="w3-panel w3-card">&ndash;&gt;-->
+<!--  &lt;!&ndash;<app-proj-forcast></app-proj-forcast>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  <div *ngIf="componentPermission.AdminDashboard.subComponentPermissions.AdminDashboardBody.subComponentPermissions.ProjectTab.mainComponentPermission">-->
+<!--    <app-proj-base ></app-proj-base>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;Mobile / Tab &ndash;&gt;-->
+<!--<div *ngIf="isMobile || isTablet" class="graph-container">-->
+<!--  &lt;!&ndash;<div>&ndash;&gt;-->
+<!--  &lt;!&ndash;<h3>Project Overall Info</h3>&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="col-sm-12">&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="w3-panel w3-card">&ndash;&gt;-->
+<!--  &lt;!&ndash;<app-proj-cost></app-proj-cost>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="col-sm-12">&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="w3-panel w3-card">&ndash;&gt;-->
+<!--  &lt;!&ndash;<app-proj-forcast></app-proj-forcast>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  <div>-->
+<!--    <app-proj-base *ngIf="componentPermission.AdminDashboard.subComponentPermissions.AdminDashboardBody.subComponentPermissions.ProjectTab.mainComponentPermission"></app-proj-base>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<main class="l-page__main profile-page">
+  <div class="l-wrapper profile-page__wrapper">
+    <div class="project-dashboard">
+      <div class="project-dashboard__project-list">
+        <div class="project-dashboard__search-bar">
+          <div class="m-form-field project-dashboard__search">
+            <div class="m-form-field__field">
+                            <span class="m-form-field__pre">
+                                <svg class="a-icon project-dashboard__search-icon">
+                                    <use xlink:href="#search"></use>
+                                </svg>
+                            </span>
+              <input class="m-form-field__input project-dashboard__search-input" type="text" minlength="0" maxlength="524288" placeholder="Search" value=""
+                     (keyup)="applyFilter($event)">
+            </div>
+          </div>
+<!--          <a  class="project-dashboard__filter">-->
+<!--                        <span class="m-form-field__pre" (mouseover)="changeText=true" (mouseout)="changeText=false">-->
+<!--                            <svg class="a-icon project-dashboard__filter-icon">-->
+<!--                                <use xlink:href="#filter"></use>-->
+<!--                            </svg>-->
+<!--                        </span>-->
+
+<!--            <div class="filter-results" *ngIf="changeText">-->
+<!--              <ul class="filter-results__list">-->
+<!--                <li class="filter-results__item">-->
+<!--                  <label class="a-checkbox filter-results__item-checkbox">-->
+<!--                    <input type="checkbox" class="a-checkbox__check">-->
+<!--                    <span class="a-checkbox__label">All</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="filter-results__item">-->
+<!--                  <label class="a-checkbox filter-results__item-checkbox">-->
+<!--                    <input type="checkbox" class="a-checkbox__check">-->
+<!--                    <span class="a-checkbox__label">Product</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--                <li class="filter-results__item">-->
+<!--                  <label class="a-checkbox filter-results__item-checkbox">-->
+<!--                    <input type="checkbox" class="a-checkbox__check">-->
+<!--                    <span class="a-checkbox__label">Service</span>-->
+<!--                  </label>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </a>-->
+        </div>
+        <div class="project-dashboard__scroll" *ngIf="dataLoadingProj">
+          <div class="project-dashboard__card" *ngFor="let item of projectResponse" (click)="projectRedirect(item.code, item.name, item.members)">
+            <div class="project-dashboard__card-header project-dashboard__card-flex">
+              <img src={{item.image}} alt="Image" class="project-dashboard__card-img">
+              <h2 class="project-dashboard__card-title">{{item.name}}</h2>
+            </div>
+            <div class="project-dashboard__card-body">
+              <div class="project-dashboard__card-values project-dashboard__card-flex">
+                <p class="project-dashboard__card-topic">Owner</p>
+                <span class="project-dashboard__card-answer">{{item.owner}}</span>
+              </div>
+              <div class="project-dashboard__card-values project-dashboard__card-flex-start">
+                <p class="project-dashboard__card-topic">PM</p>
+
+                  <span class="project-dashboard__card-answer">{{item.manager}}</span>
+
+              </div>
+              <div class="project-dashboard__card-values project-dashboard__card-flex">
+                <p class="project-dashboard__card-topic">Members</p>
+                <span class="project-dashboard__card-answer">{{item.members}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-dashboard__project-details">
+        <app-dashboard-header></app-dashboard-header>
+
+        <hr class="project-dashboard__project-details-hr">
+
+        <div class="project-dashboard-description">
+          <div class="project-dashboard__header">
+            <h2 class="project-dashboard__header-title">Project Overall Performance</h2>
+<!--            <div class="m-form-field__field project-dashboard__sortby-select m-form-field__min-height">-->
+<!--              <select class="m-form-field__select" [(ngModel)]="overallPerformanceMonthFilter">-->
+<!--                <option *ngFor="let filter of loadedMonthFilters">{{filter}}</option>-->
+<!--              </select>-->
+<!--            </div>-->
+          </div>
+          <div class="overall-performance">
+            <app-project-gitlab-performance></app-project-gitlab-performance>
+            <app-project-performance-timelog></app-project-performance-timelog>
+            <app-project-finance-data></app-project-finance-data>
+<!--            <app-project-performance-backlog></app-project-performance-backlog>-->
+            <app-project-designation-category></app-project-designation-category>
+          </div>
+        </div>
+
+        <div class="project-dashboard-comparison">
+          <div class="comparison-filter-section">
+            <div class="project-dashboard__header">
+              <h3 class="project-dashboard__header-title-sub">Filter By</h3>
+              <div class="project-dashboard__sortby">
+                <p class="project-dashboard__sortby-title">Sort by :</p>
+                <div class="m-form-field__field project-dashboard__sortby-select m-form-field__min-height">
+                  <select class="m-form-field__select" [(ngModel)]="selectedMonthFilter" (change)="getMembersWithTime()">
+                    <option *ngFor="let filter of loadedMonthFilters">{{filter}}</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="members-distribution">
+            <div class="project-dashboard__header">
+              <h2 class="project-dashboard__header-title">Designation-Wise Members Distribution</h2>
+            </div>
+            <app-designation-wise-members></app-designation-wise-members>
+          </div>
+
+          <div class="project-members">
+            <div class="project-dashboard__header">
+              <h2 class="project-dashboard__header-title">Project Members</h2>
+            </div>
+            <app-members-details></app-members-details>
+          </div>
+
+<!--          <div class="project-hierrachy">-->
+<!--            <div class="project-dashboard__header">-->
+<!--              <h2 class="project-dashboard__header-title">Project Hierrachy</h2>-->
+<!--            </div>-->
+<!--            <app-project-hierarchy></app-project-hierarchy>-->
+<!--          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>

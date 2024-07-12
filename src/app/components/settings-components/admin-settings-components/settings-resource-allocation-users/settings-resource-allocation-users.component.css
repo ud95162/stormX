@@ -1,0 +1,38 @@
+.a-btn.is-disabled {
+  background-color: #f2f2f2;
+  color: #555;
+}
+
+.emp-name + .hide-text{
+  display: block;
+}
+
+.hide-text {
+  display: none;
+}
+
+
+.resource-request-action__td-item{
+  border: none;
+  /*margin-bottom: 10px;*/
+  background: none;
+}
+
+.mat-menu-content:not(:empty) {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: grid !important;
+}
+
+.mat-menu-content {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: grid !important;
+}
+
+
+::ng-deep  .leave-approve-actions .mat-menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

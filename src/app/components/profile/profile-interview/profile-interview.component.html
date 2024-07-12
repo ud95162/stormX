@@ -1,0 +1,36 @@
+<div class="col-sm-12 no-padding">
+  <div class="col-xs-3">
+    <ul class="nav nav-tabs tabs-left">
+      <li class="active">
+        <a data-toggle="tab" href="#personalInterviewOngoing">
+          <i aria-hidden="true" class="fa fa-briefcase"></i>&nbsp;&nbsp;Ongoing Interviews
+        </a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#personalInterviewUpcoming">
+          <i aria-hidden="true" class="fa fa-check-circle"></i>&nbsp;&nbsp;Upcoming Interviews
+        </a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#personalInterviewHistory">
+          <i aria-hidden="true" class="fa fa-history"></i>&nbsp;&nbsp;History
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-xs-9">
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="personalInterviewOngoing">
+        <app-recruitment-finish-interview-applicants></app-recruitment-finish-interview-applicants>
+      </div>
+      <div class="tab-pane fade in" id="personalInterviewUpcoming">
+        <app-recruitment-to-be-hired-applicants></app-recruitment-to-be-hired-applicants>
+      </div>
+      <div class="tab-pane fade in" id="personalInterviewHistory">
+        <app-recruitment-ongoing-interview-applicants></app-recruitment-ongoing-interview-applicants>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>

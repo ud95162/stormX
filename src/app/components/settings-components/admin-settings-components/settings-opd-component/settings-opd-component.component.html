@@ -1,0 +1,12 @@
+<div style="background-color: #FFFFFF; padding: 20px">
+  <div class="c-page-nav__transparent">
+    <nav class="c-page-nav__wrapper">
+      <a class="c-page-nav__item MaritalOPD" [ngClass]="{'is-selected': section == 'MaritalOPD'}" (click)="changeSection('MaritalOPD')">OPD Configurations</a>
+      <a class="c-page-nav__item DesignationOPD" [ngClass]="{'is-selected': section == 'DesignationOPD'}" (click)="changeSection('DesignationOPD')">Overrides</a>
+    </nav>
+  </div>
+  <div style="margin-top: 20px;">
+    <app-settings-opd-designation-component *ngIf="section === 'DesignationOPD'"></app-settings-opd-designation-component>
+    <app-settings-opd-with-marital-component *ngIf="section === 'MaritalOPD'"></app-settings-opd-with-marital-component>
+  </div>
+</div>

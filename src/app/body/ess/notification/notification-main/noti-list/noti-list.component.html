@@ -1,0 +1,589 @@
+<app-error-modal></app-error-modal>
+<app-confirmation-popup-modal></app-confirmation-popup-modal>
+<!--Request accept modal-->
+<div class="modal fade skills-approve" id="acceptSkill" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Accept Skill Request</h4>
+        <button class="close" data-dismiss="modal" type="button">&times;</button>
+      </div>
+      <div *ngIf="viewRequestModalContent" class="modal-body">
+        <div class="media">
+          <div class="media-left">
+            <img class="media-object img-circle" src={{notificationCreatorImg}} style="width:60px; height:60px">
+          </div>
+          <div class="media-body">
+            <p class="media-heading" style="margin-bottom: 16px!important; font-weight: 500; font-size: 14px; margin-top: 4px;">
+              {{notificationText}}
+            </p>
+            <div class="well"
+                 style="padding-top: 9px !important; padding-bottom: 9px !important; margin-bottom: 0 !important;">
+              <div class="form-group">
+                <label class="form-label" for="input_skill" style="padding: 0">Supervisor Rating <span
+                  style="color: red"> *</span>
+                </label>
+                <table width="100%">
+                  <tr>
+                    <td style="width: 95%">
+                      <div class="slidecontainer">
+                        <input (input)="changeSupervisorRating()" class="slider" id="skillsSupervisorRating" max="10"
+                               min="1" type="range"
+                               value="5">
+                      </div>
+                    </td>
+                    <td align="right" style="width: 5%">
+                      <span style="font-weight: bold">{{supervisorRating}}</span>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="acceptSkillRequest(true)" class="btn" data-dismiss="modal"
+                style="background-color: #006eff; color: #FFFFFF"
+                type="button">
+          Accept
+        </button>
+        <button (click)="acceptSkillRequest(false)" class="btn pull-left btn-danger" data-dismiss="modal"
+                style="" type="button">
+          Decline
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 30px">
+  <ul class="nav nav-tabs">
+    <li [ngClass]="{'active': empSelectedTab === 'notifications'}"><a
+      *ngIf="checkPermission.checkUserHavePermissionForSection('NormalNotificationsTab')"
+      (click)="changeTab('notifications')"
+      data-toggle="tab">Notifications</a>
+    </li>
+    <li [ngClass]="{'active': empSelectedTab === 'requests'}"><a
+      *ngIf="checkPermission.checkUserHavePermissionForSection('RequestNotificationsTab')"
+      (click)="changeTab('requests')"
+      data-toggle="tab">Skill Requests</a>
+    </li>
+    <li [ngClass]="{'active': empSelectedTab === 'letterRequest'}"><a
+      *ngIf="checkPermission.checkUserHavePermissionForSection('LetterRequestNotificationsTab')"
+      (click)="changeTab('letterRequest')"
+      data-toggle="tab">Letter Request</a>
+    </li>
+    <li [ngClass]="{'active': empSelectedTab === 'facilityRequests'}"><a
+      *ngIf="checkPermission.checkUserHavePermissionForSection('FacilityRequestNotificationsTab')"
+      (click)="changeTab('facilityRequests')"
+      data-toggle="tab">Facility Request</a>
+    </li>
+    <li [ngClass]="{'active': empSelectedTab === 'opdRequests'}"><a
+      *ngIf="checkPermission.checkUserHavePermissionForSection('FacilityRequestNotificationsTab')"
+      (click)="changeTab('opdRequests')"
+      data-toggle="tab">OPD Request</a>
+    </li>
+  </ul>
+
+<!--  <div class="tab-content">-->
+    <div *ngIf="empSelectedTab === 'notifications'">
+      <div *ngIf="notificationLoading" style="text-align: center">
+        <img src="assets/image/loading/spinner-loading.svg" style="padding-top: 10%" alt="load">
+      </div>
+      <div (scroll)="onScroll()" *ngIf="fullNotificationLoaded" class="w3-panel w3-card"
+           style="margin-top: 10px">
+        <span (click)="readFullAllNotification()" class = "readAllButton">Read all</span>
+
+        <div *ngFor="let notificationMonthRange of fullNotificationList">
+          <h4 *ngIf="notificationMonthRange.notificationResponsesForDate !== null" style="font-weight: 600 !important;">
+            {{notificationMonthRange.date}}
+          </h4>
+
+          <div *ngFor="let notification of notificationMonthRange.notificationResponsesForDate" class="media"
+               style="cursor: pointer">
+            <div class="media-left">
+              <img (click)="this.fullNotificationImgRedirect(notification.creatorInfo.empNo)" class="img-circle"
+                   src={{notification.creatorInfo.image}}
+                   style="width:50px; height: 50px; cursor: pointer" alt="emp">
+            </div>
+            <div
+              (click)="this.fullNotificationRedirect(notification.postId, notification.audienceId, notification.notificationTypeShortText)"
+              class="media-body">
+              <h5 class="media-heading" style="margin-top: 3px">
+                <i *ngIf="notification.readUnread === 1" aria-hidden="true" class="fa fa-circle"
+                   style="color: #ef3648"></i>
+                {{notification.text}}
+              </h5>
+              <h6 style="font-size: 11px; color: #838383;">
+                <i aria-hidden="true" class="fa {{notification.notificationTypeShortText}}"
+                   style="padding-right: 5px"></i>
+                {{notification.dateTime}}
+              </h6>
+            </div>
+            <div
+              (click)="skillRequestPopup(notification.text, notification.audienceId, notification.creatorInfo.empNo, notification.creatorInfo.image, notification.postId)"
+              *ngIf="notification.notificationTypeShortText === 'SKILL_REQ'"
+              class="media-right">
+              <span class="label label-danger" data-target="#acceptSkill" data-toggle="modal"
+                    style="background-color: #Ef3648">View Request</span>
+            </div>
+            <hr style="margin-top: 10px; margin-bottom: 0px">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div  *ngIf="empSelectedTab === 'requests'">
+      <div (scroll)="onScroll()" *ngIf="fullRequestLoaded" class="w3-panel w3-card"
+           style="margin-top: 10px">
+
+        <div *ngFor="let notificationMonthRange of fullRequestList">
+          <h4 *ngIf="notificationMonthRange.notificationResponsesForDate !== null" style="font-weight: 600 !important;">
+            {{notificationMonthRange.date}}
+          </h4>
+
+          <div *ngFor="let notification of notificationMonthRange.notificationResponsesForDate" class="media"
+               style="cursor: pointer">
+            <div class="media-left">
+              <img (click)="this.fullNotificationImgRedirect(notification.creatorInfo.empNo)" class="img-circle"
+                   src={{notification.creatorInfo.image}}
+                   style="width:50px; height: 50px; cursor: pointer">
+            </div>
+            <div
+              (click)="this.fullNotificationRedirect(notification.postId, notification.audienceId, notification.notificationTypeShortText)"
+              class="media-body">
+              <h5 class="media-heading" style="margin-top: 3px">
+                <i *ngIf="notification.readUnread === 1" aria-hidden="true" class="fa fa-circle"
+                   style="color: #ef3648"></i>
+                {{notification.text}}
+              </h5>
+              <h6 style="font-size: 11px; color: #838383;">
+                <i aria-hidden="true" class="fa {{notification.notificationTypeShortText}}"
+                   style="padding-right: 5px"></i>
+                {{notification.dateTime}}
+              </h6>
+            </div>
+            <div
+              (click)="skillRequestPopup(notification.text, notification.audienceId, notification.creatorInfo.empNo, notification.creatorInfo.image, notification.postId)"
+              *ngIf="notification.notificationTypeShortText === 'SKILL_REQ'"
+              class="media-right">
+                <span class="label label-danger" data-target="#acceptSkill" data-toggle="modal"
+                      style="background-color: #Ef3648">View Request</span>
+            </div>
+            <hr style="margin-top: 10px; margin-bottom: 0">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="empSelectedTab === 'letterRequest'">
+      <br/>
+      <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <select class="form-control" id="yearForLetter" [(ngModel)]="selectedYearForLetterRequest" (change)="loadLetterRequest()">
+              <option *ngFor="let val of yearList" value="{{val}}">{{val}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <select class="form-control" id="sel2" [(ngModel)]="letterRequestFilterType" (change)="loadLetterRequest()">
+              <option value="All">All</option>
+              <option value="New">New</option>
+              <option value="Processing">Processing</option>
+              <option value="Printed">Printed</option>
+              <option value="Ready">Ready</option>
+              <option value="Completed">Collected</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div style="background: #ffffff;padding: 1px 5px 5px 20px; display: flex; justify-content: space-between; align-items: end;"
+           *ngFor="let letterRequest of fullLetterRequest" class="u-mb-">
+        <div>
+          <div style="display: flex" >
+            <h5 style="font-weight: 600 !important;font-size: 16px;">
+              {{letterRequest.letterTypeName}}</h5>
+            <span class="a-chip__summary a-chip__summary--new" *ngIf="letterRequest.letterStatus === 'New'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">New</span>
+            <span class="a-chip__summary a-chip__summary--collected" *ngIf="letterRequest.letterStatus === 'Completed'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">Collected</span>
+            <span class="a-chip__summary a-chip__summary--processing" *ngIf="letterRequest.letterStatus === 'Processing'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">Processing</span>
+            <span class="a-chip__summary a-chip__summary--printed" *ngIf="letterRequest.letterStatus === 'Printed'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">Printed</span>
+            <span class="a-chip__summary a-chip__summary--ready" *ngIf="letterRequest.letterStatus === 'Ready'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">Ready</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 100px;grid-auto-flow: row;margin: 15px 0 0 0;">
+            <p style="font-size: 12px">Requested Date : {{letterRequest.requestedDate}}</p>
+            <p style="font-size: 12px">Facility Id : {{letterRequest.relatedEntityId}}</p>
+          </div>
+        </div>
+        <button class="delete-request-button" style="" *ngIf="letterRequest.letterStatus == 'New'"
+                (click)="deleteRequest(letterRequest.relatedEntityId)">Delete
+        </button>
+      </div>
+      <br>
+      <div *ngIf="fullLetterRequest.length == 0 " style="align-items: center; text-align: center" class="w3-panel w3-card">
+        <img src="assets/image/bad_face.svg" alt="no-data">
+        <h4>No requests available!</h4>
+      </div>
+    <br>
+    </div>
+    <div  *ngIf="empSelectedTab === 'facilityRequests'">
+      <br/>
+      <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <select class="form-control" id="yearForFacility" [(ngModel)]="selectedYearForFacilityRequest" (change)="loadFacilityRequest()">
+              <option *ngFor="let val of yearList" value="{{val}}">{{val}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <select class="form-control" id="sel3" [(ngModel)]="facilityRequestFilterType" (change)="loadFacilityRequest()">
+              <option value="All">All</option>
+              <option value="New">New</option>
+              <option value="InProgress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div style="background: #ffffff;padding: 10px 20px;"
+           *ngFor="let facilityRequest of fullFacilityRequest;" class="u-mb-">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center"
+               data-target="#viewHistoryRequestedEmployee" (click)="loadIndividualRequest(facilityRequest.facilityId)"  data-toggle="modal">
+            <div style="display: flex; align-items: center">
+              <h5 style="font-weight: 600 !important;font-size: 16px;">
+                {{facilityRequest.facilityTypeName}} - {{facilityRequest.venue}} : {{facilityRequest.title}}</h5>
+              <span class="a-chip__summary a-chip__summary--new" *ngIf="facilityRequest.status == 'New'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">New</span>
+              <span class="a-chip__summary a-chip__summary--collected" *ngIf="facilityRequest.status == 'Completed'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">Completed</span>
+              <span class="a-chip__summary a-chip__summary--processing" *ngIf="facilityRequest.status == 'WIP'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">In Progress</span>
+            </div>
+            <button class="delete-request-button" style="" *ngIf="facilityRequest.status == 'New'"
+                    (click)="deleteFacilityRequest(facilityRequest.facilityId)">Delete
+            </button>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 100px;grid-auto-flow: row;margin: 15px 0 0 0;"
+               data-target="#viewHistoryRequestedEmployee" (click)="loadIndividualRequest(facilityRequest.facilityId)"  data-toggle="modal">
+            <p style="font-size: 12px">Requested Date : {{facilityRequest.requestedDate}}</p>
+            <p style="font-size: 12px">Facility Id : {{facilityRequest.facilityId}}</p>
+          </div>
+        </div>
+        <button class="delete-request-button" style="background-color: #00563F" *ngIf="facilityRequest.status == 'Completed' && facilityRequest.feedback == null"
+                data-toggle="modal" (click)="setFacilityId(facilityRequest.facilityId)"  data-target="#provideFeedback">FeedBack
+        </button>
+      </div>
+      <br>
+      <div *ngIf="fullFacilityRequest.length == 0 " style="align-items: center; text-align: center" class="w3-panel w3-card">
+        <img src="assets/image/bad_face.svg" alt="no-data">
+        <h4>No requests available!</h4>
+      </div>
+    </div>
+
+    <div *ngIf="empSelectedTab === 'opdRequests'">
+      <br/>
+      <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <select class="form-control" id="year" [(ngModel)]="selectedYear" (change)="loadOpdRequest()">
+              <option *ngFor="let val of yearList" value="{{val}}">{{val}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <select class="form-control" id="sel1" [(ngModel)]="opdRequestFilterType" (change)="loadOpdRequest()">
+              <option value="All">All</option>
+              <option value="New">New</option>
+              <option value="Declined">Declined</option>
+              <option value="Processing">Processing</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div style="background: #ffffff;padding: 10px 20px;"
+           *ngFor="let opdRequest of fullOpdRequest;" class="u-mb-">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center">
+            <div style="display: flex; align-items: center;">
+              <h5 style="font-weight: 600 !important;font-size: 16px;">{{opdRequest.title}}</h5>
+              <span class="a-chip__summary a-chip__summary--new" *ngIf="opdRequest.status == 'New'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">New</span>
+              <span class="a-chip__summary a-chip__summary--collected" *ngIf="opdRequest.status == 'Completed'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">Completed</span>
+              <span class="a-chip__summary a-chip__summary--processing" *ngIf="opdRequest.status == 'Processing'" style="width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">Processing</span>
+              <span class="a-chip__summary a-chip__summary--printed" *ngIf="opdRequest.status == 'Declined'" style="background-color: #ffe4e4; width: fit-content;height: fit-content;margin: 5px 5px 5px 15px;">Declined</span>
+            </div>
+            <a (click)="loadIndividualOpdRequest(opdRequest.opdid)" data-target="#viewOpdRequestDetails" data-toggle="modal" style="text-decoration: underline; cursor:pointer;">View Details</a>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 100px;grid-auto-flow: row;margin: 15px 0 0 0;">
+            <p style="font-size: 12px">Requested Date : {{opdRequest.requestedDate}}</p>
+            <p style="font-size: 12px">Requested Year : {{opdRequest.year}}</p>
+            <p style="font-size: 12px">OPD Id : {{opdRequest.opdid}}</p>
+            <p style="font-size: 12px">Total Amount : {{opdRequest.total | number}}</p>
+          </div>
+          <div *ngIf="opdRequest.status == 'Declined'">
+            <p style="font-size: 13px; color: #EC6666">Declined Reason: {{opdRequest.declineReason == null ? '-' : opdRequest.declineReason }}</p>
+          </div>
+        </div>
+
+      </div>
+      <br>
+      <div *ngIf="fullOpdRequest.length == 0 " style="align-items: center; text-align: center" class="w3-panel w3-card">
+        <img src="assets/image/bad_face.svg" alt="no-data">
+        <h4>No requests available!</h4>
+      </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="provideFeedback" role="dialog">
+  <div class="modal-dialog modal-sm ">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <button class="close" data-dismiss="modal" id="closeModal" type="button">&times;</button>
+      <div class="modal-header"> Provide Feedback</div>
+      <div  class="modal-body" align="center">
+        <div class="row" style="text-align: left">
+        <label  >Feedback :  </label>
+          <textarea [(ngModel)]="feedback" class="form-control" style="height: fit-content;resize: vertical;" id="feedback" ></textarea>
+          <input type="hidden" value="{{modalFacilityId}}" class="form-control" id="facilityId"  readonly>
+        <br>
+        <div class="row">
+          <div class="col-sm-12 form-group" style="text-align: center">
+            <button class="delete-request-button" [style.background-color] ="completedColor" (click)="saveFeedback()"> Provide Feedback </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="viewOpdRequestDetails" role="dialog">
+  <div class="modal-dialog modal-lg ">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <button class="close" data-dismiss="modal" id="closeModal" type="button">&times;</button>
+      <div class="modal-header"> OPD Request Details</div>
+      <div  class="modal-body" align="center">
+        <div *ngIf="opdRequest.files != []" class="row">
+          <div class="col-sm-6" style="text-align: left">
+            <p >Request Type : {{opdRequest.opdtypeName}}</p>
+            <p >Request Id : {{opdRequest.opdid}}</p>
+            <p >Requested Employee : {{opdRequest.requestedEmployeeId}} - {{opdRequest.requestedEmployeeName}}</p>
+            <p >Requested Employee email : {{opdRequest.email}}@codegen.net</p>
+            <p >Requested Date : {{opdRequest.requestedDate}}</p>
+            <p >Description : {{opdRequest.title}}</p>
+            <p *ngIf="opdRequest.status == 'Declined'  "  class="request-header-content ">Decline Reason : {{opdRequest.declineReason}}</p>
+          </div>
+          <div *ngIf="opdRequest.files != []" class="col-sm-6">
+            <div *ngFor="let file of opdRequest.files" class="col-sm-4" style="padding: 10px" >
+
+              <div (click)="openFile(file.url)"  *ngIf="file.name.includes('.pdf') || file.name.includes('.docx') || file.name.includes('.txt')" style="text-align: center">
+                <i  class="fa fa-file-pdf-o  fa-5x"  style="width: 100%;margin:10px;color: #006eff"></i>
+                <span style="color:#006eff">{{file.name}}</span>
+
+              </div>
+              <div (click)="openFile(file.url)" *ngIf="!(file.name.includes('.pdf') || file.name.includes('.docx') || file.name.includes('.txt'))">
+                <img   height="100px" width="100px" src="{{file.url}}">
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row" style="text-align: center">
+          <div class="col-sm-6" >
+            <div  class="row ">
+              <div class="col-sm-3 text-center"  *ngIf="opdRequest.status == 'New'" >
+                <button   class="delete-request-button"  [style.background-color]="newColor" disabled >New </button>
+              </div>
+              <div class="col-sm-3 text-center" *ngIf="opdRequest.status == 'Declined'" >
+                <button class="delete-request-button"  [style.background-color] = "declinedColor" disabled >Declined </button>
+              </div>
+              <div class="col-sm-3 text-center" *ngIf="opdRequest.status == 'Processing'" >
+                <button class="delete-request-button"  [style.background-color]=" processingColor" disabled >Processing </button>
+              </div>
+              <div class="col-sm-3 text-center" *ngIf="opdRequest.status == 'Completed'" >
+                <button class="delete-request-button"  [style.background-color] ="completedColor" disabled >Completed </button>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div *ngIf="opdRequest.items != []">
+              <table width="100%">
+                <tr style="text-align: center;font-weight: bold;font-size: 15px;padding: 10px" >
+                  <td width="10%">Number</td>
+                  <td width="40%">Item Name</td>
+                  <td width="40%">Amount</td>
+
+                </tr>
+
+                <tr style="text-align: center;font-size: 12px" *ngFor="let item of opdRequest.items ;let i =index">
+                  <td   width="10%"  style="padding: 10px">{{i+1}}</td>
+                  <td   width="40%"  style="padding: 10px">{{item.name}}</td>
+                  <td   width="40%"  style="padding: 10px">{{item.amount | currency :'Rs: '}}</td>
+                </tr>
+
+                <tr style="text-align: center;font-weight: bold;font-size: 12px">
+                  <td width="10%"  style="padding: 10px"></td>
+                  <td width="40%"  style="padding: 10px">Total</td>
+                  <td width="40%"  style="padding: 10px">{{opdRequest.total | currency: 'Rs: '}}</td>
+
+
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="viewHistoryRequestedEmployee" role="dialog">
+  <div class="modal-dialog modal-lg ">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <button class="close" data-dismiss="modal" id="closeModal" type="button">&times;</button>
+      <div class="modal-header"> Facility Request Progress</div>
+
+
+      <div  class="modal-body" align="center">
+        <div class="row">
+
+          <div *ngFor="let historyRecord of facilityRequest.facilityRequestHistory; let i =index" style="text-align: left;font-family: 'Century Gothic'" class="col-sm-12">
+
+            <table *ngIf="historyRecord.text.includes('The request was made')" width="100%" style="color: #D2222D" >
+
+              <tr>
+                <td width="45%" align="right">{{historyRecord.date_time.date}}/{{historyRecord.date_time.month+1}}/{{historyRecord.date_time.year}} at {{historyRecord.date_time.hour}}:{{historyRecord.date_time.minute}} <br>  {{historyRecord.text}} </td>
+                <td width="10%" align="center"> <h3 class="numberNewCircle ">{{i+1}}</h3> </td>
+                <td width="45%"> </td>
+              </tr>
+
+            </table>
+            <table *ngIf="historyRecord.text.includes('The request was assigned')" width="100%" style="color: #FF8503">
+              <tr>
+                <td width="45%"></td>
+                <td width="10%" align="center"><h3 class="numberProcessingCircle ">{{i+1}}</h3></td>
+                <td width="45%">{{historyRecord.date_time.date}}/{{historyRecord.date_time.month+1}}/{{historyRecord.date_time.year}} at {{historyRecord.date_time.hour}}:{{historyRecord.date_time.minute}} <br>  {{historyRecord.text}} </td>
+              </tr>
+            </table>
+            <table *ngIf="historyRecord.text.includes('The time duration for the request was extended')" width="100%" style="color: #FF8503">
+              <tr>
+                <td width="45%"></td>
+                <td width="10%" align="center"><h3 class="numberProcessingCircle ">{{i+1}}</h3></td>
+                <td width="45%">{{historyRecord.date_time.date}}/{{historyRecord.date_time.month+1}}/{{historyRecord.date_time.year}} at {{historyRecord.date_time.hour}}:{{historyRecord.date_time.minute}} <br>  {{historyRecord.text}} </td>
+              </tr>
+            </table>
+            <table *ngIf="historyRecord.text.includes('The request was completed')" width="100%" style="color: #00563F">
+              <tr>
+                <td width="45%" align="right" >{{historyRecord.date_time.date}}/{{historyRecord.date_time.month+1}}/{{historyRecord.date_time.year}} at {{historyRecord.date_time.hour}}:{{historyRecord.date_time.minute}} <br>  {{historyRecord.text}} </td>
+                <td width="10%" align="center"><h3 class="numberCompletedCircle ">{{i+1}}</h3></td>
+                <td width="45%"></td>
+              </tr>
+            </table>
+
+
+          </div>
+        </div>
+
+        <div *ngIf="facilityRequest.status == 'WIP'" style="color: #00563F">
+          Estimated Completion : {{facilityRequest.completionDateToString}}
+        </div>
+        <div *ngIf="facilityRequest.extendDurationRequest != null ">
+          <br>
+          <div *ngFor="let extendRequest of facilityRequest.extendDurationRequest; let i =index" style="text-align: left" class="w3-panel w3-card">
+
+            <p *ngIf="extendRequest.status == 1 " class="media-heading" style="margin-top: 3px;font-weight: bold;font-family: 'Century Gothic'"  >
+              {{i+1}} :
+              {{extendRequest.reason}}
+
+            </p>
+            <p  *ngIf="extendRequest.status == 2 " class="media-heading" style="margin-top: 3px;font-weight: bold;color:#00563F;font-family: 'Century Gothic'"  >
+              {{i+1}} :
+              {{extendRequest.reason}}
+
+            </p>
+            <p *ngIf="extendRequest.status == 3 " class="media-heading" style="margin-top: 3px;font-weight: bold;color: #D2222D;font-family: 'Century Gothic'"  >
+              {{i+1}} :
+              {{extendRequest.reason}}
+
+            </p>
+            <table width="100%">
+              <tr>
+                <td width="85%" *ngIf="extendRequest.status == 1 " style="margin-top: 3px;font-weight: bold">
+
+
+                  {{extendRequest.empNo}} -  {{extendRequest.employeeName}} requests to extend the request by {{extendRequest.duration % 1 > 0 ? extendRequest.duration *100 : extendRequest.duration}} {{extendRequest.duration % 1 > 0 ? 'hours' : 'days'}} because of the above reason.
+
+                </td>
+                <td width="85%" style="margin-top: 3px;font-weight: bold;color:#00563F "  *ngIf="extendRequest.status == 2 ">
+
+
+                  {{extendRequest.empNo}} -  {{extendRequest.employeeName}} requests to extend the request by {{extendRequest.duration % 1 > 0 ? extendRequest.duration *100 : extendRequest.duration}} {{extendRequest.duration % 1 > 0 ? 'hours' : 'days'}} because of the above reason.
+
+                </td>
+                <td width="85%" *ngIf="extendRequest.status == 3 " style="margin-top: 3px;font-weight: bold;color: #D2222D">
+
+
+                  {{extendRequest.empNo}} -  {{extendRequest.employeeName}} requests to extend the request by {{extendRequest.duration % 1 > 0 ? extendRequest.duration *100 : extendRequest.duration}} {{extendRequest.duration % 1 > 0 ? 'hours' : 'days'}} because of the above reason.
+
+                </td>
+                <td *ngIf="extendRequest.status == 1 " width="15%" align="center" style="text-align: center">
+                  <button
+
+                    class="btn request-accept-button"
+                    type="button">
+                    Pending
+                  </button>
+                </td>
+                <td *ngIf="extendRequest.status == 2 " width="15%" align="center">
+                  <button
+
+                    class="btn request-complete-button"
+                    type="button">
+                    Accepted
+                  </button>
+                </td>
+                <td *ngIf="extendRequest.status == 3 " width="15%" align="center">
+                  <button
+
+                    class="btn request-decline-button"
+                    type="button">
+                    Declined
+                  </button>
+                </td>
+
+              </tr>
+            </table>
+
+
+          </div>
+        </div>
+        <div *ngIf="facilityRequest.status == 'New' " style="text-align: center;">
+          <img src="assets/image/bad_face.svg">
+          <h4>No data available!</h4>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="name">Name</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" type="text" id="name" [(ngModel)]="contactDetails.guardianName"
+             value="{{contactDetails.guardianName}}" minlength="0" maxlength="524288" placeholder="name">
+    </div>
+  </div>
+</div>
+
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="address">Address</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" type="text" id="address" [(ngModel)]="contactDetails.guardianAddress"
+             value="{{contactDetails.guardianAddress}}" minlength="0" maxlength="524288" placeholder="address">
+    </div>
+  </div>
+</div>
+
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="relationship">Relationship</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" type="text" id="relationship" [(ngModel)]="contactDetails.relationship"
+             value="{{contactDetails.relationship}}" minlength="0" maxlength="524288" placeholder="relationship">
+    </div>
+  </div>
+</div>
+
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="contact-number">Contact NO</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" type="text" id="contact-number" [(ngModel)]="contactDetails.guardianPhoneNo"
+             value="{{contactDetails.guardianPhoneNo}}" minlength="0" maxlength="524288" placeholder="phone no">
+    </div>
+  </div>
+</div>

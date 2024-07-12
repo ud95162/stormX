@@ -1,0 +1,45 @@
+<div class="overall-performance__card">
+  <div class="overall-performance__card-header">
+    <div class="card-header__section">
+      <img src="assets/images/financial.png" alt="Image" class="card-header__section-img">
+      <div class="card-header__section-titles">
+        <h3 class="card-header__section-titles-main card-header__section-titles-main--active">Finance</h3>
+      </div>
+    </div>
+  </div>
+  <div class="overall-performance__body" *ngIf="financeDataLoaded">
+    <div class="overall-performance-row">
+      <div class="overall-performance-row__left">
+        <svg class="a-icon overall-performance-row__left-icon overall-performance-row__left-icon--up">
+          <use xlink:href="#increase"></use>
+        </svg>
+        <p class="overall-performance-row__left-text overall-performance-row__left-text--normal">Revenue</p>
+      </div>
+      <div class="overall-performance-row__right">
+        <p class="overall-performance-row__right-value">{{revenue}} GBP</p>
+      </div>
+    </div>
+    <div class="overall-performance-row">
+      <div class="overall-performance-row__left">
+        <svg class="a-icon overall-performance-row__left-icon overall-performance-row__left-icon--down">
+          <use xlink:href="#decrease"></use>
+        </svg>
+        <p class="overall-performance-row__left-text overall-performance-row__left-text--normal">Cost</p>
+      </div>
+      <div class="overall-performance-row__right">
+        <p class="overall-performance-row__right-value">{{cost}} GBP</p>
+      </div>
+    </div>
+    <div class="overall-performance-row">
+      <div class="overall-performance-row__left">
+        <svg class="a-icon overall-performance-row__left-icon overall-performance-row__left-icon--up">
+          <use xlink:href="#increase"></use>
+        </svg>
+        <p class="overall-performance-row__left-text overall-performance-row__left-text--normal">{{answer}}</p>
+      </div>
+      <div class="overall-performance-row__right">
+        <p class="overall-performance-row__right-value">{{profit}} GBP</p>
+      </div>
+    </div>
+  </div>
+</div>

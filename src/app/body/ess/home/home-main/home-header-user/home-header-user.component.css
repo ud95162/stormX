@@ -1,0 +1,55 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  border-radius: 2px;
+  background: #FFFFFF;
+}
+
+.w3-card, .w3-card-2 {
+  /*box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)*/
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  /*box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)*/
+}
+
+/*----------------------------------------------------------------------------------*/
+.data-card {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.vertical-line {
+  border-right: 1px solid #EAE8EA;
+}
+
+.dashboard-header-avatar {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.dashboard-header-stars {
+  color: gold;
+  font-size: 1.2em;
+}
+
+.dashboard-header-calender-ul {
+  padding-left: 0 !important;
+}
+
+.dashboard-header-calender-li {
+  list-style: none;
+}
+
+.admin-header-div {
+  margin-top: 5px;
+}

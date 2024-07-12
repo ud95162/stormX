@@ -1,0 +1,18 @@
+<div *ngIf="viewLogCard" class="w3-panel w3-card">
+  <div *ngFor="let activityLog of activityLogList">
+    <h4 style="font-weight: 600 !important;">{{activityLog.date}}</h4>
+    <div *ngFor="let activity of activityLog.logs" class="media" style="cursor: pointer">
+      <div class="media-left">
+        <h6 style="font-size: 10px; color: #838383; margin: 0 !important;">
+          <i aria-hidden="true" class="fa {{activity.type}} fa-2x" style="padding-right: 5px"></i>
+        </h6>
+      </div>
+      <div class="media-body">
+        <h5 class="media-heading" style="margin-top: 3px">
+          {{activity.text}}
+        </h5>
+      </div>
+      <hr style="margin-top: 10px; margin-bottom: 0px">
+    </div>
+  </div>
+</div>

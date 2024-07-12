@@ -1,0 +1,109 @@
+<!--&lt;!&ndash;new implementation&ndash;&gt;-->
+<!--<app-error-modal></app-error-modal>-->
+<!--<div class="o-modal settings-modal" id="userGroupPermissionGroupWizard">-->
+
+<!--  <div class="o-modal__content">-->
+
+<!--    <div class="o-modal__body">-->
+<!--      <div class="o-modal__inner-header">-->
+<!--        <h3 class="o-modal__inner-header-title">Update Permission Groups for {{selectedUserGroup}} User Group</h3>-->
+<!--        <button class="a-btn a-btn&#45;&#45;link" (click)="hideModal('userGroupPermissionGroupWizard')">-->
+<!--          <svg class="a-icon o-modal__close-icon">-->
+<!--            <use xlink:href="#close"></use>-->
+<!--          </svg>-->
+<!--        </button>-->
+<!--      </div>-->
+
+<!--      <div class="o-modal__content-section">-->
+
+<!--        <div class="permission-grants-modal__users">-->
+<!--          <div class="permission-grants-modal__box" #existingPermissionsListId="cdkDropList"-->
+<!--               (cdkDropListDropped)="dropUpdatePermissionGroups($event)"-->
+<!--               [cdkDropListConnectedTo]="[assignedPermissionsListId]"-->
+<!--               [cdkDropListData]="existingPermissionList"-->
+<!--               cdkDropList>-->
+<!--            <h3 class="permission-grants-modal__box-title">Other Permissions</h3>-->
+<!--            <ul class="permission-grants-modal__box-list" *ngIf="showExistingPermissionGroups">-->
+<!--              <li class="user-group-modal__box-item" *ngFor="let existingPermission of existingPermissionList" cdkDrag-->
+<!--              style="cursor: pointer">-->
+<!--                <h3 class="permission-grants-modal__box-item-name">{{existingPermission}}</h3>-->
+<!--                <svg class="a-icon o-modal__close-icon permission-grants-modal__box-item-icon">-->
+<!--                  <use xlink:href="#drag"></use>-->
+<!--                </svg>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="permission-grants-modal__box pg-drag-section" #assignedPermissionsListId="cdkDropList"-->
+<!--               (cdkDropListDropped)="dropUpdatePermissionGroups($event)"-->
+<!--               [cdkDropListConnectedTo]="[existingPermissionsListId]"-->
+<!--               [cdkDropListData]="assignedPermissionList"-->
+<!--               cdkDropList>-->
+<!--            <h3 class="permission-grants-modal__box-title">Assigned Permission</h3>-->
+<!--            <ul class="permission-grants-modal__box-list" *ngIf="showCurrentUserGroup">-->
+<!--              <li class="permission-grants-modal__box-item" *ngFor="let assignedPermission of assignedPermissionList" cdkDrag>-->
+<!--                <h3 class="permission-grants-modal__box-item-name">{{assignedPermission}}</h3>-->
+<!--                <svg class="a-icon o-modal__close-icon permission-grants-modal__box-item-icon">-->
+<!--                  <use xlink:href="#drag"></use>-->
+<!--                </svg>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="permission-grants-modal-reminder">-->
+<!--          <ul class="permission-grants-modal-reminder__list">-->
+<!--            <li  class="permission-grants-modal-reminder__item">Note that the assigned permissions groups will affect the children user groups ( if there are any )</li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="o-modal__footer">-->
+<!--        <button class="a-btn o-modal__button o-modal__button&#45;&#45;primary" (click)="updateUserGroupPermission()">-->
+<!--          Update Permission</button>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--  </div>-->
+
+<!--</div>-->
+<!--&lt;!&ndash;permission grant start&ndash;&gt;-->
+<!--<div class="permission-grants-content" *ngIf="showPermissionAllowedUserGroups">-->
+<!--  <div class="permission-grants-content__search">-->
+<!--    <div class="m-form-field">-->
+<!--      <div class="m-form-field__field">-->
+<!--                           <span class="m-form-field__pre">-->
+<!--                                <svg class="a-icon permission-grants-content__search-icon">-->
+<!--                                    <use xlink:href="#search"></use>-->
+<!--                                </svg>-->
+<!--                            </span>-->
+<!--        <input class="m-form-field__input" type="text" minlength="0"-->
+<!--               maxlength="524288" placeholder="Search User Group" value="" [(ngModel)]="searchTerm">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div *ngIf="permissionAllowedUserGroups.systemDefinedUserGroups.length > 0">-->
+<!--    <h4 *ngIf="showUserGroupTitle">System Defined User Groups</h4>-->
+<!--    <div class="permission-grants-content__details">-->
+<!--      <div  *ngFor="let userGroup of permissionAllowedUserGroups.systemDefinedUserGroups | userGroupFilterPipe: searchTerm" >-->
+<!--        <app-settings-permission-user-group-card-component-->
+<!--          (toGetUserGroupPermission)="onClickUserGroupNameToLoadPermissionGroups($event)"-->
+<!--          [userGroup]="userGroup"></app-settings-permission-user-group-card-component>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div *ngIf="permissionAllowedUserGroups.customUserGroups.length > 0">-->
+<!--    <h4 *ngIf="showUserGroupTitle">Custom User Groups</h4>-->
+<!--    <div class="permission-grants-content__details">-->
+<!--      <div *ngFor="let userGroup of permissionAllowedUserGroups.customUserGroups | userGroupFilterPipe: searchTerm">-->
+<!--        <app-settings-permission-user-group-card-component-->
+<!--          (toGetUserGroupPermission)="onClickUserGroupNameToLoadPermissionGroups($event)"-->
+<!--          [userGroup]="userGroup"></app-settings-permission-user-group-card-component>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;permission grant end&ndash;&gt;-->

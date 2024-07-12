@@ -1,0 +1,103 @@
+<main class="l-page__main profile-page">
+  <div class="l-wrapper profile-page__wrapper">
+    <div class="c-worfeffort-header__section">
+      <div class="c-worfeffort-header__previous-icon">
+        <svg class="a-icon" (click)="changeMainActiveTab('HomePage')">
+          <use xlink:href="#previous"></use>
+        </svg>
+        <div class="previous-text" [(ngModel)]="mainTabSelection" ngDefaultControl>{{mainTabSelection}}</div>
+      </div>
+
+      <div class="c-page-nav__transparent">
+        <nav class="c-page-nav__wrapper" aria-label="work effort nav">
+          <a [ngClass]="effort_overview_tab_class" (click)="changeMainActiveTab('Work Effort Overview')"
+             *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortOverview')">Effort
+            Overview</a>
+          <a [ngClass]="summary_view_tab_class" (click)="changeMainActiveTab('Summary View')"
+             *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortSummaryView')">Summary View</a>
+<!--          <a [ngClass]="detailed_view_tab_class" (click)="changeMainActiveTab('Detailed View')"-->
+<!--             *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortSummaryView')">Detailed View</a>-->
+        </nav>
+      </div>
+
+
+    </div>
+
+
+    <div class="profile-page__page-content" *ngIf="overviewTabClicked && checkPermission.checkUserHavePermissionForSection('WorkEffortOverview')">
+
+      <!--sidebar-->
+      <div class="profile-page__sidebar">
+        <div class="m-form-field__field">
+          <select class="m-form-field__select" >
+            <option disabled="" hidden="" selected="" value="Attendance Overview" >Attendance Overview</option>
+            <option value="Attendance Overview">Attendance Overview</option>
+            <option value="Attendance Overview">Worked Hour Analysis</option>
+            <option value="Attendance Overview">Overall Worked Hours Distribution</option>
+            <option value="Attendance Overview">Project-Wise Worked Hours Distribution</option>
+            <option value="Attendance Overview">Leave Analysis</option>
+            <option value="Attendance Overview">Employee Wise Worked Hour Analysis</option>
+            <option value="Attendance Overview">Task Time Analysis</option>
+            <option value="Attendance Overview">Statistic Analysis</option>
+          </select>
+        </div>
+        <div class="c-profile-card @@class">
+          <div class="c-profile-card__summary">
+            <div class="c-page-nav c-page-nav--vertical">
+              <nav class="c-page-nav__wrapper c-page-nav__wrapper--vertical" aria-label="mobile view of work effort nav">
+                <a [ngClass]="attendance_overview_class" (click)="activeTabChange('AttendanceOverview')"
+                  *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortAttendanceOverview')">Attendance Overview</a>
+                <a [ngClass]="worked_analysis_class" (click)="activeTabChange('WorkedHourAnalysis')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortWorkedHoursAnalysis')">Worked Hour Analysis</a>
+                <a [ngClass]="overall_hours_class" (click)="activeTabChange('OverallWorkedHour')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortOverallWorkedHoursDistribution')">Overall Worked Hours Distribution</a>
+                <a [ngClass]="project_wise_class" (click)="activeTabChange('ProjectWiseHours')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortProjectWiseWorkedHoursDistribution')">Project-Wise Worked Hours Distribution</a>
+                <a [ngClass]="leave_analysis_class" (click)="activeTabChange('LeaveAnalysis')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortLeaveAnalysis')">Leave Analysis</a>
+                <a [ngClass]="employee_wise_class" (click)="activeTabChange('EmployeeWiseHours')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortEmployeeWiseWorkedHoursAnalysis')">Employee Wise Worked Hour Analysis</a>
+                <a [ngClass]="task_time_class" (click)="activeTabChange('TaskTime')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortTaskTimeAnalysis')">Task Time Analysis</a>
+                <a [ngClass]="statistic_analysis_class" (click)="activeTabChange('StatisticAnalysis')">Statistic Analysis</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="profile-page__main-content" *ngIf="attendanceOverviewClicked">
+        <app-attendance-overview></app-attendance-overview>
+      </div>
+      <div class="profile-page__main-content" *ngIf="workedHourAnalysisClicked">
+        <app-worked-hours-analysis></app-worked-hours-analysis>
+      </div>
+      <div class="profile-page__main-content" *ngIf="leaveAnalysisClicked">
+        <app-leave-analysis></app-leave-analysis>
+      </div>
+      <div class="profile-page__main-content" *ngIf="overallWorkedHoursClicked">
+        <app-overall-worked-hours-distribution></app-overall-worked-hours-distribution>
+      </div>
+      <div class="profile-page__main-content" *ngIf="projectWiseWorkedHourClicked">
+        <app-project-wise-worked-hours-distribution></app-project-wise-worked-hours-distribution>
+      </div>
+      <div class="profile-page__main-content" *ngIf="taskTimeClicked">
+        <app-task-time-analysis></app-task-time-analysis>
+      </div>
+      <div class="profile-page__main-content" *ngIf="employeeWiseHoursClicked">
+        <app-employee-wise-worked-hour-analysis></app-employee-wise-worked-hour-analysis>
+      </div>
+
+
+    </div>
+<!--    <div *ngIf="detailedTabClicked">-->
+<!--      <app-home-tab-work-from-home-detailed-view></app-home-tab-work-from-home-detailed-view>-->
+<!--    </div>-->
+    <div *ngIf="summaryTabClicked">
+      <app-home-tab-work-from-home-summary-view></app-home-tab-work-from-home-summary-view>
+    </div>
+  </div>
+</main>
+
+
+

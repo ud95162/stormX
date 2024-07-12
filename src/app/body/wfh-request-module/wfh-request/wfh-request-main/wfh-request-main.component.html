@@ -1,0 +1,28 @@
+<app-alerts></app-alerts>
+<main class="l-page__main profile-page">
+  <div class="profile-page__nav">
+    <div class="c-page-nav">
+      <nav class="c-page-nav__wrapper reservation-main__wrapper">
+        <a class="c-page-nav__item " [ngClass]="{'is-selected' : activeTabName === 'userView'}"
+           *ngIf="componentPermission.checkUserHavePermissionForSection('WFHRequestUserView')"
+           (click)="changeActiveNavTab('userView')">WFH Request User View</a>
+        <a class="c-page-nav__item " [ngClass]="{'is-selected' : activeTabName === 'adminView'}"
+           *ngIf="componentPermission.checkUserHavePermissionForSection('WFHRequestSupervisorView')"
+           (click)="changeActiveNavTab('adminView')">WFH Request Supervisor View</a>
+        <a class="c-page-nav__item " [ngClass]="{'is-selected' : activeTabName === 'hrView'}"
+           *ngIf="componentPermission.checkUserHavePermissionForSection('WFHRequestHrView')"
+           (click)="changeActiveNavTab('hrView')">WFH Request HR View</a>
+      </nav>
+    </div>
+  </div>
+  <div class="l-wrapper profile-page__wrapper">
+    <app-wfh-request-user-view *ngIf="activeTabName === 'userView'"></app-wfh-request-user-view>
+  </div>
+  <div class="l-wrapper profile-page__wrapper">
+    <app-wfh-request-admin-view *ngIf="activeTabName === 'adminView'"></app-wfh-request-admin-view>
+  </div>
+  <div class="l-wrapper profile-page__wrapper">
+    <app-wfh-request-hr-view *ngIf="activeTabName === 'hrView'"></app-wfh-request-hr-view>
+  </div>
+
+</main>

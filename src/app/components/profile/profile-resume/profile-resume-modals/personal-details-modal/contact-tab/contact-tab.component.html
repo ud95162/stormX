@@ -1,0 +1,355 @@
+<!--<section class="l-grid l-grid&#45;&#45;1-2">-->
+<!--  <div class="l-grid__item ">-->
+<!--    &lt;!&ndash; has-focus&ndash;&gt;-->
+<!--    <div class="m-form-field">-->
+<!--      <div class="m-form-field__label-wrap">-->
+<!--        <label class="m-form-field__label" for="permanent-address">Permanent Address</label>-->
+<!--      </div>-->
+<!--      <div class="m-form-field__field">-->
+<!--        <div class="m-form-field__field-item">-->
+<!--          <input class="m-form-field__input" id="permanent-address" type="text"-->
+<!--                 minlength="0" maxlength="524288" placeholder="your permanent address"-->
+<!--                 [(ngModel)]="contactDetails.address" value="{{contactDetails.address}}">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <span class="m-form-field__error">error</span>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="l-grid__item ">-->
+<!--    &lt;!&ndash; has-focus&ndash;&gt;-->
+<!--    <div class="m-form-field">-->
+<!--      <div class="m-form-field__label-wrap">-->
+<!--        <label class="m-form-field__label" for="p-add" style="visibility: hidden;">First-->
+<!--          name</label>-->
+<!--      </div>-->
+<!--      <div class="m-form-field__field">-->
+<!--        <div class="m-form-field__field-item">-->
+<!--          <input class="m-form-field__input" id="p-add" type="text" minlength="0"-->
+<!--                 maxlength="524288" placeholder="Address line 01" value="">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <span class="m-form-field__error">error</span>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+
+<!--<section class="l-grid l-grid&#45;&#45;1-2">-->
+<!--  <div class="l-grid__item ">-->
+<!--    &lt;!&ndash; has-focus&ndash;&gt;-->
+<!--    <div class="m-form-field">-->
+<!--      <div class="m-form-field__label-wrap">-->
+<!--        <label class="m-form-field__label" for="permanent-address">Permanent-->
+<!--          Address</label>-->
+<!--      </div>-->
+<!--      <div class="m-form-field__field">-->
+<!--        <div class="m-form-field__field-item">-->
+<!--          <input class="m-form-field__input" id="permanen-address" type="text"-->
+<!--                 minlength="0" maxlength="524288" placeholder="No" value="">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <span class="m-form-field__error">error</span>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="l-grid__item ">-->
+<!--    &lt;!&ndash; has-focus&ndash;&gt;-->
+<!--    <div class="m-form-field">-->
+<!--      <div class="m-form-field__label-wrap">-->
+<!--        <label class="m-form-field__label" for="r-add">Residential Address</label>-->
+<!--      </div>-->
+<!--      <div class="m-form-field__field">-->
+<!--        <div class="m-form-field__field-item">-->
+<!--          <input class="m-form-field__input" id="r-add" type="text" minlength="0"-->
+<!--                 maxlength="524288" placeholder="Your Residential Address"-->
+<!--                 [(ngModel)]="contactDetails.other_address" value="{{contactDetails.other_address}}">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <span class="m-form-field__error">error</span>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!--        has-focus-->
+<!--<div class="m-form-field">-->
+<!--  <div class="m-form-field__label-wrap">-->
+<!--    <label class="m-form-field__label" for="living-status">Living Status</label>-->
+<!--  </div>-->
+<!--  <div class="m-form-field__field">-->
+
+<!--    &lt;!&ndash; visible in desktop&ndash;&gt;-->
+<!--    <select class="m-form-field__select" id="living-status" [(ngModel)]="contactDetails.livingSituation">-->
+<!--      <option *ngIf="contactDetails.livingSituation == 'No Data' " value="undefined" disabled selected hidden>Select</option>-->
+<!--      <option value="Own Property">Own Property</option>-->
+<!--      <option value="Parent's">Parent's</option>-->
+<!--      <option value="Rented">Rented</option>-->
+<!--    </select>-->
+<!--    &lt;!&ndash; visible in desktop end&ndash;&gt;-->
+
+<!--  </div>-->
+<!--  <span class="m-form-field__error">error</span>-->
+<!--</div>-->
+
+<!--        has-focus-->
+<!--<div class="m-form-field">-->
+<!--  <div class="m-form-field__label-wrap">-->
+<!--    <label class="m-form-field__label" for="mobile-number">Mobile Number</label>-->
+<!--  </div>-->
+<!--  <div class="m-form-field__field">-->
+<!--    <div class="m-form-field__field-item">-->
+<!--      <input class="m-form-field__input" id="mobile-number" type="text" minlength="0"-->
+<!--             maxlength="10" placeholder="07x xxx xxxx"-->
+<!--             [(ngModel)]="contactDetails.mobile" value="{{contactDetails.mobile}}">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <span class="m-form-field__error">error</span>-->
+<!--</div>-->
+
+<!--        has-focus-->
+<!--<div class="m-form-field">-->
+<!--  <div class="m-form-field__label-wrap">-->
+<!--    <label class="m-form-field__label" for="home-number">Home Number</label>-->
+<!--  </div>-->
+<!--  <div class="m-form-field__field">-->
+<!--    <div class="m-form-field__field-item">-->
+<!--      <input class="m-form-field__input" id="home-number" type="text" minlength="0"-->
+<!--             maxlength="10" placeholder="07x xxx xxxx"-->
+<!--             [(ngModel)]="contactDetails.home_mobile" value="{{contactDetails.home_mobile}}">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <span class="m-form-field__error">error</span>-->
+<!--</div>-->
+
+<!-- contact details -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="permanent-address">Permanent Address</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" type="text" id="permanent-address" [(ngModel)]="contactDetails.address"
+             value="{{contactDetails.address}}" minlength="0" maxlength="524288" placeholder="your permanent address">
+    </div>
+  </div>
+</div>
+
+<!-- city details -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="City">City</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="City" type="text" minlength="0"
+             maxlength="524288" placeholder="Colombo" [(ngModel)]="contactDetails.city" value="{{contactDetails.city}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- residential address -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="r-add">Residential Address</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="r-add" type="text" minlength="0"
+             maxlength="524288" placeholder="Colombo" [(ngModel)]="contactDetails.other_address"
+             value="{{contactDetails.other_address}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- living status - dropdown component-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label">Living Status</label>
+  </div>
+  <div class="m-form-field__field">
+
+    <select class="m-form-field__select" [(ngModel)]="contactDetails.livingSituation">
+      <option *ngIf="contactDetails.livingSituation == 'No Data' " value="undefined" disabled selected hidden>Select</option>
+      <option value="Own Property">Own Property</option>
+      <option value="Parent's">Parent's</option>
+      <option value="Rented">Rented</option>
+    </select>
+
+  </div>
+</div>
+
+<!-- mobile number -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="mobile-number">Mobile Number</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="mobile-number" type="text" minlength="0"
+             pattern="^\d{10}$" #mobile="ngModel" maxlength="10" placeholder="07x xxx xxxx" [(ngModel)]="contactDetails.mobile"
+             value="{{contactDetails.mobile}}">
+    </div>
+  </div>
+  <span class="span__error" *ngIf="mobile.errors?.pattern">
+    Mobile number not valid.
+  </span>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- home number -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="home-number">Home Number</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="home-number" type="text" minlength="0"
+             maxlength="10" placeholder="07x xxx xxxx" [(ngModel)]="contactDetails.home_mobile"
+             pattern="^\d{10}$" #homeMobile="ngModel" value="{{contactDetails.home_mobile}}">
+    </div>
+
+  </div>
+  <span class="span__error" *ngIf="homeMobile.errors?.pattern">
+    Mobile number not valid.
+  </span>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- personal email -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="personal-email">Personal Email</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="personal-email" type="text" minlength="0"
+             maxlength="524288" placeholder="" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" [(ngModel)]="contactDetails.personal_email"
+             #personalEmail="ngModel"
+             value="{{contactDetails.personal_email}}">
+    </div>
+  </div>
+  <span class="span__error" *ngIf="personalEmail.errors?.pattern">
+    Email not valid.
+  </span>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- work email -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="work-email">Work Email</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="work-email" type="text" minlength="0"
+             maxlength="524288" placeholder="" disabled [(ngModel)]="contactDetails.work_email"
+             value="{{contactDetails.work_email}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- general line -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="general-line">General Line</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="general-line" type="text" minlength="0"
+             maxlength="524288" placeholder="" [(ngModel)]="contactDetails.extension"
+             pattern="^\d{10}$"     #generalLine="ngModel" value="{{contactDetails.extension}}">
+    </div>
+  </div>
+  <span class="span__error" *ngIf="generalLine.errors?.pattern">
+    General line  invalid.
+  </span>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- skype id -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="skype">Skype ID</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="skype" type="text" minlength="0"
+             maxlength="524288" placeholder="" [(ngModel)]="contactDetails.skype"
+             #skype="ngModel"    value="{{contactDetails.skype}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- fb -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="fb">Facebook</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="fb" type="text" minlength="0"
+             maxlength="100" placeholder="" disabled
+             value="https://www.facebook.com/">
+      <input class="m-form-field__input" id="fb" type="text" minlength="0"
+             maxlength="524288" placeholder="John Smith" [(ngModel)]="contactDetails.facebook"
+             value="{{contactDetails.facebook}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- twitter -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="twitter">Twitter</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="twitter" type="text" minlength="0"
+             maxlength="100" placeholder="" disabled
+             value="https://twitter.com/">
+      <input class="m-form-field__input" id="twitter" type="text" minlength="0"
+             maxlength="524288" placeholder="John Smith" [(ngModel)]="contactDetails.twitter"
+             value="{{contactDetails.twitter}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- linkedIn -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="linkedin">LinkedIn</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="linkedin" type="text" minlength="0"
+             maxlength="100" placeholder="" disabled
+             value="https://lk.linkedin.com/in/">
+      <input class="m-form-field__input" id="linkedin" type="text" minlength="0"
+             maxlength="524288" placeholder="John Smith" [(ngModel)]="contactDetails.linkedin"
+             value="{{contactDetails.linkedin}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!-- personal website -->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="personal-website">Personal Website</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="personal-website" type="text" minlength="0"
+             maxlength="524288" placeholder="" [(ngModel)]="contactDetails.personal_web_site"
+             value="{{contactDetails.personal_web_site}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+

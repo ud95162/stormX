@@ -1,0 +1,39 @@
+<div class="w3-panel w3-card">
+
+  <table width="100%">
+    <tr>
+      <td width="90%">
+        <h4 class="resignation-label">Standard Leaves Vs Special Leaves (Days)</h4>
+      </td>
+
+      <td>
+        <select [(ngModel)]="year" (change)="onYearChange($event)" #recordCount
+                class="form-control resignation-filter-bar-year-select">
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+          <option value="2019">2019</option>
+        </select>
+      </td>
+
+    </tr>
+  </table>
+
+  <div class="resignation-graph" *ngIf="showCustomGraph">
+    <canvas
+      [type]="lineChartType"
+      [colors]="leaveChartColors"
+      [datasets]="standardSpecialChartData"
+      [labels]="lineChartLabels"
+      [legend]="lineChartLegend"
+      [options]="lineChartOptions"
+      baseChart>
+    </canvas>
+  </div>
+  <div *ngIf="showCustomLoading" class="col-sm-12 no-padding" style="text-align: center; height: 250px">
+    <img src="assets/image/loading/graph-loading.svg" style="height: 120px !important;">
+  </div>
+  <div *ngIf="showNoDataCustomError" class="col-sm-12 no-padding" style="text-align: center; top: 25%;">
+    <img src="assets/image/bad_face.svg">
+    <h4 style="color: #838383">No data available</h4>
+  </div>
+</div>

@@ -1,0 +1,413 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background-color: #ffffff !important;
+}
+.highlightText {
+  background: yellow;
+}
+.w3-card, .w3-card-2 {
+  /*box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)*/
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  /*box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)*/
+}
+
+/*-------------------------------------------------------------------------------------------------------------------*/
+/*---filter */
+.project-filter{
+  width: 100%;
+  background: url(https://img.icons8.com/ios-filled/18/000000/filter.png) no-repeat scroll 7px 7px;
+  padding-left:30px;
+  background-color: white;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------*/
+
+.project-avatar {
+  width: 100px;
+  height: 100px;
+}
+.project-avatar-mob {
+  width: 60px;
+  height: 60px;
+}
+.project-name {
+  font-size: 20px;
+  font-weight: 600 !important;
+  color: #2d2f32;
+  margin: 0;
+  cursor: pointer;
+
+}
+
+/*.project-about {*/
+/*  font-size: 12px;*/
+/*  color: #616263;*/
+/*  margin: 0;*/
+/*}*/
+
+.project-count {
+  font-size: 32px;
+  color: #006eff;
+  margin: 0;
+  cursor: pointer;
+  float: right;
+}
+
+.project-count-label {
+  font-size: 10px;
+  color: #999999;
+  margin: 0;
+}
+
+/*-------------------------------------------------------------------------------------------------------------------*/
+
+/*Scrollbar*/
+.scrollbar {
+  float: left;
+  height: 300px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.force-overflow {
+  min-height: 450px;
+}
+
+#style-1::-webkit-scrollbar-track {
+}
+
+#style-1::-webkit-scrollbar {
+  width: 3px;
+}
+
+#style-1::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .1);
+}
+
+/*----------------------------------------------------------------------------------*/
+/*.designationTinyCardContainer {*/
+/*  text-align: center;*/
+/*  padding: 5px;*/
+/*  height: 115px;*/
+/*  background-color: #e6fbff;*/
+/*  border-radius: 2px;*/
+/*  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, .05), 0 1px 5px 0 rgba(0, 0, 0, .1);*/
+/*}*/
+
+/*----------------------------------------------------------------------------------*/
+
+/*edit project */
+
+.save-category-designation {
+  border-radius: 4px;
+  background-color: #006eff;
+  color: #FFFFFF;
+  padding: 2px 12px;
+  float: right;
+}
+
+/*------------------------------------------------------------------------------------*/
+
+
+
+.col-sm-6 {
+  padding: 0 10px 0 10px !important;
+}
+
+/*----------------------------------------------------------------------------------*/
+/*Role Background color*/
+/*!*DEV*!*/
+/*.SEI {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.TnC {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.ASE {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.SE {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.SSE {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.ATTL {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.TTL {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.STTL {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.ASA {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.SA {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.SSA {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*.VPE {*/
+/*  background-color: #7DD2F9;*/
+/*  color: #004464 !important;*/
+/*}*/
+
+/*!*QA*!*/
+/*.QAI {*/
+/*  background-color: #8EE89A;*/
+/*  color: #045E10 !important;*/
+/*}*/
+
+/*.AQA {*/
+/*  background-color: #8EE89A;*/
+/*  color: #045E10 !important;*/
+/*}*/
+
+/*.QA {*/
+/*  background-color: #8EE89A;*/
+/*  color: #045E10 !important;*/
+/*}*/
+
+/*.SQAE {*/
+/*  background-color: #8EE89A;*/
+/*  color: #045E10 !important;*/
+/*}*/
+
+/*.AQAL {*/
+/*  background-color: #8EE89A;*/
+/*  color: #045E10 !important;*/
+/*}*/
+
+/*.QAL {*/
+/*  background-color: #8EE89A;*/
+/*  color: #045E10 !important;*/
+/*}*/
+
+/*.SQAL {*/
+/*  background-color: #8EE89A;*/
+/*  color: #045E10 !important;*/
+/*}*/
+
+/*!*System*!*/
+/*.E-S {*/
+/*  background-color: #FF9C7D;*/
+/*  color: #902E0F !important;*/
+/*}*/
+
+/*.SE-S {*/
+/*  background-color: #FF9C7D;*/
+/*  color: #902E0F !important;*/
+/*}*/
+
+/*.ALE-S {*/
+/*  background-color: #FF9C7D;*/
+/*  color: #902E0F !important;*/
+/*}*/
+
+/*.LE-S {*/
+/*  background-color: #FF9C7D;*/
+/*  color: #902E0F !important;*/
+/*}*/
+
+/*.SLE-S {*/
+/*  background-color: #FF9C7D;*/
+/*  color: #902E0F !important;*/
+/*}*/
+
+/*.SM-STO {*/
+/*  background-color: #FF9C7D;*/
+/*  color: #902E0F !important;*/
+/*}*/
+
+/*.SM-SBO {*/
+/*  background-color: #FF9C7D;*/
+/*  color: #902E0F !important;*/
+/*}*/
+
+/*!*Project Manager*!*/
+/*.PC {*/
+/*  background-color: #F0C3FF;*/
+/*  color: #9400C6 !important;*/
+/*}*/
+
+/*.PM {*/
+/*  background-color: #F0C3FF;*/
+/*  color: #9400C6 !important;*/
+/*}*/
+
+/*.SPM {*/
+/*  background-color: #F0C3FF;*/
+/*  color: #9400C6 !important;*/
+/*}*/
+
+/*.AHP {*/
+/*  background-color: #F0C3FF;*/
+/*  color: #9400C6 !important;*/
+/*}*/
+
+/*.Head-CR {*/
+/*  background-color: #F0C3FF;*/
+/*  color: #9400C6 !important;*/
+/*}*/
+
+/*.Head-PM {*/
+/*  background-color: #F0C3FF;*/
+/*  color: #9400C6 !important;*/
+/*}*/
+
+/*!*UX*!*/
+/*.AUX {*/
+/*  background-color: #FFBF62;*/
+/*  color: #704A12 !important;*/
+/*}*/
+
+/*.UEE {*/
+/*  background-color: #FFBF62;*/
+/*  color: #704A12 !important;*/
+/*}*/
+
+/*.SUEE {*/
+/*  background-color: #FFBF62;*/
+/*  color: #704A12 !important;*/
+/*}*/
+
+/*.ALUE {*/
+/*  background-color: #FFBF62;*/
+/*  color: #704A12 !important;*/
+/*}*/
+
+/*.H-UE {*/
+/*  background-color: #FFBF62;*/
+/*  color: #704A12 !important;*/
+/*}*/
+
+/*!*HR*!*/
+/*.MHRA {*/
+/*  background-color: #FFEDA2;*/
+/*  color: #63561E !important;*/
+/*}*/
+
+/*!*BA*!*/
+/*.ABA {*/
+/*  background-color: #FAC0D9;*/
+/*  color: #BF0052 !important;*/
+/*}*/
+
+/*.BA {*/
+/*  background-color: #FAC0D9;*/
+/*  color: #BF0052 !important;*/
+/*}*/
+
+/*.SBA {*/
+/*  background-color: #FAC0D9;*/
+/*  color: #BF0052 !important;*/
+/*}*/
+
+/*.M-BA {*/
+/*  background-color: #FAC0D9;*/
+/*  color: #BF0052 !important;*/
+/*}*/
+
+/*!*R&D*!*/
+/*.ADS {*/
+/*  background-color: #D5DC77;*/
+/*  color: #585D1A !important;*/
+/*}*/
+
+/*.Head-RnD {*/
+/*  background-color: #D5DC77;*/
+/*  color: #585D1A !important;*/
+/*}*/
+
+/*!*VEGA*!*/
+/*.AME {*/
+/*  background-color: #CAD3D8;*/
+/*  color: #4C4F50 !important;*/
+/*}*/
+
+/*.AEE {*/
+/*  background-color: #CAD3D8;*/
+/*  color: #4C4F50 !important;*/
+/*}*/
+
+/*.AD {*/
+/*  background-color: #CAD3D8;*/
+/*  color: #4C4F50 !important;*/
+/*}*/
+
+/*.EE {*/
+/*  background-color: #CAD3D8;*/
+/*  color: #4C4F50 !important;*/
+/*}*/
+
+/*.ME {*/
+/*  background-color: #CAD3D8;*/
+/*  color: #4C4F50 !important;*/
+/*}*/
+
+/*.ID {*/
+/*  background-color: #CAD3D8;*/
+/*  color: #4C4F50 !important;*/
+/*}*/
+
+/*.RS {*/
+/*  background-color: #CAD3D8;*/
+/*  color: #4C4F50 !important;*/
+/*}*/
+
+/*!*Marketing*!*/
+/*.BDE {*/
+/*  background-color: #D2C6C2;*/
+/*  color: #5D3528 !important;*/
+/*}*/
+
+/*.E-T {*/
+/*  background-color: #D2C6C2;*/
+/*  color: #5D3528 !important;*/
+/*}*/
+
+/*!*Product*!*/
+/*.SPA {*/
+/*  background-color: #90A4AE;*/
+/*  color: #272B2D !important;*/
+/*}*/
+
+.pointing {
+  cursor: pointer;
+}

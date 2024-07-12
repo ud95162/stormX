@@ -1,0 +1,362 @@
+<div class="modal fade" id="requestLetterModal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="user-header-nav">
+        <button class="close  closeHover" data-dismiss="modal" type="button" >&times;
+        </button>
+        <br>
+        <ul class="nav nav-tabs container" id="RequestHeader" style="width: fit-content;">
+          <li class="active">
+            <a data-toggle="tab" (click)="onChangeRequest('letter')" href="#letterRequest">Letter Request</a>
+          </li>
+          <li>
+            <a data-toggle="tab" (click)="onChangeRequest('facility')" href="#facilityRequest">Facility Request</a>
+          </li>
+          <li>
+            <a data-toggle="tab" (click)="onChangeRequest('OPD')" href="#OPDRequest">OPD Requests</a>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-header">
+        <h4 *ngIf="showLetterRequestHeader" class="modal-title">Request a Letter from Admin</h4>
+        <h4 *ngIf="showFacilityRequestHeader" class="modal-title">Request a Facility from Admin</h4>
+        <h4 *ngIf="showOPDRequestHeader" class="modal-title">Request for OPD</h4>
+      </div>
+      <div *ngIf="showRequestBody" class="modal-body">
+        <div *ngIf="showLetterRequestBody">
+          <form>
+            <div class="form-group row">
+              <div class="col-sm-6 div-container">
+                <select class="form-control request-letter-type-dropdown" id="requestLetterType">
+                  <option *ngFor="let lettertype of letterTypes">
+                    {{lettertype}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-sm-6 div-container">
+                <div class="input-group" title="When do you need the letter?">
+                  <span class="input-group-addon date-picker-style-span">
+                    <i aria-hidden="true" class="fa fa-calendar"></i>
+                  </span>
+                  <input [(ngModel)]="letterRequestObject.expectingDate" class="form-control date-picker-style"
+                         id="letterRequestDate"
+                         name="letterRequestDate"
+                         type="date">
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-12">
+              <textarea (keydown)="increaseTextBoxSize('requestBody')" [(ngModel)]="letterRequestObject.letterBody"
+                        class="form-control request-body" id="requestBody"
+                        name="requestBody"
+                        placeholder="Dear sir..."></textarea>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <p class="request-notice-p">*KRIYO will automatically inform HR department regarding your request.
+                  Do you want to send the request to a specific HR Executive?</p>
+              </div>
+              <div class="col-sm-2">
+                <div class="material-switch pull-right">
+                  <input (click)="requestFromCheckboxClick('letter')" id="requestFromPerson" name="requestFromPerson"
+                         type="checkbox"/>
+                  <label class="switch-label" for="requestFromPerson"></label>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showRequestFromPerson" class="form-group row">
+              <div class="col-sm-12">
+                <select class="form-control request-letter-type-dropdown" id="requestingFromName">
+                  <option *ngFor="let requestfrom of requestingFromEmployeesList">
+                    {{requestfrom.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="showFacilityRequestBody">
+          <div class="form-group row" style="margin-bottom: 0">
+            <div class="col-sm-6 div-container">
+              <select class="form-control request-letter-type-dropdown" id="requestFacilityType">
+                <option *ngFor="let facilityType of facilityTypes" value="{{facilityType}}">
+                  {{facilityType}}
+                </option>
+              </select>
+            </div>
+            <div class="col-sm-6 div-container">
+              <select class="form-control request-letter-type-dropdown" id="requestFacilityVenue">
+                <option *ngFor="let venueType of venueTypes" value="{{venueType}}">
+                  {{venueType}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12 div-container">
+              <label>Title<span style="color: red"> *</span></label>
+              <input class="form-control" placeholder="Enter title" id="title">
+            </div>
+            <br> <br>
+            <div class="col-sm-12 div-container">
+              <label>Facility Request Message<span style="color: red"> *</span></label>
+              <textarea (keydown)="increaseTextBoxSize('facilityRequestBody')"
+                        [(ngModel)]="facilityRequestObject.facilityBody"
+                        class="form-control request-body" id="facilityRequestBody"
+                        name="requestBody"
+                        placeholder="Hello, "></textarea>
+            </div>
+          </div>
+
+          <div> <p style="color: red; padding-left: 6px;">*Required</p></div>
+            <div class="form-group row imageUploadDropZone" >
+            <image-upload (uploadFinished)="uploadFinish($event)" [extensions]="['jpg','png','gif','JPEG', '.jpg']"
+            [headers]="{Accept: '*/*'}"
+            [maxFileSize]="uploadImageSize"
+            [style]="customStyle"
+            [url]="imageUploadUrl"
+            buttonCaption="Browse to upload "
+            dropBoxMessage=" or Drag and Drop to upload (max size 5MB)">
+          </image-upload>
+
+            <div class="row" style="margin: 10px 0 0 0">
+              <div class="col-sm-12">
+                <div *ngFor="let image of imageUploadArray" class="col-sm-3"
+                     style="padding: 0 !important; margin-bottom: 10px">
+                  <img height="50%" src={{image}} width="100%"/>
+                  <i (click)="deleteUploadedImage(image)" aria-hidden="true"
+                     class="fa fa-2x fa-times pull-right"
+                     style="color: #Ef3648; position: absolute; margin-left: -26px; cursor: pointer;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <p style="margin-left: 16px; font-size: 13px; font-weight: 600; color: red; margin-top: 10px">{{validationErrorMsg}}</p>
+          </div>
+
+         </div>
+
+
+        <div *ngIf="showOPDRequestBody">
+          <div  *ngIf="opdDataLoaded && defaultOpdBalance !== 0 && !deadlinePassedForOpd">
+            <div class="opd-balance u-mb-">
+              <div class="opd-balance__bg opd-balance__bg--blue">
+                <p class="opd-balance__title">OPD Balance </p>
+                <p class="opd-balance__remaining"> {{remainOpdAmount | number}} / <span
+                  class="opd-balance__full">{{opdData.allocatedAmount | number}}</span></p>
+              </div>
+            </div>
+            <p class="opd-blance-valid"><span class="opd-blance-valid__date"> {{opdData.validStart}}</span>&nbsp;&nbsp;to&nbsp;&nbsp;
+              <span class="opd-blance-valid__date">{{opdData.validEnd}}</span>
+              <span class="opd-blance-valid__remaining" *ngIf="remainingDatesForOpd > 1">&nbsp;&nbsp;(
+                <span class="opd-blance-valid__remaining-days--blue" *ngIf="remainingDatesForOpd > 100">
+                  {{remainingDatesForOpd}}
+                </span>
+                <span class="opd-blance-valid__remaining-days--green" *ngIf="remainingDatesForOpd < 100 && remainingDatesForOpd > 30">
+                  {{remainingDatesForOpd}}
+                </span>
+                <span class="opd-blance-valid__remaining-days--orange" *ngIf="remainingDatesForOpd <= 30 && remainingDatesForOpd > 10">
+                  {{remainingDatesForOpd}}
+                </span>
+                <span class="opd-blance-valid__remaining-days--red" *ngIf="remainingDatesForOpd <= 10 && remainingDatesForOpd > 1">
+                  {{remainingDatesForOpd}}
+                </span> more days)
+              </span>
+              <span class="opd-blance-valid__remaining" *ngIf="remainingDatesForOpd == 1">&nbsp;&nbsp;(
+                <span class="opd-blance-valid__remaining-days--red">
+                  {{remainingDatesForOpd}}
+                </span> more day)
+              </span>
+            </p>
+          </div>
+          <div  *ngIf="notEligibleForOpd">
+            <div class="opd-balance-nodata">
+              <h3 class="opd-balance-nodata__title">Oops!</h3>
+              <p class="opd-balance-nodata__des">You are not eligible for OPD.</p>
+            </div>
+          </div>
+          <div  *ngIf="deadlinePassedForOpd">
+            <div class="opd-balance-nodata">
+              <h3 class="opd-balance-nodata__title">Oops!</h3>
+              <p class="opd-balance-nodata__des">Deadline is already passed to complete this transaction.</p>
+            </div>
+            <div class="opd-balance u-mb-">
+              <div class="opd-balance__bg opd-balance__bg--red">
+                <p class="opd-balance__title">OPD Balance </p>
+                <p class="opd-balance__remaining"> {{remainOpdAmount | number}} / <span
+                  class="opd-balance__full">{{opdData.allocatedAmount | number}}</span></p>
+              </div>
+            </div>
+            <p class="opd-blance-valid"  *ngIf="opdValidEndDate !== null || opdValidStartDate !== null"><span class="opd-blance-valid__date"> {{opdData.validStart}}</span>&nbsp;&nbsp;to&nbsp;&nbsp;
+              <span class="opd-blance-valid__date">{{opdData.validEnd}}</span>
+            </p>
+          </div>
+
+          <div  *ngIf="opdDataLoaded && defaultOpdBalance === 0">
+            <div class="opd-balance-nodata">
+              <h3 class="opd-balance-nodata__title">Oops!</h3>
+              <p class="opd-balance-nodata__des">You do not have sufficient OPD balance complete this transaction.</p>
+            </div>
+            <div class="opd-balance u-mb-">
+              <div class="opd-balance__bg opd-balance__bg--red">
+                <p class="opd-balance__title">OPD Balance </p>
+                <p class="opd-balance__remaining"> {{remainOpdAmount | number}} / <span
+                  class="opd-balance__full">{{opdData.allocatedAmount | number}}</span></p>
+              </div>
+            </div>
+            <p class="opd-blance-valid"><span class="opd-blance-valid__date" *ngIf="opdValidEndDate !== null || opdValidStartDate !== null"> {{opdData.validStart}}</span>&nbsp;&nbsp;to&nbsp;&nbsp;
+              <span class="opd-blance-valid__date">{{opdData.validEnd}}</span>
+            </p>
+          </div>
+
+
+
+          <div class="row" *ngIf="!opdDataLoaded">
+            <div class="col-md-4">
+              <label>Select Year</label>
+              <select class="form-control pull-left" [(ngModel)]="selectedYear" (change)="getDataForSelectedYear()">
+                <option *ngFor="let data of leaveYearList" value="{{data}}">{{data}}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label>Type</label>
+              <p class="opd-type__text"> Medical</p>
+            </div>
+          </div>
+
+          <div class="row div-container" *ngIf="opdDataLoaded">
+            <div class="col-md-4">
+              <label>Select Year</label>
+              <select class="form-control pull-left" [(ngModel)]="selectedYear" (change)="getDataForSelectedYear()">
+                <option *ngFor="let data of leaveYearList" value="{{data}}">{{data}}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label>Type</label>
+              <p class="opd-type__text" id="requestOPDType"> Medical</p>
+            </div>
+          </div>
+
+
+
+          <div class="row" *ngIf="opdDataLoaded">
+            <div class="col-sm-12 div-container">
+              <label>Enter Description<span style="color: red"> *</span></label>
+              <textarea class="form-control" placeholder="Enter Description" id="titleOpd"></textarea>
+            </div>
+          </div>
+          <br>
+          <table width="100%" style="" *ngIf="opdDataLoaded">
+            <tr style="text-align: center;font-weight: bold;font-size: 15px;padding: 10px">
+              <td width="10%"></td>
+              <td width="55%" style="text-align: left; padding-left: 15px">Item Name<span style="color: red"> *</span></td>
+              <td width="25%" style="padding-right: 15px; text-align: right">Amount<span style="color: red"> *</span></td>
+              <td width="10%"></td>
+            </tr>
+
+            <tr style="text-align: center;font-size: 14px"
+                *ngFor="let item of itemArray;let i =index">
+              <td *ngIf="currentEdit == i" width="10%" style="padding: 10px">{{i+1}}</td>
+              <td *ngIf="currentEdit == i" width="55%" style="padding: 10px 10px 10px 15px; text-align: left;"><input
+                (keypress)="inputKeyPressEdit($event)" value="{{editItemSelected.name}}" class="form-control"
+                id="editItemName"></td>
+              <td *ngIf="currentEdit == i" width="25%" style="padding: 10px 15px 10px 10px; text-align: right"><input
+                (keypress)="inputKeyPressEdit($event)" value="{{editItemSelected.amount}}" class="form-control"
+                type="number" id="editItemAmount"></td>
+              <td *ngIf="currentEdit == i" width="10%" style="text-align: right">
+                <button class="btn request-accept-button" (click)="editItem(i)" id="editItemBtnId">Update</button>
+              </td>
+              <td *ngIf="currentEdit != i" width="10%" style="padding: 10px">{{i + 1}}</td>
+              <td class="td__item_name" *ngIf="currentEdit != i" width="55%" style="padding: 10px 10px 10px 15px; text-align: left">{{item.name}}</td>
+              <td *ngIf="currentEdit != i" width="25%" style="padding: 10px 15px 10px 10px; text-align: right">{{item.amount | currency :'Rs: '}}</td>
+              <td *ngIf="currentEdit != i" width="10%" style="padding: 10px;text-align: right;display: flex;align-items: center;justify-content: flex-end;width: 100%;">
+                <i aria-hidden="true"
+                   (click)="selectEditItem(i)"
+                   class="fa fa-edit"
+                   style="color: green; margin-top: 2px; margin-right: 4px; cursor: pointer; font-size: 22px"></i>
+                &nbsp; &nbsp;<i aria-hidden="true" (click)="removeItem(i)" class="fa fa-trash-o"
+                                               style="color: red; cursor: pointer; font-size: 22px"></i></td>
+            </tr>
+
+            <tr style="text-align: center;padding: 10px">
+              <td width="5%" style="padding: 10px">{{itemArray == null ? '1' : itemArray.length + 1}}</td>
+              <td width="60%" style="padding: 10px 10px 10px 15px; text-align: left"><input (keypress)="inputKeyPress($event)" class="form-control"
+                                                           id="addItemName"></td>
+              <td width="25%" style="padding: 10px 15px 10px 10px; text-align: right"><input (keypress)="inputKeyPress($event)" class="form-control" min="0"
+                                                           type="number" id="addItemAmount"></td>
+              <td width="10%" style="text-align: right">
+                <button class="btn request-accept-button" (click)="addItem()" id="addItemBtnId"> Add</button>
+              </td>
+            </tr>
+            <tr style="text-align: center;font-weight: bold;font-size: 14px">
+              <td width="10%" style="padding: 10px"></td>
+              <td width="55%" style="padding: 10px; text-align: right">Total</td>
+              <td width="25%" style="padding: 10px 15px 10px 10px; text-align: right">{{itemTotalAmount | currency: 'Rs: '}}</td>
+              <td width="10%" style="padding: 10px;text-align: right"></td>
+
+            </tr>
+          </table>
+
+
+          <div class="row" *ngIf="opdDataLoaded">
+           <div> <p style="color: red; padding-left: 6px;">*Required</p></div>
+            <ngx-dropzone  (change)="onFileSelect($event)" [accept]="'.jpg,.png,.gif,.jpeg,.docx,.txt,.pdf, .xlsx'" style="  height: 100px !important; width: auto; margin: 2px 10px 2px 20px;" >
+              <ngx-dropzone-label > <span><i aria-hidden="true" class="fa fa-upload fa-20x"></i></span> Browse or Drag and Drop to upload (max size 5MB)</ngx-dropzone-label>
+            </ngx-dropzone>
+            <div class="row" style="margin: 10px 0 0 0">
+              <div class="col-sm-12">
+                <div *ngFor="let file of fileUploadArray" class="col-sm-3"
+                     style="padding: 0 !important; margin-bottom: 10px">
+
+
+                  <div *ngIf="file.name.includes('.pdf') || file.name.includes('.docx') || file.name.includes('.txt')"
+                       style="text-align: center">
+                    <i (click)="deleteUploadedImageFile(file.url,file.name)" aria-hidden="true"
+                       class="fa fa-2x fa-times pull-right" style="color: #Ef3648;"></i>
+                    <i class="fa fa-file-pdf-o  fa-5x" style="width: 100%;margin:10px"
+                    ></i>
+                    <span>{{file.name}}</span>
+
+                  </div>
+                  <div
+                    *ngIf="!(file.name.includes('.pdf') || file.name.includes('.docx') || file.name.includes('.txt'))">
+                    <img height="50%" src={{file.url}} width="100%"/>
+                    <i (click)="deleteUploadedImageFile(file.url,file.name)" aria-hidden="true"
+                       class="fa fa-2x fa-times pull-right"
+                       style="color: #Ef3648; position: absolute; margin-left: -26px; cursor: pointer;"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer" *ngIf="showLetterRequestFooter">
+        <button  (click)="postRequest()" class="btn request-letter-button"
+                data-dismiss="modal" type="button">
+          Request
+        </button>
+      </div>
+      <div class="modal-footer" *ngIf="showOPDRequestFooter && opdDataLoaded">
+        <button (click)="postOPDRequest()" class="btn request-letter-button"
+                  data-dismiss="modal" type="button" [disabled]="opdRequestBtnDisabled">
+            Request
+        </button>
+      </div>
+      <div class="modal-footer" *ngIf="showFacilityRequestFooter">
+        <button (click)="postFacilityRequest()" class="btn request-letter-button"
+                type="button" id="facilityReqCloseButton">
+            Request
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

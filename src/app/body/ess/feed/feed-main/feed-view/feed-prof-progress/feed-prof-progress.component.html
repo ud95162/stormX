@@ -1,0 +1,15 @@
+<div *ngIf="showProgress" class="w3-panel w3-card">
+  <div class="media">
+    <div class="media-body">
+      <h5 class="media-heading">Profile Strength</h5>
+      <h4 class="strength-label">
+        <b>{{profileProgressData.profileLevelName}}</b>
+      </h4>
+      <h6 class="strength-label-details">{{profileProgressData.profileLevelNext}}</h6>
+    </div>
+    <div class="media-right" title={{profileProgressData.profileLevelName}}>
+      <img class="media-object" src="assets/image/profile-rating/{{profileProgressData.profileLevel}}.svg"
+           style="width:67px">
+    </div>
+  </div>
+</div>

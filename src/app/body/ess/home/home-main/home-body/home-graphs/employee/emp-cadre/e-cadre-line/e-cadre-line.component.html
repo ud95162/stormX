@@ -1,0 +1,61 @@
+<div class="profile-page__main-content"
+     *ngIf="checkPermission.checkUserHavePermissionForSection('EmployeeCadreLineGraph')">
+
+  <div>
+    <div class="dashboard-page @@class">
+      <div class="dashboard-page__block-main">
+        <div class="dashboard-page__block-main-header dashboard-page__block-main-header--chart">
+          <div class="dashboard-page__left">
+
+<!--            <div class="c-page-nav__secondary">-->
+<!--              <nav class="c-page-nav__wrapper">-->
+<!--&lt;!&ndash;                <a class="c-page-nav__item " [ngClass]="{ 'is-selected': eCaderGraphToggle }" (click)="chnageECaderChart('caders')">Cadre</a>&ndash;&gt;-->
+<!--                <a class="c-page-nav__item " [ngClass]="{ 'is-selected': !eCaderGraphToggle }" (click)="chnageECaderChart('employeements')">Employment</a>-->
+<!--              </nav>-->
+<!--            </div>-->
+
+
+          </div>
+          <div class="dashboard-page__right">
+
+            <button (click)="isECadreDnutVisible = !isECadreDnutVisible" class="a-link-btn c-dashboard-card__btn a-link-btn_lg pie-chart__btn-align">
+              <svg class="a-icon dashboard-chart__icon">
+                <use xlink:href="#pie_chart_outline"></use>
+              </svg>
+            </button>
+
+            <div class="c-overview-card__filter">
+              <div class="m-form-field">
+                <div class="m-form-field__field">
+                  <select (change)="changeYear()" id="yearDropdown" class="m-form-field__select ">
+                    <option *ngFor="let year of yearArray">{{year}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+<!--        <div class="dashboard-page__block-wrapper-main"*ngIf="eCaderGraphToggle">-->
+<!--          <div class="dashboard-page__block-wrapper wrapper-custom__margin"  id="eCadreLineChart">-->
+<!--          </div>-->
+<!--        </div>-->
+
+        <div class="dashboard-page__block-wrapper-main"*ngIf="!eCaderGraphToggle">
+          <div class="dashboard-page__block-wrapper wrapper-custom__margin"  id="eCadreEmploymentChart"></div>
+        </div>
+
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="isECadreDnutVisible" class="c-people-dashboard__card--wrapper">
+    <h2 class="c-people-dashboard__card--text">Employee Cadre</h2>
+  <div class="c-people-dashboard__card--chart">
+    <app-e-cadre-dnut></app-e-cadre-dnut>
+  </div>
+</div>
+

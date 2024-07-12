@@ -1,0 +1,58 @@
+<div class="panel-group">
+  <div class="panel panel-style">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#newlist" style="text-decoration: none">
+          Add new section
+          <i aria-hidden="true" class="fa fa-chevron-circle-down pull-right"></i>
+        </a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" id="newlist" style="color: black">
+      <ul class="list-group">
+        <li class="list-group-item add-li-item">
+          <button class="btn btn-link btn-block add-li-btn-item" data-target="#addQul" data-toggle="modal"
+                  type="button">
+            Qualification
+            <i aria-hidden="true" class="fa fa-plus-circle pull-right"></i>
+          </button>
+        </li>
+        <li class="list-group-item add-li-item">
+          <button class="btn btn-link btn-block add-li-btn-item" data-target="#addSkill" data-toggle="modal"
+                  type="button">
+            Skills
+            <i aria-hidden="true" class="fa fa-plus-circle pull-right"></i>
+          </button>
+        </li>
+        <li class="list-group-item add-li-item">
+          <button class="btn btn-link btn-block add-li-btn-item" data-target="#addFamily" data-toggle="modal"
+                  type="button">
+            Family Details
+            <i aria-hidden="true" class="fa fa-plus-circle pull-right"></i>
+          </button>
+        </li>
+        <li class="list-group-item add-li-item">
+          <button class="btn btn-link btn-block add-li-btn-item" data-target="#addPreviousWorkDetail" data-toggle="modal"
+                  type="button">
+            Previous Employment Detail
+            <i aria-hidden="true" class="fa fa-plus-circle pull-right"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addQul" role="dialog">
+  <app-add-qualification></app-add-qualification>
+</div>
+<div class="modal fade" id="addSkill" role="dialog">
+  <app-add-skill></app-add-skill>
+</div>
+<div class="modal fade" id="addFamily" role="dialog">
+  <app-add-family></app-add-family>
+</div>
+<div class="modal fade" id="addPreviousWorkDetail" role="dialog">
+  <app-add-previous-work-detail></app-add-previous-work-detail>
+</div>

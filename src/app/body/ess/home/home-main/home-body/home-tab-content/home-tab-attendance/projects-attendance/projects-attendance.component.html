@@ -1,0 +1,334 @@
+<div class="l-wrapper profile-page__wrapper" *ngIf="componentPermission.checkUserHavePermissionForSection('AttendanceDashboard')">
+  <div class="transport-header">
+    <div style="display: flex; align-items: center;">
+      <svg class="a-icon"
+           (click)="backToSummaryPage()" style="font-size: 16px; cursor: pointer">
+        <use xlink:href="#previous"></use>
+      </svg>
+      <h3 class="transport-header__title" style="margin-top: 0; margin-left: 12px">Project Wise Attendance</h3>
+    </div>
+    <div class="project-wise-date">
+      <div class="m-form-field u-mr+">
+        <div class="m-form-field__field project-wise-date__input">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input project-wise-date__input" id="f-name" type="date"
+                   [(ngModel)]="selectedDate" [ngModelOptions]="{standalone: true }"
+                   (change)="dateChanged()"
+                   minlength="0"
+                   maxlength="524288" placeholder="06/01/2022" value="06/01/2022">
+          </div>
+        </div>
+      </div>
+      <div class="project-wise-filter">
+        <button class="project-wise-filter__btn" (click)="displayHideFilterSection($event)">
+          <svg class="a-icon m-form-field__pre-icon project-wise-filter__icon">
+            <use xlink:href="#filter"></use>
+          </svg>
+        </button>
+          <div class="project-wise-filter-box " *ngIf="filterSectionDisplay" (click)="$event.stopPropagation()">
+            <div class="m-form-field" *ngIf="preInsertDataLoaded">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">Company</label>
+              </div>
+
+              <div class="m-form-field__field m-form-field__min-height">
+                <div class="m-form-field__field-item">
+                  <select class="m-form-field__select"
+                          [(ngModel)]="selectedCompanyID" [ngModelOptions]="{standalone: true}"
+                          (change)="getBusinessUnitsData(); getProjectsAttendanceData(); getProjectsData()">
+                    <option value="0">All</option>
+                    <option *ngFor="let data of companiesList" value="{{data.id}}">{{data.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <span class="m-form-field__error">error</span>
+            </div>
+            <div class="m-form-field" *ngIf="businessUnitsDataLoaded">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">Business Unit</label>
+              </div>
+
+              <div class="m-form-field__field m-form-field__min-height">
+                <div class="m-form-field__field-item">
+                  <select class="m-form-field__select"
+                          [(ngModel)]="selectedBUID" [ngModelOptions]="{standalone: true}"
+                          (change)="getDepartmentsData(); getProjectsAttendanceData()">
+                    <option value="0">All</option>
+                    <option *ngFor="let data of businessUnitList" value="{{data.id}}">{{data.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <span class="m-form-field__error">error</span>
+            </div>
+            <div class="m-form-field" *ngIf="preInsertDataLoaded">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">Cadre</label>
+              </div>
+
+              <div class="m-form-field__field m-form-field__min-height">
+                <div class="m-form-field__field-item">
+                  <select class="m-form-field__select"
+                          [(ngModel)]="selectedCadreID" [ngModelOptions]="{standalone: true}"
+                          (change)="getProjectsAttendanceData()">
+                    <option value="0">All</option>
+                    <option *ngFor="let data of cadresList" value="{{data.cadreID}}">{{data.cadreName}}</option>
+                  </select>
+                </div>
+              </div>
+              <span class="m-form-field__error">error</span>
+            </div>
+
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="allProjectsSummarySectionDisplay">
+    <div class="l-grid u-mt+" [ngClass]="{'l-grid--3-2': !notAWorkingDay}" *ngIf="attendanceDataLoaded && attendanceData !== undefined">
+      <div class="project-wise-card">
+        <div class="project-wise-card__box project-wise-card__box--line"
+             (click)="showModal('attendanceEmployees', 'Present Employees', 'Present')"
+             style="cursor:pointer;">
+          <h5 class="project-wise-card__title project-wise-card__title--main">Present Count</h5>
+          <h2 class="project-wise-card__count">{{attendanceData.presentCount}}</h2>
+          <p class="project-wise-card__precentage">
+          <span class="project-wise-card__precentage-value project-wise-card__precentage-value--high"
+                *ngIf="presentPercentage >= 50">
+          {{presentPercentage}}%
+          </span>
+            <span class="project-wise-card__precentage-value project-wise-card__precentage-value--low"
+                  *ngIf="presentPercentage < 50">
+          {{presentPercentage}}%
+          </span>
+            of total employees</p>
+        </div>
+
+        <div class="project-wise-card__box-sub"
+             (click)="showModal('attendanceEmployees', 'WFO Employees', 'WFO')"
+             style="cursor:pointer;">
+          <h5 class="project-wise-card__title">WFO Count</h5>
+          <h2 class="project-wise-card__count">{{attendanceData.officeCount}}</h2>
+          <p class="project-wise-card__precentage">
+          <span class="project-wise-card__precentage-value project-wise-card__precentage-value--high"
+                *ngIf="officePercentage >= 50">
+          {{officePercentage}}%
+          </span>
+            <span class="project-wise-card__precentage-value project-wise-card__precentage-value--low"
+                  *ngIf="officePercentage < 50">
+          {{officePercentage}}%
+          </span>
+            of total employees</p>
+        </div>
+
+        <div class="project-wise-card__box-sub"
+             (click)="showModal('attendanceEmployees', 'WFH Employees', 'WFH')"
+             style="cursor:pointer;">
+          <h5 class="project-wise-card__title">WFH Count</h5>
+          <h2 class="project-wise-card__count">{{attendanceData.homeCount}}</h2>
+          <p class="project-wise-card__precentage">
+          <span class="project-wise-card__precentage-value project-wise-card__precentage-value--high"
+                *ngIf="homePercentage >= 50">
+          {{homePercentage}}%
+          </span>
+            <span class="project-wise-card__precentage-value project-wise-card__precentage-value--low"
+                  *ngIf="homePercentage < 50">
+          {{homePercentage}}%
+          </span>
+            of total employees</p>
+        </div>
+      </div>
+      <div class="l-grid__item" *ngIf="!notAWorkingDay">
+        <div class="l-grid l-grid--1-1">
+          <div class="project-wise-card"
+               (click)="showModal('attendanceEmployees', 'Absent Employees', 'Absent')"
+               style="cursor:pointer;">
+            <div class="project-wise-card__box project-wise-card__box--line">
+              <h5 class="project-wise-card__title">Absent Count</h5>
+              <h2 class="project-wise-card__count project-wise-card__count--error">{{attendanceData.absentCount}}</h2>
+              <p class="project-wise-card__precentage">
+              <span class="project-wise-card__precentage-value project-wise-card__precentage-value--high"
+                    *ngIf="absentPercentage < 50">
+          {{absentPercentage}}%
+          </span>
+                <span class="project-wise-card__precentage-value project-wise-card__precentage-value--low"
+                      *ngIf="absentPercentage >= 50">
+          {{absentPercentage}}%
+          </span>
+                of total employees</p>
+            </div>
+          </div>
+          <div class="project-wise-card"
+               (click)="showModal('attendanceEmployees', 'Leave Employees', 'Leave')"
+               style="cursor:pointer;">
+            <div class="project-wise-card__box project-wise-card__box--line">
+              <h5 class="project-wise-card__title">Leave Count</h5>
+              <h2 class="project-wise-card__count project-wise-card__count--error">{{attendanceData.leaveCount}}</h2>
+              <p class="project-wise-card__precentage">
+              <span class="project-wise-card__precentage-value project-wise-card__precentage-value--high"
+                    *ngIf="leavePercentage < 50">
+          {{leavePercentage}}%
+          </span>
+                <span class="project-wise-card__precentage-value project-wise-card__precentage-value--low"
+                      *ngIf="leavePercentage >= 50">
+          {{leavePercentage}}%
+          </span>
+                of total employees</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="l-grid l-grid--2-3" style="margin-top: 16px;" *ngIf="attendanceDataLoaded">
+      <div class="m-form-field">
+        <div class="m-form-field__field">
+                        <span class="m-form-field__pre">
+                            <svg class="a-icon m-form-field__pre-icon project-wise-icon__search">
+                                <use xlink:href="#search"></use>
+                            </svg>
+                        </span>
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                   placeholder="Search here" value="" [(ngModel)]="searchTerm">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-wise-list u-mt" *ngIf="attendanceDataLoaded && attendanceData !== undefined">
+      <div class="project-details-card" *ngFor="let project  of attendanceData.currentAttendanceProjectWiseResponseList | projectsAttendance: searchTerm"
+           (click)="viewSelectedProjectSummary(project)">
+        <div class="project-details-card-top">
+          <div class="project-details__info">
+            <img [src]="project.projectImg" alt="project-logo" class="project-details__info-logo"
+                 (error) ="setDefaultPic($event)">
+            <div class="project-details__summaray" >
+              <h2 class="project-details__summaray--title" *ngIf="project.projectName !== null">
+                {{project.projectName}}
+              </h2>
+              <h2 class="project-details__summaray--title" *ngIf="project.projectName == null">
+                Not Assigned
+              </h2>
+            </div>
+
+          </div>
+          <div class="project-details__member">
+            <p class="project-details__member-title">Members&nbsp;:&nbsp;<span
+              class="project-details__member-count">{{project.currentAttendanceResponse.totalCount}}</span></p>
+          </div>
+        </div>
+        <div class="l-grid l-grid--3-2 u-mt+">
+          <div class="project-wise-card project-wise-card__projects">
+            <div class="project-wise-card__box project-wise-card__box--line">
+              <h5 class="project-wise-card__title project-wise-card__title--main">Present Count</h5>
+              <h2 class="project-wise-card__count">{{project.currentAttendanceResponse.presentCount}}</h2>
+            </div>
+
+            <div class="project-wise-card__box project-wise-card__projects">
+              <h5 class="project-wise-card__title">Office Count</h5>
+              <h2 class="project-wise-card__count">{{project.currentAttendanceResponse.officeCount}}</h2>
+            </div>
+
+            <div class="project-wise-card__box project-wise-card__projects">
+              <h5 class="project-wise-card__title">Home Count</h5>
+              <h2 class="project-wise-card__count">{{project.currentAttendanceResponse.homeCount}}</h2>
+            </div>
+          </div>
+          <div class="l-grid__item">
+            <div class="l-grid l-grid--1-1">
+              <div class="project-wise-card project-wise-card__projects">
+                <div class="project-wise-card__box project-wise-card__box--line">
+                  <h5 class="project-wise-card__title">Absent Count</h5>
+                  <h2
+                    class="project-wise-card__count project-wise-card__count--error">{{project.currentAttendanceResponse.absentCount}}</h2>
+                </div>
+              </div>
+              <div class="project-wise-card project-wise-card__projects">
+                <div class="project-wise-card__box project-wise-card__box--line">
+                  <h5 class="project-wise-card__title">Leave Count</h5>
+                  <h2
+                    class="project-wise-card__count project-wise-card__count--error">{{project.currentAttendanceResponse.leaveCount}}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-project-wise *ngIf="!allProjectsSummarySectionDisplay"
+                    [selectedProjectData]="selectedProjectAttendanceData"
+                    [allProjects]="allProjects"
+                    [allProjectAttendanceData]="attendanceData"></app-project-wise>
+</div>
+
+
+
+<div class="o-modal" id="attendanceEmployees">
+  <div class="o-modal__content-sm edit-personal-details">
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header header-line__bottom">
+        <h4>{{modalHeader}}</h4>
+        <button class="a-btn a-btn--link o-modal__inner-close o-modal__inner-close-sm"
+                (click)="hideModal('attendanceEmployees')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="o-modal-liked-people" style="max-height: 550px; overflow-y: auto; overflow-x: hidden" *ngIf="modalEmployeeList.length > 0">
+            <ul class="m-form-field__results-list">
+              <li *ngFor="let employee of modalEmployeeList">
+                <div class="m-form-field__results-item" style="padding: 16px 8px 4px 0 !important;">
+                  <div class="m-form-field__results-leftside">
+                    <div class="m-form-field__results-pic">
+                      <img src="{{employee.empImage}}" alt="img" class="m-form-field__results-img">
+                    </div>
+                    <div class="m-form-field__results-details">
+                      <div style="display: flex; align-items: center">
+                        <p class="m-form-field__results-name">{{employee.empName}}</p>
+                      </div>
+                      <p class="m-form-field__results-number">{{employee.empNo}}</p>
+                    </div>
+                  </div>
+                  <div class="m-form-field__results-leftside">
+                    <div style="padding-top: 6px; display: flex; align-items: center;">
+                      <i class="fa fa-phone m-form-field__results-icon" aria-hidden="true"></i>
+                      <p class="m-form-field__results-mobnumber"> {{employee.empMobileNo}}</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+      </div>
+
+      <div class="o-modal-liked-people" *ngIf="modalEmployeeList.length === 0">
+        <div class="project-setting__empty--state">
+          <div class="project-setting__empty--wraper">
+            <img src="assets/images/empty-box.png" alt="">
+            <h4 class="project-setting__empty--text">No Data Available!</h4>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="o-modal__footer" style="padding: 24px 24px 10px; justify-content: end" *ngIf="modalEmployeeList.length > 0">
+      <button  (click)="downloadExcel()" class="btn export-report-button" id="btnExport"
+               type="button">
+        <svg class="a-icon">
+          <use xlink:href="#printer"></use>
+        </svg>
+        Export (.csv)
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+

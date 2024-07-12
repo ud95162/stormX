@@ -1,0 +1,43 @@
+@media only screen and (max-width: 992px) {
+  .projet-wice__table-time {
+    white-space: nowrap;
+    white-space: nowrap;
+    width: 143px !important;
+    text-align: center;
+  }
+
+  .projet-wice__table-time br {
+    display: none;
+  }
+
+  .wide-worked-hour__table--wraper {
+    overflow-x: auto;
+    width: calc(100vw - 325px);
+  }
+
+  .c-emp_workhour--table-head {
+    width: calc(100vw - -280px);
+  }
+
+}
+
+
+@media only screen and (max-width: 768px) {
+  .wide-worked-hour__table--wraper {
+    overflow-x: auto;
+    width: calc(100vw - 40px);
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+
+  .workeffort-filter_section-right {
+    display: block;
+  }
+
+  .m-form-field-inline {
+    grid-template-columns: 1fr;
+    grid-gap: 19px;
+  }
+}

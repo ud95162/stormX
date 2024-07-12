@@ -1,0 +1,307 @@
+<!--<div id="editReviewModal" class="o-modal">-->
+
+
+<!--  <div class="o-modal__content edit-personal-details">-->
+
+<!--    <div class="o-modal__body">-->
+<!--      <div class="o-modal__inner-header">-->
+<!--        &lt;!&ndash;        <h3 class="o-modal__inner-header-title"> Edit Given Review </h3>&ndash;&gt;-->
+<!--        <h3> Edit Given Review </h3>-->
+<!--        <button class="a-btn a-btn&#45;&#45;link o-modal__inner-close" (click)="hideModal('editReviewModal')">-->
+<!--          <svg class="a-icon o-modal__close-icon">-->
+<!--            <use xlink:href="#close"></use>-->
+<!--          </svg>-->
+<!--        </button>-->
+<!--        <button class="a-btn a-btn&#45;&#45;light o-modal__back-btn u-visible-sm">-->
+<!--          <svg class="a-icon u-mr">-->
+<!--            <use xlink:href="#previous"></use>-->
+<!--          </svg>-->
+<!--          Back-->
+<!--        </button>-->
+<!--      </div>-->
+
+<!--      <div class="m-form-field">-->
+<!--        <div class="m-form-field__label-wrap">-->
+<!--          <label *ngIf="showReviewGivenToInput" class="m-form-field__label" for="reviewGivenTo"> Given to </label>-->
+<!--          <label *ngIf="showReviewGivenToInput == false" class="m-form-field__label" for="reviewGivenTo"> Given-->
+<!--            by </label>-->
+<!--        </div>-->
+
+<!--        <div class="m-form-field__field">-->
+<!--          <div class="m-form-field__field-item">-->
+<!--            <input class="m-form-field__input" id="reviewGivenTo" disabled type="text" minlength="0"-->
+<!--                   maxlength="524288" placeholder="" value="">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <span class="m-form-field__error">error</span>-->
+<!--      </div>-->
+
+<!--      <div class="m-form-field">-->
+<!--        <div class="m-form-field__label-wrap">-->
+<!--          <label class="m-form-field__label" for="reviewTitle"> Title </label>-->
+<!--        </div>-->
+
+<!--        <div class="m-form-field__field">-->
+<!--          <div class="m-form-field__field-item">-->
+<!--            <input class="m-form-field__input" id="reviewTitle" type="text" minlength="0"-->
+<!--                   maxlength="524288" placeholder="" value="" [(ngModel)]="reviewTitleText">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <span class="m-form-field__error">error</span>-->
+<!--      </div>-->
+
+<!--      <div class="c-review-card__details">-->
+
+<!--        <div class="c-review-card__rating">-->
+<!--          <svg class="a-icon c-review-card__rating-img" (click)="setGroupStar(1)">-->
+<!--            <use xlink:href="#stars" *ngIf="starRating >= 1"></use>-->
+<!--            <use xlink:href="#star-line" *ngIf="starRating <= 1"></use>-->
+<!--          </svg>-->
+<!--          <svg class="a-icon c-review-card__rating-img" (click)="setGroupStar(2)">-->
+<!--            <use xlink:href="#stars" *ngIf="starRating >= 2"></use>-->
+<!--            <use xlink:href="#star-line" *ngIf="starRating <= 2"></use>-->
+<!--          </svg>-->
+<!--          <svg class="a-icon c-review-card__rating-img" (click)="setGroupStar(3)">-->
+<!--            <use xlink:href="#stars" *ngIf="starRating >= 3"></use>-->
+<!--            <use xlink:href="#star-line" *ngIf="starRating <= 3"></use>-->
+<!--          </svg>-->
+<!--          <svg class="a-icon c-review-card__rating-img" (click)="setGroupStar(4)">-->
+<!--            <use xlink:href="#stars" *ngIf="starRating >= 4"></use>-->
+<!--            <use xlink:href="#star-line" *ngIf="starRating <= 4"></use>-->
+<!--          </svg>-->
+<!--          <svg class="a-icon c-review-card__rating-img" (click)="setGroupStar(5)">-->
+<!--            <use xlink:href="#stars" *ngIf="starRating === 5"></use>-->
+<!--            <use xlink:href="#star-line" *ngIf="starRating <= 5"></use>-->
+<!--          </svg>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="m-form-field">-->
+<!--        <div class="m-form-field__label-wrap">-->
+<!--          <label class="m-form-field__label" for="reviewComment"> Comments </label>-->
+<!--        </div>-->
+<!--        <textarea id="reviewComment" name="test" rows="8" cols="95" [(ngModel)]="reviewCommentText"></textarea>-->
+<!--      </div>-->
+
+<!--      <div class="o-modal__footer">-->
+<!--        <div class="o-modal__footer__add">-->
+<!--          &lt;!&ndash;          <label class="a-checkbox">&ndash;&gt;-->
+<!--          &lt;!&ndash;            <input checked id="reviewPostOnFeed" type="checkbox" class="a-checkbox__check">&ndash;&gt;-->
+<!--          &lt;!&ndash;            <span class="a-checkbox__label">Post on Feed</span>&ndash;&gt;-->
+<!--          &lt;!&ndash;          </label>&ndash;&gt;-->
+<!--          &lt;!&ndash;-delete this skill-&ndash;&gt;-->
+<!--          <div class="delete-card__item" (click)="onPostDelete()">-->
+<!--            <svg class="a-link-btn a-icon c-pax-details__block-main-icon">-->
+<!--              <use xlink:href="#bin"></use>-->
+<!--            </svg>-->
+<!--            <span class="class=" m-form-field__label>Delete Review</span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <button (click)="editReview()" class="a-btn a-btn&#45;&#45;primary">Post</button>-->
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div id="editReviewModal" class="o-modal review-modal">
+
+  <div class="o-modal__content-sm edit-personal-details">
+
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header" style="display: flex;">
+        <!--        <h3 class="o-modal__inner-header-title o-header-title__align">Review {{this.headerData.name}}</h3>-->
+        <h3 class="o-header-title__align">Edit review</h3>
+        <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('editReviewModal')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+        <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm">
+          <svg class="a-icon u-mr">
+            <use xlink:href="#previous"></use>
+          </svg>
+          Back
+        </button>
+      </div>
+
+      <div class="o-modal-review__wraper">
+        <div class="person-image__circle" style="display: flex; flex-direction: column; align-items: center;">
+          <img src="{{employeeImage}}" class="image__circle" alt="profile image">
+
+          <div class="review-modal__rating">
+            <p class="review-modal__rating-title">Rate {{employeeFirstName}}  <span class="required">*</span></p>
+            <div style = "color: #EFCE4A; margin-bottom: 20px; margin-top: 0; cursor:pointer; font-size: 1.2em;"
+                 title="Edit a rating">
+
+              <span (click)="setGroupStar(0)" *ngIf="starRating >= 1" class="review-modal__rating-star">
+              <i class="fa fa-star"></i>
+            </span>
+              <span (click)="setGroupStar(1)" *ngIf="starRating === 0" class="review-modal__rating-star">
+              <i class="fa fa-star-o"></i>
+            </span>
+              <span (click)="setGroupStar(1)" *ngIf="starRating >= 2" class="review-modal__rating-star">
+              <i class="fa fa-star"></i>
+            </span>
+              <span (click)="setGroupStar(2)" *ngIf="starRating <= 1" class="review-modal__rating-star">
+              <i class="fa fa-star-o"></i>
+            </span>
+              <span (click)="setGroupStar(2)" *ngIf="starRating >= 3" class="review-modal__rating-star">
+              <i class="fa fa-star"></i>
+            </span>
+              <span (click)="setGroupStar(3)" *ngIf="starRating <= 2" class="review-modal__rating-star">
+              <i class="fa fa-star-o"></i>
+            </span>
+              <span (click)="setGroupStar(3)" *ngIf="starRating >= 4" class="review-modal__rating-star">
+              <i class="fa fa-star"></i>
+            </span>
+              <span (click)="setGroupStar(4)" *ngIf="starRating <= 3" class="review-modal__rating-star">
+              <i class="fa fa-star-o"></i>
+            </span>
+              <span (click)="setGroupStar(4)" *ngIf="starRating === 5" class="review-modal__rating-star">
+              <i class="fa fa-star"></i>
+            </span>
+              <span (click)="setGroupStar(5)" *ngIf="starRating <= 4" class="review-modal__rating-star">
+              <i class="fa fa-star-o"></i>
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="m-form-field u-mb+">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label" for="reviewTitle"> Title <span class="required">*</span> </label>
+        </div>
+
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" id="reviewTitle" type="text" minlength="0"
+                   maxlength="524288" placeholder="" value="" [(ngModel)]="reviewTitleText">
+          </div>
+        </div>
+        <span class="m-form-field__error">error</span>
+      </div>
+
+      <div class="m-form-field">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label" for="reviewComment"> Comments </label>
+        </div>
+        <textarea id="reviewComment" name="test" rows="5" cols="95" [(ngModel)]="reviewCommentText" style="padding: 10px 14px;"></textarea>
+      </div>
+
+      <div style="margin-top: 10px;">
+        <span style="font-size: 14px; font-weight: normal; color: red;">{{errorMsg}}</span>
+      </div>
+
+      <div class="o-modal__footer">
+        <div class="o-modal__footer__add">
+<!--          <div class="o-modal__footer__add">-->
+<!--            <label class="a-checkbox">-->
+<!--              <input id="reviewPostOnFeed" type="checkbox" class="a-checkbox__check">-->
+<!--              <span class="a-checkbox__label">Post on Feed</span>-->
+<!--            </label>-->
+<!--          </div>-->
+
+        </div>
+
+        <button (click)="editReview()" class="a-btn a-btn--primary">Post</button>
+
+    </div>
+
+  </div>
+  </div>
+</div>
+
+
+
+
+
+<!--delete review new modal-->
+<!--not using-->
+<div class="o-modal" id="deleteReview">
+  <div class="o-modal__content">
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header">
+        <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('deleteReview')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+      </div>
+      <h3 class="t1 ts-dark">Delete Review!</h3>
+      <span>
+        <h4>This action will permanantly delete the review on <b>{{editUsername}} </b></h4>
+        <h4>Are You Sure???</h4>
+      </span>
+      <div class="o-modal__footer">
+        <button class="a-btn a-btn--trinity u-mr" (click)="hideModal('deleteReview')">Cancel</button>
+        <button class="a-btn a-btn--primary" (click)="onPostDelete('')">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--New View Reviews Implementation-->
+<div *ngIf="showReviews">
+  <div class=" profile-summary-header review-header">
+    <p class="c-pax-details__header u-mb0 u-mt0">Reviews</p>
+    <button class="a-btn a-btn--primary" *ngIf="showAddReview" (click)="showSaveQuoteModal('reviewProfileModal')">
+      Review {{employeeFirstName}}
+    </button>
+  </div>
+  <div class="c-profile-reviews">
+    <div *ngIf="showReviews" class="c-profile-reviews__wrapper review-section__wrapper">
+
+      <div class="c-profile-reviews__main">
+
+        <div
+          *ngIf="componentPermission.includes('ProfileReceivedReviews')"
+          class="c-profile-reviews__container" style="padding: 0;">
+          <div class="c-profile-reviews__title" style="padding: 16px 20px;">
+            <div class="c-profile-reviews__text" style="font-weight: 600; margin-right: 4px;">Received</div>
+            <div class="c-profile-reviews__count">({{receivedReviewsCount}})</div>
+          </div>
+          <div *ngIf="receivedDataLoaded"  style="padding: 0 16px">
+
+            <div *ngFor="let review of receivedReviewList">
+              <app-review-card
+                (employeeIdToRedirectEvent)="profileRedirect($event.employeeId, $event.postedAs, $event.postedPageObj)"
+                (reviewEditEvent)="onEditReviewClick($event.reviewTopic, $event.reviewComment, $event.reviewId, $event.reviewStarRating, $event.reviewEmpName, $event.reviewEmpNo, $event)"
+                (reviewLikeEvent)="onLikeReview($event.reviewId, $event.likedOrNot)"
+                (reviewDeleteEvent) = "onPostDelete($event.reviewId)"
+                [reviewData]="review"></app-review-card>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="c-profile-reviews__main">
+        <div
+          *ngIf="componentPermission.includes('ProfileGivenReviews')"
+          class="c-profile-reviews__container" style="padding: 0px;">
+          <div class="c-profile-reviews__title" style="padding: 16px 20px;">
+            <div class="c-profile-reviews__text" style="font-weight: 600; margin-right: 4px;">Given</div>
+            <div class="c-profile-reviews__count">({{givenReviewsCount}})</div>
+          </div>
+          <div *ngIf="receivedDataLoaded" style="padding: 0px 16px">
+
+            <div *ngFor="let givenreview of givenReviewList">
+              <app-review-card
+                (employeeIdToRedirectEvent)="profileRedirect($event.employeeId, $event.postedAs, $event.postedPageObj)"
+                (reviewEditEvent)="onEditReviewClick($event.reviewTopic, $event.reviewComment, $event.reviewId, $event.reviewStarRating, $event.reviewEmpName, $event.reviewEmpNo, $event)"
+                (reviewLikeEvent)="onLikeReview($event.reviewId, $event.likedOrNot)"
+                [reviewData]="givenreview"></app-review-card>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="c-timeline-card" id="profileTimelineCard" *ngIf="timelineData!=null">
+  <div class="c-timeline-card__header">
+    <div class="c-timeline-card__date">
+      <div class="c-timeline-card__lbl">
+        {{dayOfWeek}}
+      </div>
+      <div class="c-timeline-card__lbl c-timeline-card__lbl--secondary">
+        {{mothDay}}
+      </div>
+      <div class="c-timeline-card__lbl">
+        {{month}}
+      </div>
+    </div>
+    <div class="c-timeline-card__media">
+      <img class="c-timeline-card__img" alt="Achievement" src="{{instanceImage}}">
+    </div>
+  </div>
+
+  <div class="c-timeline-card__content">
+    {{instanceTitle}}
+  </div>
+  <div class="c-timeline-card__content">
+    {{description}}
+  </div>
+
+  <div class="c-timeline-card__footer">
+    <div class="c-timeline-card__details">
+
+    </div>
+    <div *ngIf="showEdit && group === 'company' && instanceId !== 0" class="c-timeline-card__edit">
+      <button class="a-link-btn c-timeline-card__btn" (click)="emitId(instanceId)" style="margin-right: 5px">
+        <svg class="a-icon">
+          <use xlink:href="#edit"></use>
+        </svg>
+      </button>
+      <button class="a-link-btn c-timeline-card__btn" (click)="onTimelinePostDelete()">
+        <svg class="a-link-btn a-icon c-pax-details__block-delete-icon">
+          <use xlink:href="#bin"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

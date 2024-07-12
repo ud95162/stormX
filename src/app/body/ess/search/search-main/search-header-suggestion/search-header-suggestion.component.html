@@ -1,0 +1,22 @@
+<div *ngIf="isDesktop">
+  <div class="col-sm-12" style="margin-top: 25px; margin-bottom: 20px; padding-right: 0; padding-left: 0;">
+    <div (click)="searchSuggestion(suggestion)" *ngFor="let suggestion of searchSuggestionList"
+         class="w3-panel w3-card col-sm-2 suggestionCard" style="margin-right: 10px; cursor: pointer">
+      {{suggestion}}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isMobile || isTablet">
+  <table style="margin-top: 15px;" width="100%">
+    <tr>
+      <td *ngFor="let suggestion of searchSuggestionList" style="padding: 0 5px;" width="33%">
+        <div (click)="searchSuggestion(suggestion)"
+             class="w3-panel w3-card suggestionCard"
+             style="padding: 5px !important; height: 40px; cursor: pointer; width: 103px;">
+          {{suggestion}}
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

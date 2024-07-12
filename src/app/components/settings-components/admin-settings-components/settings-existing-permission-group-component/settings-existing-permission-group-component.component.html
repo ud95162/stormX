@@ -1,0 +1,96 @@
+<!--new implementation-->
+<div class="o-modal" id="deletePermissionGroupModal">
+
+  <div class="o-modal__content-sm edit-personal-details">
+
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header header-line__bottom">
+        <h3 class="o-modal__inner-header-title ">
+          <svg class="a-icon u-mr m-failed-icon">
+            <use xlink:href="#bin"></use>
+          </svg>
+          Delete</h3>
+        <button class="a-btn a-btn--link o-modal__inner-close o-modal__inner-close-sm "
+                (click)="hideModal('deletePermissionGroupModal')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+        <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm"
+                (click)="hideModal('deletePermissionGroupModal')">
+          <svg class="a-icon u-mr ">
+            <use xlink:href="#previous"></use>
+          </svg>
+          Back
+        </button>
+      </div>
+
+      <div class="o-modal-review__wraper">
+        <h5>By deleting, this will no longer available on this system. </h5>
+
+
+      </div>
+      <h5 class="o-modal-text-failed">Are you sure ..?</h5>
+
+    </div>
+
+    <div class="o-modal__footer o-modal__footer-sm">
+      <div class="o-modal__footer__add">
+        <button class="a-btn a-btn--primary" (click)="hideModal('deletePermissionGroupModal')">Cancel</button>
+      </div>
+
+      <button class="a-btn a-btn--primary a-btn--hide" (click)="deletePermissionGroup()">Delete</button>
+    </div>
+
+  </div>
+</div>
+
+<!---input field-->
+<div class="welfare-header-input__wraper" *ngIf="showExistingPermissionGroups">
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <span class="m-form-field__pre">
+                    <svg class="a-icon m-form-field__pre-icon">
+                    <use xlink:href="#search"></use>
+                </svg>
+                </span>
+      <input class="m-form-field__input" id="f-name" type="text" minlength="0" maxlength="524288"
+             placeholder="Search group" value="" [(ngModel)]="searchTerm">
+    </div>
+  </div>
+</div>
+
+<!--group list--->
+
+<div class="permission-setting__list-wrapper" *ngIf="showExistingPermissionGroups">
+
+  <div class="c-designnation__roles">
+    <div class="c-accordion-section" *ngFor="let permissionGroup of existingPermissionGroups | permissionGroupFilterPipe: searchTerm; let i = index">
+      <div class="c-accordion-section__top">
+        <div class="c-accordion-section__header c-accordion-section__header--top">
+          <h2 class="c-accordion-section__header-title">{{permissionGroup.permissionGroup}}</h2>
+          <p class="c-accordion-section__header-para">{{permissionGroup.description}}</p>
+        </div>
+        <div class="c-accordion-section__icons">
+          <div class="c-accordion-section__icons-edit" (click)="setRecordsEditPermissionGroup(permissionGroup.permissionGroup)">
+            <svg class="a-link-btn a-icon c-accordion-section__icons-edit-icon">
+              <use xlink:href="#edit"></use>
+            </svg>
+          </div>
+          <div class="c-accordion-section__icons-collapse" (click)="onClickShowHideGroup(i)">
+            <svg class="a-link-btn a-icon c-accordion-section__icons-collapse-icon">
+              <use xlink:href="#pointer-down-circle" id="icon_direction_{{i}}"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="permission-setting-body" id="groupList_{{i}}" style="display: none">
+        <ul class="permission-setting-body__list" *ngIf="permissionGroup.grantedEmployeeGroups.length > 0">
+          <li class="permission-setting-body-item" *ngFor="let userGroup of permissionGroup.grantedEmployeeGroups">
+            {{userGroup}}</li>
+        </ul>
+        <a class="permission-setting-body__delete" (click)="onClickDeletePermissionGroup(permissionGroup)">Delete this group</a>
+      </div>
+    </div>
+  </div>
+</div>

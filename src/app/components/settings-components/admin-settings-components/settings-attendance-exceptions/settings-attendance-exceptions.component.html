@@ -1,0 +1,82 @@
+<div class="">
+
+      <div class="route-settings__header">
+        <h2 class="c-define-designation__text">Attendance Exceptions</h2>
+        <button class="a-btn a-btn--primary" (click)="showModal('createAttendanceException')">
+          <svg class="a-icon u-mr-">
+            <use xlink:href="#plus"></use>
+          </svg>
+          Add New Attendance Exception
+        </button>
+      </div>
+
+      <div class="reservation-table">
+        <table class="c-kriyo-deta__table " *ngIf="attendanceExceptionsLoaded" aria-describedby="route-create-table">
+          <thead class="c-kriyo-deta__table--header ">
+          <tr>
+            <th id="facilityId">Employee No</th>
+            <th id="facilityName">Email</th>
+            <th></th>
+          </tr>
+
+          </thead>
+
+          <tbody class="c-kriyo-deta__table--body" style="overflow-y: auto; height: calc(100vh - 100px)">
+          <tr *ngFor="let employee of attendanceExceptions">
+            <td class="reservation-table__row">
+              <p class="reservation-table__main">{{employee.newEmpNo}}</p>
+            </td>
+            <td class="reservation-table__row">
+              <p class="reservation-table__main">{{employee.email}}</p>
+            </td>
+            <td class="reservation-table__icons">
+              <a class="reservation-table__icons-link" (click)="deleteAttendanceException(employee)">
+                <svg class="a-icon c-global-header__nav-icon reservation-table__icons-close">
+                  <use xlink:href="#trash"></use>
+                </svg>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+<div class="o-modal route-modal" id="createAttendanceException">
+
+  <div class="o-modal__content-md">
+    <div class="o-modal__inner-header">
+      <h3 class="o-modal__inner-header-title">Create Exception</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close o-modal__inner-close-sm"
+              (click)="hideModal('createAttendanceException')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="o-modal__body">
+      <div class="m-form-field-inline" style="margin-bottom: 0">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label--medium">New Emp No</label>
+        </div>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input"  placeholder="Type here" type="text" value="" [(ngModel)]="newEmpNo">
+          </div>
+        </div>
+      </div>
+
+      <div class="o-modal__footer justify-content-end">
+        <div class="">
+          <button class="a-btn a-btn--secondary u-mr+" (click)="hideModal('createAttendanceException')">Cancel</button>
+          <button class="a-btn a-btn--primary"
+                  (click)="saveNewAttendanceException()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

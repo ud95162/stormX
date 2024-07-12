@@ -1,0 +1,57 @@
+<div style="height: 30px !important;"></div>
+
+<div class="container">
+  <div class="w3-panel w3-card">
+    <div class="col-sm-12">
+      <div style="margin-bottom: 15px !important;">
+        <div *ngIf="showUploader">
+          <image-upload (uploadFinished)="uploadFinish($event)" *ngIf="showUploader"
+                        [extensions]="['jpg','png','gif','JPEG', '.jpg']"
+                        [headers]="{Accept: '*/*'}"
+                        [maxFileSize]="uploadImageSize"
+                        [max]="1"
+                        [style]="customStyle"
+                        [url]="imageUploadUrl"
+                        buttonCaption="Browse to upload "
+                        dropBoxMessage=" or Drag and Drop to upload (max size 5MB)"></image-upload>
+        </div>
+
+        <div *ngIf="showImage" style="text-align: center">
+          <i (click)="deleteUploadedImage()" aria-hidden="true"
+             class="fa fa-times-circle-o delete-uploaded-image"></i>
+          <img src={{userimage}}
+               style="width: 150px; height: 150px; border-radius: 100px; border-color: #006eff; border-style: dotted;">
+        </div>
+      </div>
+
+      <div class="row">
+        <form>
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-12 form-group">
+                <label>Name: <span style="color: red"> *</span></label>
+                <input class="form-control" id="userName" required type="text">
+              </div>
+              <div class="col-sm-12 form-group">
+                <label>Email Address: <span style="color: red"> *</span></label>
+                <input class="form-control" id="userEmail" required type="email">
+              </div>
+              <div class="col-sm-12 form-group">
+                <label>Organization:</label>
+                <input class="form-control" id="userOrganization" type="text">
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="col-sm-12">
+              <div class="input-group" style="width: 100%">
+                <button (click)="saveuser()" class="btn btn-block save-user-button" type="button">Register</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

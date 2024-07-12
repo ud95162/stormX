@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+mat-horizontal-stepper{
+  margin: 15%;
+  margin-top: 5% !important;
+  padding: 4%;
+  padding-top: 3% !important;
+  min-height: 300px;
+
+}
+
+#itext {
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+mat-form-field{
+  min-width: 60%;
+  padding-bottom: 0px !important;
+}
+
+:host ::ng-deep .mat-form-field-wrapper{
+  margin: 0 !important;
+  padding: 0;
+}
+
+#nextButton{
+  margin-top: 10px;
+  height: 3.3em;
+  width: 8em;
+}
+
+.rating{
+  margin-left: 20px;
+  color: gold;
+}
+
+.star{
+  padding-right: 5px;
+}
+
+#ratingNext{
+  margin-left: 15px;
+}
+
+#furtherText{
+  min-width: 80%;
+  min-height: 150px;
+  margin-left: 15px;
+}
+
+#finishDiv{
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+mat-error{
+  padding:5px;
+}
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+

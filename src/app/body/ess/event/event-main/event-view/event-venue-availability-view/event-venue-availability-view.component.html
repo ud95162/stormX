@@ -1,0 +1,91 @@
+<div class="container">
+  <div *ngIf="isDesktop" class="col-sm-2" style="top: 30px; padding-left: 0; padding-right: 5px">
+    <app-event-view-sidebar [employeeId]="employeeId"></app-event-view-sidebar>
+  </div>
+  <div class="col-sm-10" style="top: 30px;">
+    <div>
+      <div class="w3-panel w3-card {{setCustomPaddingOnMobile(isDesktop)}}">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-6 form-group">
+                <div class="input-group">
+                <span class="input-group-addon date-time-form-span">
+                  <i aria-hidden="true" class="fa fa-calendar"></i>
+                </span>
+                  <input (change)="onChangeTimeRecords('start')" [(ngModel)]="startDateTimeToCreate"
+                         class="form-control date-time-form" id="eventStartRecords" min="{{todayDateTimeToCreate}}"
+                         type="datetime-local"
+                          max="{{maxDateTimeToCreate}}">
+                </div>
+              </div>
+              <div class="col-sm-6 form-group">
+                <div class="input-group">
+                <span class="input-group-addon date-time-form-span">
+                  <i aria-hidden="true" class="fa fa-calendar"></i>
+                </span>
+                  <input (change)="onChangeTimeRecords('end')" [(ngModel)]="endDateTimeToCreate"
+                         class="form-control date-time-form"
+                         id="eventEndRecords"
+                         min="{{startDateTimeToCreate}}"
+                         max="{{maxDateTimeToCreate}}"
+                         type="datetime-local"
+                         />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div *ngIf="showForm" class="col-sm-9 form-group">
+                <select class="form-control date-time-form" id="eventVenueToCheck">
+                  <option *ngFor="let eventVenue of eventPreData.venueList">
+                    {{eventVenue.name}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-sm-3 form-group">
+                <button (click)="checkAvailability()" *ngIf="showCheckAvailabilityBtn"
+                        class="btn check-availability-button">Check Availability
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <p class="error-message" id="errorMessage">{{validationError}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="showNoResults" style="text-align: center">
+        <img src="assets/image/bad_face.svg">
+        <h4 style="color: #838383">No Locations available!</h4>
+      </div>
+
+      <div *ngIf="dataLoading" style="text-align: center; margin-top: 30px">
+        <img class="loadingSvg" src="assets/image/loading/search-loading-bounce.svg">
+      </div>
+
+      <div *ngIf="showLocations">
+        <hr>
+        <div *ngIf="!searchedLocationData.timeAvailability"
+             class="location-warning-message-div location-warning-message-div-false">
+          {{locationToCheck}} is not available at the Given time.
+        </div>
+        <div *ngIf="searchedLocationData.timeAvailability"
+             class="location-warning-message-div location-warning-message-div-true">
+          {{locationToCheck}} is available at the Given time.
+        </div>
+
+        <div style="margin-bottom: 10px">
+          <span *ngFor="let suggestionType of locationSuggestionTypes" class="event-type-span">
+            <i aria-hidden="true" class="fa fa-circle {{suggestionType.key}}"></i> {{suggestionType.name}}
+          </span>
+        </div>
+
+        <div *ngFor="let location of searchedLocationData.suggestions">
+          <app-event-available-slot-card [suggestedLocation]="location"></app-event-available-slot-card>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

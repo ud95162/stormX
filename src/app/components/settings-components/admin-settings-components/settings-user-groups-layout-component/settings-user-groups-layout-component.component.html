@@ -1,0 +1,375 @@
+<!--<button class="btn header-line-button pull-right" data-target="#saveUserGroup" data-toggle="modal"-->
+<!--        id="openUserGroupOpenWizard"-->
+<!--        type="button">Create User Group-->
+<!--</button>-->
+
+<!--<div class="modal fade" id="saveUserGroup" role="dialog">-->
+<!--  <div class="modal-dialog">-->
+
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <button class="close" data-dismiss="modal" id="closeUserGroupOpenWizard" type="button">&times;</button>-->
+<!--        <h4 class="modal-title title-header-h4">-->
+<!--          <span *ngIf="!showEdit">Save</span><span *ngIf="!showEdit">Edit</span> User Group-->
+<!--        </h4>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <div>-->
+<!--          <div>-->
+<!--            <div class="permission-group-list-container">-->
+<!--              <h5 class="permission-groups-list-title-h5">All Users</h5>-->
+<!--              <div #allUsersListId="cdkDropList"-->
+<!--                   (cdkDropListDropped)="dropUpdatePermissionGroups($event)"-->
+<!--                   [cdkDropListConnectedTo]="[groupUsersListId]"-->
+<!--                   [cdkDropListData]="allUsersList"-->
+<!--                   cdkDropList-->
+<!--                   class="permission-group-list-div">-->
+<!--                <div *ngIf="showAllUsersList" class="scrollbar" id="style-1">-->
+<!--                  <div class="force-overflow">-->
+<!--                    <div *ngFor="let allUser of allUsersList" cdkDrag-->
+<!--                         class="permission-group-item permission-group-item-other">{{allUser.name}}</div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              <div class="row">-->
+<!--                <div class="col-sm-12">-->
+<!--                  <div class="input-group stylish-input-group custom-search-input-div">-->
+<!--                    <input (keypress)="inputKeyPress($event)" [(ngModel)]="addedUser"-->
+<!--                           class="form-control custom-search-input"-->
+<!--                           id="tagInput" list="tagKeys" placeholder="Search Users" type="text">-->
+<!--                    <datalist id="tagKeys">-->
+<!--                      <option *ngFor="let allUser of allUsersList" value={{allUser.name}}>-->
+<!--                    </datalist>-->
+<!--                    <span class="input-group-addon input-group-addon-stylish">-->
+<!--                    <button (click)="addUsers()" id="tagBtn" type="button">-->
+<!--                      <i aria-hidden="true" class="fa fa-users"></i>-->
+<!--                    </button>-->
+<!--                  </span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--            </div>-->
+
+<!--            <div class="permission-group-list-container">-->
+<!--              <h5 class="permission-groups-list-title-h5">Group Users</h5>-->
+<!--              <div #groupUsersListId="cdkDropList"-->
+<!--                   (cdkDropListDropped)="dropUpdatePermissionGroups($event)"-->
+<!--                   [cdkDropListConnectedTo]="[allUsersListId]"-->
+<!--                   [cdkDropListData]="groupUsersList"-->
+<!--                   cdkDropList-->
+<!--                   class="permission-group-list-div">-->
+<!--                <div *ngIf="showGroupUsersList" class="scrollbar" id="style-1">-->
+<!--                  <div class="force-overflow">-->
+<!--                    <div *ngFor="let groupUser of groupUsersList" cdkDrag-->
+<!--                         class="permission-group-item permission-group-item-assigned">{{groupUser.name}}</div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="custom-search-input-div">-->
+<!--            <div class="well custom-well">-->
+<!--              <form>-->
+<!--                <div>-->
+<!--                  <div class="row no-margin">-->
+<!--                    <div class="col-sm-6 form-group">-->
+<!--                      <input [(ngModel)]="groupDetails.groupName" class="form-control group-name-form"-->
+<!--                             id="userGroupName"-->
+<!--                             name="userGroupName" placeholder="Group Name" required type="text">-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-6 form-group">-->
+<!--                      <select *ngIf="showExistingUserGroupsList" [(ngModel)]="groupDetails.superGroupName"-->
+<!--                              class="form-control form-control-select-graph" id="superUserGroup" name="superUserGroup"-->
+<!--                              title="Super User Group">-->
+<!--                        <option></option>-->
+<!--                        <option-->
+<!--                          *ngFor="let groupName of existingUserGroupsObj.customUserGroups">{{groupName.groupName}}</option>-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="row no-margin">-->
+<!--                    <div class="col-sm-6 form-group">-->
+<!--                      <div class="chip-div">-->
+<!--                        <div (click)="changeGroupType(gType)" *ngFor="let gType of groupTypes"-->
+<!--                             class="chip-custom {{setGroupType(gType)}}">-->
+<!--                          {{gType}}-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-sm-6 form-group">-->
+<!--                      <label class="checkbox-inline">-->
+<!--                        <input [(ngModel)]="groupDetails.permissionsGrantable" class="permission-grant-checkbox"-->
+<!--                               id="permissionGrant"-->
+<!--                               name="permissionGrant" type="checkbox">-->
+<!--                        <h6 class="permission-grant-h6">Allow Permissions</h6>-->
+<!--                      </label>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </form>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--        <p class="permission-group-update-warning">* Group creating user will be added to the group automatically.</p>-->
+
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <div class="row">-->
+<!--          <div class="col-sm-12 no-padding">-->
+<!--            <div class="col-sm-8">-->
+<!--              <div class="pull-left">-->
+<!--                <img *ngIf="showSavingLoad" src="assets/image/loading/spinner-loading.svg"-->
+<!--                     style="height: 30px;">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-sm-4">-->
+<!--              <button (click)="saveUserGroup()" *ngIf="!showEdit" class="btn header-create-button pull-right"-->
+<!--                      type="button">-->
+<!--                Save Group-->
+<!--              </button>-->
+<!--              <button (click)="editUserGroup()" *ngIf="showEdit" class="btn header-create-button pull-right"-->
+<!--                      type="button">-->
+<!--                Update Group-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<div class="w3-panel w3-card top-card-class-custom">-->
+<!--  <div *ngIf="showExistingUserGroupsList" class="card-containing-div">-->
+<!--    <div *ngFor="let existingUserGroup of existingUserGroupsList" class="col-sm-12">-->
+<!--      <div *ngIf="existingUserGroup.data.length > 0">-->
+<!--        <h4 class="group-type-title-h4">{{existingUserGroup.type}}</h4>-->
+
+<!--        <div *ngFor="let userGroup of existingUserGroup.data" class="col-sm-4">-->
+<!--          <div class="w3-panel w3-card">-->
+<!--            <diV class="header-title-div">-->
+<!--              <h5 class="card-title-h5">{{userGroup.groupName}}-->
+<!--                <button (click)="clickOnEditButton(userGroup)" *ngIf="userGroup.groupTypeObj.editable"-->
+<!--                        class="btn btn-link pull-right edit-project-button" type="button">-->
+<!--                  <i aria-hidden="true" class="fa fa-pencil"></i></button>-->
+<!--              </h5>-->
+
+<!--              <h6 *ngIf="userGroup.superEmployeeGroup !== null" class="card-super-user-h6">Super User Group-->
+<!--                : {{userGroup.superEmployeeGroup.groupName}}</h6>-->
+<!--            </diV>-->
+<!--            <div class="card-content-div">-->
+<!--              <div class="scrollbar" id="style-1">-->
+<!--                <div class="force-overflow">-->
+<!--                  <div *ngFor="let user of userGroup.groupMemberInfos" class="media">-->
+<!--                    <div class="media-left">-->
+<!--                      <img (click)="profileRedirect(user.empNo)" class="media-object img-circle user-avatar-image"-->
+<!--                           src="{{user.image}}">-->
+<!--                    </div>-->
+<!--                    <div class="media-body">-->
+<!--                      <h4 class="user-name-h4">{{user.name}}</h4>-->
+<!--                      <h6 class="user-designation-h6">{{user.designation}}</h6>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--new implementation---------------------------------------------------------------------------------------->
+<div class="o-modal settings-modal" id="saveUserGroup">
+
+  <div class="o-modal__content">
+
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header">
+        <h3 class="o-modal__inner-header-title">User Group</h3>
+        <button class="a-btn a-btn--link" (click)="hideModal('saveUserGroup')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="o-modal__content-section">
+<!--        search new-->
+        <div class="m-form-field user-group-modal__search">
+          <div class="m-form-field__field">
+                           <span class="m-form-field__pre">
+                                <svg class="a-icon user-group-modal__search-icon">
+                                    <use xlink:href="#search"></use>
+                                </svg>
+                            </span>
+            <input class="m-form-field__input" type="text" minlength="0"
+                   maxlength="524288" placeholder="Search" value="" (keyup)="inputKeyPress($event)" list="tagKeys" [(ngModel)]="addedUser">
+            <div class="m-search-results" *ngIf="filterValuesLoaded">
+              <ul class="m-search-results__lists" id="tagKeys">
+                <li class="m-search-results__items" *ngFor="let allUser of filteredEmployeeList" (click)="addUsers(allUser.name)" id="tagBtn">{{allUser.name}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+<!--        search end-->
+
+        <div class="user-group-modal__users" *ngIf="showAllUsersList">
+          <div class="user-group-modal__box" #allUsersListId="cdkDropList"
+               (cdkDropListDropped)="dropUpdatePermissionGroups($event)"
+               [cdkDropListConnectedTo]="[groupUsersListId]"
+               [cdkDropListData]="allUsersList"
+               cdkDropList>
+            <h3 class="user-group-modal__box-title">All Users</h3>
+            <ul class="user-group-modal__box-list">
+              <li class="user-group-modal__box-item" *ngFor="let allUser of allUsersList" cdkDrag style="cursor: pointer">
+              <h3 class="user-group-modal__box-item-name">{{allUser.name}}</h3>
+                <svg class="a-icon o-modal__close-icon user-group-modal__box-item-icon">
+                  <use xlink:href="#drag"></use>
+                </svg>
+              </li>
+            </ul>
+          </div>
+          <div class="permission-grants-modal__box pg-drag-section" #groupUsersListId="cdkDropList"
+               (cdkDropListDropped)="dropUpdatePermissionGroups($event)"
+               [cdkDropListConnectedTo]="[allUsersListId]"
+               [cdkDropListData]="groupUsersList"
+               cdkDropList>
+            <h3 class="user-group-modal__box-title">Group Users</h3>
+            <ul class="user-group-modal__box-list" *ngIf="showGroupUsersList">
+              <li class="user-group-modal__box-item" *ngFor="let groupUser of groupUsersList" cdkDrag>
+                <h3 class="user-group-modal__box-item-name">{{groupUser.name}}</h3>
+                <svg class="a-icon o-modal__close-icon user-group-modal__box-item-icon">
+                  <use xlink:href="#drag"></use>
+                </svg>
+            </ul>
+          </div>
+        </div>
+
+        <hr class="user-group-modal__hr">
+
+        <div class="user-group-modal-bottom">
+          <div class="user-group-modal__left-side">
+            <div class="m-form-field">
+              <div class="m-form-field__field">
+                <div class="m-form-field__field-item">
+                  <input class="m-form-field__input" id="userGroupName" type="text" minlength="0" name="userGroupName"
+                         maxlength="524288" placeholder="Group Name" value="" [(ngModel)]="groupDetails.groupName">
+                </div>
+              </div>
+              <span class="m-form-field__error">error</span>
+            </div>
+            <div class="user-group-modal__selector">
+              <a class="user-group-modal__item {{setGroupType(gType)}}"
+                 (click)="changeGroupType(gType)" *ngFor="let gType of groupTypes">{{gType}}</a>
+            </div>
+          </div>
+          <div class="user-group-modal__right-side">
+            <div class="m-form-field">
+              <div class="m-form-field__field">
+                <select class="m-form-field__select" *ngIf="showExistingUserGroupsList"
+                        [(ngModel)]="groupDetails.superGroupName" id="superUserGroup" name="superUserGroup"
+                        title="Super User Group">
+                  <option value="{{groupName.groupName}}"
+                    *ngFor="let groupName of existingUserGroupsObj.customUserGroups">{{groupName.groupName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="user-group-modal-permission">
+              <label class="a-checkbox user-group-modal-permission__checkbox">
+                <input type="checkbox" class="a-checkbox__check" [(ngModel)]="groupDetails.permissionsGrantable"
+                       id="permissionGrant" name="permissionGrant">
+                <span class="a-checkbox__label user-group-modal-permission__checkbox-label">Allow Permission</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="user-group-modal-reminder">
+          <ul class="user-group-modal-reminder__list">
+            <li class="user-group-modal-reminder__item">Group creating user will be added to the group automatically
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="o-modal__footer">
+        <button class="a-btn o-modal__button o-modal__button--primary" (click)="saveUserGroup()" *ngIf="!showEdit">Save Group</button>
+        <button class="a-btn o-modal__button o-modal__button--primary" (click)="editUserGroup()" *ngIf="showEdit">Update Group</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!--permission grant start-->
+<div class="user-group-settings-content">
+  <div class="user-group-settings-content__top-section">
+    <div class="m-form-field user-group-settings-content__top-section-search">
+      <div class="m-form-field__field">
+                           <span class="m-form-field__pre">
+                                <svg class="a-icon user-group-settings-content__top-section-search-icon">
+                                    <use xlink:href="#search"></use>
+                                </svg>
+                            </span>
+        <input class="m-form-field__input" type="text" minlength="0"
+               maxlength="524288" placeholder="Search" value="" (keyup)="applyFilterToGroups($event)">
+      </div>
+    </div>
+    <div class="user-group-settings-content__button">
+      <button class="user-group-settings-content__button-add" (click)="showSaveQuoteModal('saveUserGroup')">
+        <svg class="a-icon user-group-settings-content__button-icon">
+          <use xlink:href="#plus"></use>
+        </svg>
+        Create New User Group
+      </button>
+    </div>
+  </div>
+  <div  *ngIf="showExistingUserGroupsList">
+    <div *ngFor="let existingUserGroup of existingUserGroupsList" class="user-group-settings-content__wrapper">
+      <div *ngIf="existingUserGroup.data.length > 0" >
+        <h2 class="user-group-settings-content__wrapper-header">{{existingUserGroup.type}}</h2>
+        <div class="user-group-settings-content__details">
+          <div class="user-group-settings-content__card" *ngFor="let userGroup of existingUserGroup.data">
+            <div class="user-group-settings-content__header">
+              <div class="user-group-settings-content__title">
+                <h3 class="user-group-settings-content__title-name">{{userGroup.groupName}}</h3>
+                <p class="user-group-settings-content__title-group" *ngIf="userGroup.superEmployeeGroup !== null">
+                  Super User Group : {{userGroup.superEmployeeGroup.groupName}}</p>
+              </div>
+              <svg class="a-icon user-group-settings-content__header-icon" (click)="clickOnEditButton(userGroup)"
+                   *ngIf="userGroup.groupTypeObj.editable">
+                <use xlink:href="#edit"></use>
+              </svg>
+            </div>
+            <div class="user-group-settings-content__body">
+              <ul class="user-group-settings-content__body-list">
+                <li class="user-group-settings-content__body-item" *ngFor="let user of userGroup.groupMemberInfos">
+                  <img src="{{user.image}}" alt="user image" class="user-group-settings-content__body-item-img"
+                       (click)="profileRedirect(user.empNo)">
+                  <div class="user-group-settings-content__body-item-group">
+                    <h2 class="user-group-settings-content__body-item-name">{{user.name}}</h2>
+                    <p class="user-group-settings-content__body-item-position">{{user.designation}}</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--permission grant end-->

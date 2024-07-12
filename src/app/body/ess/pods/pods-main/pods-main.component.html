@@ -1,0 +1,242 @@
+
+<body class="l-page" *ngIf="generalOps.checkUserHavePermissionForSection('UserOfMeetingPods')">
+<div class="meeting-pod" style="padding: 30px 40px;">
+  <div class="meeting-pod__header" style="margin-bottom: 24px;">
+    <div class="bay-details" *ngIf="venueDetailsLoaded">
+      <h1 class="bay-details__title" style="margin-top: 0; margin-bottom: 16px;">{{ loggedVenueDetails.name }}</h1>
+      <div class="bay-details-features">
+        <div class="bay-details-features__group">
+          <svg class="a-icon bay-details-features__icon">
+            <use xlink:href="#m-users"></use>
+          </svg>
+          <svg class="a-icon bay-details-features__icon--sm">
+            <use xlink:href="#m-close"></use>
+          </svg>
+          <span class="bay-details-features__text">{{ loggedVenueDetails.capacity }}</span>
+        </div>
+        <div class="bay-details-features__group" *ngIf="checkVenueFacility('Wifi')">
+          <svg class="a-icon bay-details-features__icon">
+            <use xlink:href="#m-wifi"></use>
+          </svg>
+        </div>
+        <div class="bay-details-features__group"  *ngIf="checkVenueFacility('TV')">
+          <svg class="a-icon bay-details-features__icon">
+            <use xlink:href="#m-tv"></use>
+          </svg>
+        </div>
+        <div class="bay-details-features__group"  *ngIf="checkVenueFacility('Calling')">
+          <svg class="a-icon bay-details-features__icon">
+            <use xlink:href="#m-phone"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <button class="meeting-pod__button" (click)="openSidebar()">Today Schedule</button>
+  </div>
+
+  <div class="meeting-pod-grid" *ngIf="eventDetailsDataLoaded && currentAndNextEventDetails.length > 0">
+    <div class="meeting-list" >
+      <div class="meeting-list__item meeting-list__item--active u-mb2+" *ngIf="currentAndNextEventDetails[0].startTime !== null">
+        <div style="width: 100%">
+          <span class="meeting-list__item-chip meeting-list__item-chip--current meeting-bottom-16">Current Meeting</span>
+          <h1 class="meeting-list__item-title" style="margin-top: 0;">{{ currentAndNextEventDetails[0].eventName }}</h1>
+          <div class="meeting-details meeting-top-12">
+            <div class="meeting-details-item">
+              <svg class="a-icon meeting-details-item__icon meeting-details-item__icon--active">
+                <use xlink:href="#m-clock"></use>
+              </svg>
+              <p class="meeting-details-item__time"><span>{{ currentAndNextEventDetails[0].startTime }}</span> - <span>{{ currentAndNextEventDetails[0].endTime }}</span></p>
+            </div>
+            <div class="meeting-details-item__line"></div>
+            <div class="meeting-details-item">
+              <svg class="a-icon meeting-details-item__icon meeting-details-item__icon--active">
+                <use xlink:href="#m-user"></use>
+              </svg>
+              <p class="meeting-details-item__name">{{ currentAndNextEventDetails[0].organizer }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="currentMeetingRemainingTimeGraph" style="width: 160px; height: 160px">
+        </div>
+      </div>
+
+      <div class="meeting-list__item meeting-list__item--next" *ngIf="currentAndNextEventDetails[0].startTime === null && currentAndNextEventDetails[1].startTime !== null ">
+        <div style="width: 100%;">
+          <h1 class="meeting-list__item-title" style="margin-top: 0;">Available</h1>
+          <div class="meeting-details meeting-top-12">
+            <div class="meeting-details-item">
+              <svg class="a-icon meeting-details-item__icon">
+                <use xlink:href="#m-clock"></use>
+              </svg>
+              <p class="meeting-details-item__time"><span>{{ currentTime }}{{currentTimeHalf}}</span> - <span> {{currentAndNextEventDetails[1].startTime}}</span></p>
+
+            </div>
+          </div>
+        </div>
+
+        <div id="currentMeetingRemainingTimeGraph" style="width: 160px; height: 160px">
+        </div>
+      </div>
+
+
+
+      <div class="meeting-list__item" *ngIf="currentAndNextEventDetails[1].startTime !== null">
+        <div style="width: 100%">
+          <span class="meeting-list__item-chip meeting-list__item-chip--upcoming meeting-bottom-16">Upcoming Meeting</span>
+          <h1 class="meeting-list__item-title" style="margin-top: 0;">{{ currentAndNextEventDetails[1].eventName }}</h1>
+          <div class="meeting-details meeting-top-12">
+            <div class="meeting-details-item">
+              <svg class="a-icon meeting-details-item__icon">
+                <use xlink:href="#m-clock"></use>
+              </svg>
+              <p class="meeting-details-item__time"><span>{{ currentAndNextEventDetails[1].startTime }}</span> - <span>{{ currentAndNextEventDetails[1].endTime }}</span></p>
+            </div>
+            <div class="meeting-details-item__line"></div>
+            <div class="meeting-details-item">
+              <svg class="a-icon meeting-details-item__icon">
+                <use xlink:href="#m-user"></use>
+              </svg>
+              <p class="meeting-details-item__name">{{ currentAndNextEventDetails[1].organizer }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meeting-pod-grid" *ngIf="eventDetailsDataLoaded" style="align-items: flex-end;">
+    <div class="meeting-list" *ngIf="nextAvailableSlot.startTime === null">
+    </div>
+    <div class="meeting-list" *ngIf="nextAvailableSlot.startTime !== null">
+      <div class="meeting-list__item meeting-list__item--next">
+        <div style="width: 100%;">
+          <h1 class="meeting-list__item-title" *ngIf="currentAndNextEventDetails[1].startTime !== null" style="margin-top: 0;">Next Available</h1>
+          <h1 class="meeting-list__item-title" *ngIf="currentAndNextEventDetails[1].startTime === null "  style="margin-top: 0;">Available</h1>
+          <div class="meeting-details meeting-top-12">
+            <div class="meeting-details-item">
+              <svg class="a-icon meeting-details-item__icon">
+                <use xlink:href="#m-clock"></use>
+              </svg>
+              <p class="meeting-details-item__time"><span>{{ nextAvailableSlot.startTime }}</span> - <span> {{nextAvailableSlot.endTime}}</span></p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="meeting-clock">
+      <h1 class="meeting-clock__time">{{currentTime}}
+        <span class="meeting-clock__format">{{currentTimeHalf}}</span>
+      </h1>
+      <p class="meeting-clock__date">{{currentDate}}</p>
+    </div>
+  </div>
+</div>
+
+<div id="sidebar" class="meeting-schedule-sidebar "  [ngClass]="{'open': allEventsDisplay}" style="overflow-y: hidden;">
+  <div class="meeting-schedule-sidebar__header">
+    <h2 class="meeting-schedule-sidebar__header-title" style="margin-top: 0;">Today Schedule</h2>
+    <a  class="meeting-schedule-sidebar__header-icon" (click)="closeSidebar()">
+      <svg class="a-icon ">
+        <use xlink:href="#m-close"></use>
+      </svg>
+    </a>
+  </div>
+  <div class="meeting-schedule-sidebar__body" *ngIf="eventDetailsDataLoaded">
+    <div class="meeting-list">
+      <div *ngFor="let event of allEventsForDay" class="meeting-list__wrapper">
+
+        <div class="meeting-list__item meeting-list__item--active" *ngIf="event.date !== null &&
+          event.startTime === currentAndNextEventDetails[0].startTime &&
+          event.startTime !== currentAndNextEventDetails[1].startTime">
+          <div style="width: 100%">
+            <span class="meeting-list__item-chip meeting-list__item-chip--current meeting-bottom-16">Current Meeting</span>
+            <h1 class="meeting-list__item-title" style="margin-top: 0;">{{ event.eventName }}</h1>
+            <div class="meeting-details meeting-top-12">
+              <div class="meeting-details-item">
+                <svg class="a-icon meeting-details-item__icon meeting-details-item__icon--active">
+                  <use xlink:href="#m-clock"></use>
+                </svg>
+                <p class="meeting-details-item__time"><span>{{ event.startTime }}</span> - <span>{{ event.endTime }}</span></p>
+              </div>
+              <div class="meeting-details-item__line"></div>
+              <div class="meeting-details-item">
+                <svg class="a-icon meeting-details-item__icon meeting-details-item__icon--active">
+                  <use xlink:href="#m-user"></use>
+                </svg>
+                <p class="meeting-details-item__name">{{ event.organizer }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="meeting-list__item" *ngIf="event.date !== null &&
+          event.startTime !== currentAndNextEventDetails[0].startTime &&
+          event.startTime === currentAndNextEventDetails[1].startTime">
+          <div style="width: 100%">
+            <span class="meeting-list__item-chip meeting-list__item-chip--upcoming meeting-bottom-16">Upcoming Meeting</span>
+            <h1 class="meeting-list__item-title" style="margin-top: 0;">{{ event.eventName }}</h1>
+            <div class="meeting-details meeting-top-12">
+              <div class="meeting-details-item">
+                <svg class="a-icon meeting-details-item__icon">
+                  <use xlink:href="#m-clock"></use>
+                </svg>
+                <p class="meeting-details-item__time"><span>{{ event.startTime }}</span> - <span>{{ event.endTime }}</span></p>
+              </div>
+              <div class="meeting-details-item__line"></div>
+              <div class="meeting-details-item">
+                <svg class="a-icon meeting-details-item__icon">
+                  <use xlink:href="#m-user"></use>
+                </svg>
+                <p class="meeting-details-item__name">{{ event.organizer }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="meeting-list__item" *ngIf="event.date !== null &&
+          event.startTime !== currentAndNextEventDetails[0].startTime &&
+          event.startTime !== currentAndNextEventDetails[1].startTime">
+          <div style="width: 100%">
+            <h1 class="meeting-list__item-title" style="margin-top: 0;">{{ event.eventName }}</h1>
+            <div class="meeting-details meeting-top-12">
+              <div class="meeting-details-item">
+                <svg class="a-icon meeting-details-item__icon">
+                  <use xlink:href="#m-clock"></use>
+                </svg>
+                <p class="meeting-details-item__time"><span>{{ event.startTime }}</span> - <span>{{ event.endTime }}</span></p>
+              </div>
+              <div class="meeting-details-item__line"></div>
+              <div class="meeting-details-item">
+                <svg class="a-icon meeting-details-item__icon">
+                  <use xlink:href="#m-user"></use>
+                </svg>
+                <p class="meeting-details-item__name">{{ event.organizer }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="meeting-list__item meeting-list__item--next" *ngIf="event.date === null">
+          <div style="width: 100%;">
+            <h1 class="meeting-list__item-title" style="margin-top: 0;">Available</h1>
+            <div class="meeting-details meeting-top-12">
+              <div class="meeting-details-item">
+                <svg class="a-icon meeting-details-item__icon">
+                  <use xlink:href="#m-clock"></use>
+                </svg>
+                <p class="meeting-details-item__time"><span>{{ event.startTime }}</span> - <span>{{ event.endTime }}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="backdrop" class="backdrop " (click)="closeSidebar()"></div>
+
+</body>

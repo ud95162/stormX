@@ -1,0 +1,44 @@
+<div class="c-leave-dashboard__middle--wrraper">
+  <table class="c-kriyo-deta__table" *ngIf="noPayDataLoaded">
+    <thead class="c-kriyo-deta__table--header ">
+    <tr>
+      <th> Leave Type </th>
+      <th> Jan</th>
+      <th> Feb</th>
+      <th> Mar</th>
+      <th> Apr</th>
+      <th> May</th>
+      <th> Jun</th>
+      <th> Jul</th>
+      <th> Aug</th>
+      <th> Sep</th>
+      <th> Oct</th>
+      <th> Nov</th>
+      <th> Dec</th>
+      <th> Total</th>
+
+    </tr>
+
+    </thead>
+
+    <tbody class="c-kriyo-deta__table--body">
+
+    <tr>
+      <td>No Pay</td>
+      <td>{{noPayLeaveResponse.Jan}}</td>
+      <td>{{noPayLeaveResponse.Feb}}</td>
+      <td>{{noPayLeaveResponse.Mar}}</td>
+      <td>{{noPayLeaveResponse.Apr}}</td>
+      <td>{{noPayLeaveResponse.May}}</td>
+      <td>{{noPayLeaveResponse.Jun}}</td>
+      <td>{{noPayLeaveResponse.Jul}}</td>
+      <td>{{noPayLeaveResponse.Aug}}</td>
+      <td>{{noPayLeaveResponse.Sep}}</td>
+      <td>{{noPayLeaveResponse.Oct}}</td>
+      <td>{{noPayLeaveResponse.Nov}}</td>
+      <td>{{noPayLeaveResponse.Dec}}</td>
+      <td>{{noPayTotalCount}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

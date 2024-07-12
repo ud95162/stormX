@@ -1,0 +1,303 @@
+<!--new impl-->
+
+<!--main-->
+<div class="review-page__main-content" *ngIf="customAppraisalPermission.showOverallAppraisal" style="padding-bottom: 0">
+  <div class="o-tabs review-page-tabs" *ngIf="latestYear" style="padding-bottom: 0">
+    <div *ngFor="let latestPerm of latestPermissionMap | keyvalue" class="o-tabs__nav review-page-tabs__nav">
+      <a *ngIf="latestPerm.value['showSelfAppraisal'] && selectedYear === latestPerm.key"
+         class="o-tabs__nav-item review-page-tabs__nav-item " [ngClass]="{'is-active': tabName == 'selfAppraisal'}"
+         (click)="changeTabs('selfAppraisal')">
+        <svg class="a-icon review-page-tabs__nav-icon">
+          <use xlink:href="#self-appraisal"></use>
+        </svg>
+        <span class="review-page-tabs__nav-title">Self Appraisal</span>
+      </a>
+      <a *ngIf="latestPerm.value['showOverallAppraisal'] && selectedYear === latestPerm.key"
+         class="o-tabs__nav-item review-page-tabs__nav-item " [ngClass]="{'is-active': tabName == 'accomplishments'}"
+         (click)="changeTabs('accomplishments')">
+        <svg class="a-icon review-page-tabs__nav-icon">
+          <use xlink:href="#accomplishments"></use>
+        </svg>
+        <span class="review-page-tabs__nav-title">Accomplishment</span>
+      </a>
+      <a *ngIf="latestPerm.value['showGivenAppraisal'] && selectedYear === latestPerm.key && baseCriteriaTabPermission"
+         class="o-tabs__nav-item review-page-tabs__nav-item " [ngClass]="{'is-active': tabName == 'baseCriteria'}"
+         (click)="changeTabs('baseCriteria')">
+        <svg class="a-icon review-page-tabs__nav-icon">
+          <use xlink:href="#criteria"></use>
+        </svg>
+        <span class="review-page-tabs__nav-title">Base Criteria Evaluation</span>
+      </a>
+
+      <a *ngIf="latestPerm.value['showGivenAppraisal'] && selectedYear === latestPerm.key"
+         class="o-tabs__nav-item review-page-tabs__nav-item " [ngClass]="{'is-active': tabName == 'givenAppraisal'}"
+         (click)="changeTabs('givenAppraisal')">
+        <svg class="a-icon review-page-tabs__nav-icon">
+                    <use xlink:href="#line-chart"></use>
+        </svg>
+        <span class="review-page-tabs__nav-title">Competency Review</span>
+      </a>
+      <a *ngIf="latestPerm.value['showAppraisees'] && selectedYear === latestPerm.key"
+         class="o-tabs__nav-item review-page-tabs__nav-item " [ngClass]="{'is-active': tabName == 'appraisees'}"
+         (click)="changeTabs('appraisees')">
+        <svg class="a-icon review-page-tabs__nav-icon">
+                    <use xlink:href="#users"></use>
+        </svg>
+        <span class="review-page-tabs__nav-title">Appraisees</span>
+      </a>
+      <a *ngIf="latestPerm.value['showAppraisalMeetingComments'] && selectedYear === latestPerm.key"
+         class="o-tabs__nav-item review-page-tabs__nav-item " [ngClass]="{'is-active': tabName == 'meetingComments'}"
+         (click)="changeTabs('meetingComments')">
+        <svg class="a-icon review-page-tabs__nav-icon">
+                    <use xlink:href="#shake-hand"></use>
+        </svg>
+        <span class="review-page-tabs__nav-title">Appraisal Interview</span>
+      </a>
+
+    </div>
+
+<!--    <div class="col-xs-12 w3-panel w3-card" style="height: 114px"-->
+<!--         *ngIf="hideYearPanel">-->
+<!--      <div class="col-xs-3"><h5 class="selecting-year">Select Year</h5></div>-->
+<!--      <div class="col-xs-3" *ngIf="years.length > 0">-->
+<!--        <select-->
+<!--          (change)="changeYear()" [(ngModel)]="selectedYear"-->
+<!--          class="form-control pull-right attendance-admin-project-select"-->
+<!--          id="designationSchemeSelect" name="designationSchemeSelect">-->
+<!--          <option *ngFor="let year of years">{{year}}</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--      <div class="col-xs-6">-->
+<!--        <div class="col-xs-6"></div>-->
+<!--        <div class="col-xs-6">-->
+<!--          <div *ngIf="currentLocation === '#/profile/_search'" (click)="profileRedirect()" style="text-align: center;">-->
+<!--            <button-->
+<!--              class="btn leave-user-redirect-button"-->
+<!--              type="button"><i aria-hidden="true" class="fa fa-arrow-left"></i>-->
+<!--              Back to Profile-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    <div class="o-tabs__content evaluation-section__content" style="padding-bottom: 0;" *ngIf="hideYearPanel">
+      <div class="o-tabs__pane review-page-tabs__pane is-active" id="tab-b">
+        <div class="c-accomplishment__header">
+          <div class="c-accomplishment__header-back" *ngIf="currentLocation === '#/profile/_search'" (click)="profileRedirect()">
+            <svg class="a-icon header-back-icon">
+              <use xlink:href="#long-arrow--back"></use>
+            </svg>
+            <span class="c-accomplishment__header-back--text">Back to Profile</span>
+          </div>
+          <div class="c-accomplishment__header-filter">
+            <div class="m-form-field c-accomplishment__form-field">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label">Select Year</label>
+              </div>
+              <div class="m-form-field__field"  *ngIf="years.length > 0">
+                <select class="m-form-field__select" (change)="changeYear()" [(ngModel)]="selectedYear"
+                        id="designationSchemeSelect" name="designationSchemeSelect">
+                  <option *ngFor="let year of years">{{year}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="previousYear">
+      <div *ngIf="previousPermission.showSelfAppraisal && tabName === 'selfAppraisal'"
+           id="selfAppraisalTab">
+        <app-profile-appraisal-self-appraisal-form
+          [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-self-appraisal-form>
+      </div>
+      <div *ngIf="previousPermission.showOverallAppraisal && tabName === 'accomplishments'"
+           id="selfAppraisalAccomplishmentTab">
+        <app-profile-appraisal-accomplishments
+          [year]="selectedYear"
+          [employeeId]="employeeId"></app-profile-appraisal-accomplishments>
+      </div>
+      <div *ngIf="previousPermission.showGivenAppraisal && tabName === 'baseCriteria' && baseCriteriaTabPermission"
+           class="o-tabs__content review-page-tabs__content position-relative" style="padding-top: 0">
+        <app-profile-appraisal-base-criteria-eval
+          [employeeId]="employeeId" [year] = "selectedYearForBaseCriteria"></app-profile-appraisal-base-criteria-eval>
+      </div>
+      <div *ngIf="previousPermission.showGivenAppraisal && tabName === 'givenAppraisal'">
+        <app-profile-appraisal-performance-appraisal-form
+          [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-performance-appraisal-form>
+      </div>
+      <div *ngIf="previousPermission.showAppraisees && tabName === 'appraisees'">
+        <app-profile-appraisal-appraisee-list-view
+          [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-appraisee-list-view>
+      </div>
+      <div *ngIf="previousPermission.showAppraisalMeetingComments && tabName === 'meetingComments'">
+        <app-profile-appraisal-appraisal-interviews
+          [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-appraisal-interviews>
+      </div>
+
+    </div>
+
+    <div *ngIf="latestYear">
+      <div *ngFor="let latestPerm of latestPermissionMap | keyvalue">
+        <div *ngIf="selectedYear === latestPerm.key" class="o-tabs__content review-page-tabs__content">
+          <div *ngIf="latestPerm.value['showSelfAppraisal'] && tabName === 'selfAppraisal'">
+            <app-profile-appraisal-self-appraisal-form
+              [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-self-appraisal-form>
+          </div>
+          <div *ngIf="latestPerm.value['showOverallAppraisal'] && tabName === 'accomplishments'">
+            <app-profile-appraisal-accomplishments
+              [year]="selectedYear"
+              [employeeId]="employeeId"></app-profile-appraisal-accomplishments>
+          </div>
+          <div *ngIf="latestPerm.value['showGivenAppraisal'] && tabName === 'baseCriteria' && baseCriteriaTabPermission"
+               class="o-tabs__content review-page-tabs__content" style="padding-top: 0">
+            <app-profile-appraisal-base-criteria-eval
+              [employeeId]="employeeId" [year] = "selectedYearForBaseCriteria"></app-profile-appraisal-base-criteria-eval>
+          </div>
+
+          <div *ngIf="latestPerm.value['showGivenAppraisal'] && tabName === 'givenAppraisal'">
+            <app-profile-appraisal-performance-appraisal-form
+              [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-performance-appraisal-form>
+          </div>
+          <div *ngIf="latestPerm.value['showAppraisees'] && tabName === 'appraisees'">
+            <app-profile-appraisal-appraisee-list-view
+              [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-appraisee-list-view>
+          </div>
+          <div *ngIf="latestPerm.value['showAppraisalMeetingComments'] && tabName === 'meetingComments'">
+            <app-profile-appraisal-appraisal-interviews
+              [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-appraisal-interviews>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--old impl-->
+
+<!--<div class="col-sm-12 no-padding" *ngIf="customAppraisalPermission.showOverallAppraisal">-->
+
+<!--  <div class="col-xs-12 appraisal-tab-pane__wrapper" *ngIf="latestYear" role="tabpanel">-->
+<!--    <div *ngFor="let latestPerm of latestPermissionMap | keyvalue" role="tabpanel">-->
+<!--      <div *ngIf="selectedYear === latestPerm.key" role="tabpanel">-->
+<!--        <ul class="nav nav-pills" role="tablist">-->
+<!--          &lt;!&ndash;                    <li *ngIf="latestPerm.value['showGivenAppraisal']" class="nav-item active appraisal-tab-pane__item" role="presentation">&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <a data-toggle="tab" href="#latestPerformanceAppraisalTab" role="tab">&ndash;&gt;-->
+<!--          &lt;!&ndash;                            <i aria-hidden="true" class="fa fa-line-chart"></i>&nbsp;&nbsp;Performance Appraisal&ndash;&gt;-->
+<!--          &lt;!&ndash;                        </a>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    </li>&ndash;&gt;-->
+<!--          <li *ngIf="latestPerm.value['showSelfAppraisal']" class="nav-item appraisal-tab-pane__item" role="presentation">-->
+<!--            <a data-toggle="tab" href="#latestSelfAppraisalTab" role="tab">-->
+<!--              <i aria-hidden="true" class="fa fa-user"></i>&nbsp;&nbsp;Self Appraisal-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          &lt;!&ndash;              <li *ngIf="latestPerm.value.showAppraisees">&ndash;&gt;-->
+<!--          &lt;!&ndash;                    <li *ngIf="latestPerm.value['showAppraisees']" class="nav-item appraisal-tab-pane__item" role="presentation">&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <a data-toggle="tab" href="#latestAppraiseesViewTab" role="tab">&ndash;&gt;-->
+<!--          &lt;!&ndash;                            <i aria-hidden="true" class="fa fa-users"></i>&nbsp;&nbsp;Appraisees&ndash;&gt;-->
+<!--          &lt;!&ndash;                        </a>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    </li>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    <li *ngIf="latestPerm.value['showAppraisalMeetingComments']" role="presentation">&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <a data-toggle="tab" href="#latestAppraisalInterviewTab" role="tab">&ndash;&gt;-->
+<!--          &lt;!&ndash;                            <i aria-hidden="true" class="fa fa-handshake-o"></i>&nbsp;&nbsp;Appraisal Interview&ndash;&gt;-->
+<!--          &lt;!&ndash;                        </a>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    </li>&ndash;&gt;-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="div-separator">-->
+<!--  </div>-->
+
+
+<!--  &lt;!&ndash;    <div class="col-xs-12 w3-panel w3-card" style="height: 114px" *ngIf="years.length > 0">&ndash;&gt;-->
+
+<!--  &lt;!&ndash;        <div class="col-xs-3"><h5 class="selecting-year">Select Year</h5></div>&ndash;&gt;-->
+<!--  &lt;!&ndash;        <div class="col-xs-3">&ndash;&gt;-->
+<!--  &lt;!&ndash;            <select&ndash;&gt;-->
+<!--  &lt;!&ndash;                    (change)="changeYear()" [(ngModel)]="selectedYear"&ndash;&gt;-->
+<!--  &lt;!&ndash;                    class="form-control pull-right attendance-admin-project-select"&ndash;&gt;-->
+<!--  &lt;!&ndash;                    id="designationSchemeSelect" name="designationSchemeSelect">&ndash;&gt;-->
+<!--  &lt;!&ndash;                <option *ngFor="let year of years">{{year}}</option>&ndash;&gt;-->
+<!--  &lt;!&ndash;            </select>&ndash;&gt;-->
+<!--  &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;        <div class="col-xs-6">&ndash;&gt;-->
+<!--  &lt;!&ndash;            <div class="col-xs-6"></div>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <div class="col-xs-6">&ndash;&gt;-->
+
+<!--  &lt;!&ndash;                <div *ngIf="currentLocation === '#/profile/_search'" (click)="profileRedirect()" style="text-align: center;">&ndash;&gt;-->
+
+<!--  &lt;!&ndash;                    <button&ndash;&gt;-->
+<!--  &lt;!&ndash;                            class="btn leave-user-redirect-button"&ndash;&gt;-->
+<!--  &lt;!&ndash;                            type="button"><i aria-hidden="true" class="fa fa-arrow-left"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        Back to Profile&ndash;&gt;-->
+<!--  &lt;!&ndash;                    </button>&ndash;&gt;-->
+
+
+<!--  &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;            </div>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+<!--</div>-->
+
+<!--<div class="col-sm-12 no-padding" *ngIf="previousYear">-->
+<!--  &lt;!&ndash; Tab panes &ndash;&gt;-->
+<!--  <div class="tab-content">-->
+<!--    &lt;!&ndash;        <div *ngIf="previousPermission.showGivenAppraisal" class="tab-pane fade in active"&ndash;&gt;-->
+<!--    &lt;!&ndash;             id="performanceAppraisalTab">&ndash;&gt;-->
+<!--    &lt;!&ndash;            <app-profile-appraisal-performance-appraisal-form&ndash;&gt;-->
+<!--    &lt;!&ndash;                    [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-performance-appraisal-form>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--    <div *ngIf="previousPermission.showSelfAppraisal" class="tab-pane fade in" id="selfAppraisalTab">-->
+<!--      <app-profile-appraisal-self-appraisal-form-->
+<!--        [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-self-appraisal-form>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;        <div *ngIf="previousPermission.showAppraisees" class="tab-pane fade in" id="appraiseesViewTab">&ndash;&gt;-->
+<!--    &lt;!&ndash;            <app-profile-appraisal-appraisee-list-view&ndash;&gt;-->
+<!--    &lt;!&ndash;                    [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-appraisee-list-view>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <div *ngIf="previousPermission.showAppraisalMeetingComments" class="tab-pane fade in"&ndash;&gt;-->
+<!--    &lt;!&ndash;             id="appraisalInterviewTab">&ndash;&gt;-->
+<!--    &lt;!&ndash;            <app-profile-appraisal-appraisal-interviews&ndash;&gt;-->
+<!--    &lt;!&ndash;                    [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-appraisal-interviews>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--  </div>-->
+
+<!--</div>-->
+
+<!--<div class="col-sm-12 no-padding" *ngIf="latestYear">-->
+<!--  <div *ngFor="let latestPerm of latestPermissionMap | keyvalue">-->
+<!--    <div *ngIf="selectedYear === latestPerm.key">-->
+<!--      &lt;!&ndash; Tab panes &ndash;&gt;-->
+<!--      <div class="tab-content">-->
+<!--        <div *ngIf="latestPerm.value['showGivenAppraisal']" class="tab-pane fade in active"-->
+<!--             id="latestPerformanceAppraisalTab">-->
+<!--          <app-profile-appraisal-performance-appraisal-form-->
+<!--            [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-performance-appraisal-form>-->
+<!--        </div>-->
+<!--        <div *ngIf="latestPerm.value['showSelfAppraisal']" class="tab-pane fade in" id="latestSelfAppraisalTab">-->
+<!--          <app-profile-appraisal-self-appraisal-form-->
+<!--            [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-self-appraisal-form>-->
+<!--        </div>-->
+<!--        <div *ngIf="latestPerm.value['showAppraisees']" class="tab-pane fade in" id="latestAppraiseesViewTab">-->
+<!--          <app-profile-appraisal-appraisee-list-view-->
+<!--            [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-appraisee-list-view>-->
+<!--        </div>-->
+<!--        <div *ngIf="latestPerm.value['showAppraisalMeetingComments']" class="tab-pane fade in"-->
+<!--             id="latestAppraisalInterviewTab">-->
+<!--          <app-profile-appraisal-appraisal-interviews-->
+<!--            [employeeId]="employeeId" [year]="selectedYear"></app-profile-appraisal-appraisal-interviews>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</div>-->

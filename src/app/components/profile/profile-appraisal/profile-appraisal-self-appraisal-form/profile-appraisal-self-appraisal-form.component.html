@@ -1,0 +1,385 @@
+<!--<div *ngIf="showSelfAppraisalForm" id="selfAppraisalCompleteForm">-->
+<div *ngIf="previousView" id="selfAppraisalCompleteForm">
+  <div class="w3-panel w3-card">
+    <div>
+      <h4 class="title-header-h4">Evaluation Feedback</h4>
+      <div class="self-appraisal-paragraph-div">
+        <!--<p class="self-appraisal-paragraph"-->
+        <!--*ngFor="let feedback of selfAppraisalObject.selfEvaluationFeedback.text">{{feedback}}</p>-->
+        <p class="self-appraisal-paragraph">In order to facilitate the constructive discussions at the face to face
+          discussions, we would like to hear from you on the following 5 topics to help us understand the nature of your
+          work, your professional development over the last year, your insights on how you plan on improving yourself to
+          reach to the next level and any challenges you face in your journey of growth.</p>
+        <p class="self-appraisal-paragraph">Please note that this feedback is about your performance and your growth. We
+          will have a separate employee survey towards the end of February 2019 for you to give your feedback on the
+          company and cross cutting aspects as a whole.</p>
+        <p class="self-appraisal-paragraph"> The period of evaluation for which you should fill this form should be from
+          <b>April 2018 to December 2018</b>.</p>
+        <hr>
+        <div *ngIf="false" class="appraisal-disclamer-div">
+          <h5>DISCLAIMER STATEMENT</h5>
+          <p>SIGNATURE INDICATES THAT THE PERFORMANCE APPRAISAL HAS BEEN READ AND DISCUSSED WITH ME. SIGNATURE DOES NOT
+            NECESSARILY INDICATE AGREEMENT OR DISAGREEMENT WITH THE CONTENT OF THIS APPRAISAL.</p>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let commentGroup of selfAppraisalObject.feedbackList" class="col-sm-12">
+      <h4 class="title-header-h4">{{commentGroup.title.title}}</h4>
+      <textarea (focus)="increaseTextBoxSize(removeSpace(commentGroup.title.title))"
+                (keydown)="increaseTextBoxSize(removeSpace(commentGroup.title.title))"
+                [(ngModel)]="commentGroup.comment" class="form-control appraisal-question-comments-textarea"
+                [disabled]="true"
+                id="{{removeSpace(commentGroup.title.title)}}"
+                name="Positive"
+                placeholder="{{commentGroup.title.title}}"></textarea>
+    </div>
+    <div class="col-sm-12">
+      <div *ngIf="selfAppraisalObject.submissionStatus.lastUpdateTime !== null"
+           class="col-sm-12">
+        <h6
+          class="self-appraisal-form-submission-status submission-type-{{selfAppraisalObject.submissionStatus.saveType}}">
+          Last Saved <span
+          *ngIf="selfAppraisalObject.submissionStatus.saveType === 0">Draft</span> {{selfAppraisalObject.submissionStatus.lastUpdateTime}}
+        </h6>
+      </div>
+      <div *ngIf="selfAppraisalObject.viewAsMySelf" class="col-sm-12 no-padding">
+        <div class="col-sm-6 no-padding" *ngIf="false">
+          <button (click)="submitSelfAppraisalForm(0)" class="btn header-line-button" type="button">
+            Save Draft
+          </button>
+        </div>
+        <div class="col-sm-6 no-padding" *ngIf="false">
+          <button (click)="submitSelfAppraisalForm(1)" class="btn header-create-button pull-right" type="button">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<div class="col-sm-12 no-padding" style="text-align: center; top: 25%;">-->
+<!--<img src="assets/image/bad_face.svg">-->
+<!--<h4 style="color: #838383">No data available</h4>-->
+<!--</div>-->
+
+
+<!--Appraisal Saving Comment-->
+<div>
+  <button
+    class="btn btn-info hide" data-target="#notificationPopupForSavingAppraiserComment" data-toggle="modal"
+    id="openPersonalAppraiserCommentNotificationPopup"
+    type="button">Open Modal
+  </button>
+  <!--Modal-->
+  <div class="modal fade" id="notificationPopupForSavingAppraiserComment" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            class="close" data-dismiss="modal" id="closePersonalAppraiserCommentNotificationPopup"
+            type="button">&times;
+          </button>
+          <h4 class="modal-title title-header-h4">Notification</h4>
+        </div>
+        <div class="modal-body">
+          <h5 class="notification-body">
+            {{commentSavingResponse?.message}}
+          </h5>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--Appraisal pillar Comment On Notification Popup-->
+<div>
+  <button
+    class="btn btn-info hide" data-target="#notificationPopupForSavingAppraisalPillarCommentData" data-toggle="modal"
+    id="openPersonalAppraisalDatEditingNotificationPillarCommentPopup"
+    type="button">Open Modal
+  </button>
+  <!--Modal-->
+  <div class="modal fade" id="notificationPopupForSavingAppraisalPillarCommentData" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            class="close" data-dismiss="modal" id="closePersonalAppraisalDatEditingNotificationPillarCommentPopup"
+            type="button">&times;
+          </button>
+          <h4 class="modal-title title-header-h4">Notification</h4>
+        </div>
+        <div class="modal-body">
+          <h5 class="notification-body">
+            {{pillarCommentSavingResponse?.message}}
+          </h5>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="latestView">
+  <div>
+
+    <div class="div-separator-small"></div>
+
+    <div class="w3-panel w3-card" *ngIf="showNoDataError || showLoading">
+
+      <div class="row">
+
+        <div class="col-sm-3">
+
+        </div>
+
+        <div class="col-sm-9" style="padding-right: 320px; padding-left: 50px;">
+
+          <div *ngIf="showLoading" class="col-sm-12 no-padding" style="text-align: center; top: 25%;">
+            <img src="assets/image/loading/graph-loading.svg" style="height: 120px !important;">
+          </div>
+
+          <div *ngIf="showNoDataError" class="col-sm-12 no-padding" style="text-align: center; top: 25%;">
+            <img src="assets/image/bad_face.svg">
+            <h4 style="color: #838383">No data available</h4>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="false">
+      <div class="w3-panel w3-card" *ngIf="showEditProfile">
+
+        <div class="row">
+
+          <div class="col-sm-2" style="padding-left: 19px;">
+            <div>
+              <img
+                class="media-object appraisal-employee-header-square-image"
+                src="{{personalApprisalData.employeeInfo.image}}">
+            </div>
+          </div>
+
+          <div class="col-sm-7" style="padding-left: 0px;">
+            <div>
+              <h5
+                class="search-header-name"
+                title="{{personalApprisalData.employeeInfo.name}}">{{personalApprisalData.employeeInfo.name}}&nbsp;&nbsp;[{{personalApprisalData.employeeInfo.empNo}}
+                ]</h5>
+              <h6
+                class="search-header-designation"
+                title="{{personalApprisalData.employeeInfo.designation}}">{{personalApprisalData.employeeInfo.designation}}</h6>
+              <h6
+                class="search-header-completion"
+                title="{{personalApprisalData.employeeInfo.project}}">{{personalApprisalData.employeeInfo.project}}</h6>
+            </div>
+          </div>
+
+          <div class="col-sm-3" style="padding-left: 58px;">
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="showEditProfile && showForm">
+
+      <div *ngFor="let appriseObj of personalApprisalData.ratingGroupedByPillars">
+
+        <div class="w3-panel w3-card">
+          <div class="row" style="padding-right: 20px;padding-left: 20px;">
+            <h4 style="font-size: 15px; color: #2d2f32; font-weight: 600 !important;">{{appriseObj.pillarName}}</h4>
+          </div>
+
+          <div class="row" style="padding-right: 20px;padding-left: 20px;padding-top: 3px;padding-bottom: 5px;"
+               *ngFor="let expObj of appriseObj.expectationsInPillar; let i = index;">
+            <div>
+              <div class="{{getLeftColumnWidth(expObj.otherRatings)}} formatted"
+                   style="font-size:14px;">{{expObj.expectationName}}</div>
+              <div class="{{getRightColumnWidth(expObj.otherRatings)}}" style="padding:0px;">
+
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-11">
+
+                      <div class="attendance-admin-date-select">
+                        <div *ngFor="let otherRating of expObj.otherRatings" class="radio radio-primary radio-inline">
+                          <input
+                            type="radio"
+                            value="{{otherRating.name}}"
+                            (click)="changePillarRating(personalApprisalData.employeeInfo.empNo,expObj.expectationId,expObj.otherRatings,expObj.selfGivenRatingName,otherRating.name)"
+                            id="dateRangeRadio-self-{{expObj.expectationId}}-{{removingSpace(otherRating.name)}}"
+                            name="dateRangeRadio-self-{{expObj.expectationId}}-{{removingSpace(otherRating.name)}}"
+                            [(ngModel)]="expObj.selfGivenRatingName"
+                            [disabled]="isReadOnly">
+                          <label
+                            for="dateRangeRadio-self-{{expObj.expectationId}}-{{removingSpace(otherRating.name)}}"> {{otherRating.name}} </label>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="col-sm-1 view-history">
+
+                      <!--<div class="tooltip">-->
+                      <!--<span class="tooltiptext">View Edit History</span>-->
+                      <!--</div>-->
+
+                      <!--<div class="tooltip">Hover over me-->
+                      <!--<span class="tooltiptext">Tooltip text</span>-->
+                      <!--</div>-->
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+            <br>
+          </div>
+
+          <div *ngIf="appriseObj.commentAreasInPillarDesignation.length > 0">
+            <div class="row cmt-section"
+                 *ngFor="let expObjComment of appriseObj.commentAreasInPillarDesignation; let j = index;">
+
+              <!--<div *ngIf="appriseObj.showToEmployee">-->
+              <div>
+                <div class="col-sm-11 pillar-cmt-input">
+                  <!--                    do not show the criteria name for self appraisal-->
+                  <!--                    <h4  class="cmt-save">{{expObjComment.commentArea}}</h4>-->
+                  <textarea
+                    (focus)="increasingTextBoxSize(expObjComment.commentArea)"
+                    (keydown)="increasingTextBoxSize(expObjComment.commentArea)"
+                    [(ngModel)]="expObjComment.commentForEmployeeForCommentArea.selfComment"
+                    class="form-control appraisal-pillar-comments-textArea" data-gramm_editor="false"
+                    id="{{expObjComment.commentArea}}"
+                    name="{{expObjComment.commentArea}}"
+                    placeholder="Your Comment"
+                    [readonly]="isReadOnly"></textarea>
+                </div>
+                <div class="col-sm-1 pillar-cmt-save">
+                  <!--<div>-->
+                  <!--<button-->
+                  <!--(click)="saveAppraiserCommentWithinPillar(expObjComment)" class="btn header-create-button pull-right"-->
+                  <!--type="button"-->
+                  <!--[disabled]="isReadOnly">-->
+                  <!--Save-->
+                  <!--</button>-->
+                  <!--</div>-->
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!--Self comment saving rest all need to implement -->
+
+    <!--<div *ngIf="false">-->
+    <div class="w3-panel w3-card" *ngIf="showEditProfile">
+
+      <div>
+        <button class="a-btn a-btn--primary">{{personalApprisalData.overallSelfCommentText}}</button>
+        <div class="col-sm-12">
+          <div class="appraisal-instruction" *ngIf="year === '2021(New)'">
+            <p class="appraisal-instruction__para">
+              <svg class="a-icon appraisal-instruction__icon">
+                <use xlink:href="#information"></use>
+              </svg>
+              <span class="appraisal-instruction__text">Follow Instructions</span>
+            </p>
+
+            <div class="appraisal-instruction-content">
+              <!--                      <h2 class="appraisal-instruction-content__title">Follow Instructions</h2>-->
+              <p class="appraisal-instruction-content__para">Please provide feedback based on the following four main
+                areas; We kindly request you to list down the pointers under each heading</p>
+
+              <ul class="appraisal-instruction-content__list">
+                <li class="appraisal-instruction-content__item">{{personalApprisalData.selfPositiveCommentText}}?</li>
+                <li class="appraisal-instruction-content__item">{{personalApprisalData.selfChallengesCommentText}}</li>
+                <li class="appraisal-instruction-content__item">{{personalApprisalData.selfDevelopmentCommentText}}</li>
+                <li class="appraisal-instruction-content__item">{{personalApprisalData.selfNeedsCommentText}}</li>
+              </ul>
+              <p class="appraisal-instruction-content__text">Thank You.</p>
+            </div>
+          </div>
+          <div class="appraisal-instruction" *ngIf="year !== '2021(New)' && intYear > 2021">
+            <p class="appraisal-instruction__para">
+              <svg class="a-icon appraisal-instruction__icon">
+                <use xlink:href="#information"></use>
+              </svg>
+              <span class="appraisal-instruction__text">Follow Instructions</span>
+            </p>
+
+            <div class="appraisal-instruction-content">
+              <p class="appraisal-instruction-content__para">Please provide feedback based on the following areas; We
+                kindly request you to list down the pointers under each heading</p>
+
+              <ul class="appraisal-instruction-content__list">
+                <li class="appraisal-instruction-content__item">{{personalApprisalData.selfPositiveCommentText}}</li>
+                <li class="appraisal-instruction-content__item">{{personalApprisalData.selfChallengesCommentText}}</li>
+                <li class="appraisal-instruction-content__item">{{personalApprisalData.selfKeyDevelopmentMilestonesCommentText}}</li>
+                <li class="appraisal-instruction-content__item">{{personalApprisalData.selfDevelopmentCommentText}}</li>
+              </ul>
+              <p class="appraisal-instruction-content__text">Thank You.</p>
+            </div>
+          </div>
+          <textarea
+            (focus)="increasingTextBoxSize('appraiserOverAllComment')"
+            (keydown)="increasingTextBoxSize('appraiserOverAllComment')"
+            [(ngModel)]="personalApprisalData.overallSelfComment"
+            class="form-control appraisal-question-comments-textArea" data-gramm_editor="false"
+            id="appraiserOverAllComment"
+            name="appraiserOverAllComment"
+            placeholder="{{personalApprisalData.overallSelfComment}}"
+            [readonly]="isReadOnly"></textarea>
+        </div>
+
+
+      </div>
+
+    </div>
+    <!--</div>-->
+
+
+    <div class="row" *ngIf="!isReadOnly">
+      <div
+        style="display: flex; align-items: center; justify-content: flex-end; margin-top: 16px; margin-right: 16px;">
+        <label class="a-checkbox" style="margin-bottom: 0px; margin-right: 16px;">
+          <input (click)="onCheckBoxClick()" class="a-checkbox__check" type="checkbox" id="selfCompleted">
+          <span class="a-checkbox__label" style="font-size: 14px; padding-left: 22px;">Mark as completed</span>
+        </label>
+        <button
+          (click)="saveAll()" class="btn header-create-button pull-right"
+          type="button"
+          style="font-size: 16px; margin-top: 0px;"
+          [disabled]="isReadOnly">
+          Save All
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+

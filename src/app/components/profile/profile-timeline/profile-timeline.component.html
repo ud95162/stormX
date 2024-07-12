@@ -1,0 +1,161 @@
+<div *ngIf="dataLoaded">
+
+  <!--Hide from timeline-->
+  <div class="modal fade" id="deletetimelineRecord" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" data-dismiss="modal" type="button">&times;</button>
+          <h4 class="modal-title">HIDE RECORD FROM TIMELINE</h4>
+        </div>
+        <div class="modal-body">
+          <h4>Are you sure?</h4>
+        </div>
+        <div class="modal-footer">
+          <button class="btn modalCancelButton pull-left" data-dismiss="modal" data-target="#editTimelineRecord"
+                  data-toggle="modal" style="width: 70px !important;" type="button">
+            Cancel
+          </button>
+          <button (click)="onTimelinePostDelete()" class="btn deleteTimelineRecord" data-dismiss="modal"
+                  style="width: 70px !important;" type="button">
+            Hide
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- New Implementation -->
+  <!--  <div class="c-pax-details__header">-->
+  <!--    {{employeeFirstName}}'s Timeline-->
+  <!--  </div>-->
+  <div class="c-profile-timeline">
+
+    <div class="c-profile-timeline__header">
+
+      <div class="c-profile-timeline__section">
+        <div class="c-profile-timeline__legend">
+          <div class="c-profile-timeline__symbol">
+            <svg class="a-icon">
+              <use xlink:href="#elipse"></use>
+            </svg>
+          </div>
+
+          <!--          <div class="c-profile-timeline__lbl">-->
+          <!--            <div *ngIf="!clientPermission.ClientPermission.subComponentPermissions.ClientRnJ.mainComponentPermission">-->
+          <!--              In codegen-->
+          <!--            </div>-->
+          <!--            <div *ngIf="clientPermission.ClientPermission.subComponentPermissions.ClientRnJ.mainComponentPermissio">-->
+          <!--              In company-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <div *ngIf="!clientPermission.includes('ClientPermission')">
+            <div class="c-profile-timeline__lbl">
+              In codegen
+            </div>
+          </div>
+          <div *ngIf="clientPermission.includes('ClientPermission')">
+            <div class="c-profile-timeline__lbl">
+              In company
+            </div>
+          </div>
+        </div>
+
+        <div class="c-profile-timeline__legend c-profile-timeline__legend--primary">
+          <div class="c-profile-timeline__symbol">
+            <svg class="a-icon">
+              <use xlink:href="#elipse"></use>
+            </svg>
+          </div>
+
+          <div class="c-profile-timeline__lbl">
+            Industry
+          </div>
+
+        </div>
+
+        <div class="c-profile-timeline__legend c-profile-timeline__legend--secondary">
+          <div class="c-profile-timeline__symbol">
+            <svg class="a-icon">
+              <use xlink:href="#elipse"></use>
+            </svg>
+          </div>
+
+          <div class="c-profile-timeline__lbl">
+            Accomplishments
+          </div>
+
+        </div>
+
+        <div class="c-profile-timeline__legend c-profile-timeline__legend--light">
+          <div class="c-profile-timeline__symbol">
+            <svg class="a-icon">
+              <use xlink:href="#elipse"></use>
+            </svg>
+          </div>
+
+          <div class="c-profile-timeline__lbl">
+            Education
+          </div>
+
+        </div>
+      </div>
+      <div class="c-profile-timeline__add">
+        <!--        <button (click)="loadEmployeeTimeline()" class="a-btn c-profile-timeline__btn"-->
+        <!--                *ngIf="componentPermission.subComponentPermissions.ProfileBody.subComponentPermissions.Timeline.subComponentPermissions.PersonalTimeline.subComponentPermissions.AddToPersonalTimeline.mainComponentPermission"-->
+        <!--                data-target="#addToTimelineModal" data-toggle="modal">Add new</button>-->
+
+        <button (click)="changeTimelineType()" class="a-btn c-profile-timeline__btn"
+                *ngIf="componentPermission.includes('AddToPersonalTimeline') && showAddNew"
+        >Add new
+        </button>
+
+      </div>
+    </div>
+
+    <div class="c-profile-timeline__content">
+
+      <div class="c-timeline">
+
+        <!-- loop -->
+        <div class="c-timeline__block" *ngFor="let timelineBlock of timelineArray ; let j = index">
+          <div *ngFor="let timelineData of timelineBlock ; let i = index">
+            <div class="c-timeline__item c-timeline__item--{{timelineData.group}}"
+                 *ngFor="let milestone of timelineData.milestones"
+                 [ngStyle]="{'left':getLeftPosition(i ,j ) , 'right' : getRightPosition(i, j )}">
+
+              <div class="c-timeline__info">
+                <span class="c-timeline__info-text">{{getSplitMilestoneTitle(milestone.title)}}...</span>
+                <span class="c-timeline__date">{{milestone.date}}</span>
+              </div>
+              <span class="c-timeline__point">
+              <svg class="a-icon">
+                <use xlink:href="#elipse"></use>
+              </svg>
+            </span>
+
+              <div class="c-timeline__item-card">
+                <app-profile-timeline-card [timelineData]=timelineData
+                                           (emitIdEvent)="IdToEdit($event)"></app-profile-timeline-card>
+                <!--                <app-profile-timeline-edit *ngIf="editDataLoaded" [timelineInstanceData]="editTimelineData"></app-profile-timeline-edit>-->
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <app-profile-timeline-add-record-modal (successful)="refreshTimeline()"></app-profile-timeline-add-record-modal>
+  <!--  <app-profile-timeline-edit-modal> </app-profile-timeline-edit-modal>-->
+  <app-profile-timeline-edit-modal [timelineInstanceData]="editTimelineData"
+                                   [editIdClicked]="editIdClicked"
+                                   (successful)="refreshTimeline()"></app-profile-timeline-edit-modal>
+
+</div>

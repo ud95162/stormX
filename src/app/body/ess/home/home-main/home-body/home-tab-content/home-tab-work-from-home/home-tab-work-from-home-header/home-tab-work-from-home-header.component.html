@@ -1,0 +1,99 @@
+<div class="advance-attendace__sidebar">
+  <div class="advance-attendace__sidebar--wrapper">
+      <h2 class="select-range__card--text">Select Range Type</h2>
+      <!---radio button list-->
+      <div class="m-form-field__radio">
+        <input id="rangeType11" name="rangeType" value="R11" (click)="setDateRange('R11')" type="radio" [(ngModel)]="rangeType">
+        <label  for="rangeType11" class="m-form-radio__label-wrap">Yesterday</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input id="rangeType4" name="rangeType" (click)="setDateRange('R4')" type="radio" [(ngModel)]="rangeType" value="R4">
+        <label  for="rangeType4" class="m-form-radio__label-wrap">Today</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input id="rangeType3" name="rangeType" (click)="setDateRange('R3')" type="radio" [(ngModel)]="rangeType" value="R3">
+        <label  for="rangeType3" class="m-form-radio__label-wrap">This Week</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input id="rangeType2" name="rangeType" (click)="setDateRange('R2')" type="radio" [(ngModel)]="rangeType" value="R2">
+        <label  for="rangeType2" class="m-form-radio__label-wrap">Last Week</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input id="rangeType1" name="rangeType" (click)="setDateRange('R1')" type="radio" [(ngModel)]="rangeType" value="R1">
+        <label  for="rangeType1" class="m-form-radio__label-wrap">Last 7 Days</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input id="rangeType8" name="rangeType" (click)="setDateRange('R8')" type="radio" [(ngModel)]="rangeType" value="R8">
+        <label  for="rangeType8" class="m-form-radio__label-wrap">This Month</label>
+      </div>
+
+      <div class="m-form-field__radio">
+        <input id="rangeType6" name="rangeType" (click)="setDateRange('R6')" type="radio" [(ngModel)]="rangeType" value="R6">
+        <label  for="rangeType6" class="m-form-radio__label-wrap">Select Month</label>
+      </div>
+
+    <!---select month-->
+
+    <div class="m-form__select--month" *ngIf="rangeSingleMonthWidget">
+
+      <div class="m-form-field">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label" for="f-name">Select Month</label>
+        </div>
+        <div class="m-form-field__field m-form-field__min-height">
+          <div class="m-form-field__field-item">
+            <select class="m-form-field__select " (change)="setDateRange('R6')"
+                    [(ngModel)]="selectedMonthFilter" id="filterSelect" name="filterSelect">
+              <option *ngFor="let filter of loadedMonthFilters">{{filter}}</option>
+            </select>
+          </div>
+        </div>
+        <span class="m-form-field__error">error</span>
+      </div><br>
+    </div>
+<!--    selection end-->
+
+      <div class="m-form-field__radio">
+        <input id="rangeType5" name="rangeType" (click)="setDateRange('R5')" type="radio" [(ngModel)]="rangeType" value="R5">
+        <label  for="rangeType5" class="m-form-radio__label-wrap">Custom</label>
+      </div>
+<!--    custom template start-->
+        <div class="m-form__from--to" *ngIf="rangeCustomWidget">
+
+          <div class="m-form-field">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label" for="fromDate">From Date</label>
+            </div>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" minlength="0" maxlength="524288" placeholder="" value=""
+                       (change)="setDateRange('R5')" type="date" [(ngModel)]="selectedFromDate"  id="fromDate" max="{{currentDate}}">
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+<!--          template end-->
+
+      <!---to-->
+
+      <div class="m-form-field Custom-height__from-date">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label" for="toDate">To Date</label>
+        </div>
+        <div class="m-form-field__field m-form-field__min-height">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" minlength="0" maxlength="524288" placeholder="" value=""
+                   (change)="setDateRange('R5')" type="date" [(ngModel)]="selectedToDate"  id="toDate" max="{{currentDate}}">
+          </div>
+        </div>
+        <span class="m-form-field__error">error</span>
+      </div>
+
+    </div>
+  </div>
+</div>

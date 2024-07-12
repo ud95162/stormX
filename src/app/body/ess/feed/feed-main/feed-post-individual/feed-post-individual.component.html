@@ -1,0 +1,126 @@
+<app-error-modal></app-error-modal>
+
+<div class="container" style="margin-top: 20px !important;">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div>
+      <div *ngIf="dataLoaded" style="word-wrap: break-word;">
+        <div class="w3-panel w3-card">
+
+          <!--Edit post modal-->
+          <app-edit-post-modal (closeEditModalEvent)="modalClose()"
+                               (saveEditedEvent)="editPost()"
+                               (tagPeopleEvent)="addTags($event)"
+                               (untagPeopleEvent)="untagFriend($event.person, $event.fromwhere)"
+                               [editTaggedFriendsToEditFromFeed]="editTaggedFriendsArray"
+                               [fullNameListToEditFromFeed]="fullNameList"
+                               [imageListToEditFromFeed]="editImageArray"
+                               [imageUploadUrl]="imageUploadUrl"></app-edit-post-modal>
+
+          <!--Delete post modal-->
+          <app-delete-post-modal
+            (closeDeleteModalEvent)="modalClose()"
+            (deletePostEvent)="deletePost()"></app-delete-post-modal>
+
+          <!--Share post modal-->
+          <app-share-post-modal
+            (closeShareModalEvent)="modalClose()"
+            (sharePostEvent)="sharePublishPost()"
+            (viewTaggedAllEvent)="modalClose($event.type, $event.shareId)"
+            *ngIf="false" [postToShareFromComponent]="sharePost"></app-share-post-modal>
+
+          <!--View people modal-->
+          <app-view-people-modal (profileRedirectEvent)="profileRedirect($event, 0, null)"
+                                 [modalDialogContentSize]="showResizeModalDialogContent"
+                                 [modalDialogSize]="showResizeModalDialog"
+                                 [modalHeader]="peopleModalHeader"
+                                 [peopleList]="taggedList"></app-view-people-modal>
+
+          <!--Post body-->
+          <app-post
+            (employeeIdToRedirectEvent)="profileRedirect($event.employeeId, $event.postedAs, $event.postedPageObj)"
+            (postDeleteEvent)="deletePostMenuClick($event)"
+            (postEditEvent)="editPostOnClick($event.postId, $event.postTitle, $event.postContent, $event.postVisibility, $event.postImages, $event.postEmpId)"
+            (postHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+            (postRedirectEvent)="postRedirect($event)"
+            (readMorePostEvent)="loadMorePost($event)"
+            (viewImageModalEvent)="viewImageModal($event.postId, $event.imageArray, $event.image)"
+            (viewTaggedEvent)="viewTaggedAll($event.viewTagType, $event.postId)"
+            *ngIf="individualPostData.postType === 'post'"
+            [postDataFromFeed]="individualPostData"></app-post>
+
+          <!--Post Review-->
+          <app-review
+            (employeeIdToRedirectEvent)="profileRedirect($event.employeeId, $event.postedAs, $event.postedPageObj)"
+            (reviewPostDeleteEvent)="deletePostMenuClick($event)"
+            (reviewPostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+            (reviewPostRedirectEvent)="postRedirect($event)"
+            *ngIf="individualPostData.postType === 'review'"
+            [reviewDataFromFeed]="individualPostData"></app-review>
+
+          <!--Post Skill-->
+          <app-skill (employeeIdToRedirectEvent)="profileRedirect($event, 0, null)"
+                     (skillPostDeleteEvent)="deletePostMenuClick($event)"
+                     (skillPostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+                     (skillPostRedirectEvent)="postRedirect($event)"
+                     *ngIf="individualPostData.postType === 'skill'"
+                     [skillDataFromFeed]="individualPostData"></app-skill>
+
+          <!--Post Accomplishments-->
+          <app-accomplishment (accomplishmentPostDeleteEvent)="deletePostMenuClick($event)"
+                              (accomplishmentPostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+                              (accomplishmentPostRedirectEvent)="postRedirect($event)"
+                              (employeeIdToRedirectEvent)="profileRedirect($event, 0, null)"
+                              *ngIf="individualPostData.postType === 'accomp'"
+                              [accomplishmentDataFromFeed]="individualPostData"></app-accomplishment>
+
+          <!--Post Qualification-->
+          <app-qualification (employeeIdToRedirectEvent)="profileRedirect($event, 0, null)"
+                             (qualificationPostDeleteEvent)="deletePostMenuClick($event)"
+                             (qualificationPostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+                             (qualificationPostRedirectEvent)="postRedirect($event)"
+                             *ngIf="individualPostData.postType === 'quali'"
+                             [qualificationDataFromFeed]="individualPostData"></app-qualification>
+
+          <!--Post Profile Picture-->
+          <app-prof-picture (employeeIdToRedirectEvent)="profileRedirect($event, 0, null)"
+                            (profPicPostDeleteEvent)="deletePostMenuClick($event)"
+                            (profPicPostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+                            (profPicPostRedirectEvent)="postRedirect($event)"
+                            *ngIf="individualPostData.postType === 'profupdate'"
+                            [profPicDataFromFeed]="individualPostData"></app-prof-picture>
+
+          <!--Post Share -->
+          <app-share (employeeIdToRedirectEvent)="profileRedirect($event, 0, null)"
+                     (sharePostDeleteEvent)="deletePostMenuClick($event)"
+                     (sharePostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+                     (sharePostRedirectEvent)="postRedirect($event)"
+                     (shareViewTaggedEvent)="viewTaggedAll($event.viewTagType, $event.postId)"
+                     *ngIf="individualPostData.postType === 'share' && individualPostData.originalPost != null"
+                     [shareDataFromFeed]="individualPostData"></app-share>
+
+          <!--Like and comment the post-->
+          <app-like-comment (deleteCommentEvent)="deleteComment($event.commentId, $event.postId, 'fromfeed')"
+                            (likeUnlikePostEvent)="likeUnlikePost($event.postId, $event.operation, 'fromfeed')"
+                            (loadCommentsEvent)="loadComments($event, 'frommodal')"
+                            (postCommentEvent)="commentPost($event, 'fromfeed')"
+                            (profileRedirectEvent)="profileRedirect($event, 0, null)"
+                            (viewLikedEvent)="viewTaggedAll($event.funType, $event.postId)"
+                            [callingFrom]="callingFrom"
+                            [postCommentDataFromFeed]="individualPostData"></app-like-comment>
+
+          <!--view image modal-->
+          <app-image-viewer
+            (deleteCommentOnImageViewerEvent)="deleteComment($event.commentId, $event.postId, 'frommodal')"
+            (likeUnlikePostOnImageViewerEvent)="likeUnlikePost($event.postId, $event.operation, 'frommodal')"
+            (loadCommentsOnImageViewerEvent)="loadComments($event, 'frommodal')"
+            (postCommentOnImageViewerEvent)="commentPost($event, 'frommodal')"
+            (profileRedirectOnImageViewerEvent)="profileRedirect($event, 0, null)"
+            (viewLikedOnImageViewerEvent)="viewTaggedAll($event.funType, $event.postId)"
+            [postDataFromFeed]="individualPostData"
+            [postImageShowFromFeed]="showImageModal"></app-image-viewer>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

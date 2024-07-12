@@ -1,0 +1,219 @@
+<main class="l-page__main summary-dashbaord-page">
+  <div class="l-wrapper summary-dashbaord-page__wrapper">
+    <div class="header-title__wraper">
+      <div class="header-main-title">
+        <h2>Dashboard</h2>
+      </div>
+
+<!--      <div class="header-main-title__link">-->
+<!--        <a href="#">View Summary</a>-->
+<!--      </div>-->
+    </div>
+
+    <!---block content-->
+    <div class="dashboard-row-grid">
+      <span class="numeric-flow">A - I</span>
+
+      <div class="dashboard-card__wraper">
+
+        <div class="summary-card" (click)="changeActiveTab('WorkSummary')"
+             *ngIf= "checkPermission.checkUserHavePermissionForSection('AttendanceDashboard')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/attendance_summary.png" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Attendance</h4>
+          </div>
+        </div>
+
+        <div class="summary-card" (click)="changeActiveTab('faceRec')"
+             *ngIf="checkPermission.checkUserHavePermissionForSection('FaceRecAttendanceCardOfNavigationBar')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/face-recognition.svg" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>FaceRec Attendance</h4>
+          </div>
+        </div>
+
+        <div class="summary-card" (click)="changeActiveTab('hrAnalytics')"
+             *ngIf="checkPermission.checkUserHavePermissionForSection('FaceRecAttendanceCardOfNavigationBar')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/team-people.png" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>HR Analytics</h4>
+          </div>
+        </div>
+
+
+
+
+        <div class="summary-card" (click)="changeActiveTab('issueLetters')"
+             *ngIf="checkPermission.checkUserHavePermissionForSection('IssueLetterCardOfNavigationBar')" >
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/Issue%20letter.svg" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Issue Letters</h4>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!---block content-->
+    <div class="dashboard-row-grid">
+      <span class="numeric-flow">J - Q</span>
+      <div class="dashboard-card__wraper">
+
+
+        <div class="summary-card" (click)="changeActiveTab('KnowledgeGraph')"
+             *ngIf= "checkPermission.checkUserHavePermissionForSection('KnowledgeGraphAdmin')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/Knoledge_graph.svg" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Knowledge Graph</h4>
+          </div>
+        </div>
+
+        <div class="summary-card" (click)="changeActiveTab('Leave')"
+             *ngIf= "checkPermission.checkUserHavePermissionForSection('LeaveTab')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/calendar.png" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Leave</h4>
+          </div>
+        </div>
+
+        <div class="summary-card" (click)="changeActiveTab('manageFacility')"
+             *ngIf="checkPermission.checkUserHavePermissionForSection('FacilityManagementCardOfNavigationBar')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/Manage_Facility.svg" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Manage Facility</h4>
+          </div>
+        </div>
+
+
+        <div class="summary-card" (click)="changeActiveTab('manageOpd')"
+             *ngIf="checkPermission.checkUserHavePermissionForSection('OPDRequestsCardOfNavigationBar')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/opd_icon.png" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Manage OPD</h4>
+          </div>
+        </div>
+
+
+
+
+        <div class="summary-card" (click)="changeActiveTab('People')"
+             *ngIf= "checkPermission.checkUserHavePermissionForSection('PeopleTab')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/team-people.png" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>People </h4>
+          </div>
+        </div>
+
+        <div class="summary-card" (click)="changeActiveTab('Project')"
+             *ngIf= "checkPermission.checkUserHavePermissionForSection('ProjectTab')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/shuttle.png" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Project</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!---block content-->
+    <div class="dashboard-row-grid">
+      <span class="numeric-flow">R - Z</span>
+      <div class="dashboard-card__wraper">
+
+
+
+        <div class="summary-card" (click)="changeActiveTab('recruitmentDashboard')"
+             *ngIf="checkPermission.checkUserHavePermissionForSection('RecruitmentCardOfNavigationBar')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/Rec-Dashboard.svg" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Recruitment Dashboard</h4>
+          </div>
+        </div>
+
+
+        <div class="summary-card" (click)="changeActiveTab('ResourceMap')"
+             *ngIf= "checkPermission.checkUserHavePermissionForSection('ResourceMapTab')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/Resource_map.svg" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Resource Map</h4>
+          </div>
+        </div>
+
+        <div class="summary-card" (click)="changeActiveTab('Summary')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/report-summary.png" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Summary</h4>
+          </div>
+        </div>
+
+
+        <div class="summary-card" (click)="changeActiveTab('usageDashboard')"
+             *ngIf="checkPermission.checkUserHavePermissionForSection('UsageDashBoardCardOfNavigationBar')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/Usage_Dashboard.svg" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Usage Dashboard</h4>
+          </div>
+        </div>
+
+
+        <div class="summary-card" (click)="changeActiveTab('WorkEffort')"
+             *ngIf= "checkPermission.checkUserHavePermissionForSection('WwtTab')">
+          <div class="c-card-icon">
+            <img  class="c-card-icon__image" src="assets/images/suitcase.png" alt="">
+          </div>
+
+          <div class="c-card-text">
+            <h4>Work Effort</h4>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</main>
+

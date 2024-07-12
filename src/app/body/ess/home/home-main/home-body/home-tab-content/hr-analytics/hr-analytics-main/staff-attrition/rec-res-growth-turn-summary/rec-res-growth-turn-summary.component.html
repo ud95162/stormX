@@ -1,0 +1,54 @@
+<div class="analytics-statistics u-mb+" >
+  <div class="analysis-statistics__card">
+    <div class="analytics-statistics-row">
+      <div class="analytics-statistics-details">
+        <span class="analytics-statistics-details__value">{{recruitmentCount | number}}</span>
+        <p class="analytics-statistics-details__title">Recruitment Count</p>
+      </div>
+      <div class="analytics-statistics-card__icon">
+        <svg class="a-icon">
+          <use xlink:href="#users-01"></use>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="analysis-statistics__card">
+    <div class="analytics-statistics-row">
+      <div class="analytics-statistics-details">
+        <span class="analytics-statistics-details__value analytics-statistics-details__value--high">{{resignationCount | number}}</span>
+        <p class="analytics-statistics-details__title">Resign Count</p>
+      </div>
+      <div class="analytics-statistics-card__icon analytics-statistics-card__icon--minus">
+        <svg class="a-icon">
+          <use xlink:href="#users-minus"></use>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="analysis-statistics__card">
+    <div class="analytics-statistics-row">
+      <div class="analytics-statistics-details">
+        <span class="analytics-statistics-details__value analytics-statistics-details__value--high">{{headGrowthCount}}%</span>
+        <p class="analytics-statistics-details__title">Head Growth</p>
+      </div>
+      <div class="analytics-statistics-card__icon">
+        <svg class="a-icon">
+          <use xlink:href="#users-plus"></use>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="analysis-statistics__card">
+    <div class="analytics-statistics-row">
+      <div class="analytics-statistics-details">
+        <span class="analytics-statistics-details__value analytics-statistics-details__value--low">{{turnOverCount}}%</span>
+        <p class="analytics-statistics-details__title">Turnover</p>
+      </div>
+      <div class="analytics-statistics-card__icon analytics-statistics-card__icon--minus">
+        <svg class="a-icon">
+          <use xlink:href="#trend-down-01"></use>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>

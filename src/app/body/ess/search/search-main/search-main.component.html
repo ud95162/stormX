@@ -1,0 +1,34 @@
+<div *ngIf="checkPermission.checkUserHavePermissionForSection('Search')" class="container">
+  <div>
+    <div *ngIf="isDesktop">
+      <app-search-header-suggestion
+        *ngIf="checkPermission.checkUserHavePermissionForSection('Suggestions')"></app-search-header-suggestion>
+      <!--margin top 40 px without suggestion bar-->
+      <div class="col-sm-12" style="padding-left: 0; padding-right: 0;">
+        <div class="col-sm-9" style="padding: 0;">
+          <app-search-result-card
+            *ngIf="checkPermission.checkUserHavePermissionForSection('SearchResults')"></app-search-result-card>
+        </div>
+
+        <div class="col-sm-3" style="padding-left: 45px !important;">
+          <div>
+            <app-search-interested-card
+              *ngIf="checkPermission.checkUserHavePermissionForSection('InterestedIn')"></app-search-interested-card>
+            <!--<app-search-related-card></app-search-related-card>-->
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isMobile || isTablet">
+      <app-search-header-suggestion
+        *ngIf="checkPermission.checkUserHavePermissionForSection('Suggestions')"></app-search-header-suggestion>
+      <!--margin top 40 px without suggestion bar-->
+      <div>
+        <app-search-result-card
+          *ngIf="checkPermission.checkUserHavePermissionForSection('SearchResults')"></app-search-result-card>
+      </div>
+    </div>
+  </div>
+</div>

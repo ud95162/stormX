@@ -1,0 +1,103 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background-color: #ffffff !important;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.custom-w3-padding {
+  padding: 12px !important;
+  margin: 0 -15px !important;
+}
+
+.check-availability-button {
+  border-radius: 4px;
+  background-color: #006eff;
+  padding: 4px 12px;
+  color: #FFFFFF;
+  float: right;
+}
+
+.date-time-form {
+  padding: 4px 12px;
+  height: 31px;
+  border-radius: 4px;
+}
+
+.date-time-form-span {
+  padding: 4px 12px;
+  height: 31px;
+  border-radius: 4px 4px 0 0;
+}
+
+.location-warning-message-div {
+  border-radius: 2px;
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: center;
+  padding: 5px;
+  color: #FFFFFF;
+}
+
+.location-warning-message-div-false {
+  background-color: #f6646d;
+}
+
+.location-warning-message-div-true {
+  background-color: #87d100;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.event-type-span {
+  margin: 0 10px 0 0;
+  font-size: 12px !important;
+}
+
+.available {
+  color: #87d100;
+}
+
+.location {
+  color: #ffac09;
+}
+
+.time {
+  color: #4abfe7;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+
+.event-mobile-view {
+  margin-top: 10px;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.custom-data-picker-div {
+  width: 100% !important;
+}
+
+.error-message {
+  color: red;
+  font-size: 13px;
+  margin-left: 18px;
+  font-weight: 600;
+}

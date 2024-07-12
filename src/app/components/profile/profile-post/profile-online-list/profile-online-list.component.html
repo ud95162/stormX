@@ -1,0 +1,74 @@
+
+<div class="c-post-online">
+  <div class="c-post-online__header">
+    <div class="c-post-online__title">
+      Online
+    </div>
+    <div class="c-post-online__count">
+      {{onlineCount}}
+    </div>
+  </div>
+  <!-- All members are shown currently -->
+  <div class="c-post-online__wrapper">
+    <div class="c-post-online-card" *ngFor="let online of onlineList">
+        <div class="c-post-online__media">
+          <img (click)="profileRedirect(online.empNo)" class="c-post-online__img" src="{{online.image}}">
+        </div>
+        <div class="c-post-online__content">
+          <div class="c-post-online__user" (click)="profileRedirect(online.empNo)">
+            {{online.name}}
+          </div>
+          <div class="c-post-online__designation">
+            {{online.designation}}
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Old implementation -->
+
+<!-- <div class="w3-panel w3-card">
+  <table style="margin-bottom: 10px" width=100%>
+    <tr>
+      <td style="font-size: 1.5em; font-weight: 500" width=80%>
+        Online Users
+      </td>
+      <td align="right" style="font-size: 1.5em; font-weight: 500" width=20%>
+        {{onlineCount}}
+      </td>
+    </tr>
+
+  </table>
+  <hr>
+  <div>
+    <div>
+      <div class="scrollbar" id="style-1">
+        <div class="force-overflow">
+          <div *ngFor="let online of onlineList" class="media">
+            <div class="media-left">
+              <img (click)="profileRedirect(online.empNo)" class="media-object img-circle pointCursor"
+                   src="{{online.image}}" style="width:35px; height:35px;">
+              <i *ngIf="online.online === true" aria-hidden="true" class="fa fa-circle pull-right listNotification"
+                 style="color: #49D620"></i>
+              <i *ngIf="online.online === false" aria-hidden="true" class="fa fa-circle pull-right listNotification"
+                 style="color: #FFC01B"></i>
+            </div>
+            <div class="media-body">
+              <h6 class="media-heading" style="margin-top: 8px"><a (click)="profileRedirect(online.empNo)" onmouseover="" style="cursor: pointer;">{{online.name}}</a>
+              </h6>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ -->

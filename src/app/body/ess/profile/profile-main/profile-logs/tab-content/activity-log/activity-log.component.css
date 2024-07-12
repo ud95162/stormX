@@ -1,0 +1,190 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background-color: #ffffff !important;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*----------------------------------------------------------------------------------*/
+.EMPLOYEE {
+  position: relative
+}
+
+.EMPLOYEE:before {
+  content: "\f007";
+}
+
+.COURSE {
+  position: relative
+}
+
+.COURSE:before {
+  content: "\f007";
+}
+
+.FAMILY_DETAIL {
+  position: relative
+}
+
+.FAMILY_DETAIL:before {
+  content: "\f007";
+}
+
+.ACCOMPLISHMENT {
+  position: relative
+}
+
+.ACCOMPLISHMENT:before {
+  content: "\f007";
+}
+
+.POST_UNSUBSCRIBE {
+  position: relative
+}
+
+.POST_UNSUBSCRIBE:before {
+  content: "\f007";
+}
+
+.POST_SUBSCRIBE {
+  position: relative
+}
+
+.POST_SUBSCRIBE:before {
+  content: "\f007";
+}
+
+.POST_HIDE {
+  position: relative
+}
+
+.POST_HIDE:before {
+  content: "\f007";
+}
+
+.POST {
+  position: relative
+}
+
+.POST:before {
+  content: "\f007";
+}
+
+.COMMENT {
+  position: relative
+}
+
+.COMMENT:before {
+  content: "\f007";
+}
+
+.POST_LIKE {
+  position: relative
+}
+
+.POST_LIKE:before {
+  content: "\f007";
+}
+
+.SEARCH {
+  position: relative
+}
+
+.SEARCH:before {
+  content: "\f007";
+}
+
+.TIMELINE {
+  position: relative
+}
+
+.TIMELINE:before {
+  content: "\f007";
+}
+
+.TIMELINE_LIKE {
+  position: relative
+}
+
+.TIMELINE_LIKE:before {
+  content: "\f007";
+}
+
+.UNIVERSITY {
+  position: relative
+}
+
+.UNIVERSITY:before {
+  content: "\f007";
+}
+
+.HIGH_SCHOOL {
+  position: relative
+}
+
+.HIGH_SCHOOL:before {
+  content: "\f007";
+}
+
+.REVIEW_DISLIKE {
+  position: relative
+}
+
+.REVIEW_DISLIKE:before {
+  content: "\f007";
+}
+
+.REVIEW_LIKE {
+  position: relative
+}
+
+.REVIEW_LIKE:before {
+  content: "\f007";
+}
+
+.SKILL {
+  position: relative
+}
+
+.SKILL:before {
+  content: "\f007";
+}
+
+.CONTACT {
+  position: relative
+}
+
+.CONTACT:before {
+  content: "\f007";
+}
+
+.QUALIFICATION {
+  position: relative
+}
+
+.QUALIFICATION:before {
+  content: "\f007";
+}
+
+.REVIEW {
+  position: relative
+}
+
+.REVIEW:before {
+  content: "\f007";
+}

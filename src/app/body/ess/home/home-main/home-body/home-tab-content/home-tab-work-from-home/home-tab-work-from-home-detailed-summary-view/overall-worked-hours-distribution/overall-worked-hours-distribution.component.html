@@ -1,0 +1,247 @@
+<div
+  *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortOverallWorkedHoursDistribution')">
+  <div class="dashboard-page @@class">
+    <div class="dashboard-page__block-main">
+      <div class="dashboard-page__block-wrapper-main">
+
+
+        <!--work effort filters--->
+        <div class="workeffort-filter_section-right">
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--workflow" for="overall-worked-hour-date">Date</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" id="overall-worked-hour-date" type="date" minlength="0"
+                       maxlength="n/a4288" placeholder="Days" value=""
+                       (change)="filterByDate()" [(ngModel)]="selectedDate">
+              </div>
+            </div>
+
+            <span class="m-form-field__error">error</span>
+          </div>
+        </div>
+
+
+        <!---table-->
+
+        <div class="projet-wice__hour-distribution">
+          <div class="projet-wice__today--hours">
+            <table class="projet-wice__table">
+              <thead class="projet-wice__table--header">
+              <tr class="projet-wice__table-header-row">
+                <th></th>
+                <th class="projet-wice__table-time">{{dateVariable}} <br>  {{selectedDateToDisplay}}</th>
+                <th class="projet-wice__table-time">Week <br> {{startDateOfWeekToDisplay}}</th>
+                <th class="projet-wice__table-time">Month <br> {{startDateOfMonthToDisplay}}</th>
+                <th class="project-wice__nodata"></th>
+                <th class="projet-wice__table-time">{{dateVariable}} <br>  {{selectedDateToDisplay}}</th>
+                <th class="projet-wice__table-time">Week <br> {{startDateOfWeekToDisplay}}</th>
+                <th class="projet-wice__table-time">Month <br> {{startDateOfMonthToDisplay}}</th>
+                <th class="project-wice__nodata"></th>
+                <th class="projet-wice__table-time">{{dateVariable}} <br>  {{selectedDateToDisplay}}</th>
+                <th class="projet-wice__table-time">Week <br> {{startDateOfWeekToDisplay}}</th>
+                <th class="projet-wice__table-time">Month <br> {{startDateOfMonthToDisplay}}</th>
+              </tr>
+
+              <tr class="projet-wice__table-header-row">
+                <th></th>
+                <th colspan="3" class="projet-wice__hour--header">Web Work Tracker</th>
+                <th class="project-wice__nodata"></th>
+                <th colspan="3" class="projet-wice__hour--header">Jira</th>
+                <th class="project-wice__nodata"></th>
+                <th colspan="3" class="projet-wice__hour--header">Attendance System</th>
+              </tr>
+              </thead>
+
+              <tbody class="workeffort-filter__table--bod">
+              <tr class="projet-wice__table-row">
+                <td class="projet-wice__name">Not Recorded</td>
+                <td *ngIf="wwtResponseDataLoadedForToday">{{WWTResponseToday['notRecorded']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForWeek">{{WWTResponseWeek['notRecorded']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForMonth">{{WWTResponseMonth['notRecorded']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForMonth" class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td class="project-wice__nodata"></td>
+                <td *ngIf="faceRecResponseDataLoadedForToday">{{faceRecResponseToday['notRecorded']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForWeek">{{faceRecResponseWeek['notRecorded']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForMonth">{{faceRecResponseMonth['notRecorded']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForMonth" class="loading"></td>
+              </tr>
+              <tr class="projet-wice__table-row">
+                <td class="projet-wice__name">Below 2hrs</td>
+                <td *ngIf="wwtResponseDataLoadedForToday">{{WWTResponseToday['belowTwoHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForWeek">{{WWTResponseWeek['belowTwoHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForMonth">{{WWTResponseMonth['belowTwoHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForMonth" class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td class="project-wice__nodata"></td>
+                <td *ngIf="faceRecResponseDataLoadedForToday">{{faceRecResponseToday['belowTwoHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForWeek">{{faceRecResponseWeek['belowTwoHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForMonth">{{faceRecResponseMonth['belowTwoHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForMonth" class="loading"></td>
+              </tr>
+              <tr class="projet-wice__table-row">
+                <td class="projet-wice__name">2hrs - 4hrs</td>
+                <td *ngIf="wwtResponseDataLoadedForToday">{{WWTResponseToday['twoHoursToFourHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForWeek">{{WWTResponseWeek['twoHoursToFourHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForMonth">{{WWTResponseMonth['twoHoursToFourHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForMonth" class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td class="project-wice__nodata"></td>
+                <td *ngIf="faceRecResponseDataLoadedForToday">{{faceRecResponseToday['twoHoursToFourHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForWeek">{{faceRecResponseWeek['twoHoursToFourHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForMonth">{{faceRecResponseMonth['twoHoursToFourHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForMonth" class="loading"></td>
+              </tr>
+              <tr class="projet-wice__table-row">
+                <td class="projet-wice__name">4hrs - 6hrs</td>
+                <td *ngIf="wwtResponseDataLoadedForToday">{{WWTResponseToday['fourHoursToSixHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForWeek">{{WWTResponseWeek['fourHoursToSixHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForMonth">{{WWTResponseMonth['fourHoursToSixHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForMonth" class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td class="project-wice__nodata"></td>
+                <td *ngIf="faceRecResponseDataLoadedForToday">{{faceRecResponseToday['fourHoursToSixHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForWeek">{{faceRecResponseWeek['fourHoursToSixHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForMonth">{{faceRecResponseMonth['fourHoursToSixHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForMonth" class="loading"></td>
+              </tr>
+              <tr class="projet-wice__table-row">
+                <td class="projet-wice__name">6hrs - 8hrs</td>
+                <td *ngIf="wwtResponseDataLoadedForToday">{{WWTResponseToday['sixHoursToEightHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForWeek">{{WWTResponseWeek['sixHoursToEightHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForMonth">{{WWTResponseMonth['sixHoursToEightHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForMonth" class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td class="project-wice__nodata"></td>
+                <td *ngIf="faceRecResponseDataLoadedForToday">{{faceRecResponseToday['sixHoursToEightHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForWeek">{{faceRecResponseWeek['sixHoursToEightHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForMonth">{{faceRecResponseMonth['sixHoursToEightHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForMonth" class="loading"></td>
+              </tr>
+              <tr class="projet-wice__table-row">
+                <td class="projet-wice__name">8hrs - 10hrs</td>
+                <td *ngIf="wwtResponseDataLoadedForToday">{{WWTResponseToday['eightHoursToTenHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForWeek">{{WWTResponseWeek['eightHoursToTenHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForMonth">{{WWTResponseMonth['eightHoursToTenHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForMonth" class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td class="project-wice__nodata"></td>
+                <td *ngIf="faceRecResponseDataLoadedForToday">{{faceRecResponseToday['eightHoursToTenHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForWeek">{{faceRecResponseWeek['eightHoursToTenHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForMonth">{{faceRecResponseMonth['eightHoursToTenHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForMonth" class="loading"></td>
+              </tr>
+              <tr class="projet-wice__table-row">
+                <td class="projet-wice__name">10hrs - 12hrs</td>
+                <td *ngIf="wwtResponseDataLoadedForToday">{{WWTResponseToday['tenToTwelveHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForWeek">{{WWTResponseWeek['tenToTwelveHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForMonth">{{WWTResponseMonth['tenToTwelveHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForMonth" class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td class="project-wice__nodata"></td>
+                <td *ngIf="faceRecResponseDataLoadedForToday">{{faceRecResponseToday['tenToTwelveHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForWeek">{{faceRecResponseWeek['tenToTwelveHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForMonth">{{faceRecResponseMonth['tenToTwelveHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForMonth" class="loading"></td>
+              </tr>
+              <tr class="projet-wice__table-row">
+                <td class="projet-wice__name">12hrs - 15hrs</td>
+                <td *ngIf="wwtResponseDataLoadedForToday">{{WWTResponseToday['twelveHoursToFifteenHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForWeek">{{WWTResponseWeek['twelveHoursToFifteenHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForMonth">{{WWTResponseMonth['twelveHoursToFifteenHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForMonth" class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td class="project-wice__nodata"></td>
+                <td *ngIf="faceRecResponseDataLoadedForToday">{{faceRecResponseToday['twelveHoursToFifteenHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForWeek">{{faceRecResponseWeek['twelveHoursToFifteenHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForMonth">{{faceRecResponseMonth['twelveHoursToFifteenHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForMonth" class="loading"></td>
+              </tr>
+              <tr class="projet-wice__table-row">
+                <td class="projet-wice__name">Over 20hrs</td>
+                <td *ngIf="wwtResponseDataLoadedForToday">{{WWTResponseToday['overTwentyHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForWeek">{{WWTResponseWeek['overTwentyHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="wwtResponseDataLoadedForMonth">{{WWTResponseMonth['overTwentyHours']}}</td>
+                <td *ngIf="!wwtResponseDataLoadedForMonth" class="loading"></td>
+                <td class="project-wice__nodata"></td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td>n/a</td>
+                <td class="project-wice__nodata"></td>
+                <td *ngIf="faceRecResponseDataLoadedForToday">{{faceRecResponseToday['overTwentyHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForToday" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForWeek">{{faceRecResponseWeek['overTwentyHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForWeek" class="loading"></td>
+                <td *ngIf="faceRecResponseDataLoadedForMonth">{{faceRecResponseMonth['overTwentyHours']}}</td>
+                <td *ngIf="!faceRecResponseDataLoadedForMonth" class="loading"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

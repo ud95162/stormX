@@ -1,0 +1,76 @@
+<div class="c-accomplishment__header">
+  <div class="c-accomplishment__header-type">
+    <div class="c-custom-dropdown c-accomplishment__list">
+      <div class="c-custom-dropdown__header dropdown__color--bg" (click)="categoryListDisplay()">
+        <span class="c-custom-dropdown__header-title dropdown__color--text u-mr">{{selectedCategoryName}}</span>
+        <svg class="a-icon c-custom-dropdown__header-icon dropdown__color--icon">
+          <use xlink:href="#pointer-down"></use>
+        </svg>
+      </div>
+      <div class="c-custom-dropdown__body" *ngIf="displayCategoryList">
+        <ul class="c-custom-dropdown__body-list">
+          <li class="c-custom-dropdown__body-item" value="0" (click)="getSelectedCategoryData(0)">All Achievements</li>
+          <li class="c-custom-dropdown__body-item" *ngFor="let data of categoryList" value="{{data.categoryID}}"
+              (click)="getSelectedCategoryData(data.categoryID)">{{data.category}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="c-accomplishment__header-filter"  (click)="hideList()">
+    <div class="m-form-field c-accomplishment__form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label">From Date</label>
+      </div>
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" [(ngModel)]="fromDate" (change)="getEmployeeAccomplishments()">
+        </div>
+      </div>
+    </div>
+    <div class="m-form-field c-accomplishment__form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label">To Date</label>
+      </div>
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" [(ngModel)]="toDate" (change)="getEmployeeAccomplishments()">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="c-accomplishment__content"  (click)="hideList()" *ngIf="employeeAccomplishmentData.length > 0">
+  <div class="c-accomplishment-card" *ngFor="let data of employeeAccomplishmentData">
+    <div class="c-accomplishment-card__header">
+      <h4 class="c-accomplishment-card__header-title">{{data.accomplishment}}</h4>
+    </div>
+    <div class="c-accomplishment-card__body">
+
+      <img src="/assets/images/winner-cup.png" class="c-accomplishment-card__img" alt="Accomplishment-Image" *ngIf="data.image === null">
+      <img src="{{data.image}}" class="c-accomplishment-card__img" alt="Accomplishment-Image" *ngIf="data.image !== null">
+      <div class="c-accomplishment-card__content">
+        <h4 class="c-accomplishment-card__content-title">{{getRelatedCategoryName(data.categoryID)}}</h4>
+        <p class="c-accomplishment-card__content-date">{{data.fromDate}} {{generateToDateText(data.toDate, data.ongoing)}}</p>
+        <a  class="c-accomplishment-card__content-link" (click) = "data.enabled = !data.enabled"
+            *ngIf="data.description != null && !data.enabled">More Info</a>
+        <a class="c-accomplishment-card__content-link"
+           *ngIf="data.enabled" (click) = "data.enabled = !data.enabled">Less Info</a>
+        <p class="c-accomplishment-card__content-paragraph" *ngIf="data.enabled">
+          {{data.description}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="c-accomplishment__content" *ngIf="employeeAccomplishmentData.length === 0"
+     style="display: flex !important; justify-content: center !important; align-items: center !important">
+  <div class="c-data__empty" style="display: grid; justify-content: center">
+    <img src="/assets/new-design-images/no-data.png" alt="no data">
+    <div class="gray-500 s-small-default c-data__empty-sub">
+      Accomplishment Data Not Available!
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+  <!--dropdown component-->
+  <div class="m-form-field">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label">Skill Type <span class="required">*</span></label>
+    </div>
+    <div class="m-form-field__field">
+
+      <!-- visible in mobile-->
+<!--      <select class="m-form-field__select" hidden>-->
+<!--        <option value="undefined" disabled selected hidden>Select</option>-->
+<!--        <option value="Days">Days</option>-->
+<!--        <option value="Nights">Nights</option>-->
+<!--      </select>-->
+
+      <!-- visible in desktop-->
+<!--      <input class="m-form-field__trigger" type="button" value="Select">-->
+
+<!--      <div class="m-form-field__drop">-->
+<!--        <ul class="m-form-field__list">-->
+<!--          <li class="m-form-field__list-item">Days</li>-->
+<!--          <li class="m-form-field__list-item">Night</li>-->
+<!--        </ul>-->
+<!--      </div>-->
+      <div class="m-form-field__field-item">
+        <input class="m-form-field__input" id="skill-type" type="text" minlength="0"
+               maxlength="524288" placeholder="" value="" [ngModel]="skillType" disabled>
+      </div>
+      <!-- visible in desktop end-->
+
+    </div>
+  </div>
+
+  <!--        has-focus-->
+  <div class="m-form-field">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label" for="skill">Skills <span class="required">*</span></label>
+    </div>
+    <div class="m-form-field__field">
+      <div class="m-form-field__field-item">
+        <span class="m-form-field__pre">
+                    <svg class="a-icon m-form-field__pre-icon">
+                    <use xlink:href="#search"></use>
+                </svg>
+                </span>
+        <input *ngIf="skillType=='Technical Skills'" class="m-form-field__input"  list="techSkillsList" name="techSkill" id="skill" type="text" minlength="0"
+               maxlength="524288" placeholder="Search for technical skills" value="" [(ngModel)]="skillName">
+        <input *ngIf="skillType=='Soft Skills'" class="m-form-field__input"  list="softSkillsList" name="skill" id="skill" type="text" minlength="0"
+               maxlength="524288" placeholder="Search for soft skills" value="" [(ngModel)]="skillName" >
+        <datalist id="techSkillsList">
+          <option *ngFor="let techskill of technicalSkillsArray" value="{{techskill.name}}">
+        </datalist>
+        <datalist id="softSkillsList">
+          <option *ngFor="let softskill of softSkillsArray" value="{{softskill.name}}">
+        </datalist>
+      </div>
+    </div>
+    <span class="m-form-field__error">error</span>
+  </div>
+
+  <!--        has-focus-->
+  <div class="m-form-field">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label" for="skillsPersonalRating">Personal Rating <span class="required">*</span></label>
+    </div>
+
+    <div class="m-form-range__select">
+      <div class="rSlider">
+        <span class="slide"></span>
+        <input (input)="changePersonalRating()" id="skillsPersonalRating" class="select-range" type="range" min="0" max="10" >
+      </div>
+      <span id="demo">{{personalRating}}</span>
+
+    </div>
+
+  </div>
+  <!--        has-focus-->
+  <div class="m-form-field" *ngIf="skillType == 'Technical Skills'">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label">Supervisor <span class="required">*</span></label>
+    </div>
+    <div class="m-form-field__field">
+      <!-- visible in desktop-->
+      <select class="m-form-field__select" id="supervisor" [(ngModel)]="techSkillSupervisor">
+        <option value ="undefined" disabled selected >Select</option>
+        <option *ngFor="let supervisor of supervisorList" [value]="supervisor.empId">
+          {{supervisor.name}}
+        </option>
+      </select>
+      <!-- visible in desktop end-->
+
+    </div>
+  </div>
+
+  <!--        has-focus-->
+  <div class="m-form-field">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label">Description</label>
+    </div>
+    <textarea id="test" name="test" rows="8" cols="95" [(ngModel)]="description"></textarea>
+  </div>
+

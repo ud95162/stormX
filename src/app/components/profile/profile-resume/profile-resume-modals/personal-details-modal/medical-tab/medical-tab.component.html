@@ -1,0 +1,53 @@
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="known-allergies">Known Allergies</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="known-allergies" type="text" minlength="0"
+             maxlength="524288" [(ngModel)]="medicalDetails.known_allergies" value="{{medicalDetails.known_allergies}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="regular-medications">Regular Medications</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="regular-medications" type="text"
+             minlength="0" maxlength="524288" [(ngModel)]="medicalDetails.medication" value="{{medicalDetails.medication}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="chronic-ailments">Chronic Ailments</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="chronic-ailments" type="text" minlength="0"
+             maxlength="524288" [(ngModel)]="medicalDetails.chronic_ailment" value="{{medicalDetails.chronic_ailment}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="blood-group">Blood</label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+      <input class="m-form-field__input" id="blood-group" type="text" minlength="0"
+             maxlength="524288" [(ngModel)]="medicalDetails.blood_type" value="{{medicalDetails.blood_type}}">
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+

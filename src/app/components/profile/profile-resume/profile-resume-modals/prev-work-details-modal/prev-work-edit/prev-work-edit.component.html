@@ -1,0 +1,77 @@
+<!--        has-focus-->
+<!--<div *ngIf="modalType=='edit'">-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="designation">Designation <span class="required">*</span></label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+        <span class="m-form-field__pre">
+                    <svg class="a-icon m-form-field__pre-icon">
+                    <use xlink:href="#search"></use>
+                </svg>
+                </span>
+      <input class="m-form-field__input"  list="previousJobRolesList" name="designation" id="designation" type="text" minlength="0"
+             maxlength="524288" placeholder="Search for designation" value="" [(ngModel)]="prevWorkDetails.title" >
+      <datalist id="previousJobRolesList">
+        <option *ngFor="let jobRole of previousJobRoleList" value={{jobRole}}>
+      </datalist>
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<!--        has-focus-->
+<div class="m-form-field">
+  <div class="m-form-field__label-wrap">
+    <label class="m-form-field__label" for="company">Company <span class="required">*</span></label>
+  </div>
+  <div class="m-form-field__field">
+    <div class="m-form-field__field-item">
+        <span class="m-form-field__pre">
+                    <svg class="a-icon m-form-field__pre-icon">
+                    <use xlink:href="#search"></use>
+                </svg>
+                </span>
+      <input class="m-form-field__input"  list="previousCompaniesList" name="company" id="company" type="text" minlength="0"
+             maxlength="524288" placeholder="Search for company" value="" [(ngModel)]="prevWorkDetails.company" >
+      <datalist id="previousCompaniesList">
+        <option *ngFor="let company of previousCompaniesList" value={{company}}>
+      </datalist>
+    </div>
+  </div>
+  <span class="m-form-field__error">error</span>
+</div>
+
+<section class="l-grid l-grid--1-1 date-sec">
+  <div class="l-grid__item">
+    <!--        has-focus-->
+    <div class="m-form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label" for="calender1">From <span class="required">*</span></label>
+      </div>
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" id="calender1" value="123" [(ngModel)]="prevWorkDetails.from_date">
+        </div>
+      </div>
+      <span class="m-form-field__error">error</span>
+    </div>
+  </div>
+  <div class="l-grid__item">
+    <!--        has-focus-->
+    <div class="m-form-field">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label" for="calender2">To <span class="required">*</span></label>
+      </div>
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="date" id="calender2" value="123" [(ngModel)]="prevWorkDetails.to_date">
+        </div>
+      </div>
+      <span class="m-form-field__error">error</span>
+    </div>
+
+  </div>
+</section>
+<!--</div>-->

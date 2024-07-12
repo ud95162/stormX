@@ -1,0 +1,166 @@
+<app-error-modal></app-error-modal>
+<!--start of new implementation-->
+<div class="profile-page__nav" *ngIf="showPage">
+  <div class="c-page-nav">
+    <nav class="c-page-nav__wrapper">
+      <a class={{homeTabLI}}
+         *ngIf="checkPermission.checkUserHavePermissionForSection('PageHome')"
+         (click)="changeTabs('home')" data-toggle="tab"><span>Home</span></a>
+      <a class={{aboutTabLI}}
+         *ngIf="checkPermission.checkUserHavePermissionForSection('PageAbout')"
+         (click)="changeTabs('about')" data-toggle="tab"><span>About</span></a>
+      <a class={{photosTabLI}}
+         *ngIf="checkPermission.checkUserHavePermissionForSection('PagePhotos')"
+         (click)="changeTabs('photos')" data-toggle="tab"><span>Photos</span></a>
+      <a class={{reviewTabLI}}
+         *ngIf="checkPermission.checkUserHavePermissionForSection('PageReviews')"
+         (click)="changeTabs('review')" data-toggle="tab"><span>Review</span></a>
+    </nav>
+  </div>
+</div>
+
+<div class="l-wrapper profile-page__wrapper" *ngIf="showPage">
+  <div class="profile-page__page-content">
+    <div class="profile-page__sidebar">
+      <app-page-header *ngIf="checkPermission.checkUserHavePermissionForSection('PageNameCard')"
+      [pageId]="pageId"></app-page-header>
+    </div>
+    <div>
+      <div class="profile-page__main-content" >
+        <div
+          *ngIf="checkPermission.checkUserHavePermissionForSection('PageHome')">
+          <app-page-home-tab *ngIf="home"
+                             [pageId]="pageId"></app-page-home-tab>
+        </div>
+
+
+        <div *ngIf="checkPermission.checkUserHavePermissionForSection('PageAbout')">
+          <app-page-about-tab
+            *ngIf="about"
+            [pageId]="pageId"></app-page-about-tab>
+        </div>
+
+        <div
+          *ngIf="checkPermission.checkUserHavePermissionForSection('PagePhotos')">
+          <app-page-photos-tab
+            *ngIf="photos"
+            [pageId]="pageId"></app-page-photos-tab>
+        </div>
+
+        <div
+          *ngIf="checkPermission.checkUserHavePermissionForSection('PageReviews')">
+          <app-page-reviews-tab
+            *ngIf="review"
+            [pageId]="pageId"
+            [pageName]="pageName"></app-page-reviews-tab>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--end of ne implementation-->
+<!--<div *ngIf="showPage">-->
+<!--  <div *ngIf="isDesktop" class="container">-->
+<!--    <div class="col-sm-2" style="top: 20px; padding-left: 0; padding-right: 5px">-->
+<!--      <app-page-header *ngIf="componentPermission.Pages.subComponentPermissions.PageNameCard.mainComponentPermission"-->
+<!--                       [pageId]="pageId"></app-page-header>-->
+<!--    </div>-->
+<!--    <div class="col-sm-10" style="top: 20px;">-->
+<!--      <ul class="nav nav-tabs">-->
+<!--        <li class="active">-->
+<!--          <a *ngIf="componentPermission.Pages.subComponentPermissions.PageHome.mainComponentPermission"-->
+<!--             data-toggle="tab"-->
+<!--             href="#home">Home</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a *ngIf="componentPermission.Pages.subComponentPermissions.PageAbout.mainComponentPermission"-->
+<!--             data-toggle="tab"-->
+<!--             href="#about">About</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a *ngIf="componentPermission.Pages.subComponentPermissions.PagePhotos.mainComponentPermission"-->
+<!--             data-toggle="tab"-->
+<!--             href="#photos">Photos</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a *ngIf="componentPermission.Pages.subComponentPermissions.PageReviews.mainComponentPermission"-->
+<!--             data-toggle="tab"-->
+<!--             href="#review">Review</a>-->
+<!--        </li>-->
+<!--      </ul>-->
+
+<!--      <div class="tab-content">-->
+<!--        <div class="tab-pane fade in active" id="home">-->
+<!--          <app-page-home-tab *ngIf="componentPermission.Pages.subComponentPermissions.PageHome.mainComponentPermission"-->
+<!--                             [pageId]="pageId"></app-page-home-tab>-->
+<!--        </div>-->
+<!--        <div class="tab-pane fade" id="about">-->
+<!--          <app-page-about-tab-->
+<!--            *ngIf="componentPermission.Pages.subComponentPermissions.PageAbout.mainComponentPermission"-->
+<!--            [pageId]="pageId"></app-page-about-tab>-->
+<!--        </div>-->
+<!--        <div class="tab-pane fade" id="photos">-->
+<!--          <app-page-photos-tab-->
+<!--            *ngIf="componentPermission.Pages.subComponentPermissions.PagePhotos.mainComponentPermission"-->
+<!--            [pageId]="pageId"></app-page-photos-tab>-->
+<!--        </div>-->
+<!--        <div class="tab-pane fade" id="review">-->
+<!--          <app-page-reviews-tab-->
+<!--            *ngIf="componentPermission.Pages.subComponentPermissions.PageReviews.mainComponentPermission"-->
+<!--            [pageId]="pageId"-->
+<!--            [pageName]="pageName"></app-page-reviews-tab>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div *ngIf="isMobile || isTablet">-->
+<!--    <app-page-header *ngIf="componentPermission.Pages.subComponentPermissions.PageNameCard.mainComponentPermission"-->
+<!--                     [pageId]="pageId"></app-page-header>-->
+
+<!--    <ul class="nav nav-tabs" style="margin-top: -19px !important;">-->
+<!--      <li class="active">-->
+<!--        <a *ngIf="componentPermission.Pages.subComponentPermissions.PageHome.mainComponentPermission" data-toggle="tab"-->
+<!--           href="#home">Home</a>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <a *ngIf="componentPermission.Pages.subComponentPermissions.PageAbout.mainComponentPermission" data-toggle="tab"-->
+<!--           href="#about">About</a></li>-->
+<!--      <li>-->
+<!--        <a *ngIf="componentPermission.Pages.subComponentPermissions.PagePhotos.mainComponentPermission"-->
+<!--           data-toggle="tab"-->
+<!--           href="#photos">Photos</a>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <a *ngIf="componentPermission.Pages.subComponentPermissions.PageReviews.mainComponentPermission"-->
+<!--           data-toggle="tab"-->
+<!--           href="#review">Review</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+
+<!--    <div class="tab-content">-->
+<!--      <div class="tab-pane fade in active" id="home">-->
+<!--        <app-page-home-tab *ngIf="componentPermission.Pages.subComponentPermissions.PageHome.mainComponentPermission"-->
+<!--                           [pageId]="pageId"></app-page-home-tab>-->
+<!--      </div>-->
+<!--      <div class="tab-pane fade" id="about">-->
+<!--        <app-page-about-tab *ngIf="componentPermission.Pages.subComponentPermissions.PageAbout.mainComponentPermission"-->
+<!--                            [pageId]="pageId"></app-page-about-tab>-->
+<!--      </div>-->
+<!--      <div class="tab-pane fade" id="photos">-->
+<!--        <app-page-photos-tab-->
+<!--          *ngIf="componentPermission.Pages.subComponentPermissions.PagePhotos.mainComponentPermission"-->
+<!--          [pageId]="pageId"></app-page-photos-tab>-->
+<!--      </div>-->
+<!--      <div class="tab-pane fade" id="review">-->
+<!--        <app-page-reviews-tab-->
+<!--          *ngIf="componentPermission.Pages.subComponentPermissions.PageReviews.mainComponentPermission"-->
+<!--          [pageId]="pageId"-->
+<!--          [pageName]="pageName"></app-page-reviews-tab>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

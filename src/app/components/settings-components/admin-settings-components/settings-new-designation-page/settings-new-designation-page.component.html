@@ -1,0 +1,357 @@
+<div class="kriyo-stories">
+  <div class="l-page__sub-content content-fluid">
+    <div class="l-page__sub-content content-fluid">
+
+      <div class="opd-settings-header">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h2 class="c-define-designation__text">Designation Configurations</h2>
+          <div class="user-group-settings-content__button" style="padding-right: 20px;">
+            <button class="user-group-settings-content__button-add" style="padding: 0 15px;"
+                    (click)="addNewDesignation()">
+              <svg class="a-icon user-group-settings-content__button-icon">
+                <use xlink:href="#plus"></use>
+              </svg>
+              Create New Designation
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-filter u-mt-20">
+        <div class="c-filter__items">
+          <div class="c-filter__items-wrap-end" style="position: relative">
+            <div class="m-form-field m-search-field u-mr-10">
+              <div class="m-form-field__field">
+                <div class="m-form-field__field-item m-search-input">
+                  <input autocomplete="off" class="m-form-field__input" type="text" placeholder="Search here"
+                         [(ngModel)]="searchTerm"
+                         #employeeFilterInput (keyup)="getSearchResults($event)"
+                  >
+                </div>
+              </div>
+            </div>
+
+            <button class="a-btn a-btn--primary" aria-label="Employee table filter"
+                    (click)="displayFiltersOnClick()">
+              <svg class="a-icon">
+                <use xlink:href="#filter"></use>
+              </svg>
+              <!--            Filters-->
+            </button>
+
+            <div class="project-wise-filter-box " *ngIf="filterSectionDisplay" (click)="$event.stopPropagation()">
+              <div class="m-form-field" *ngIf="companyDataLoaded">
+                <div class="m-form-field__label-wrap">
+                  <label class="m-form-field__label">Company</label>
+                </div>
+
+                <div class="m-form-field__field m-form-field__min-height">
+                  <div class="m-form-field__field-item">
+                    <select class="m-form-field__select"
+                            [(ngModel)]="selectedCompanyID" [ngModelOptions]="{standalone: true}"
+                            (change)="getBusinessUnitsDetails();">
+                      <option value="0">All</option>
+                      <option *ngFor="let data of companyData" value="{{data.companyID}}">{{data.companyName}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <span class="m-form-field__error">error</span>
+              </div>
+              <div class="m-form-field" *ngIf="buDataLoaded">
+                <div class="m-form-field__label-wrap">
+                  <label class="m-form-field__label">Business Unit</label>
+                </div>
+
+                <div class="m-form-field__field m-form-field__min-height">
+                  <div class="m-form-field__field-item">
+                    <select class="m-form-field__select"
+                            [(ngModel)]="selectedBUID" [ngModelOptions]="{standalone: true}"
+                            (change)="getDepartmentsDetails();">
+                      <option [defaultSelected]="0">All</option>
+                      <option *ngFor="let data of businessUnitsData" value="{{data.id}}">{{data.name}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <span class="m-form-field__error">error</span>
+              </div>
+
+              <div class="m-form-field" *ngIf="cadresList">
+                <div class="m-form-field__label-wrap">
+                  <label class="m-form-field__label">Cadre</label>
+                </div>
+
+                <div class="m-form-field__field m-form-field__min-height">
+                  <div class="m-form-field__field-item">
+                    <select class="m-form-field__select"
+                            [(ngModel)]="selectedCadreID" [ngModelOptions]="{standalone: true}">
+                      <option value="0">All</option>
+                      <option *ngFor="let data of cadresList" value="{{data.cadreID}}">{{data.cadreName}}</option>
+                    </select>
+                  </div>
+                </div>
+                <span class="m-form-field__error">error</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="l-grid u-mt+"
+           style="margin-top: 10px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+        <div class="project-wise-card">
+          <div class="project-wise-card__box project-wise-card__box--line"
+               style="cursor:pointer;">
+            <h5>{{d.id}</h5>
+          </div>
+          <div class="project-wise-card__box-sub"></div>
+        </div>
+
+    </div>
+
+
+    </div>
+  </div>
+
+  <div class="o-modal" id="newDesignationModal">
+
+    <div class="c-experience__modal o-modal__content">
+
+      <div class="o-modal__body">
+        <div class="o-modal__inner-header-line o-modal__inner-header">
+          <h2 class="c-define-designation__text">Create Designation</h2>
+          <button class="a-btn a-btn--link o-modal__inner-close"
+                  (click)="hideModal('newDesignationModal')">
+            <svg class="a-icon o-modal__close-icon">
+              <use xlink:href="#x"></use>
+            </svg>
+          </button>
+        </div>
+
+        <div class="c-modal__body-container">
+          <div *ngIf="!designationGroupsSelected">
+
+            <div class="c-form__wrap">
+              <div class="c-form__wrap-items" *ngIf="companyDataLoaded">
+                <div class="m-form-field">
+                  <label class="m-form-field__label">Company</label>
+                  <div class="m-form-field__field">
+                    <div class="m-form-field__field-item m-list-input">
+                      <select class="m-form-field__input" aria-label="Select Supervisor"
+                              [(ngModel)]="newDesignationDetails.designationCombination.companyID"
+                              [ngModelOptions]="{standalone: true}"
+                              (change)="getBusinessUnitsDetails();">
+                        <option *ngFor="let data of companyData"
+                                value="{{data.companyID}}">{{data.companyName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="c-form__wrap-items" [ngClass]="{'a__visibility--hidden': businessUnitsData.length === 0}">
+                <div class="m-form-field">
+                  <label class="m-form-field__label">Business Unit</label>
+                  <div class="m-form-field__field">
+                    <div class="m-form-field__field-item m-list-input">
+                      <select class="m-form-field__input" aria-label="Select Supervisor"
+                              [(ngModel)]="newDesignationDetails.designationCombination.buID"
+                              [ngModelOptions]="{standalone: true}"
+                              (change)="getDepartmentsDetails()">
+                        <option *ngFor="let data of businessUnitsData" value="{{data.id}}">{{data.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="c-form__wrap" *ngIf="deptDataLoaded">
+              <div class="c-form__wrap-items" *ngIf="deptDataLoaded">
+                <div class="m-form-field">
+                  <label class="m-form-field__label">Department</label>
+                  <div class="m-form-field__field">
+                    <div class="m-form-field__field-item m-list-input">
+                      <select class="m-form-field__input" aria-label="Select Supervisor"
+                              [(ngModel)]="newDesignationDetails.designationCombination.deptID"
+                              [ngModelOptions]="{standalone: true}"
+                              (change)="getOfficeDetails()">
+                        <option *ngFor="let data of departmentsData" value="{{data.id}}">{{data.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="c-form__wrap-items" [ngClass]="{'a__visibility--hidden': officeData.length === 0}">
+                <div class="m-form-field ">
+                  <label class="m-form-field__label">Office</label>
+                  <div class="m-form-field__field-item m-list-input">
+                    <select class="m-form-field__input" aria-label="Select Office" multiple
+                            [(ngModel)]="newDesignationDetails.designationCombination.officeID"
+                            [ngModelOptions]="{standalone: true}">
+                      <option *ngFor="let data of officeData" [value]="data.id">{{data.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="c-form__wrap">
+              <div class="c-form__wrap-items" *ngIf="cadreDataLoaded">
+                <div class="m-form-field">
+                  <label class="m-form-field__label">Cadre</label>
+                  <div class="m-form-field__field">
+                    <div class="m-form-field__field-item m-list-input">
+                      <select class="m-form-field__input" aria-label="Select Supervisor"
+                              [(ngModel)]="newDesignationDetails.designationCombination.cadreID"
+                              [ngModelOptions]="{standalone: true}"
+                              (change)="getSubCadres()">
+                        <option *ngFor="let cadre of cadresList" value="{{cadre.id}}">{{cadre.cadre}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="c-form__wrap-items" [ngClass]="{'a__visibility--hidden': subCadreData.length === 0}">
+                <div class="m-form-field ">
+                  <label class="m-form-field__label">Sub Cadre</label>
+                  <div class="m-form-field__field">
+                    <div class="m-form-field__field-item m-list-input">
+                      <select class="m-form-field__input" aria-label="Select Supervisor"
+                              [(ngModel)]="newDesignationDetails.designationCombination.subCadreID"
+                              [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let data of subCadreData" value="{{data.id}}">{{data.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div *ngIf="designationGroupsSelected">
+
+            <div class="c-form__wrap">
+
+              <div class="c-form__wrap-items">
+                <div class="m-form-field">
+                  <label class="m-form-field__label">Designation Category</label>
+                  <div class="m-form-field__field">
+                    <input list="designationCategory" name="designationGroup" class="m-form-field__input"
+                           placeholder="Select a category" required
+                           [(ngModel)]="newDesignationDetails.designationCategory.categoryName"/>
+                    <datalist id="designationCategory" class="m-form-field__datalist">
+                      <option *ngFor="let data of designationCategory">{{data}}</option>
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+
+              <div class="c-form__wrap-items">
+                <div class="m-form-field">
+                  <label class="m-form-field__label">Designation Group</label>
+                  <div class="m-form-field__field">
+                    <input list="designationGroup" name="designationGroup" class="m-form-field__input"
+                           placeholder="Select a group" required
+                           [(ngModel)]="newDesignationDetails.designationGroup.groupName"/>
+                    <datalist id="designationGroup" class="m-form-field__datalist">
+                      <option *ngFor="let data of designationGroup">{{data}}</option>
+                    </datalist>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <br>
+
+            <div class="c-form__wrap">
+              <div class="c-form__wrap-items">
+                <div class="m-form-field">
+                  <label class="m-form-field__label">Designation Name</label>
+                  <div class="m-form-field__field">
+                    <div class="m-form-field__field-item">
+                      <input autocomplete="off" class="m-form-field__input" type="text"
+                             required aria-label="Enter Designation"
+                             [(ngModel)]="designationObject.designationName"
+                             [ngClass]="{'is-disabled': designationList.length !== 0}"
+                             [ngModelOptions]="{standalone: true}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="c-form__wrap-items">
+                <div class="m-form-field ">
+                  <label class="m-form-field__label">Abbreviation</label>
+                  <div class="m-form-field__field">
+                    <div class="m-form-field__field-item">
+                      <input autocomplete="off" class="m-form-field__input" type="text"
+                             required aria-label="Enter Abbreviation"
+                             [(ngModel)]="designationObject.abbreviation"
+                             [ngClass]="{'is-disabled': designationList.length !== 0}"
+                             [ngModelOptions]="{standalone: true}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="c-form__wrap-items" style="margin-top: 20px; text-align: right">
+              <button class="a-btn a-btn--link" (click)="addToDesignationList()"
+                      [ngClass]="{'is-disabled': !designationObject.designationName || !designationObject.abbreviation}">
+                <svg class="a-icon user-group-settings-content__button-icon">
+                  <use xlink:href="#plus"></use>
+                </svg>
+                Add
+              </button>
+            </div>
+            <br>
+
+            <div class="c-form__wrap"
+                 style="margin-top: 10px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <div class="card" *ngFor="let data of designationList; let index = index">
+                <div class="container">
+                  <button (click)="removeCard(index)">
+                    <svg class="a-icon o-modal__close-icon">
+                      <use xlink:href="#x"></use>
+                    </svg>
+                  </button>
+                  <h4 class="item-title">{{data.designationName}}</h4>
+                  <p class="item-abbreviation">{{data.abbreviation}}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="o-modal__footer" style="margin: 0">
+            <div class="o-modal__footer-btns" *ngIf="!designationGroupsSelected">
+              <button class="a-btn a-btn--trinity u-mr" (click)="hideModal('newDesignationModal')">Cancel</button>
+              <button class="a-btn a-btn--secondary" (click)="setNewDesignationGroups()" *ngIf="showNextButton">Next
+                Step
+              </button>
+            </div>
+            <div class="o-modal__footer-btns" *ngIf="designationGroupsSelected">
+              <button class="a-btn a-btn--trinity u-mr" (click)="resetNewDesignationGroups()">Back</button>
+              <button class="a-btn a-btn--secondary" (click)="saveNewDesignation()"
+                      [ngClass]="{'is-disabled': designationList.length === 0}" *ngIf="showSaveButton">Create
+                Designation
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

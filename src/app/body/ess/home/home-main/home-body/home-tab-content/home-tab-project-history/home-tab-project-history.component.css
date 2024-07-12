@@ -1,0 +1,121 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background-color: #ffffff !important;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.card-title-h5 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #2d2f32;
+  font-weight: 600 !important;
+  display: inline;
+}
+
+.card-sub-title-h6 {
+  margin: 20px 0 10px 0;
+  font-size: 14px;
+  color: #2d2f32;
+  font-weight: bold !important;
+}
+
+img {
+  width: 20%;
+  float: right;
+  margin-top: -20px;
+  margin-bottom: -15px;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.btn-submit {
+  border-radius: 4px;
+  padding: 4px 10px;
+  float: right;
+  background-color: white;
+  border-color: #007bff;
+  color: #007bff;
+  font-size: 14px;
+}
+
+.btn-delete {
+  border-radius: 4px;
+  padding: 0 8px;
+  float: right;
+  background-color: white;
+  border-color: #dc3545;
+  color: white;
+  font-size: 14px;
+}
+
+.note {
+  margin: 4px 0;
+  background: #d6d6d6;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+
+/*-------------------------*/
+.utilization-registry {
+  margin-top: 12px;
+}
+
+.project-utilization-history {
+  margin-top: 36px;
+}
+
+.delete-util {
+  color: #dc3545;
+}
+
+.padding-left-0 {
+  padding-left: 0;
+}
+
+.error-message {
+  color: #dc3545;
+}
+
+
+.loading {
+  width: 60px;
+  height: 70%;
+  margin-top: -15px;
+  margin-bottom: -15px;
+}
+
+.input-new-team {
+  padding-right: 25px;
+}
+
+.close-new-team {
+  position: absolute;
+  top: 28px;
+  left: 156px;
+  border: none;
+  font-weight: 500;
+  border-radius: 10px
+}
+
+.close-new-team:hover {
+  color: #007bff;
+}

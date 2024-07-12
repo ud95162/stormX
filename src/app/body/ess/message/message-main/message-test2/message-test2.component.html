@@ -1,0 +1,43 @@
+<div style="height: 100px"></div>
+
+<!--<tag-input [ngModel]="itemsAsObjects"></tag-input>-->
+
+<label for="typeahead-focus">Search for a state:</label>
+<input
+  #instance="ngbTypeahead"
+  (click)="click$.next($event.target.value)"
+  (focus)="focus$.next($event.target.value)"
+  [(ngModel)]="model"
+  [ngbTypeahead]="search1"
+  class="form-control"
+  id="typeahead-focus"
+  type="text"
+/>
+<hr>
+<pre>Model: {{ model | json }}</pre>
+
+<input class="form-control search-input" id="searchbox" list="states" placeholder="What are you looking for..."
+       type="text"/>
+<div class="datalist">
+  <datalist id="states">
+    <option *ngFor="let searchKey of states" value={{searchKey}}>
+  </datalist>
+</div>
+
+
+<p>A typeahead example that uses a custom template for results display, an object as the model,
+  and the highlight directive to highlight the term inside the custom template.
+</p>
+
+<ng-template #rt let-r="result" let-t="term">
+  <img [src]="'https://upload.wikimedia.org/wikipedia/commons/thumb/' + r['flag']" class="mr-1" style="width: 16px">
+  <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+</ng-template>
+
+<label for="typeahead-template">Search for a state:</label>
+<input [(ngModel)]="model" [inputFormatter]="formatter" [ngbTypeahead]="search2" [resultTemplate]="rt"
+       class="form-control"
+       id="typeahead-template"
+       type="text"/>
+<hr>
+<pre>Model: {{ model | json }}</pre>

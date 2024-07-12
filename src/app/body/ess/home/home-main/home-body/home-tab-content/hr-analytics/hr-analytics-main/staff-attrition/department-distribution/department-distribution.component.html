@@ -1,0 +1,113 @@
+<div class="l-grid l-grid--1-1" style="margin-top: 16px;">
+  <div class="analytics-graph-card">
+    <div class="analytics-graph-card-row u-mb+">
+      <h6 class="analytics-graph-card__title u-mb0">Cumulative - HeadGrowth vs Turnover</h6>
+
+      <div class="hr-analytics-department-filter">
+        <a class="project-dashboard__filter" style="width: fit-content" (click)="displayDepartmentAttritionFilters($event)">
+                <span class="m-form-field__pre">
+                    <svg class="a-icon project-dashboard__filter-icon">
+                        <use xlink:href="#filter"></use>
+                    </svg>
+                </span>
+        </a>
+        <div class="project-wise-filter-box" *ngIf="attritionFilterSectionDisplay" (click)="$event.stopPropagation()">
+          <div class="m-form-field" *ngIf="companies.length > 0">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Company</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select"
+                        [(ngModel)]="selectedCompanyID" [ngModelOptions]="{standalone: true}"
+                        (change)="getBusinessUnitsData();">
+                  <option *ngFor="let data of companies" value="{{data.id}}">{{data.name}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+
+          <div class="m-form-field" *ngIf="businessUnitsDataLoaded">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Business Unit</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select"
+                        [(ngModel)]="selectedBuID" [ngModelOptions]="{standalone: true}"
+                        (change)="filterDepartmentWiseData()">
+                  <option *ngFor="let data of businessUnits" value="{{data.id}}">{{data.name}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+
+          <div class="m-form-field">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Start Date</label>
+            </div>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input autocomplete="off" class="m-form-field__input" type="date"
+                       placeholder="Type Here"
+                       [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}"
+                       (change)="changeDateRange()"
+                       aria-label="Start Date">
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+
+          <div class="m-form-field">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">End Date</label>
+            </div>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input autocomplete="off" class="m-form-field__input" type="date"
+                       placeholder="Type Here"
+                       [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}"
+                       (change)="changeDateRange()"
+                       aria-label="End Date">
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+    <table class="c-kriyo-deta__table analysis-statistics-table" *ngIf="departmentWiseDataLoaded"
+           aria-describedby="dep-wise-employee-distribution">
+      <thead class="c-kriyo-deta__table--header">
+      <tr>
+        <th>Department</th>
+        <th>Active</th>
+        <th>Recruits</th>
+        <th>Resigned</th>
+      </tr>
+      </thead>
+
+      <tbody class="c-kriyo-deta__table--body project-members__table-body">
+      <tr *ngFor="let data of departmentWiseData">
+        <td>{{data.depName}}</td>
+        <td>{{data.activeCount}}</td>
+        <td>{{data.recruitCount}}</td>
+        <td>{{data.resignCount}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="analytics-graph-card">
+    <h6 class="analytics-graph-card__title u-mb+">Resigned vs Recruits vs Active</h6>
+    <div id="depWiseEmployeeDistributionStackedChart" style="height: 520px"></div>
+  </div>
+</div>
+

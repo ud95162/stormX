@@ -1,0 +1,491 @@
+<!--&lt;!&ndash;new implementation&ndash;&gt;-->
+<!--<div class="dashboard-overview__main&#45;&#45;seperator">-->
+<!--  <app-home-tab-work-from-home-detailed-view-header></app-home-tab-work-from-home-detailed-view-header>-->
+<!--  &lt;!&ndash;<div class="w3-panel w3-card" *ngIf="gettingDataMessage">&ndash;&gt;-->
+<!--  &lt;!&ndash;  <h5 class="loading" style="display: inline">{{gettingDataMessage}}</h5>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="w3-panel w3-card">&ndash;&gt;-->
+<!--  &lt;!&ndash;  <div class="row">&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="col-sm-1" style="text-align: center">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6>Number of Days</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="!summeryDataLoaded" class="loading">Loading</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="summeryDataLoaded"><b>{{numberOfDays}}</b></h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="col-sm-1" style="text-align: center">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6>Number of Working Days</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="!summeryDataLoaded" class="loading">Loading</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="summeryDataLoaded"><b>{{numberOfWorkingDays}}</b></h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="col-sm-2 vertical" style="text-align: center">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6>Total Number of Hours</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="!summeryDataLoaded" class="loading">Loading</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="summeryDataLoaded"><b>{{totalWorkTime}} hrs</b></h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="col-sm-2 vertical" style="text-align: center">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6>Total Number of Users</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="!summeryDataLoaded" class="loading">Loading</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="summeryDataLoaded"><b>{{totalUsers}}</b></h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="col-sm-2 vertical" style="text-align: center">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6>Hours Per Day</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="!summeryDataLoaded" class="loading">Loading</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="summeryDataLoaded"><b>{{averageWorkTimePerDay}} hours/day</b></h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="col-sm-2 vertical" style="text-align: center">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6>Hours Per User</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="!summeryDataLoaded" class="loading">Loading</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="summeryDataLoaded"><b>{{averageWorkTimePerUser}} hours/user</b></h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="col-sm-2" style="text-align: center">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6>Hours Per User Per Day</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="!summeryDataLoaded" class="loading">Loading</h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h6 *ngIf="summeryDataLoaded"><b>{{averageWorkTimePerDayPerUser}} hours/user/day</b></h6>&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;  </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="w3-panel w3-card" *ngIf="showTable">&ndash;&gt;-->
+<!--  &lt;!&ndash;  <div class="row">&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="col-sm-4">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <input type="text" class="form-control" name="searchTermName" [(ngModel)]="searchTermName" placeholder="Filter By Name" aria-label="searchName" aria-describedby="basic-addon1">&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="col-sm-4">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <input type="text" class="form-control" name="searchTermEmail" [(ngModel)]="searchTermEmail" placeholder="Filter By Email" aria-label="searchEmail" aria-describedby="basic-addon1">&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="col-sm-4">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <input type="text" class="form-control" name="searchTermProject" [(ngModel)]="searchTermProject"  placeholder="Filter By Project" aria-label="searchProject" aria-describedby="basic-addon1">&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;  </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+<!--  &lt;!&ndash;<div class="w3-panel w3-card" *ngIf="showTable">&ndash;&gt;-->
+<!--  &lt;!&ndash;  <section>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="tableContainer">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <h1 *ngIf="isSorting">Sorting...</h1>&ndash;&gt;-->
+<!--  &lt;!&ndash;      <table class="table">&ndash;&gt;-->
+<!--  &lt;!&ndash;        <thead class="thead-dark fixedHeader">&ndash;&gt;-->
+<!--  &lt;!&ndash;        <tr style="text-align: center">&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="8%">Index</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="8%" style="text-align: center">Full Name&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByNameAsc()"  *ngIf="!nameAsc && !nameDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByNameDsc()" *ngIf="nameAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByNameAsc()" *ngIf="nameDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="10%" style="text-align: center">Email&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByEmailAsc()"  *ngIf="!emailAsc && !emailDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByEmailDsc()" *ngIf="emailAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByEmailAsc()" *ngIf="emailDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;          <th scope="col" width="10%" *ngIf="dateAsc" style="text-align: center">Date <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByDateDes()"></i></th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="10%" *ngIf="!dateAsc" style="text-align: center">Date <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByDateAsc()"></i></th>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;          <th scope="col" width="10%" style="text-align: center">Project</th>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;          <th scope="col" width="10%" *ngIf="isTodayUsers">Total Work Time&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByTotalTimeAsc()"  *ngIf="!totalTimeAsc && !totalTimeDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByTotalTimeDes()" *ngIf="totalTimeAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByTotalTimeAsc()" *ngIf="totalTimeDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="10%" *ngIf="!isTodayUsers">Average Work Time&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByTotalTimeAsc()"  *ngIf="!totalTimeAsc && !totalTimeDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByTotalTimeDes()" *ngIf="totalTimeAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByTotalTimeAsc()" *ngIf="totalTimeDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;          <th scope="col" width="10%">Jira Issue Count&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByJiraIssueCountAsc()"  *ngIf="!jiraIssueCountAsc && !jiraIssueCountDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByJiraIssueCountDsc()" *ngIf="jiraIssueCountAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByJiraIssueCountAsc()" *ngIf="jiraIssueCountDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="10%">Jira Estimates Data</th>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;          <th scope="col" width="10%">Git Additions&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByGitAdditionsAsc()"  *ngIf="!gitAdditionsAsc && !gitAdditionsDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByGitAdditionsDsc()" *ngIf="gitAdditionsAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByGitAdditionsAsc()" *ngIf="gitAdditionsDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="10%">Git Deletions&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByGitDeletionsAsc()"  *ngIf="!gitDeletionsAsc && !gitDeletionsDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByGitDeletionsDsc()" *ngIf="gitDeletionsAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByGitDeletionsAsc()" *ngIf="gitDeletionsDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="10%">Git Total&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByGitTotalAsc()"  *ngIf="!gitTotalAsc && !gitTotalDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByGitTotalDsc()" *ngIf="gitTotalAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByGitTotalAsc()" *ngIf="gitTotalDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;          <th scope="col" width="10%">Average Actions Per Minute&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByAvgActionsPerMinuteAsc()" *ngIf="!avgActionsAsc && !avgActionsDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByAvgActionsPerMinuteDsc()" *ngIf="avgActionsAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByAvgActionsPerMinuteAsc()" *ngIf="avgActionsDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="10%">Level&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByKeyLevelAsc()" *ngIf="!levelAsc && !levelDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByKeyLevelDsc()" *ngIf="levelAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByKeyLevelAsc()" *ngIf="levelDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="10%">Keyboard Actions&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByKeyBoardStrokesAsc()" *ngIf="!totalKeyboardAsc && !totalKeyboardDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByKeyBoardStrokesDsc()" *ngIf="totalKeyboardAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByKeyBoardStrokesAsc()" *ngIf="totalKeyboardDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="10%">Mouse Actions&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByTotalMouseClicksAsc()" *ngIf="!totalMouseAsc && !totalMouseDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByTotalMouseClicksDsc()" *ngIf="totalMouseAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByTotalMouseClicksAsc()" *ngIf="totalMouseDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th scope="col" width="10%">Activity&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort" aria-hidden="true" (click)="sortByWWTActivityAsc()" *ngIf="!wwtActivityAsc && !wwtActivityDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-asc" aria-hidden="true" (click)="sortByWWTActivityDsc()" *ngIf="wwtActivityAsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <i class="fa fa-sort-amount-desc" aria-hidden="true" (click)="sortByWWTActivityAsc()" *ngIf="wwtActivityDsc"></i>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </th>&ndash;&gt;-->
+<!--  &lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--  &lt;!&ndash;        </thead>&ndash;&gt;-->
+<!--  &lt;!&ndash;        <tbody>&ndash;&gt;-->
+<!--  &lt;!&ndash;        <tr *ngIf="message" style="text-align: center">&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td colspan="13">{{message}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--  &lt;!&ndash;        <tr *ngFor="let completeResponse of completeResponses | customFilter:searchTermName:searchTermEmail:searchTermProject" #dataRow>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td>{{dataRow.rowIndex - 1}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td>{{completeResponse.fullName}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td>{{completeResponse.email}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td>{{completeResponse.date}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td>&ndash;&gt;-->
+<!--  &lt;!&ndash;            <p *ngFor="let project of completeResponse.projects | unique">&ndash;&gt;-->
+<!--  &lt;!&ndash;              {{project.projectName}}</p>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td class="tdCenter">{{completeResponse.totalWorkTimeDisplayView}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td>{{completeResponse.jiraIssueCount}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td *ngIf="completeResponse.jiraEstimatesData == null">No Records Available</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td *ngIf="completeResponse.jiraEstimatesData != null">&ndash;&gt;-->
+<!--  &lt;!&ndash;            <button type="button" class="btn btn-primary btn-xs"&ndash;&gt;-->
+<!--  &lt;!&ndash;                    data-toggle="modal"&ndash;&gt;-->
+<!--  &lt;!&ndash;                    [attr.data-target]="'#'+dataRow.rowIndex">&ndash;&gt;-->
+<!--  &lt;!&ndash;              View Jira Data&ndash;&gt;-->
+<!--  &lt;!&ndash;            </button>&ndash;&gt;-->
+<!--  &lt;!&ndash;            &lt;!&ndash; Modal &ndash;&gt;&ndash;&gt;-->
+<!--  &lt;!&ndash;            <div class="modal fade" [id]="dataRow.rowIndex" tabindex="-1" role="dialog" aria-labelledby="jiraEstimatesDataModalTitle" aria-hidden="true">&ndash;&gt;-->
+<!--  &lt;!&ndash;              <div class="modal-dialog modal-dialog-centered" role="document">&ndash;&gt;-->
+<!--  &lt;!&ndash;                <div class="modal-content">&ndash;&gt;-->
+<!--  &lt;!&ndash;                  <div class="modal-header">&ndash;&gt;-->
+<!--  &lt;!&ndash;                    <h5 class="modal-title" id="jiraEstimatesDataModalTitle">Jira Estimates Data</h5>&ndash;&gt;-->
+<!--  &lt;!&ndash;                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">&ndash;&gt;-->
+<!--  &lt;!&ndash;                      <span aria-hidden="true">&times;</span>&ndash;&gt;-->
+<!--  &lt;!&ndash;                    </button>&ndash;&gt;-->
+<!--  &lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;                  <div class="modal-body">&ndash;&gt;-->
+<!--  &lt;!&ndash;                    <table class="table">&ndash;&gt;-->
+<!--  &lt;!&ndash;                      <thead>&ndash;&gt;-->
+<!--  &lt;!&ndash;                      <tr>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th>Project</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th>Issue Key</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th>Assignee Email</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th>Updated At</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th>Estimated Time</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th>Total Time Spend</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                      </tr>&ndash;&gt;-->
+<!--  &lt;!&ndash;                      </thead>&ndash;&gt;-->
+<!--  &lt;!&ndash;                      <tbody>&ndash;&gt;-->
+<!--  &lt;!&ndash;                      <tr *ngFor="let data of completeResponse.jiraEstimatesData">&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th>{{data.projectName}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th>{{data.issuesKey}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th>{{data.assigneeEmail}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th>{{data.updatedDate}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th style="text-align: center">{{data.estimatedTimeView}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                        <th style="text-align: center">{{data.totalTimeSpendView}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;                      </tr>&ndash;&gt;-->
+<!--  &lt;!&ndash;                      </tbody>&ndash;&gt;-->
+<!--  &lt;!&ndash;                    </table>&ndash;&gt;-->
+<!--  &lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;                  <div class="modal-footer">&ndash;&gt;-->
+<!--  &lt;!&ndash;                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>&ndash;&gt;-->
+<!--  &lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;          </td>&ndash;&gt;-->
+
+<!--  &lt;!&ndash;          <td>{{completeResponse.gitAdditions}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td>{{completeResponse.gitDeletions}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td>{{completeResponse.gitTotal}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td class="tdCenter">{{completeResponse.avgActionsPerMinute}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td class="high tdCenter" *ngIf="completeResponse.level === 3">High</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td class="medium tdCenter" *ngIf="completeResponse.level === 2">Medium</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td class="low tdCenter" *ngIf="completeResponse.level === 1">Low</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td class="tdCenter" *ngIf="completeResponse.level === 0">Unavailable</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td class="tdCenter">{{completeResponse.keyBoardActions}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td class="tdCenter">{{completeResponse.mouseActions}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <td class="tdCenter">{{completeResponse.wwtActivity}}</td>&ndash;&gt;-->
+<!--  &lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--  &lt;!&ndash;        </tbody>&ndash;&gt;-->
+<!--  &lt;!&ndash;        <thead>&ndash;&gt;-->
+<!--  &lt;!&ndash;        <tr class="fixedRow">&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th colspan="2">Total Users</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th colspan="2">{{totalUsers}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th>Total Hours</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th>{{totalWorkTime}} hrs</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th>{{totalJiraIssueCount}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th></th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th>{{totalGitAdditions}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th>{{totalGitDeletions}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th>{{totalGit}}</th>&ndash;&gt;-->
+<!--  &lt;!&ndash;          <th colspan="5"></th>&ndash;&gt;-->
+<!--  &lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--  &lt;!&ndash;        </thead>&ndash;&gt;-->
+<!--  &lt;!&ndash;      </table>&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;  </section>&ndash;&gt;-->
+<!--  &lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--  <div class="workeffort-page__page-content">-->
+<!--    &lt;!&ndash;detailed card list-&ndash;&gt;-->
+
+<!--    <div class="workeffor-detailed__card&#45;&#45;section">-->
+<!--      <div class="workeffor-detailed__card&#45;&#45;item">-->
+<!--        <div class="workeffor-detailed__card&#45;&#45;wrapper">-->
+<!--          <h5 class="workeffor-detailed__card&#45;&#45;title">Number of Days</h5>-->
+<!--          <h2 class="workeffor-detailed__card&#45;&#45;count" *ngIf="summeryDataLoaded">{{numberOfDays}}</h2>-->
+<!--          <div class="workeffor-detailed__card&#45;&#45;count">-->
+<!--            <img src="assets/image/loading/spinner-loading.svg" *ngIf="!summeryDataLoaded" style="width: 50px;">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="workeffor-detailed__card&#45;&#45;item">-->
+<!--        <div class="workeffor-detailed__card&#45;&#45;wrapper">-->
+<!--          <h5 class="workeffor-detailed__card&#45;&#45;title">Number of Working Days</h5>-->
+<!--          <h2 class="workeffor-detailed__card&#45;&#45;count" *ngIf="summeryDataLoaded">{{numberOfWorkingDays}}</h2>-->
+<!--          <div class="workeffor-detailed__card&#45;&#45;count">-->
+<!--            <img src="assets/image/loading/spinner-loading.svg" *ngIf="!summeryDataLoaded" style="width: 50px;">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="workeffor-detailed__card&#45;&#45;item">-->
+<!--        <div class="workeffor-detailed__card&#45;&#45;wrapper">-->
+<!--          <h5 class="workeffor-detailed__card&#45;&#45;title">Total Number of Hours</h5>-->
+<!--          <h2 class="workeffor-detailed__card&#45;&#45;count" *ngIf="summeryDataLoaded">{{totalWorkTime}} hrs</h2>-->
+<!--          <div class="workeffor-detailed__card&#45;&#45;count">-->
+<!--            <img src="assets/image/loading/spinner-loading.svg" *ngIf="!summeryDataLoaded" style="width: 50px;">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="workeffor-detailed__card&#45;&#45;item">-->
+<!--        <div class="workeffor-detailed__card&#45;&#45;wrapper">-->
+<!--          <h5 class="workeffor-detailed__card&#45;&#45;title">Total Number of Users</h5>-->
+<!--          <h2 class="workeffor-detailed__card&#45;&#45;count" *ngIf="summeryDataLoaded">{{totalUsers}}</h2>-->
+<!--          <div class="workeffor-detailed__card&#45;&#45;count">-->
+<!--            <img src="assets/image/loading/spinner-loading.svg" *ngIf="!summeryDataLoaded" style="width: 50px;">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="workeffor-detailed__card&#45;&#45;item">-->
+<!--        <div class="workeffor-detailed__card&#45;&#45;wrapper">-->
+<!--          <h5 class="workeffor-detailed__card&#45;&#45;title">Hours Per Day</h5>-->
+<!--          <h2 class="workeffor-detailed__card&#45;&#45;count" *ngIf="summeryDataLoaded">{{averageWorkTimePerDay}} hours/day</h2>-->
+<!--          <div class="workeffor-detailed__card&#45;&#45;count">-->
+<!--            <img src="assets/image/loading/spinner-loading.svg" *ngIf="!summeryDataLoaded" style="width: 50px;">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="workeffor-detailed__card&#45;&#45;item">-->
+<!--        <div class="workeffor-detailed__card&#45;&#45;wrapper">-->
+<!--          <h5 class="workeffor-detailed__card&#45;&#45;title">Hours Per User</h5>-->
+<!--          <h2 class="workeffor-detailed__card&#45;&#45;count" *ngIf="summeryDataLoaded">{{averageWorkTimePerUser}}-->
+<!--            hours/user</h2>-->
+<!--          <div class="workeffor-detailed__card&#45;&#45;count">-->
+<!--            <img src="assets/image/loading/spinner-loading.svg" *ngIf="!summeryDataLoaded" style="width: 50px;">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="workeffor-detailed__card&#45;&#45;item">-->
+<!--        <div class="workeffor-detailed__card&#45;&#45;wrapper">-->
+<!--          <h5 class="workeffor-detailed__card&#45;&#45;title">Hours Per User Per Day</h5>-->
+<!--          <h2 class="workeffor-detailed__card&#45;&#45;count" *ngIf="summeryDataLoaded">{{averageWorkTimePerDayPerUser}}-->
+<!--            hours/user/day</h2>-->
+<!--          <div class="workeffor-detailed__card&#45;&#45;count">-->
+<!--            <img src="assets/image/loading/spinner-loading.svg" *ngIf="!summeryDataLoaded" style="width: 50px;">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+<!--    &lt;!&ndash;-table section&ndash;&gt;-->
+
+<!--    <section class="workeffor-detailed__full&#45;&#45;table-section" *ngIf="showTable">-->
+<!--      <div class="workeffor-detailed__search&#45;&#45;section">-->
+<!--        <div class="m-form-field__field workeffort-table__search">-->
+<!--          <div class="m-form-field__field-item">-->
+<!--            <input *ngIf="filterType == 'Name'" class="m-form-field__input" id="searchTermName" name="searchTermName"-->
+<!--                   type="text" minlength="0"-->
+<!--                   maxlength="524288" placeholder="Search" value="" [(ngModel)]="searchTermName">-->
+<!--            <input *ngIf="filterType == 'Email'" class="m-form-field__input" id="searchTermEmail" name="searchTermEmail"-->
+<!--                   type="text" minlength="0"-->
+<!--                   maxlength="524288" placeholder="Search" value="" [(ngModel)]="searchTermEmail">-->
+<!--            <input *ngIf="filterType == 'Project'" class="m-form-field__input" id="searchTermProject"-->
+<!--                   name="searchTermProject" type="text" minlength="0"-->
+<!--                   maxlength="524288" placeholder="Search" value="" [(ngModel)]="searchTermProject">-->
+<!--            <input *ngIf="filterType == undefined" class="m-form-field__input" id="searchTermAll" name="searchTermAll"-->
+<!--                   type="text" minlength="0"-->
+<!--                   maxlength="524288" placeholder="Search" value="" disabled>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="m-form-field-inline workeffort-table__select">-->
+<!--          <div class="m-form-field__label-wrap">-->
+<!--            <label class="m-form-field__label&#45;&#45;workflow" for="f-name">Filter By :</label>-->
+<!--          </div>-->
+
+<!--          <div class="m-form-field__field m-form-field__mint">-->
+<!--            <div class="m-form-field__field-item">-->
+<!--              <select class="m-form-field__select " [(ngModel)]="filterType">-->
+<!--                <option value="undefined" disabled="" selected="" hidden="">All</option>-->
+<!--                <option value="Name">Name</option>-->
+<!--                <option value="Email">Email</option>-->
+<!--                <option value="Project">Project</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <span class="m-form-field__error">error</span>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash;-details table&ndash;&gt;-->
+
+<!--      <div class="workeffor-detailed__full&#45;&#45;table">-->
+<!--        <table class="workeffor-detailed-deta__table">-->
+<!--          <thead class="workeffor-detailed-deta__table&#45;&#45;header">-->
+<!--          <tr>-->
+<!--            <th> Index</th>-->
+<!--            <th> Full Name</th>-->
+<!--            <th> Email</th>-->
+<!--            <th> Date</th>-->
+<!--            <th> Project</th>-->
+<!--            <th> Average Work Time</th>-->
+<!--            <th> Jira Issue Count</th>-->
+<!--            <th> Jira Estimates Data</th>-->
+<!--            <th> Git Additions</th>-->
+<!--            <th> Git Deletions</th>-->
+<!--            <th> Git Total</th>-->
+<!--            <th> Average Actions/min</th>-->
+<!--            <th> Level</th>-->
+<!--            <th> Keyboard Actions</th>-->
+<!--            <th> Mouse Actions</th>-->
+<!--            <th> Activity</th>-->
+
+<!--          </tr>-->
+
+<!--          </thead>-->
+
+<!--          <tbody class="workeffor-detailed-data__table&#45;&#45;body c-kriyo-table__max&#45;&#45;height">-->
+<!--          <tr-->
+<!--            *ngFor="let completeResponse of completeResponses | customFilter:searchTermName:searchTermEmail:searchTermProject"-->
+<!--            #dataRow>-->
+<!--            <td>{{dataRow.rowIndex - 1}}</td>-->
+<!--            <td>{{completeResponse.fullName}}</td>-->
+<!--            <td>{{completeResponse.email}}</td>-->
+<!--            <td>{{completeResponse.date}}</td>-->
+<!--            <td>-->
+<!--              <div *ngFor="let project of completeResponse.projects | unique">-->
+<!--                {{project.projectName}}</div>-->
+<!--            </td>-->
+<!--            <td class="tdCenter">{{completeResponse.totalWorkTimeDisplayView}}</td>-->
+<!--            <td>{{completeResponse.jiraIssueCount}}</td>-->
+<!--            <td *ngIf="completeResponse.jiraEstimatesData == null">No Records Available</td>-->
+<!--            <td *ngIf="completeResponse.jiraEstimatesData != null">-->
+<!--              <button type="button" class="btn btn-primary btn-xs"-->
+<!--                      data-toggle="modal"-->
+<!--                      [attr.data-target]="'#'+dataRow.rowIndex">-->
+<!--                View Jira Data-->
+<!--              </button>-->
+<!--              &lt;!&ndash; Modal &ndash;&gt;-->
+<!--              <div class="modal fade" [id]="dataRow.rowIndex" tabindex="-1" role="dialog"-->
+<!--                   aria-labelledby="jiraEstimatesDataModalTitle" aria-hidden="true">-->
+<!--                <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--                  <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                      <h5 class="modal-title" id="jiraEstimatesDataModalTitle">Jira Estimates Data</h5>-->
+<!--                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                      </button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+<!--                      <table class="table">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                          <th>Project</th>-->
+<!--                          <th>Issue Key</th>-->
+<!--                          <th>Assignee Email</th>-->
+<!--                          <th>Updated At</th>-->
+<!--                          <th>Estimated Time</th>-->
+<!--                          <th>Total Time Spend</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr *ngFor="let data of completeResponse.jiraEstimatesData">-->
+<!--                          <th>{{data.projectName}}</th>-->
+<!--                          <th>{{data.issuesKey}}</th>-->
+<!--                          <th>{{data.assigneeEmail}}</th>-->
+<!--                          <th>{{data.updatedDate}}</th>-->
+<!--                          <th style="text-align: center">{{data.estimatedTimeView}}</th>-->
+<!--                          <th style="text-align: center">{{data.totalTimeSpendView}}</th>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                      </table>-->
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </td>-->
+
+<!--            <td>{{completeResponse.gitAdditions}}</td>-->
+<!--            <td>{{completeResponse.gitDeletions}}</td>-->
+<!--            <td>{{completeResponse.gitTotal}}</td>-->
+<!--            <td class="tdCenter">{{completeResponse.avgActionsPerMinute}}</td>-->
+<!--            <td class="high tdCenter" *ngIf="completeResponse.level === 3">High</td>-->
+<!--            <td class="medium tdCenter" *ngIf="completeResponse.level === 2">Medium</td>-->
+<!--            <td class="low tdCenter" *ngIf="completeResponse.level === 1">Low</td>-->
+<!--            <td class="tdCenter" *ngIf="completeResponse.level === 0">Unavailable</td>-->
+<!--            <td class="tdCenter">{{completeResponse.keyBoardActions}}</td>-->
+<!--            <td class="tdCenter">{{completeResponse.mouseActions}}</td>-->
+<!--            <td class="tdCenter">{{completeResponse.wwtActivity}}</td>-->
+<!--          </tr>-->
+
+<!--          </tbody>-->
+<!--          <thead>-->
+<!--          <tr>-->
+<!--            <th colspan="2">Total Users</th>-->
+<!--            <th colspan="2">{{totalUsers}}</th>-->
+<!--            <th>Total Hours</th>-->
+<!--            <th>{{totalWorkTime}} hrs</th>-->
+<!--            <th>{{totalJiraIssueCount}}</th>-->
+<!--            <th></th>-->
+<!--            <th>{{totalGitAdditions}}</th>-->
+<!--            <th>{{totalGitDeletions}}</th>-->
+<!--            <th>{{totalGit}}</th>-->
+<!--            <th colspan="5"></th>-->
+<!--          </tr>-->
+
+<!--          </thead>-->
+<!--        </table>-->
+<!--      </div>-->
+
+<!--    </section>-->
+<!--    <div class="workeffor-detailed__full&#45;&#45;table-section" *ngIf="!showTable" style="text-align: center">-->
+<!--      <img src="assets/image/loading/spinner-loading.svg" style="width: 160px;">-->
+<!--    </div>-->
+
+<!--  </div>-->
+
+<!--</div>-->
+
+
+

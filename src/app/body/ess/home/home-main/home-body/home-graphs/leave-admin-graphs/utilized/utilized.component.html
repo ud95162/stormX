@@ -1,0 +1,373 @@
+<div class="c-leave-dashboard__middle--wrraper" *ngIf="leaveDataLoaded">
+
+  <div class="leave-dashboard__main-header">
+    <div class="leave-dashboard-page__right" (click)="showSaveQuoteModal('utilizedLeaveEmpRole')">
+      <a class="c-view-all__leave--details">View full table
+        <svg class="a-icon">
+          <use xlink:href="#lines-graf"></use>
+        </svg>
+
+      </a>
+    </div>
+  </div>
+
+  <table class="c-kriyo-deta__table" *ngIf="leaveDataLoaded">
+    <thead class="c-kriyo-deta__table--header ">
+    <tr>
+      <th> Leave Type </th>
+      <th> PM</th>
+      <th> Trainee,ASE,AQE</th>
+      <th> SE,SSE</th>
+      <th> Dev Lead</th>
+      <th> Architect</th>
+      <th> QAE,SQAE</th>
+      <th> Total</th>
+    </tr>
+
+    </thead>
+
+    <tbody class="c-kriyo-deta__table--body c-pending__leave--body">
+    <tr>
+      <td>Annual</td>
+      <td >{{finalResponse.annualLeave.pm}}</td>
+      <td >{{finalResponse.annualLeave.trainee}}</td>
+      <td >{{finalResponse.annualLeave.se}}</td>
+      <td >{{finalResponse.annualLeave.devLead}}</td>
+      <td >{{finalResponse.annualLeave.architects}}</td>
+      <td >{{finalResponse.annualLeave.qa}}</td>
+      <td >{{finalResponse.annualLeave.totalLeaveCount}}</td>
+
+
+    </tr>
+
+    <tr>
+      <td>Casual</td>
+      <td >{{finalResponse.casualLeave.pm}}</td>
+      <td >{{finalResponse.casualLeave.trainee}}</td>
+      <td >{{finalResponse.casualLeave.se}}</td>
+      <td >{{finalResponse.casualLeave.devLead}}</td>
+      <td >{{finalResponse.casualLeave.architects}}</td>
+      <td >{{finalResponse.casualLeave.qa}}</td>
+      <td >{{finalResponse.casualLeave.totalLeaveCount}}</td>
+
+
+    </tr>
+
+
+    <tr>
+      <td>Lieu Leave</td>
+      <td >{{finalResponse.lieuLeave.pm}}</td>
+      <td >{{finalResponse.lieuLeave.trainee}}</td>
+      <td >{{finalResponse.lieuLeave.se}}</td>
+      <td >{{finalResponse.lieuLeave.devLead}}</td>
+      <td >{{finalResponse.lieuLeave.architects}}</td>
+      <td >{{finalResponse.lieuLeave.qa}}</td>
+      <td >{{finalResponse.lieuLeave.totalLeaveCount}}</td>
+
+
+    </tr>
+
+
+    <tr>
+      <td>Maternity</td>
+      <td >{{finalResponse.maternityLeave.pm}}</td>
+      <td >{{finalResponse.maternityLeave.trainee}}</td>
+      <td >{{finalResponse.maternityLeave.se}}</td>
+      <td >{{finalResponse.maternityLeave.devLead}}</td>
+      <td >{{finalResponse.maternityLeave.architects}}</td>
+      <td >{{finalResponse.maternityLeave.qa}}</td>
+      <td >{{finalResponse.maternityLeave.totalLeaveCount}}</td>
+
+
+    </tr>
+
+
+    <tr>
+      <td>Medical</td>
+      <td >{{finalResponse.medicalLeave.pm}}</td>
+      <td >{{finalResponse.medicalLeave.trainee}}</td>
+      <td >{{finalResponse.medicalLeave.se}}</td>
+      <td >{{finalResponse.medicalLeave.devLead}}</td>
+      <td >{{finalResponse.medicalLeave.architects}}</td>
+      <td >{{finalResponse.medicalLeave.qa}}</td>
+      <td >{{finalResponse.medicalLeave.totalLeaveCount}}</td>
+
+
+    </tr>
+
+
+    <tr>
+      <td>No Pay</td>
+      <td >{{finalResponse.noPayLeave.pm}}</td>
+      <td >{{finalResponse.noPayLeave.trainee}}</td>
+      <td >{{finalResponse.noPayLeave.se}}</td>
+      <td >{{finalResponse.noPayLeave.devLead}}</td>
+      <td >{{finalResponse.noPayLeave.architects}}</td>
+      <td >{{finalResponse.noPayLeave.qa}}</td>
+      <td >{{finalResponse.noPayLeave.totalLeaveCount}}</td>
+
+
+    </tr>
+
+
+    <tr>
+      <td>Official</td>
+      <td >{{finalResponse.officialLeave.pm}}</td>
+      <td >{{finalResponse.officialLeave.trainee}}</td>
+      <td >{{finalResponse.officialLeave.se}}</td>
+      <td >{{finalResponse.officialLeave.devLead}}</td>
+      <td >{{finalResponse.officialLeave.architects}}</td>
+      <td >{{finalResponse.officialLeave.qa}}</td>
+      <td >{{finalResponse.officialLeave.totalLeaveCount}}</td>
+
+
+    </tr>
+
+
+    <tr>
+      <td>On Site Travel</td>
+      <td >{{finalResponse.onSiteLeave.pm}}</td>
+      <td >{{finalResponse.onSiteLeave.trainee}}</td>
+      <td >{{finalResponse.onSiteLeave.se}}</td>
+      <td >{{finalResponse.onSiteLeave.devLead}}</td>
+      <td >{{finalResponse.onSiteLeave.architects}}</td>
+      <td >{{finalResponse.onSiteLeave.qa}}</td>
+      <td >{{finalResponse.onSiteLeave.totalLeaveCount}}</td>
+
+
+    </tr>
+
+
+    <tr>
+      <td>Short Leave</td>
+      <td >{{finalResponse.shortLeave.pm}}</td>
+      <td >{{finalResponse.shortLeave.trainee}}</td>
+      <td >{{finalResponse.shortLeave.se}}</td>
+      <td >{{finalResponse.shortLeave.devLead}}</td>
+      <td >{{finalResponse.shortLeave.architects}}</td>
+      <td >{{finalResponse.shortLeave.qa}}</td>
+      <td >{{finalResponse.shortLeave.totalLeaveCount}}</td>
+
+
+    </tr>
+
+
+    <tr class="utilized-leave__total--count">
+      <td>Total</td>
+      <td >{{finalResponse.annualLeave.pm + finalResponse.casualLeave.pm + finalResponse.medicalLeave.pm +
+      finalResponse.onSiteLeave.pm + finalResponse.maternityLeave.pm + finalResponse.lieuLeave.pm + finalResponse.noPayLeave.pm +
+      finalResponse.officialLeave.pm + finalResponse.shortLeave.pm }}</td>
+      <td >{{finalResponse.annualLeave.trainee + finalResponse.casualLeave.trainee + finalResponse.medicalLeave.trainee +
+      finalResponse.onSiteLeave.trainee + finalResponse.maternityLeave.trainee + finalResponse.lieuLeave.trainee + finalResponse.noPayLeave.trainee +
+      finalResponse.officialLeave.trainee + finalResponse.shortLeave.trainee }}</td>
+      <td >{{finalResponse.annualLeave.se + finalResponse.casualLeave.se + finalResponse.medicalLeave.se +
+      finalResponse.onSiteLeave.se + finalResponse.maternityLeave.se + finalResponse.lieuLeave.se + finalResponse.noPayLeave.se +
+      finalResponse.officialLeave.se + finalResponse.shortLeave.se  }}</td>
+      <td >{{finalResponse.annualLeave.devLead + finalResponse.casualLeave.devLead + finalResponse.medicalLeave.devLead +
+      finalResponse.onSiteLeave.devLead + finalResponse.maternityLeave.devLead + finalResponse.lieuLeave.devLead + finalResponse.noPayLeave.devLead +
+      finalResponse.officialLeave.devLead + finalResponse.shortLeave.devLead }}</td>
+      <td >{{finalResponse.annualLeave.architects + finalResponse.casualLeave.architects + finalResponse.medicalLeave.architects +
+      finalResponse.onSiteLeave.architects + finalResponse.maternityLeave.architects + finalResponse.lieuLeave.architects + finalResponse.noPayLeave.architects +
+      finalResponse.officialLeave.architects + finalResponse.shortLeave.architects}}</td>
+      <td >{{finalResponse.annualLeave.qa + finalResponse.casualLeave.qa + finalResponse.medicalLeave.qa +
+      finalResponse.onSiteLeave.qa + finalResponse.maternityLeave.qa + finalResponse.lieuLeave.qa + finalResponse.noPayLeave.qa +
+      finalResponse.officialLeave.qa + finalResponse.shortLeave.qa }}</td>
+      <td >{{finalResponse.annualLeave.totalLeaveCount + finalResponse.casualLeave.totalLeaveCount +
+      finalResponse.medicalLeave.totalLeaveCount + finalResponse.onSiteLeave.totalLeaveCount + finalResponse.maternityLeave.totalLeaveCount + finalResponse.lieuLeave.totalLeaveCount +
+      finalResponse.noPayLeave.totalLeaveCount + finalResponse.officialLeave.totalLeaveCount  + finalResponse.shortLeave.totalLeaveCount}}</td>
+
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+
+<!--Start modal-->
+
+<div class="o-modal" id="utilizedLeaveEmpRole">
+
+  <div class="o-modal__content leave-vs-empl__role--modal">
+
+    <div class="o-modal__body">
+
+      <div class="o-modal__inner-header">
+        <h2 class="c-define-designation__text">Utilized Leaves vs Employee Role</h2>
+        <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('utilizedLeaveEmpRole')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+        <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm">
+          <svg class="a-icon u-mr">
+            <use xlink:href="#previous"></use>
+          </svg>
+          Back
+        </button>
+      </div>
+
+
+      <div class="leave-type__user--dto">
+        <table class="c-kriyo-deta__table" *ngIf="leaveDataLoaded">
+          <thead class="c-kriyo-deta__table--header">
+          <tr>
+            <th> Leave Type </th>
+            <th> PM</th>
+            <th> Trainee,ASE,AQE</th>
+            <th> SE,SSE</th>
+            <th> Dev Lead</th>
+            <th> Architect</th>
+            <th> QAE,SQAE</th>
+            <th> QA Lead</th>
+            <th> Other HC</th>
+            <th> Total</th>
+          </tr>
+          </thead>
+
+          <tbody class="c-kriyo-deta__table--body c-pending__leave--body">
+          <tr>
+            <td>Annual</td>
+            <td >{{finalResponse.annualLeave.pm}}</td>
+            <td >{{finalResponse.annualLeave.trainee}}</td>
+            <td >{{finalResponse.annualLeave.se}}</td>
+            <td >{{finalResponse.annualLeave.devLead}}</td>
+            <td >{{finalResponse.annualLeave.architects}}</td>
+            <td >{{finalResponse.annualLeave.qa}}</td>
+            <td >{{finalResponse.annualLeave.qaLead}}</td>
+            <td >{{finalResponse.annualLeave.otherHC}}</td>
+            <td >{{finalResponse.annualLeave.totalLeaveCount}}</td>
+
+          </tr>
+
+          <tr>
+            <td>Casual</td>
+            <td >{{finalResponse.casualLeave.pm}}</td>
+            <td >{{finalResponse.casualLeave.trainee}}</td>
+            <td >{{finalResponse.casualLeave.se}}</td>
+            <td >{{finalResponse.casualLeave.devLead}}</td>
+            <td >{{finalResponse.casualLeave.architects}}</td>
+            <td >{{finalResponse.casualLeave.qa}}</td>
+            <td >{{finalResponse.casualLeave.qaLead}}</td>
+            <td >{{finalResponse.casualLeave.otherHC}}</td>
+            <td >{{finalResponse.casualLeave.totalLeaveCount}}</td>
+          </tr>
+
+          <tr>
+            <td>Lieu</td>
+            <td >{{finalResponse.lieuLeave.pm}}</td>
+            <td >{{finalResponse.lieuLeave.trainee}}</td>
+            <td >{{finalResponse.lieuLeave.se}}</td>
+            <td >{{finalResponse.lieuLeave.devLead}}</td>
+            <td >{{finalResponse.lieuLeave.architects}}</td>
+            <td >{{finalResponse.lieuLeave.qa}}</td>
+            <td >{{finalResponse.lieuLeave.qaLead}}</td>
+            <td >{{finalResponse.lieuLeave.otherHC}}</td>
+            <td >{{finalResponse.lieuLeave.totalLeaveCount}}</td>
+          </tr>
+
+          <tr>
+            <td>Maternity</td>
+            <td >{{finalResponse.maternityLeave.pm}}</td>
+            <td >{{finalResponse.maternityLeave.trainee}}</td>
+            <td >{{finalResponse.maternityLeave.se}}</td>
+            <td >{{finalResponse.maternityLeave.devLead}}</td>
+            <td >{{finalResponse.maternityLeave.architects}}</td>
+            <td >{{finalResponse.maternityLeave.qa}}</td>
+            <td >{{finalResponse.maternityLeave.qaLead}}</td>
+            <td >{{finalResponse.maternityLeave.otherHC}}</td>
+            <td >{{finalResponse.maternityLeave.totalLeaveCount}}</td>
+          </tr>
+
+          <tr>
+            <td>Medical</td>
+            <td >{{finalResponse.medicalLeave.pm}}</td>
+            <td >{{finalResponse.medicalLeave.trainee}}</td>
+            <td >{{finalResponse.medicalLeave.se}}</td>
+            <td >{{finalResponse.medicalLeave.devLead}}</td>
+            <td >{{finalResponse.medicalLeave.architects}}</td>
+            <td >{{finalResponse.medicalLeave.qa}}</td>
+            <td >{{finalResponse.medicalLeave.qaLead}}</td>
+            <td >{{finalResponse.medicalLeave.otherHC}}</td>
+            <td >{{finalResponse.medicalLeave.totalLeaveCount}}</td>
+          </tr>
+
+          <tr>
+            <td>No Pay</td>
+            <td >{{finalResponse.noPayLeave.pm}}</td>
+            <td >{{finalResponse.noPayLeave.trainee}}</td>
+            <td >{{finalResponse.noPayLeave.se}}</td>
+            <td >{{finalResponse.noPayLeave.devLead}}</td>
+            <td >{{finalResponse.noPayLeave.architects}}</td>
+            <td >{{finalResponse.noPayLeave.qa}}</td>
+            <td >{{finalResponse.noPayLeave.qaLead}}</td>
+            <td >{{finalResponse.noPayLeave.otherHC}}</td>
+            <td >{{finalResponse.noPayLeave.totalLeaveCount}}</td>
+          </tr>
+
+          <tr>
+            <td>On Site</td>
+            <td >{{finalResponse.onSiteLeave.pm}}</td>
+            <td >{{finalResponse.onSiteLeave.trainee}}</td>
+            <td >{{finalResponse.onSiteLeave.se}}</td>
+            <td >{{finalResponse.onSiteLeave.devLead}}</td>
+            <td >{{finalResponse.onSiteLeave.architects}}</td>
+            <td >{{finalResponse.onSiteLeave.qa}}</td>
+            <td >{{finalResponse.onSiteLeave.qaLead}}</td>
+            <td >{{finalResponse.onSiteLeave.otherHC}}</td>
+            <td >{{finalResponse.onSiteLeave.totalLeaveCount}}</td>
+          </tr>
+
+          <tr>
+            <td>Short</td>
+            <td >{{finalResponse.shortLeave.pm}}</td>
+            <td >{{finalResponse.shortLeave.trainee}}</td>
+            <td >{{finalResponse.shortLeave.se}}</td>
+            <td >{{finalResponse.shortLeave.devLead}}</td>
+            <td >{{finalResponse.shortLeave.architects}}</td>
+            <td >{{finalResponse.shortLeave.qa}}</td>
+            <td >{{finalResponse.shortLeave.qaLead}}</td>
+            <td >{{finalResponse.shortLeave.otherHC}}</td>
+            <td >{{finalResponse.shortLeave.totalLeaveCount}}</td>
+          </tr>
+
+          <tr class="utilized-leave__total--count">
+            <td>Total</td>
+            <td >{{finalResponse.annualLeave.pm + finalResponse.casualLeave.pm + finalResponse.medicalLeave.pm +
+            finalResponse.onSiteLeave.pm + finalResponse.maternityLeave.pm + finalResponse.lieuLeave.pm + finalResponse.noPayLeave.pm +
+            finalResponse.officialLeave.pm + finalResponse.shortLeave.pm }}</td>
+            <td >{{finalResponse.annualLeave.trainee + finalResponse.casualLeave.trainee + finalResponse.medicalLeave.trainee +
+            finalResponse.onSiteLeave.trainee + finalResponse.maternityLeave.trainee + finalResponse.lieuLeave.trainee + finalResponse.noPayLeave.trainee +
+            finalResponse.officialLeave.trainee + finalResponse.shortLeave.trainee }}</td>
+            <td >{{finalResponse.annualLeave.se + finalResponse.casualLeave.se + finalResponse.medicalLeave.se +
+            finalResponse.onSiteLeave.se + finalResponse.maternityLeave.se + finalResponse.lieuLeave.se + finalResponse.noPayLeave.se +
+            finalResponse.officialLeave.se + finalResponse.shortLeave.se  }}</td>
+            <td >{{finalResponse.annualLeave.devLead + finalResponse.casualLeave.devLead + finalResponse.medicalLeave.devLead +
+            finalResponse.onSiteLeave.devLead + finalResponse.maternityLeave.devLead + finalResponse.lieuLeave.devLead + finalResponse.noPayLeave.devLead +
+            finalResponse.officialLeave.devLead + finalResponse.shortLeave.devLead }}</td>
+            <td >{{finalResponse.annualLeave.architects + finalResponse.casualLeave.architects + finalResponse.medicalLeave.architects +
+            finalResponse.onSiteLeave.architects + finalResponse.maternityLeave.architects + finalResponse.lieuLeave.architects + finalResponse.noPayLeave.architects +
+            finalResponse.officialLeave.architects + finalResponse.shortLeave.architects}}</td>
+            <td >{{finalResponse.annualLeave.qa + finalResponse.casualLeave.qa + finalResponse.medicalLeave.qa +
+            finalResponse.onSiteLeave.qa + finalResponse.maternityLeave.qa + finalResponse.lieuLeave.qa + finalResponse.noPayLeave.qa +
+            finalResponse.officialLeave.qa + finalResponse.shortLeave.qa }}</td>
+            <td >{{finalResponse.annualLeave.qaLead + finalResponse.casualLeave.qaLead + finalResponse.medicalLeave.qaLead +
+            finalResponse.onSiteLeave.qaLead + finalResponse.maternityLeave.qaLead + finalResponse.lieuLeave.qaLead + finalResponse.noPayLeave.qaLead +
+            finalResponse.officialLeave.qaLead + finalResponse.shortLeave.qaLead }}</td>
+            <td >{{finalResponse.annualLeave.otherHC + finalResponse.casualLeave.otherHC + finalResponse.medicalLeave.otherHC +
+            finalResponse.onSiteLeave.otherHC + finalResponse.maternityLeave.otherHC + finalResponse.lieuLeave.otherHC + finalResponse.noPayLeave.otherHC +
+            finalResponse.officialLeave.otherHC + finalResponse.shortLeave.otherHC }}</td>
+            <td >{{finalResponse.annualLeave.totalLeaveCount + finalResponse.casualLeave.totalLeaveCount +
+            finalResponse.medicalLeave.totalLeaveCount + finalResponse.onSiteLeave.totalLeaveCount + finalResponse.maternityLeave.totalLeaveCount + finalResponse.lieuLeave.totalLeaveCount +
+            finalResponse.noPayLeave.totalLeaveCount + finalResponse.officialLeave.totalLeaveCount  + finalResponse.shortLeave.totalLeaveCount}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!--end modal-->

@@ -1,0 +1,90 @@
+<div class="opd-settings-header">
+  <h3 style="font-weight: 600 !important; font-size: 14px;">Inconsistent Records</h3>
+
+</div>
+
+<div class="opd-settings__body">
+  <div class="opd-settings-filter" style="margin-bottom: 20px; margin-top: 44px">
+    <div class="m-form-field">
+
+      <div class="m-form-field">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label">Time</label>
+        </div>
+
+        <div class="m-form-field__label-wrap">
+          <div class="m-form-field__radio u-mr3+">
+            <input id="radio-9" name="m-form-radio__input-for-status-all" type="radio"
+                   [checked]="selectedStatus === null"
+                   (click)="changeRecordStatus( null)">
+            <label for="radio-10" class="m-form-radio__label-wrap">All</label>
+          </div>
+          <div class="m-form-field__radio u-mr3+">
+            <input id="radio-10" name="m-form-radio__input-for-status-checked" type="radio"
+                   [checked]="selectedStatus === 'CHECKED'"
+                   (click)="changeRecordStatus('CHECKED')">
+            <label for="radio-10" class="m-form-radio__label-wrap">Checked</label>
+          </div>
+
+
+          <div class="m-form-field__radio">
+            <input id="radio-11" name="m-form-radio__input-for-status-unchecked" type="radio"
+                   [checked]="selectedStatus === 'NOT_CHECKED'"
+                   (click)="changeRecordStatus('NOT_CHECKED')">
+            <label for="radio-11" class="m-form-radio__label-wrap">Not Checked</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="selectedRequestsForTakeAction.length > 0"
+       style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 5px">
+    <button
+      class="btn leave-btn__approved"
+      type="button" (click)="changeStatusOfAllRequestsModal()">
+      <i aria-hidden="true" class="fa fa-check"></i>&nbsp;Checked All
+    </button>
+  </div>
+
+  <div class="leave-type__user--dto" style="overflow-x: auto; width: 100%">
+    <table class="c-kriyo-deta__table utilized-leave__table--extend leave-utilization__table"
+           style="table-layout:fixed; margin-bottom: 0;"
+           aria-describedby="opd-config-with-marital-status" *ngIf="recordsDataLoaded">
+      <thead class="c-kriyo-deta__table--header" style="position:sticky; top: 0; z-index: 10">
+      <tr>
+        <th *ngIf="inconsistentRecords.length > 0" class="leave-table-th__check">
+          <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleSelectAll()">
+        </th>
+        <th style="width: 260px; min-width: 260px;" scope="col">Type</th>
+        <th style="width: 530px; min-width: 530px;" scope="col">Record</th>
+        <th style="width: 120px; min-width: 120px;" scope="col">Status</th>
+      </tr>
+      </thead>
+
+      <tbody class="c-kriyo-deta__table--body">
+      <tr *ngFor="let data of inconsistentRecords">
+        <td class="reservation-table__row leave-table-td__check" style="text-align: center">
+          <input [disabled]="data.status === 'CHECKED'" type="checkbox" [(ngModel)]="data.selected" (change)="updateSelected()">
+        </td>
+        <td style="width: 260px; min-width: 260px;">{{ data.recordType }}</td>
+        <td style="width: 530px; min-width: 530px;">{{ data.recordText }}</td>
+        <td style="width: 120px; min-width: 120px;">{{ data.status }}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="!recordsDataLoaded || inconsistentRecords.length === 0">
+      <div class="profile-summary__block-main u-mt">
+        <div class="c-data__empty" style="display: grid; justify-content: center">
+          <img src="/assets/new-design-images/no-data.png" alt="no data">
+          <div class="gray-500 s-small-default c-data__empty-sub">
+            No Records Available!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

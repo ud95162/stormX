@@ -1,0 +1,193 @@
+<div class="c-project__setting--wrapper" style="padding: 26px !important;">
+
+  <h2 class="c-add-project__text" style="margin-top: 0">Create New Project</h2>
+
+  <div class="m-form-field-inline">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label--medium" for="projectName">Project Name <span class="required">*</span></label>
+    </div>
+
+    <div class="m-form-field__field">
+      <div class="m-form-field__field-item">
+        <input class="m-form-field__input" id="projectName" type="text" minlength="0" maxlength="524288"
+               placeholder="Type Here" [(ngModel)]="newProjectData.projectName" [ngModelOptions]="{standalone: true }">
+      </div>
+    </div>
+
+    <span class="m-form-field__error">error</span>
+  </div>
+
+
+  <div class="m-form-field-inline">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label--medium" for="projectCode">Project Code <span class="required">*</span></label>
+    </div>
+
+    <div class="m-form-field__field">
+      <div class="m-form-field__field-item">
+        <input class="m-form-field__input" id="projectCode" type="text" minlength="0" maxlength="524288"
+               placeholder="Type Here" [(ngModel)]="newProjectData.projectCode" [ngModelOptions]="{standalone: true }">
+      </div>
+    </div>
+
+    <span class="m-form-field__error">error</span>
+  </div>
+
+  <div class="m-form-field-inline">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label--medium" for="projectJiraCode">Project Jira Code <span class="required">*</span></label>
+    </div>
+
+    <div class="m-form-field__field">
+      <div class="m-form-field__field-item">
+        <input class="m-form-field__input" id="projectJiraCode" type="text" minlength="0" maxlength="524288"
+               placeholder="Type Here"
+               [(ngModel)]="newProjectData.projectJiraCode" [ngModelOptions]="{standalone: true }">
+      </div>
+    </div>
+
+    <span class="m-form-field__error">error</span>
+  </div>
+
+
+  <div class="m-form-field-inline">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label--medium" >Project Manager</label>
+    </div>
+    <div>
+      <app-common-search-bar [placeholderText]="'Ex: John Doe, E1234'"
+                             (selectedEmployeeData)="setProjectManagerData($event)"
+                             style="display: flex; justify-content: center; align-items:end"></app-common-search-bar>
+
+      <div class="resource-allocation-pills" *ngIf="newProjectData.projectManagerDetails.length > 0">
+        <p class="resource-allocation-pills__name" *ngFor="let emp of newProjectData.projectManagerDetails">{{emp.empName}}
+          <svg class="a-icon resource-allocation-pills__icon" (click)="removeEmployeeFromList(emp, 'PM')">
+            <use xlink:href="#close"></use>
+          </svg>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-form-field-inline">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label--medium" >Project Owner</label>
+    </div>
+    <div>
+      <app-common-search-bar [placeholderText]="'Ex: John Doe, E1234'"
+                             (selectedEmployeeData)="setProjectOwnerData($event)"
+                             style="display: flex; justify-content: center; align-items:end"></app-common-search-bar>
+      <div class="resource-allocation-pills" *ngIf="newProjectData.projectOwnerDetails.length > 0">
+        <p class="resource-allocation-pills__name" *ngFor="let emp of newProjectData.projectOwnerDetails">{{emp.empName}}
+          <svg class="a-icon resource-allocation-pills__icon" (click)="removeEmployeeFromList(emp, 'VP')">
+            <use xlink:href="#close"></use>
+          </svg>
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="m-form-field-inline">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label--medium" >Project Director</label>
+    </div>
+    <div>
+      <app-common-search-bar [placeholderText]="'Ex: John Doe, E1234'"
+                             (selectedEmployeeData)="setProjectDirectorData($event)"
+                             style="display: flex; justify-content: center; align-items:end"></app-common-search-bar>
+      <div class="resource-allocation-pills" *ngIf="newProjectData.projectDirectorDetails.length > 0">
+        <p class="resource-allocation-pills__name" *ngFor="let emp of newProjectData.projectDirectorDetails">{{emp.empName}}
+          <svg class="a-icon resource-allocation-pills__icon" (click)="removeEmployeeFromList(emp, 'Director')">
+            <use xlink:href="#close"></use>
+          </svg>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-form-field-inline">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label--medium" >Project Coordinator</label>
+    </div>
+    <div>
+      <app-common-search-bar [placeholderText]="'Ex: John Doe, E1234'"
+                             (selectedEmployeeData)="setProjectCoordinatorData($event)"
+                             style="display: flex; justify-content: center; align-items:end"></app-common-search-bar>
+      <div class="resource-allocation-pills" *ngIf="newProjectData.projectCoordinatorDetails.length > 0">
+        <p class="resource-allocation-pills__name" *ngFor="let emp of newProjectData.projectCoordinatorDetails">{{emp.empName}}
+          <svg class="a-icon resource-allocation-pills__icon" (click)="removeEmployeeFromList(emp, 'PC')">
+            <use xlink:href="#close"></use>
+          </svg>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="m-form-field-inline" *ngIf="projectTypesDataLoaded">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label--medium" for="projectType">Project Type</label>
+    </div>
+
+    <div class="m-form-field__field">
+      <select class="m-form-field__select " id="projectType"
+              [(ngModel)]="newProjectData.projectType" [ngModelOptions]="{standalone: true }" >
+        <option *ngFor="let data of projectTypes" value="{{data.id}}">{{data.projectType}}</option>
+      </select>
+    </div>
+
+    <span class="m-form-field__error">error</span>
+  </div>
+
+
+  <div class="m-form-field-inline">
+    <div class="m-form-field__label-wrap">
+      <label class="m-form-field__label--medium">Project Icon</label>
+    </div>
+
+      <div class="kriyo-stories">
+        <div class="m-form-field__file-upload c-details__blog c-form__bg-border c-form__bg-border" style="cursor: pointer;" *ngIf="!imageUploaded">
+          <div class="m-form-field-file__upload-icon" style="display: flex; justify-content: center; align-items: center">
+            <image-upload (uploadFinished)="projectImageUploadFinish($event)" [extensions]="['jpg','png','gif','JPEG', '.jpg']"
+                          [headers]="{Accept: '*/*'}"
+                          [maxFileSize]="uploadImageSize"
+                          [style]="customStyle"
+                          [url]="imageUploadUrl"
+                          buttonCaption=""
+                          dropBoxMessage=""></image-upload>
+          </div>
+          <div class="m-form-field__upload-txt-main">
+            Drag and drop, or Browse your files
+          </div>
+          <div class="m-form-field__upload-txt-sub">
+            (File size less than 5MB)
+          </div>
+        </div>
+
+        <div class="c-experience-logo__preview-container" *ngIf="imageUploaded">
+          <div class="c-experience-logo__preview-wrapper c-details__blog">
+            <div class="c-experience__logo-preview">
+              <img src="{{uploadedProjectImage}}" alt="Institute Logo Preview" class="c-experience-logo__preview-wrapper">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <span class="m-form-field__error">error</span>
+  </div>
+
+
+  <div class="c-define-designation__action">
+    <button class="c-quick-link__action--button-cancel">Cancel</button>
+    <button class="c-define-designation__action--button u-ml" (click)="createNewProject()">
+      Save
+    </button>
+  </div>
+
+
+</div>
+
+<app-common-error-modal
+  [modalType]="confirmationModalType"
+  [headerText]="confirmationModalText"
+  [subText]="confirmationModalSubText"></app-common-error-modal>

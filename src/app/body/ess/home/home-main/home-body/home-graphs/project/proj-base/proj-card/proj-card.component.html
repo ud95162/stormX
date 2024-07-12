@@ -1,0 +1,336 @@
+<!--Desktop-->
+<div *ngIf="isDesktop">
+  <div class="col-sm-5">
+    <input class="form-control project-filter" (keyup)="applyFilter($event)" placeholder="Project Name | PM | VP">
+    <br>
+  </div>
+  <div class="col-sm-1 pull-right">
+
+    <button (click)="projectSettings()" class="btn btn-link pull-right edit-project-button"
+            type="button">
+      <i aria-hidden="true" class="fa fa-plus"></i></button>
+  </div>
+  <div *ngIf="dataLoadingProj">
+    <div *ngFor="let item of projectResponse " class="col-sm-12">
+      <div class="w3-panel w3-card">
+        <div class="media">
+          <div (click)="this.projectRedirect(item.projectCode,item.projectName, item.projectCount)"
+               class="media-left pointing">
+            <img class="media-object img-circle project-avatar"
+                 src={{item.projectImage}}>
+          </div>
+          <div (click)="this.projectRedirect(item.projectCode,item.projectName, item.projectCount)"
+               class=" media-body pointing">
+            <h4 class="project-name " [innerHTML]="highlight(item.projectName)">{{item.projectName}}</h4>
+            <div class="row">
+              <div class="col-sm-4">
+                <h4 style="color: #0c54b2;">
+                <span
+                  class="badge"
+                  style="background-color: #e5f0ff; padding-top: 5px; padding-bottom: 5px;color: #0c54b2; font-weight: bold">{{item.projectType}}</span>
+                </h4>
+              </div>
+              <div class="col-sm-2">
+                <h6><b>VP</b></h6>
+              </div>
+              <div class="col-sm-2">
+                <h6><b>Project Manager</b></h6>
+              </div>
+              <div class="col-sm-2">
+                <h6><b>Software Architect</b></h6>
+              </div>
+              <div class="col-sm-2">
+                <h6><b>QA Lead</b></h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+
+              </div>
+              <div class="col-sm-2">
+                <tr><h6 *ngFor="let x of item.vp" (click)="employeeRedirect(x.vpId)">
+                  <img class="img-circle" style="width: 30px;height: 30px" src="{{x.vpImage}}"><a> {{x.vpName}}</a></h6>
+                </tr>
+              </div>
+              <div class="col-sm-2">
+                <tr><h6 *ngFor="let x of item.projectManager" (click)="employeeRedirect(x.pmId)">
+                  <img class="img-circle" style="width: 30px;height: 30px" src="{{x.pmImage}}"><a> {{x.pmName}}</a></h6>
+                </tr>
+              </div>
+              <div class="col-sm-2">
+
+              </div>
+              <div class="col-sm-2">
+
+              </div>
+            </div>
+
+          </div>
+
+          <div (click)="this.projectRedirect(item.projectCode,item.projectName, item.projectCount)"
+               class="media-right pointing">
+            <h4 class="project-count">{{item.projectCount}}</h4>
+            <h6 class="project-count-label">members</h6>
+          </div>
+          <button class="btn btn-link pull-right edit-project-button"
+                  type="button" data-toggle="modal" data-target="#exampleModalCenter"
+                  (click)="this.projectEdit(item.projectCode,item.projectName,item.projectCount,item.projectImage)">
+            <i aria-hidden="true" class="fa fa-pencil"></i></button>
+
+          <div *ngIf="false">
+            <div class="col-sm-4" style="padding-left: 0">
+              <h1 (click)="this.projectRedirect(item.projectCode,item.projectName, item.projectCount)"
+                  style="margin: 10px 0 10px 0; cursor: pointer">
+                {{item.projectName}}</h1>
+            </div>
+            <div class="col-sm-8">
+              <h3 (click)="this.memberSearch(item.projectName)"
+                  style="color: #ef3648; margin: 10px 0 10px 0; cursor: pointer">
+                {{item.projectCount}} Members</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+           aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h3 class="modal-title" id="exampleModalLongTitle"><b>{{projectName}}</b></h3>
+
+            </div>
+            <div class="modal-body">
+              <div class="card-content-div">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <div class="col-sm-12 no-padding">
+                      <label class="col-sm-3 form-label-card no-padding" for="projectname">Project Name</label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="projectname" type="text" value="{{projectName}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12 no-padding">
+                      <label class="col-sm-3 form-label-card no-padding" for="projectcode">Project Code</label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="projectcode" type="text" value="{{projectCode}}">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-12 no-padding">
+                      <label class="col-sm-3 form-label-card no-padding" for="projectmanager">Add/Change Project Manager</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" id="projectmanager">
+                          <option *ngFor="let pm of pmList">{{pm.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12 no-padding">
+                      <label class="col-sm-3 form-label-card no-padding" for="projectowner">Add/Change Project Owner</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" id="projectowner">
+                          <option *ngFor="let vp of ownerList">{{vp.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12 no-padding">
+                      <label class="col-sm-3 form-label-card no-padding" for="projecthead">Add/Change Project Head</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" id="projecthead">
+                          <option>hhh</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12 no-padding">
+                      <label class="col-sm-3 form-label-card no-padding" for="projectclient">Add/Change Project Client</label>
+                      <div class="col-sm-9">
+                        <input class="form-control" id="projectclient" type="text">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12 no-padding">
+                      <label class="col-sm-3 form-label-card no-padding" for="projecttype">Add/Change Project Type</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" id="projecttype">
+                          <option value="Product">Product</option>
+                          <option value="Client">Client</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12 no-padding">
+                      <label class="col-sm-3 form-label-card no-padding" for="projectabout">About</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control project-textarea" cols="4" id="projectabout" rows="4"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-12 no-padding">
+                      <label class="col-sm-3 form-label-card no-padding">Add/Change Project Icon</label>
+                      <div class="col-sm-9">
+                        <div *ngIf="imgUrl">
+                          <i (click)="deleteImage()" aria-hidden="true"
+                             class="fa fa-times-circle-o delete-uploaded-image pull-right" id="deleteButton"></i>
+                          <img [src]="imgUrl" height="200" *ngIf="imgUrl">
+                        </div>
+                        <image-upload (change)="onFileChanged($event)" *ngIf="!imgUrl"
+                                      [extensions]="['jpg','png','gif','JPEG', '.jpg']"
+                                      [url]="imgUrl"
+                                      buttonCaption="Browse to upload "
+                                      dropBoxMessage=" or Drag and Drop to upload (max size 5MB) - To get the best view, please upload photos with 2:1 ratio"></image-upload>
+                      </div>
+                    </div>
+                  </div>
+
+<!--                  <div class="alert alert-dismissible fade in">-->
+<!--                    <a aria-label="close" class="close" data-dismiss="alert" href="#">&times;</a>-->
+<!--                  </div>-->
+
+                  <div class="form-group">
+                    <button class="btn save-category-designation"
+                            type="button">
+                      <i aria-hidden="true" class="fa fa-floppy-o"></i> Edit Project
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+
+      <div *ngIf="showLoading" class="col-sm-12 no-padding" style="text-align: center; top: 25%;">
+        <img src="assets/image/loading/graph-loading.svg" style="height: 120px !important;">
+      </div>
+
+      <div *ngIf="showNoDataError" class="col-sm-12 no-padding" style="text-align: center; top: 25%;">
+        <img src="assets/image/bad_face.svg">
+        <h4 style="color: #838383">No data available</h4>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Tablet || Mobile-->
+<div *ngIf="isMobile || isTablet">
+  <div *ngIf="dataLoadingProj">
+    <div *ngFor="let item of projectResponse" class="col-sm-12">
+      <div class="w3-panel w3-card">
+
+        <div class="media">
+          <div (click)="this.projectRedirect(item.projectCode,item.projectName, item.projectCount)" class="media-left pointing">
+            <img class="media-object img-circle project-avatar-mob"
+                 src = {{item.projectImage}}>
+          </div>
+          <div (click)="this.projectRedirect(item.projectCode,item.projectName, item.projectCount)" class=" media-body pointing">
+            <h4 class="project-name">{{item.projectName}}</h4>
+            <div class="row">
+              <div class="col-sm-2 pull-left">
+                VP
+              </div>
+              <div class="col-sm-2 pull-right">
+                <tr><h6 *ngFor="let x of item.vp" (click)="employeeRedirect(x.vpId)">
+                  <img class="img-circle" style="width: 30px;height: 30px" src="{{x.vpImage}}"><a> {{x.vpName}}</a></h6></tr>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2 pull-left">
+                Project Manager
+              </div>
+              <div class="col-sm-2 pull-right">
+                                <tr><h6 *ngFor="let x of item.projectManager" (click)="employeeRedirect(x.pmId)">
+                                  <img class="img-circle" style="width: 30px;height: 30px" src="{{x.pmImage}}"><a> {{x.pmName}}</a></h6></tr>
+              </div>
+            </div>
+<!--            <div class="row">-->
+<!--              <div class="col-sm-4">-->
+
+<!--              </div>-->
+<!--              <div class="col-sm-2">-->
+<!--                <h6><b>VP</b></h6>-->
+<!--              </div>-->
+<!--              <div class="col-sm-2">-->
+<!--                <h6><b>Project Manager</b></h6>-->
+<!--              </div>-->
+<!--              <div class="col-sm-2">-->
+<!--                <h6><b>Software Architect</b></h6>-->
+<!--              </div>-->
+<!--              <div class="col-sm-2">-->
+<!--                <h6><b>QA Lead</b></h6>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--              <div class="col-sm-4">-->
+
+<!--              </div>-->
+<!--              <div class="col-sm-2">-->
+<!--                <tr><h6 *ngFor="let x of item.vp" (click)="employeeRedirect(x.vpId)">-->
+<!--                  <img class="img-circle" style="width: 30px;height: 30px" src="{{x.vpImage}}"><a> {{x.vpName}}</a></h6></tr>-->
+<!--              </div>-->
+<!--              <div class="col-sm-2">-->
+<!--                <tr><h6 *ngFor="let x of item.projectManager" (click)="employeeRedirect(x.pmId)">-->
+<!--                  <img class="img-circle" style="width: 30px;height: 30px" src="{{x.pmImage}}"><a> {{x.pmName}}</a></h6></tr>-->
+<!--              </div>-->
+<!--              <div class="col-sm-2">-->
+
+<!--              </div>-->
+<!--              <div class="col-sm-2">-->
+
+<!--              </div>-->
+<!--            </div>-->
+
+          </div>
+          <div (click)="this.projectRedirect(item.projectCode,item.projectName, item.projectCount)" class="media-right pointing">
+            <h4 class="project-count">{{item.projectCount}}</h4>
+            <h6 class="project-count-label">members</h6>
+          </div>
+        </div>
+
+        <div *ngIf="false">
+          <div class="col-sm-4" style="padding-left: 0">
+            <h1 (click)="this.projectRedirect(item.projectCode,item.projectName, item.projectCount)"
+                style="margin: 10px 0 10px 0; cursor: pointer">
+              {{item.projectName}}</h1>
+          </div>
+          <div class="col-sm-8">
+            <h3 (click)="this.memberSearch(item.projectName)" style="color: #ef3648; margin: 10px 0 10px 0; cursor: pointer">
+              {{item.projectCount}} Members</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div>
+
+    <div *ngIf="showLoading" class="col-sm-12 no-padding" style="text-align: center; top: 25%;">
+      <img src="assets/image/loading/graph-loading.svg" style="height: 120px !important;">
+    </div>
+
+    <div *ngIf="showNoDataError" class="col-sm-12 no-padding" style="text-align: center; top: 25%;">
+      <img src="assets/image/bad_face.svg">
+      <h4 style="color: #838383">No data available</h4>
+    </div>
+
+  </div>
+</div>

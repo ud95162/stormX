@@ -1,0 +1,319 @@
+<div class="c-pax-details__block-main u-pb+ u-mb+">
+  <div class="c-pax-details__block-main__header profile-summary__header"
+       style="display: flex; justify-content: space-between; align-items: center">
+    <span class=""> Daily Attendance Log </span>
+    <button class="a-btn a-btn--primary transport-header__btn"
+            *ngIf="attendanceLogsDataLoaded && attendanceLogs.length > 0"
+            (click)="downloadAttendanceLogsReport()">Download Attendance Logs As Report
+    </button>
+  </div>
+
+  <div class="profile-summary__block-main u-mt" *ngIf="attendanceLogsDataLoaded && attendanceLogs.length === 0">
+    <div class="c-data__empty" style="display: grid; justify-content: center">
+      <img src="/assets/new-design-images/no-data.png" alt="no data">
+      <div class="gray-500 s-small-default c-data__empty-sub">
+        Employees Attendance Details Not Available!
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-summary__block-main u-mt" *ngIf="attendanceLogsDataLoaded && attendanceLogs.length > 0" #employeeAttendanceLogsSummaryTable>
+    <div class="leave-type__user--dto" style="overflow-x: auto; width: 100%">
+      <table class="c-kriyo-deta__table utilized-leave__table--extend leave-utilization__table"
+             style="table-layout:fixed; margin-bottom: 0;"
+             aria-describedby="attendance-logs">
+        <thead class="c-kriyo-deta__table--header" style="position:sticky; top: 0; z-index: 10">
+        <tr>
+          <th scope="col" class="attendance-log__th">Date</th>
+          <th scope="col" class="attendance-log__th">In Time</th>
+          <th scope="col" class="attendance-log__th">Out Time</th>
+          <th scope="col" class="attendance-log__th">Office Hrs</th>
+          <th scope="col" class="attendance-log__th">Office Work Hrs</th>
+          <th scope="col" class="attendance-log__th">WWT</th>
+          <th scope="col" class="attendance-log__th"></th>
+        </tr>
+        </thead>
+
+        <tbody class="c-kriyo-deta__table--body">
+        <ng-container *ngFor="let data of attendanceLogs">
+
+<!--          this tr section display employee absent days-->
+          <tr *ngIf="data.absentForDay" style="background-color: #fdd6d6; border-bottom: 1px solid #ffcccc">
+            <td style="width: 14.28%; font-weight: 500">{{data.calendarDate}}</td>
+            <td style="width: 71.42%; text-align: left; font-weight: 600; color: #955000;">No Pay - Absent</td>
+            <td style="width: 14.28%; text-align: right">
+              <a class=""  routerLink="/leave/main" *ngIf="loggedEmpId === searchEmpId">
+                  <i class="a-icon c-global-header__nav-icon reservation-table__icons-view fa fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </td>
+          </tr>
+<!--          end-->
+
+<!--          this tr section display employee applied a leave and not working on that day-->
+          <tr *ngIf="!data.absentForDay && data.leaveCount > 0 && data.wwtWorkHrs === null && data.maxOfficeHrs === null" style="background-color: #d3f7de; border-bottom: 1px solid #E1E1E1">
+            <td class="attendance-log__td" style="font-weight: 500">{{data.calendarDate}}</td>
+            <td style="width: 71.42%; text-align: left; font-weight: 600; color: #00950F;">
+              Leave <span style="font-weight: 500 !important; color: #232330 !important;"> -  Applied {{getAppliedLeaveTypeFromCount(data.leaveCount)}}</span>
+            </td>
+          </tr>
+<!--          end-->
+
+<!--          this tr section display employee applied a leave and worked on that day-->
+          <tr *ngIf="!data.absentForDay && data.leaveCount > 0 && (data.wwtWorkHrs !== null || data.maxOfficeHrs !== null)" style="background-color: #d3f7de; border-bottom: 1px solid #E1E1E1">
+            <td class="attendance-log__td" style="font-weight: 500">{{data.calendarDate}}</td>
+            <td class="attendance-log__td" *ngIf="data.firstInTime !== null">
+              <div style="display: flex; align-items: center">
+                <img src="assets/image/attendance/{{data.firstInSystem}}.png" alt="system" style="width: 20px; height: 20px"/>
+                <span style="margin-left: 5px"> {{data.firstInTime}}</span>
+              </div>
+            </td>
+            <td class="attendance-log__td" *ngIf="data.firstInTime === null"> - </td>
+            <td class="attendance-log__td" *ngIf="data.lastOutTime !== null">
+              <div style="display: flex; align-items: center">
+                <img src="assets/image/attendance/{{data.lastOutSystem}}.png" alt="system" style="width: 20px; height: 20px"/>
+                <span style="margin-left: 5px"> {{data.lastOutTime}}</span>
+              </div>
+            </td>
+            <td class="attendance-log__td" *ngIf="data.lastOutTime === null"> - </td>
+            <td class="attendance-log__td">{{data.maxOfficeHrs || '-'}}</td>
+            <td class="attendance-log__td"> {{data.maxWorkHrs || '-'}}</td>
+            <td class="attendance-log__td"> {{data.wwtWorkHrs || '-'}}</td>
+            <td class="attendance-log__td" style="text-align: right">
+              <a class="" >
+                <svg class="a-icon c-global-header__nav-icon reservation-table__icons-view" style="cursor: pointer"
+                     (click)="showModal('EmployeeDailyAttendanceLogsModal', data)">
+                  <use xlink:href="#eye"></use>
+                </svg>
+              </a>
+            </td>
+          </tr>
+<!--          end-->
+
+<!--          this tr section display employee normal working day logs-->
+          <tr *ngIf="!data.absentForDay && data.leaveCount === 0" style="border-bottom: 1px solid #E1E1E1">
+            <td class="attendance-log__td" style="font-weight: 500">{{data.calendarDate}}</td>
+            <td class="attendance-log__td" *ngIf="data.firstInTime !== null">
+              <div style="display: flex; align-items: center">
+                <img src="assets/image/attendance/{{data.firstInSystem}}.png" alt="system" style="width: 20px; height: 20px"/>
+                <span style="margin-left: 5px"> {{data.firstInTime}}</span>
+              </div>
+            </td>
+            <td class="attendance-log__td" *ngIf="data.firstInTime === null"> - </td>
+            <td class="attendance-log__td" *ngIf="data.lastOutTime !== null">
+              <div style="display: flex; align-items: center">
+                <img src="assets/image/attendance/{{data.lastOutSystem}}.png" alt="system" style="width: 20px; height: 20px"/>
+                <span style="margin-left: 5px"> {{data.lastOutTime}}</span>
+              </div>
+            </td>
+            <td class="attendance-log__td" *ngIf="data.lastOutTime === null"> - </td>
+            <td class="attendance-log__td">{{data.maxOfficeHrs || '-'}}</td>
+            <td class="attendance-log__td"> {{data.maxWorkHrs || '-'}}</td>
+            <td class="attendance-log__td"> {{data.wwtWorkHrs || '-'}}</td>
+            <td class="attendance-log__td" *ngIf="data.maxOfficeHrs !== null" style="text-align: right">
+              <a class="" *ngIf="data.overallAttendanceLogs !== null">
+                <svg class="a-icon c-global-header__nav-icon reservation-table__icons-view" style="cursor: pointer" (click)="showModal('EmployeeDailyAttendanceLogsModal', data)">
+                  <use xlink:href="#eye"></use>
+                </svg>
+              </a>
+            </td>
+          </tr>
+<!--          end-->
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="o-modal" id="EmployeeDailyAttendanceLogsModal">
+  <div class="o-modal__content-sm edit-personal-details" *ngIf="selectedDayAttendanceLogsView">
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header header-line__bottom">
+        <h4 style="font-weight: 600 !important; font-size: 16px">{{selectedDayAttendanceLogs.calendarDate}}</h4>
+        <button class="a-btn a-btn--link o-modal__inner-close o-modal__inner-close-sm"
+                (click)="hideModal('EmployeeDailyAttendanceLogsModal')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="o-modal-liked-people" style="overflow-x: hidden; margin-top: 30px">
+
+        <div *ngIf="selectedDayAttendanceLogs.leaveCount > 0" class="attendance-logs-leave__card">
+          <span style="font-weight: 600; font-size: 16px">Applied {{getAppliedLeaveTypeFromCount(selectedDayAttendanceLogs.leaveCount)}}</span>
+        </div>
+
+<!--        overall attendance display-->
+        <div *ngIf="selectedDayAttendanceLogs.overallAttendanceLogs !== null" style="border-bottom: 1px solid #efefef; padding-bottom: 25px">
+          <div style="display: flex; justify-content: flex-start; align-items: center; margin-bottom: 20px">
+            <span style="font-weight: 600; font-size: 14px;"> Overall Attendance</span>
+          </div>
+          <div class="attendance-logs__details">
+            <div class="attendance-logs__details-block">
+              <span class="attendance-logs__details-block__title">In Time</span>
+              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.firstInTime !== null">{{selectedDayAttendanceLogs.firstInTime}}</span>
+              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.firstInTime === null"> - </span>
+            </div>
+            <div class="attendance-logs__details-block">
+              <span class="attendance-logs__details-block__title">Out Time</span>
+              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.lastOutTime !== null">{{selectedDayAttendanceLogs.lastOutTime}}</span>
+              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.lastOutTime === null"> - </span>
+            </div>
+          </div>
+
+          <div class="attendance-logs__details">
+            <div class="attendance-logs__details-block">
+              <span class="attendance-logs__details-block__title">Office Hours</span>
+              <span class="attendance-logs__details-block__value" style="color: #16A34A" *ngIf="selectedDayAttendanceLogs.maxOfficeHrs !== null">{{selectedDayAttendanceLogs.maxOfficeHrs}}</span>
+              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.maxOfficeHrs === null"> - </span>
+            </div>
+            <div class="attendance-logs__details-block">
+              <span class="attendance-logs__details-block__title">Office Work Hours</span>
+              <span class="attendance-logs__details-block__value" style="color: #16A34A" *ngIf="selectedDayAttendanceLogs.maxWorkHrs !== null">{{selectedDayAttendanceLogs.maxWorkHrs}}</span>
+              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.maxWorkHrs === null"> - </span>
+            </div>
+          </div>
+
+          <div class="u-mt" *ngIf="selectedDayAttendanceLogs.overallAttendanceLogs.length > 0">
+            <table class="time-slot-table" aria-label="finger-attendance-logs-progress-bar" style="width: 100%;height: 20px">
+              <tr>
+                <td *ngFor="let attendance of selectedDayAttendanceLogs.overallAttendanceLogs; let i = index"
+                    class="{{attendance.employeeOfficeAttendanceState}} {{setTDStyles(i, selectedDayAttendanceLogs.overallAttendanceLogs.length)}} time-slot-table-td"
+                    [style.width]="getAttendancePercentage(attendance.startTime, attendance.endTime).width"
+                    title="{{getAttendanceTitle(attendance.startTime, attendance.endTime, attendance.betweenTimeHrs, attendance.employeeOfficeAttendanceState, attendance.startDevice, attendance.endDevice)}}"
+                    style="font-size: 8px; padding: 0">
+                  <span style="display: none">{{attendance.betweenTimeHrs}}</span>
+                </td>
+              </tr>
+            </table>
+            <table class="time-slot-table" style="width: 100%">
+              <tr>
+                <td style="text-align: left; font-size: 12px; width: 50%">00:00</td>
+                <td style="text-align: right; font-size: 12px; width: 50%">23:59</td>
+              </tr>
+            </table>
+
+          </div>
+
+        </div>
+
+<!--        finger print attendance display-->
+<!--        <div *ngIf="selectedDayAttendanceLogs.fingerttendanceLogs !== null" style="border-bottom: 1px solid #efefef; padding-bottom: 25px">-->
+<!--          <div style="display: flex; justify-content: flex-start; align-items: center; margin-bottom: 20px">-->
+<!--            <img src="assets/image/attendance/bioLogo.png" alt="bio-logo" style="width: 24px; height: 24px"/>-->
+<!--            <span style="font-weight: 600; font-size: 14px; margin-left: 10px"> Finger Print</span>-->
+<!--          </div>-->
+<!--          <div class="attendance-logs__details">-->
+<!--            <div class="attendance-logs__details-block">-->
+<!--              <span class="attendance-logs__details-block__title">In Time</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.fingerInTime !== null">{{selectedDayAttendanceLogs.fingerInTime}}</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.fingerInTime === null"> - </span>-->
+<!--            </div>-->
+<!--            <div class="attendance-logs__details-block">-->
+<!--              <span class="attendance-logs__details-block__title">Out Time</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.fingerOutTime !== null">{{selectedDayAttendanceLogs.fingerOutTime}}</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.fingerOutTime === null"> - </span>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="attendance-logs__details">-->
+<!--            <div class="attendance-logs__details-block">-->
+<!--              <span class="attendance-logs__details-block__title">Office Hours</span>-->
+<!--              <span class="attendance-logs__details-block__value" style="color: #16A34A" *ngIf="selectedDayAttendanceLogs.fingerOfficeHrs !== null">{{selectedDayAttendanceLogs.fingerOfficeHrs}}</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.fingerOfficeHrs === null"> - </span>-->
+<!--            </div>-->
+<!--            <div class="attendance-logs__details-block">-->
+<!--              <span class="attendance-logs__details-block__title">Work Hours</span>-->
+<!--              <span class="attendance-logs__details-block__value" style="color: #16A34A" *ngIf="selectedDayAttendanceLogs.fingerWorkHrs !== null">{{selectedDayAttendanceLogs.fingerWorkHrs}}</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.fingerWorkHrs === null"> - </span>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="u-mt" *ngIf="selectedDayAttendanceLogs.fingerttendanceLogs.length > 0">-->
+<!--            <table class="time-slot-table" aria-label="finger-attendance-logs-progress-bar" style="width: 100%;height: 20px">-->
+<!--              <tr>-->
+<!--                <td *ngFor="let attendance of selectedDayAttendanceLogs.fingerttendanceLogs; let i = index"-->
+<!--                    class="{{attendance.employeeOfficeAttendanceState}} {{setTDStyles(i, selectedDayAttendanceLogs.fingerttendanceLogs.length)}} time-slot-table-td"-->
+<!--                    [style.width]="getAttendancePercentage(attendance.startTime, attendance.endTime).width"-->
+<!--                    title="{{getAttendanceTitle(attendance.startTime, attendance.endTime, attendance.betweenTimeHrs, attendance.employeeOfficeAttendanceState, attendance.startDevice, attendance.endDevice)}}"-->
+<!--                    style="font-size: 8px; padding: 0">-->
+<!--                  <span style="display: none">{{attendance.betweenTimeHrs}}</span>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--            </table>-->
+<!--            <table class="time-slot-table" style="width: 100%">-->
+<!--              <tr>-->
+<!--                <td style="text-align: left; font-size: 12px; width: 50%">00:00</td>-->
+<!--                <td style="text-align: right; font-size: 12px; width: 50%">23:59</td>-->
+<!--              </tr>-->
+<!--            </table>-->
+
+<!--          </div>-->
+
+<!--        </div>-->
+
+
+<!--        <div *ngIf="selectedDayAttendanceLogs.faceAttendanceLogs !== null" style="margin-top: 25px;">-->
+<!--          <div style="display: flex; justify-content: flex-start; align-items: center; margin-bottom: 20px">-->
+<!--            <img src="assets/image/attendance/faceRecLogo.png" alt="face-logo" style="width: 24px; height: 24px" />-->
+<!--            <span style="font-weight: 600; font-size: 14px; margin-left: 10px"> FaceRec</span>-->
+<!--          </div>-->
+<!--          <div class="attendance-logs__details">-->
+<!--            <div class="attendance-logs__details-block">-->
+<!--              <span class="attendance-logs__details-block__title">In Time</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.faceInTime !== null">{{selectedDayAttendanceLogs.faceInTime}}</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.faceInTime === null"> - </span>-->
+<!--            </div>-->
+<!--            <div class="attendance-logs__details-block">-->
+<!--              <span class="attendance-logs__details-block__title">Out Time</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.faceOutTime !== null">{{selectedDayAttendanceLogs.faceOutTime}}</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.faceOutTime === null"> - </span>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="attendance-logs__details">-->
+<!--            <div class="attendance-logs__details-block">-->
+<!--              <span class="attendance-logs__details-block__title">Office Hours</span>-->
+<!--              <span class="attendance-logs__details-block__value" style="color: #16A34A" *ngIf="selectedDayAttendanceLogs.faceOfficeHrs !== null">{{selectedDayAttendanceLogs.faceOfficeHrs}}</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.faceOfficeHrs === null"> - </span>-->
+<!--            </div>-->
+<!--            <div class="attendance-logs__details-block">-->
+<!--              <span class="attendance-logs__details-block__title">Work Hours</span>-->
+<!--              <span class="attendance-logs__details-block__value" style="color: #16A34A" *ngIf="selectedDayAttendanceLogs.faceWorkHrs !== null">{{selectedDayAttendanceLogs.faceWorkHrs}}</span>-->
+<!--              <span class="attendance-logs__details-block__value" *ngIf="selectedDayAttendanceLogs.faceWorkHrs === null"> - </span>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="u-mt" *ngIf="selectedDayAttendanceLogs.faceAttendanceLogs.length > 0">-->
+<!--            <table class="time-slot-table" aria-label="attendance-logs-progress-bar" style="width: 100%;height: 20px">-->
+<!--              <tr>-->
+<!--                <td *ngFor="let attendance of selectedDayAttendanceLogs.faceAttendanceLogs; let i = index"-->
+<!--                    class="{{attendance.employeeOfficeAttendanceState}} {{setTDStyles(i, selectedDayAttendanceLogs.faceAttendanceLogs.length)}} time-slot-table-td"-->
+<!--                    [style.width]="getAttendancePercentage(attendance.startTime, attendance.endTime).width"-->
+<!--                    title="{{getAttendanceTitle(attendance.startTime, attendance.endTime, attendance.betweenTimeHrs, attendance.employeeOfficeAttendanceState, attendance.startDevice, attendance.endDevice)}}"-->
+<!--                    style="font-size: 8px; padding: 0">-->
+<!--                  <span style="display: none">{{attendance.betweenTimeHrs}}</span>-->
+<!--                </td>-->
+<!--              </tr>-->
+<!--            </table>-->
+<!--            <table class="time-slot-table" style="width: 100%">-->
+<!--              <tr>-->
+<!--                <td style="text-align: left; font-size: 12px; width: 50%">00:00</td>-->
+<!--                <td style="text-align: right; font-size: 12px; width: 50%">23:59</td>-->
+<!--              </tr>-->
+<!--            </table>-->
+
+<!--          </div>-->
+
+<!--        </div>-->
+
+
+      </div>
+    </div>
+  </div>
+</div>
+

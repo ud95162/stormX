@@ -1,0 +1,685 @@
+<!--Prviouse version notifications-->
+<div>
+  <button class="btn btn-info" data-target="#acknowledgementConfirmation" data-toggle="modal"
+          id="acknowledgementConfirmationModalButton"
+          style="display: none" type="button">
+    Modal
+  </button>
+  <!-- Modal -->
+  <div class="modal fade" id="acknowledgementConfirmation" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" data-dismiss="modal" id="confirmationModalCloseButton" type="button">&times;</button>
+          <h4 class="modal-title title-header-h4">Confirmation</h4>
+        </div>
+        <div class="modal-body">
+          <h5 class="confirmation-body">
+            <i aria-hidden="true" class="fa fa-info-circle"></i> Are you sure you want to perform this action?
+          </h5>
+        </div>
+        <div class="modal-footer">
+          <button (click)="clickOnAppraiseeAcknowledgementNo()" class="btn header-dropdown-button" data-dismiss="modal"
+                  type="button">No
+          </button>
+          <button (click)="clickOnAppraiseeAcknowledgement()" class="btn header-create-button"
+                  type="button">Yes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="previousView">
+
+<div *ngIf="showPerformanceAppraisalForm" id="performanceAppraisalCompleteForm">
+  <div class="w3-panel w3-card">
+    <div class="media">
+      <div class="media-left">
+        <img class="media-object appraisal-employee-header-square-image"
+             src="{{performanceAppraisalObject.appraisalEmployeeHeaderData.profileImage}}">
+      </div>
+      <div class="media-body">
+        <table width="100%">
+          <tr *ngFor="let row of performanceAppraisalObject.appraisalEmployeeHeaderData.appraisalHeaderData">
+            <td *ngFor="let data of row" class="appraisal-employee-header-data-td" width="30%">
+              <h6 class="title-description-h6">{{data.key}}</h6>
+              <h4 class="title-header-h4">{{data.value}}</h4>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="media-right" *ngIf="false">
+        <i (click)="printAppraisalView()" aria-hidden="true"
+           class="fa fa-print appraisal-print-view"></i>
+      </div>
+    </div>
+
+    <hr>
+    <div class="appraisal-disclamer-div">
+      <h5>DISCLAIMER STATEMENT</h5>
+      <p>YOUR PERFORMANCE FEEDBACK IS CONFIDENTIAL TO YOU, DISCLOSING THE ABOVE CONFIDENTIAL INFORMATION TO ANY THIRD
+        PARTY IS CONSIDERED AS NOT COMPLYING WITH COMPANY GUIDELINES ACCORDING TO CLAUSE 6 OF THE LETTER OF
+        APPOINTMENT.</p>
+      <h5>CLAUSE NO [6]</h5>
+      <p>YOU SHALL NOT DIVULGE ANY CONFIDENTIAL INFORMATION PERTAINING TO THE COMPANY THAT CAN BE REGARDED AS
+        CONFIDENTIAL OR ANY MATTERS OF ANY INFORMATION OF SECRECY WHICH YOU MAY COME TO LEARN IN THE COURSE OF YOUR
+        DUTIES TO ANY OUTSIDE PERSON, COMPANY EITHER INCORPORATE OR UNINCORPORATED WITHOUT THE PRIOR WRITTEN SANCTION OF
+        THE MANAGEMENT OF DISSEMINATE ANY DEROGATORY INFORMATION THAT WILL OR WILL LIKELY INJURE THE INTERESTS OF THE
+        REPUTATION OF THE COMPANY. IN THE EVENT OF SUCH ACT ON YOUR PART BEING BROUGHT TO THE NOTICE OF THE MANAGEMENT
+        THE COMPANY RESERVES THE ABSOLUTE RIGHT TO TERMINATE YOUR SERVICES WITHOUT NOTICE OR RECOMPENSE.</p>
+    </div>
+  </div>
+
+  <div *ngFor="let category of performanceAppraisalObject.appraisalDataPointGroups" class="w3-panel w3-card">
+    <h4 class="title-header-h4">{{category.title}}</h4>
+
+    <div *ngIf="category.appraisalQuestions.length > 0" class="col-sm-12 appraisal-question-group-header-div">
+      <div class="col-sm-8">
+        <h4 class="title-header-h4">Question</h4>
+      </div>
+      <div class="col-sm-4">
+        <h4 class="title-header-h4">Value</h4>
+      </div>
+    </div>
+    <div *ngFor="let question of category.appraisalQuestions">
+      <div class="col-sm-12 appraisal-question-group-questions-div">
+        <div class="col-sm-8 appraisal-question-group-question-div-sm8">
+          <h4 class="appraisal-question-group-questions">{{question.question}}</h4>
+        </div>
+        <div class="col-sm-4">
+          <input [value]="question.value" class="form-control appraisal-question-group-answers-input"  [disabled]="true"
+                 name="questionvalue" type="text">
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="category.appraisalComments.haveComments" class="col-sm-12">
+      <div style="padding-top: 10px;padding-bottom: 10px;">
+        <h4 class="appraisal-question-group-questions">Positive</h4>
+        <textarea
+          (focus)="increaseTextBoxSize(removeSpace(category.appraisalComments.commentData.positiveComment) + removeSpace(category.title))"
+          [value]="category.appraisalComments.commentData.positiveComment"
+          class="form-control appraisal-question-comments-textarea"
+          id="{{removeSpace(category.appraisalComments.commentData.positiveComment) + removeSpace(category.title)}}"
+          [disabled]="true"
+          name="Positive"
+          placeholder="Positive"></textarea>
+      </div>
+      <div style="padding-top: 10px;padding-bottom: 10px;">
+        <h4 class="appraisal-question-group-questions">Improvements</h4>
+        <textarea (focus)="increaseTextBoxSize(removeSpace(category.appraisalComments.commentData.negativeComment))"
+                  [value]="category.appraisalComments.commentData.negativeComment"
+                  class="form-control appraisal-question-comments-textarea"
+                  id="{{removeSpace(category.appraisalComments.commentData.negativeComment)}}"
+                  name="Negative"
+                  [disabled]="true"
+                  placeholder="Improvements"></textarea>
+      </div>
+      <div style="padding-top: 10px;padding-bottom: 10px;">
+        <h4 class="appraisal-question-group-questions">General Comments</h4>
+        <textarea (focus)="increaseTextBoxSize(removeSpace(category.appraisalComments.commentData.otherComment))"
+                  [value]="category.appraisalComments.commentData.otherComment"
+                  class="form-control appraisal-question-comments-textarea"
+                  id="{{removeSpace(category.appraisalComments.commentData.otherComment)}}"
+                  name="Comments"
+                  [disabled]="true"
+                  placeholder="General"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel w3-card">
+    <h4 class="title-header-h4" style="margin-bottom: 10px !important;">Appraisee Comments</h4>
+    <div class="col-sm-12">
+      <textarea (focus)="increaseTextBoxSize('previousAppraiseeComment')" (keydown)="increaseTextBoxSize('previousAppraiseeComment')"
+                [(ngModel)]="performanceAppraisalObject.appraiseeComment"
+                class="form-control appraisal-question-comments-textarea"
+                id="previousAppraiseeComment"
+                [disabled]="true"
+                name="Comment"
+                placeholder="Comment"></textarea>
+    </div>
+
+    <div
+      *ngIf="performanceAppraisalObject.viewAsMySelf && performanceAppraisalObject.appraisalAcknowledgement.acknowledgmentEdit">
+      <button *ngIf="false" style="margin-right: 15px;margin-top: 12px;" (click)="updatePerformanceAppraisal('employee')" class="btn header-create-button pull-right"
+              type="button">
+        Submit
+      </button>
+    </div>
+  </div>
+
+  <!--<div *ngIf="performanceAppraisalObject.appraisalAcknowledgement.acknowledgmentShow" class="w3-panel w3-card">-->
+    <!--<h4 class="title-header-h4">Appraisee Sign off (to be checked at the Appraisal Interview)</h4>-->
+    <!--<div class="col-sm-12">-->
+
+      <!--<form *ngIf="performanceAppraisalObject.appraisalAcknowledgement.acknowledgmentEdit"-->
+            <!--class="appraisee-acknowledgement-form">-->
+        <!--<label class="checkbox-inline">-->
+          <!--<input (click)="onClickAcknowledgementCheckBox()" id="appraiseeAcknowledgement" type="checkbox" value="">-->
+          <!--This electronic sign off indicates that the Performance feedback has been read and discussed with me. The sign-->
+          <!--off does not necessarily indicate agreement or disagreement with the content of the appraisal feedback.-->
+        <!--</label>-->
+      <!--</form>-->
+
+      <!--<h5>-->
+        <!--{{performanceAppraisalObject.appraisalAcknowledgement.acknowledgedMessage}}-->
+      <!--</h5>-->
+
+      <!--&lt;!&ndash;<h5 *ngIf="performanceAppraisalObject.appraisalAcknowledgement.acknowledgmentAcceptanceShow">&ndash;&gt;-->
+      <!--&lt;!&ndash;{{performanceAppraisalObject.appraisalAcknowledgement.acknowledgedMessage}}&ndash;&gt;-->
+      <!--&lt;!&ndash;</h5>&ndash;&gt;-->
+    <!--</div>-->
+  <!--</div>-->
+
+  <div class="w3-panel w3-card">
+    <h4 class="title-header-h4">Official Use Only (to be checked at the Appraisal Interview)</h4>
+
+    <div>
+      <div class="col-sm-12 appraisal-employee-official-use-div">
+        <h4 class="title-header-h4">Panelists</h4>
+        <div *ngFor="let panelistRecord of performanceAppraisalObject.officialUseOnlyObject.panelistInfos"
+             class="col-sm-6 appraisal-employee-official-use-div">
+          <div class="media">
+            <div class="media-left">
+              <img (click)="profileRedirect(panelistRecord.panelistInfo.empNo)"
+                   class="media-object img-circle appraisal-panelist-image"
+                   src="{{panelistRecord.panelistInfo.image}}">
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading appraisal-panelist-name">{{panelistRecord.panelistInfo.name}}</h4>
+              <h6 class="appraisal-panelist-designation">{{panelistRecord.panelistInfo.designation}}</h6>
+              <div *ngIf="false">
+                <form *ngIf="panelistRecord.showSignOffCheckBox">
+                  <label *ngIf="!panelistRecord.signedOff" class="checkbox-inline">
+                    <input (click)="clickOnAppraiserSignOff(panelistRecord.id)" id="appraiserSignOff" type="checkbox"
+                                    value="">
+                    Sign-off
+                  </label>
+                </form>
+
+                <h6 class="appraisal-panelist-designation">{{panelistRecord.signedOffStatus}}</h6>
+              </div>
+            </div>
+            <div *ngIf="false" class="media-right">
+              <i (click)="removePanelists(panelistRecord)" aria-hidden="true"
+                 class="fa fa-trash-o appraisal-panelist-delete"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="false">
+      <div class="col-sm-12 appraisal-employee-official-use-div">
+        <h4 class="title-header-h4">Salary Details</h4>
+        <div *ngFor="let salaryData of performanceAppraisalObject.officialUseOnlyObject.salaryDetails">
+          <div class="col-sm-12 appraisal-question-group-questions-div">
+            <div class="col-sm-8 appraisal-question-group-question-div-sm8">
+              <h4 class="appraisal-question-group-questions">{{salaryData.key}}</h4>
+            </div>
+            <div class="col-sm-4">
+              <input [(ngModel)]="salaryData.value" class="form-control appraisal-question-group-answers-input"
+                     id="{{removeSpace(salaryData.key)}}"
+                     name="salaryValue" type="text">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button (click)="updatePerformanceAppraisal('appraiser')" class="btn header-create-button pull-right"
+                type="button">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+
+
+<!--Appraisal Saving Comment-->
+<div>
+  <button
+    class="btn btn-info hide" data-target="#notificationPopupForSavingAppraiserComment" data-toggle="modal"
+    id="openPersonalAppraiserCommentNotificationPopup"
+    type="button">Open Modal
+  </button>
+  <!--Modal-->
+  <div class="modal fade" id="notificationPopupForSavingAppraiserComment" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            class="close" data-dismiss="modal" id="closePersonalAppraiserCommentNotificationPopup"
+            type="button">&times;
+          </button>
+          <h4 class="modal-title title-header-h4">Notification</h4>
+        </div>
+        <div class="modal-body">
+          <h5 class="notification-body">
+            {{commentSavingResponse?.message}}
+          </h5>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--Appraisal pillar Comment On Notification Popup-->
+<div>
+  <button
+    class="btn btn-info hide" data-target="#notificationPopupForSavingAppraisalPillarCommentData" data-toggle="modal"
+    id="openPersonalAppraisalDatEditingNotificationPillarCommentPopup"
+    type="button">Open Modal
+  </button>
+  <!--Modal-->
+  <div class="modal fade" id="notificationPopupForSavingAppraisalPillarCommentData" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            class="close" data-dismiss="modal" id="closePersonalAppraisalDatEditingNotificationPillarCommentPopup"
+            type="button">&times;
+          </button>
+          <h4 class="modal-title title-header-h4">Notification</h4>
+        </div>
+        <div class="modal-body">
+          <h5 class="notification-body">
+            {{pillarCommentSavingResponse?.message}}
+          </h5>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="latestView">
+<div>
+
+  <div class="div-separator-small"></div>
+
+  <div *ngIf="showNoDataError || showLoading">
+
+    <div class="row">
+
+      <div class="col-sm-12">
+
+        <div *ngIf="showLoading" class="col-sm-12 no-padding" style="text-align: center; position: absolute;top: 25%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+          <img src="assets/image/loading/graph-loading.svg" style="height: 120px !important;">
+        </div>
+
+        <div *ngIf="showNoDataError" class="col-sm-12 no-padding" style="text-align: center; position: absolute;top: 25%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+          <img src="assets/image/bad_face.svg">
+          <h4 style="color: #838383">No data available</h4>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+   <div *ngIf="false">
+   <div class="w3-panel w3-card" *ngIf="showEditProfile">
+
+    <div class="row">
+
+      <div class="col-sm-2" style="padding-left: 19px;">
+        <div>
+          <img
+            class="media-object appraisal-employee-header-square-image"
+            src="{{personalApprisalData.employeeInfo.image}}">
+        </div>
+      </div>
+
+      <div class="col-sm-7" style="padding-left: 0px;">
+        <div>
+          <h5
+            class="search-header-name"
+            title="{{personalApprisalData.employeeInfo.name}}">{{personalApprisalData.employeeInfo.name}}&nbsp;&nbsp;[{{personalApprisalData.employeeInfo.empNo}}]</h5>
+          <h6
+            class="search-header-designation"
+            title="{{personalApprisalData.employeeInfo.designation}}">{{personalApprisalData.employeeInfo.designation}}</h6>
+          <h6
+            class="search-header-completion"
+            title="{{personalApprisalData.employeeInfo.project}}">{{personalApprisalData.employeeInfo.project}}</h6>
+        </div>
+      </div>
+
+      <div class="col-sm-3" style="padding-left: 58px;">
+
+      </div>
+
+    </div>
+
+  </div>
+   </div>
+
+  <div *ngIf="showEditProfile">
+
+    <div *ngFor="let appriseObj of personalApprisalData.ratingGroupedByPillars">
+
+      <div class="w3-panel w3-card">
+        <div class="row" style="padding-right: 20px;padding-left: 20px;">
+          <h4 style="font-size: 15px; color: #2d2f32; font-weight: 600 !important;">{{appriseObj.pillarName}}</h4>
+        </div>
+
+        <div class="row" style="padding-right: 20px;padding-left: 20px;padding-top: 3px;padding-bottom: 5px;" *ngFor="let expObj of appriseObj.expectationsInPillar; let i = index;">
+          <div>
+            <div class="{{getLeftColumnWidth(expObj.otherRatings)}} formatted" style="font-size:14px;">{{expObj.expectationName}} <span style="color: #979797">{{generateWeightText(expObj.weight)}}</span></div>
+            <div class="{{getRightColumnWidth(expObj.otherRatings)}}" style="padding:0px;">
+
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-11">
+
+                    <div class="attendance-admin-date-select">
+                      <div *ngFor="let otherRating of expObj.otherRatings" class="radio radio-primary radio-inline">
+                        <input
+                          type="radio"
+                          value="{{otherRating.name}}"
+                          (click)="changePillarRating(personalApprisalData.employeeInfo.empNo,expObj.expectationId,expObj.otherRatings,expObj.givenRatingName,otherRating.name,expObj.empExpectationComments)"
+                          id="dateRangeRadio-{{expObj.expectationId}}-{{removingSpace(otherRating.name)}}"
+                          name="dateRangeRadio-{{expObj.expectationId}}-{{removingSpace(otherRating.name)}}"
+                          [(ngModel)]="expObj.givenRatingName"
+                          [disabled]="isReadOnly">
+                        <label for="dateRangeRadio-{{expObj.expectationId}}-{{removingSpace(otherRating.name)}}"> {{otherRating.name}} </label>
+                      </div>
+                    </div>
+
+                  </div>
+
+<!--                  <div class="col-sm-1 view-history">-->
+
+<!--                    &lt;!&ndash;<div class="tooltip">&ndash;&gt;-->
+<!--                    &lt;!&ndash;<span class="tooltiptext">View Edit History</span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--                    &lt;!&ndash;<div class="tooltip">Hover over me&ndash;&gt;-->
+<!--                    &lt;!&ndash;<span class="tooltiptext">Tooltip text</span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--                  </div>-->
+<!--                  <div class="col-sm-1 view-history" (click)="viewAddExpectationComment(expObj.expectationId, expObj.expectationComment, expObj.givenRatingName)">-->
+
+                    <!--<div class="tooltip">-->
+                    <!--<span class="tooltiptext">View Edit History</span>-->
+                    <!--</div>-->
+
+<!--                    <i class="fa fa-history" style="font-size: 18px;color: #cdc5c5;"></i>-->
+<!--                    <i class="fa fa-comment-o options-menu-listitem-icons" style="font-size: 18px;color: #a7aaad;"></i>-->
+
+<!--                  </div>-->
+                  <div class="col-sm-1 view-history code-comment-history__view" [ngClass]="{'is-active': expObj.empExpectationComments != null}" (click)="viewAddExpectationComment(expObj.expectationId, expObj.givenRatingName, expObj.empExpectationComments, expObj.otherRatings)">
+                    <i class="fa fa-comment-o code-comment-history__view-icon" title="comment"></i>
+<!--                    <svg class="a-icon code-comment-history__view-icon">-->
+<!--                      <use xlink:href="#accomplishments"></use>-->
+<!--                    </svg>-->
+                    <span *ngIf="expObj.empExpectationComments != null" class="code-comment-history__view-results">{{expObj.empExpectationComments[0].commentCount}}</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div><br>
+
+        </div>
+
+        <div *ngIf="appriseObj.commentAreasInPillarDesignation.length > 0">
+          <div class="row cmt-section" *ngFor="let expObjComment of appriseObj.commentAreasInPillarDesignation; let j = index;">
+            <div class="col-sm-11 pillar-cmt-input">
+              <h4  class="cmt-save">{{expObjComment.commentArea}}</h4>
+              <textarea
+                (focus)="increasingTextBoxSize(expObjComment.commentArea)" (keydown)="increasingTextBoxSize(expObjComment.commentArea)"
+                [(ngModel)]="expObjComment.commentForEmployeeForCommentArea.comment"
+                class="form-control appraisal-pillar-comments-textArea" data-gramm_editor="false"
+                id="{{expObjComment.commentArea}}"
+                name="{{expObjComment.commentArea}}"
+                placeholder="Your Comment"
+                [readonly]="isReadOnly"></textarea>
+            </div>
+            <div class="col-sm-1 pillar-cmt-save">
+              <!--<div>-->
+                <!--<button-->
+                  <!--(click)="saveAppraiserCommentWithinPillar(expObjComment)" class="btn header-create-button pull-right"-->
+                  <!--type="button"-->
+                  <!--[disabled]="isReadOnly">-->
+                  <!--Save-->
+                <!--</button>-->
+              <!--</div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <div class="w3-panel w3-card" *ngIf="showEditProfile">
+
+
+    <div class="w3-panel w3-card">
+      <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a class="tab-header"
+               href="#positive-comment"
+               aria-controls="requested"
+               role="tab"
+               data-toggle="tab">{{personalApprisalData.positiveCommentText}}</a>
+          </li>
+          <li role="presentation">
+            <a class="tab-header"
+               href="#negative-comment"
+               aria-controls="processed"
+               role="tab"
+               data-toggle="tab">{{personalApprisalData.negativeCommentText}}</a>
+          </li>
+          <li role="presentation">
+            <a class="tab-header"
+               href="#other-comment"
+               aria-controls="processed"
+               role="tab"
+               data-toggle="tab">{{personalApprisalData.otherCommentText}}</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="positive-comment">
+            <div class="div-separator-small"></div>
+            <div>
+              <div class="col-sm-12">
+      <textarea
+        (focus)="increasingTextBoxSize('appraiserPossitiveComment')" (keydown)="increasingTextBoxSize('appraiserPossitiveComment')"
+        [(ngModel)]="personalApprisalData.positiveComment"
+        class="form-control appraisal-question-comments-textArea" data-gramm_editor="false"
+        id="appraiserPossitiveComment"
+        name="appraiserPossitiveComment"
+        placeholder="{{personalApprisalData.positiveCommentText}}"
+        [readonly]="isReadOnly"></textarea>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="negative-comment">
+            <div class="div-separator-small"></div>
+            <div>
+              <div class="col-sm-12">
+
+      <textarea
+        (focus)="increasingTextBoxSize('appraiserNegativeComment')" (keydown)="increasingTextBoxSize('appraiserNegativeComment')"
+        [(ngModel)]="personalApprisalData.negativeComment"
+        class="form-control appraisal-question-comments-textArea" data-gramm_editor="false"
+        id="appraiserNegativeComment"
+        name="appraiserNegativeComment"
+        placeholder="{{personalApprisalData.negativeCommentText}}"
+        [readonly]="isReadOnly"></textarea>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="other-comment">
+            <div class="div-separator-small"></div>
+            <div class="col-sm-12">
+      <textarea
+        (focus)="increasingTextBoxSize('appraiserOtherComment')" (keydown)="increasingTextBoxSize('appraiserOtherComment')"
+        [(ngModel)]="personalApprisalData.otherComment"
+        class="form-control appraisal-question-comments-textArea" data-gramm_editor="false"
+        id="appraiserOtherComment"
+        name="appraiserOtherComment"
+        placeholder="{{personalApprisalData.otherCommentText}}"
+        [readonly]="isReadOnly"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="row" *ngIf="!isReadOnly">
+    <div style="display: flex; align-items: center; justify-content: flex-end; margin-top: 16px; margin-right: 16px;">
+      <label class="a-checkbox" style="margin-bottom: 0px; margin-right: 16px;">
+        <input (click)="onCheckBoxClick()" class="a-checkbox__check" type="checkbox" id="evaluatorCompleted">
+        <span class="a-checkbox__label" style="font-size: 14px; padding-left: 22px;">Mark as completed</span>
+      </label>
+      <button
+        (click)="saveAll()" class="btn header-create-button pull-right"
+        type="button"
+        style="font-size: 16px; margin-top: 0px;"
+        [disabled]="isReadOnly">
+        Save All
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+
+</div>
+</div>
+<!--new modal-->
+
+<div class="o-modal" id="addEditExpectationCommentModal">
+  <div class="o-modal__content code-comment-modal">
+    <div class="o-modal__inner-header">
+      <h3 class="o-modal__inner-header-title">Expectation Comment</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close"  (click)="closeModal()" *ngIf="isReadOnly || showCloseExpCommentModal">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+<!--    <div class="o-modal__body">-->
+
+<!--      <div class="o-tabs">-->
+<!--        <div class="o-tabs__nav">-->
+<!--          <a class="o-tabs__nav-item" [ngClass]="{'is-active': tabName == 'comment'}"-->
+<!--             (click)="changeTabs('comment')">Comment</a>-->
+<!--          <a class="o-tabs__nav-item is-active" [ngClass]="{'is-active': tabName == 'commentHistory'}"-->
+<!--             (click)="changeTabs('commentHistory')">Comment History</a>-->
+<!--        </div>-->
+<!--        <div class="o-tabs__content">-->
+<!--          <div class="o-tabs__pane" [ngClass]="{'is-active': tabName == 'comment'}" *ngIf="tabName === 'comment'" id="comment">-->
+<!--            <div class="m-form-field">-->
+<!--              <div class="m-form-field__label-wrap">-->
+<!--                <label class="m-form-field__label">Comment</label>-->
+<!--              </div>-->
+<!--              <textarea [(ngModel)]="expectationComment" class="code-comment-modal__textarea" placeholder="Type here.." rows="5" cols="95" [disabled]="isReadOnly" [required]="showMandatoryComment" ></textarea>-->
+<!--            </div>-->
+<!--&lt;!&ndash;            <p class="code-comment-history__warning"><span class="code-comment-history__warning-icon">**</span> It is mandatory to add a comment.</p>&ndash;&gt;-->
+<!--          </div>-->
+<!--          <div class="o-tabs__pane" [ngClass]="{'is-active': tabName == 'commentHistory'}" *ngIf="tabName === 'commentHistory'" id="commentHistory">-->
+<!--            <div *ngIf="empExpectationComments != null">-->
+<!--              <div class="code-comment-history" *ngFor="let empExpectationComment of empExpectationComments">-->
+<!--                <div class="code-comment-history__header">-->
+<!--                  <h5 class="code-comment-history__header-title">{{empExpectationComment.commentedBy}}</h5>-->
+<!--                  <span class="code-comment-history__header-date">{{ empExpectationComment.lastUpdated | date:"medium" }}</span>-->
+<!--                </div>-->
+<!--                <p class="code-comment-history__description">{{empExpectationComment.comment}}</p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="code-comment-history code-comment-history__empty" *ngIf="empExpectationComments == null">-->
+<!--              <img src="assets/image/bad_face.svg">-->
+<!--              <h4 class="code-comment-history__empty-text">No data available</h4>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--    </div>-->
+    <div class="o-modal__body">
+      <div class="m-form-field" *ngIf="!isReadOnly">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label">Comment<span *ngIf="showMandatoryComment" class="required">*</span></label>
+        </div>
+        <textarea [(ngModel)]="expectationComment" class="code-comment-modal__textarea"
+                  placeholder="Type here" rows="5" cols="95" maxlength="4294967295" [disabled]="isReadOnly"
+                  (keyup)="changeExpectationComment($event)"></textarea>
+      </div>
+      <div class="o-modal__footer" *ngIf="!isReadOnly">
+        <button class="a-btn a-btn--primary" [ngStyle]="{'cursor': ((expectationComment === '' ||
+      expectationComment === null) && (givenRatingName === 'E_Exp' || givenRatingName === 'N_Imp')) || disableButtonForSpacesInTextArea ? 'not-allowed' : '' }"
+                (click)="saveExpectationComment()" [disabled]="((expectationComment === '' || expectationComment === null) &&
+              (givenRatingName === 'E_Exp' || givenRatingName === 'N_Imp')) || disableButtonForSpacesInTextArea" >Save</button>
+      </div>
+      <div class="code-comment-history">
+        <h5 class="code-comment-history__title">Comment History</h5>
+        <div class="code-comment-history__scroll">
+          <div *ngIf="empExpectationComments != null">
+            <div class="code-comment-history-section" *ngFor="let empExpectationComment of empExpectationComments">
+              <div class="code-comment-history__header">
+                <h5 class="code-comment-history__header-title">{{empExpectationComment.commentedBy}}</h5>
+                <span class="code-comment-history__header-date">{{ empExpectationComment.lastUpdated | date:"medium" }}</span>
+              </div>
+              <p class="code-comment-history__description">{{empExpectationComment.comment}}</p>
+              <div class="code-comment-history__delete">
+                <a *ngIf="empExpectationComment.commentedByENo == loggedInEmpID && !isReadOnly" class="code-comment-history__delete-link u-mt" (click)="deleteComment()">
+                  <svg class="a-link-btn a-icon code-comment-history__delete-icon"><use xlink:href="#trash"></use></svg>Delete Comment
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="code-comment-history-section code-comment-history__empty" *ngIf="empExpectationComments == null">
+            <img src="assets/image/bad_face.svg">
+            <h4 class="code-comment-history__empty-text">No data available</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!--    <div class="o-modal__footer" *ngIf="!isReadOnly && tabName =='comment'">-->
+<!--&lt;!&ndash;      <button *ngIf="expCommentSavable" class="a-btn a-btn&#45;&#45;primary" style="cursor: not-allowed;" (click)="saveExpectationComment()" [disabled]="expectationComment === '' || expectationComment === null" >Save</button>&ndash;&gt;-->
+<!--      <button class="a-btn a-btn&#45;&#45;primary" [ngStyle]="{'cursor': (expectationComment === '' ||-->
+<!--      expectationComment === null) && (givenRatingName === 'E_Exp' || givenRatingName === 'N_Imp') ? 'not-allowed' : '' }"-->
+<!--              (click)="saveExpectationComment()" [disabled]="(expectationComment === '' || expectationComment === null) &&-->
+<!--              (givenRatingName === 'E_Exp' || givenRatingName === 'N_Imp')" >Save</button>-->
+<!--&lt;!&ndash;      <button class="a-btn a-btn&#45;&#45;primary" *ngIf="expCommentEditable" (click)="setEditExpectationComment()" >Edit</button>&ndash;&gt;-->
+<!--    </div>-->
+
+  </div>
+
+</div>

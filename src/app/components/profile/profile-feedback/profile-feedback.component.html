@@ -1,0 +1,41 @@
+<mat-tab-group type="pills" [orientation]="horizontal" *ngIf="isLoaded">
+<!--<mat-tab-group type="pills" [orientation]="horizontal">-->
+  <mat-tab title="Personal" *ngIf="this.permissionData.showPersonalTab
+   && componentPermission.includes('FeedbackPersonalView')">
+  <!--<mat-tab title="Personal">-->
+    <ng-template ngbTabContent>
+
+      <app-profile-feedback-personal *ngIf="this.permissionData.showPersonalTab
+      && componentPermission.includes('FeedbackPersonalView')"></app-profile-feedback-personal>
+      <!--<app-profile-feedback-personal></app-profile-feedback-personal>-->
+
+    </ng-template>
+  </mat-tab>
+  <mat-tab *ngIf="this.permissionData.showAdminTab
+  && componentPermission.includes('FeedbackLeadView')">
+  <!--<mat-tab>-->
+    <ng-template ngbTabTitle>Admin</ng-template>
+    <ng-template ngbTabContent>
+
+      <app-profile-feedback-admin *ngIf="this.permissionData.showAdminTab
+      && componentPermission.includes('FeedbackLeadView')"></app-profile-feedback-admin>
+
+      <!--<app-profile-feedback-admin></app-profile-feedback-admin>-->
+
+    </ng-template>
+  </mat-tab>
+  <mat-tab *ngIf="this.permissionData.showExecutiveTab
+  && componentPermission.includes('FeedbackExecutiveView')">
+  <!--<mat-tab>-->
+    <ng-template ngbTabTitle>Excecutive</ng-template>
+    <ng-template ngbTabContent>
+
+
+      <app-profile-feedback-excecutive *ngIf="this.permissionData.showExecutiveTab
+      && componentPermission.includes('FeedbackExecutiveView')"></app-profile-feedback-excecutive>
+
+      <!--<app-profile-feedback-excecutive></app-profile-feedback-excecutive>-->
+
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

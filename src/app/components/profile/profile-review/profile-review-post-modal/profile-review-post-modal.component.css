@@ -1,0 +1,175 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  background-color: #FFFFFF !important;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.write-review-card {
+  text-align: center;
+}
+
+.write-review-header {
+  font-size: 16px;
+  color: #2d2f32;
+  font-weight: 500;
+  margin-top: 0;
+}
+
+.write-review-button {
+  background-color: #006eff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 4px 12px;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.review-type-lable {
+  color: #858585;
+  font-size: 18px;
+  margin-top: 0;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.modal-view {
+  z-index: 1050 !important;
+}
+
+/*Load more or less*/
+.loadmorebtn {
+  background-color: transparent;
+  width: 100% !important;
+  color: #c0c0c0;
+  border: none !important;
+}
+
+.loadmorebtn:focus,
+.loadmorebtn:active:focus {
+  outline: none;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+
+.write-review-stars {
+  color: gold;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.save-review-button {
+  border-radius: 4px;
+  background-color: #006eff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 4px 12px;
+}
+
+.delete-review-button {
+  border-radius: 4px;
+  background-color: #FF0A00;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  padding: 4px 12px;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.show-save {
+  display: block;
+}
+
+.hide-save {
+  display: none;
+}
+
+.show-edit {
+  display: block;
+}
+
+.hide-edit {
+  display: none;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.review-mobile-tabs {
+  width: 50%;
+}
+
+/*Custom tabs*/
+.nav-tabs {
+  /*border-bottom: 2px solid #DDD;*/
+  background-color: #FFFFFF;
+  text-align: center;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+  border-width: 0;
+}
+
+.nav-tabs > li > a {
+  border: none;
+  color: #858585;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li > a:hover {
+  border: none;
+  color: #006eff !important;
+  background: transparent;
+}
+
+.nav-tabs > li > a::after {
+  content: "";
+  background: #006eff;
+  height: 2px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -1px;
+  transition: all 250ms ease 0s;
+  transform: scale(0);
+}
+
+.nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
+  transform: scale(1);
+}
+
+.tab-nav > li > a::after {
+  background: #006eff none repeat scroll 0 0;
+  color: #fff;
+}
+
+.tab-pane {
+  padding: 15px 0;
+}
+
+.tab-content {
+  padding-top: 10px
+}
+
+.nav-tabs > li > a {
+  background-color: #FFFFFF;
+}

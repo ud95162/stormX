@@ -1,0 +1,125 @@
+<div class="w3-panel w3-card">
+  <div class="project-utilization-registry">
+    <div class="header">
+      <div class="header-title">
+        <h5 class="card-title-h5">Project Utilization Registry</h5>
+      </div>
+      <div class="header-note">
+        <div class="note">
+          <b class="note-title">Note: </b>
+          <p class="note-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus et harum molestiae nobis quod sapiente si
+            nt sunt tenetur! Aliquam delectus enim excepturi explicabo fugiat harum laboriosam non odio omnis quae?</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!showForm">Loading.... </div>
+    <div *ngIf="!showForm">
+      <img
+        alt="" class="loading"
+        src="../../../../../assets/image/loading/loading-stripe.svg">
+    </div>
+    <div *ngIf="showForm" class="utilization-registry">
+      <div class="utilization-registry-form-container">
+        <form class="utilization-registry-form">
+          <div class="row">
+            <div class="col-sm-2 form-group">
+              <label for="empId">Emp ID</label>
+              <input [(ngModel)]="formData.empId" class="form-control" name="empId" type="text" disabled>
+            </div>
+            <div class="col-sm-4 form-group padding-left-0">
+              <label for="fromDate">Start Date</label>
+              <input (change)="onChangeFromDate()" [(ngModel)]="formData.fromDate" class="form-control" name="fromDate" type="date">
+            </div>
+            <div class="col-sm-4 form-group padding-left-0">
+              <label for="toDate">End Date</label>
+              <input *ngIf="!toDateUntilNow" (change)="onChangeToDate(false)" [(ngModel)]="formData.toDate" class="form-control" name="toDate" type="date">
+              <input *ngIf="toDateUntilNow" class="form-control" name="toDate" type="date" disabled>
+            </div>
+            <div class="col-sm-2 form-group">
+              <label for="toDateUntilNow1"></label>
+              <div class="checkbox checkbox-primary">
+                <input [checked]="toDateUntilNow" (click)="onChangeToDate(true)" id="toDateUntilNow" type="checkbox">
+                <label class="padding-left-0" for="toDateUntilNow">
+                  Until Today
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 form-group">
+              <label for="project">Select the project</label>
+              <select (change)="onChangeProject()"
+                [(ngModel)]="formData.project" class="form-control" name="project">
+                <option
+                  *ngFor="let project of projectTeamList"
+                  [ngValue]="project">{{project.projectName}} ({{project.projectCode}})
+                </option>
+              </select>
+            </div>
+            <div class="col-sm-4 form-group padding-left-0">
+              <label for="team">Select the team (if there)</label>
+              <select *ngIf="!newTeam" (change)="onChangeTeam()"
+                [(ngModel)]="formData.team" class="form-control" name="team">
+                <option
+                  *ngFor="let team of selectedProjectTeams"
+                  [ngValue]="team">{{team}}
+                </option>
+                <option [ngValue]="'-1'"> --- New Team --- </option>
+              </select>
+              <input *ngIf="newTeam" [(ngModel)]="formData.team" class="form-control input-new-team" name="team" type="text">
+              <button class="close-new-team" *ngIf="newTeam" (click)="closeNewTeam()">x</button>
+            </div>
+            <div class="col-sm-4 form-group padding-left-0">
+              <label for="value">Allocation % (optional)</label>
+              <input (keyup)="onChangeValue()" [(ngModel)]="formData.value" class="form-control" name="value" type="number">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="utilization-registry-actions">
+        <button (click)="onSaveResourceUtilization()" class="btn btn-sm btn-primary btn-submit">
+          <i aria-hidden="true" class="fa fa-floppy-o"></i> Save
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="error-message">
+    <p>{{message}}</p>
+  </div>
+  <div class="project-utilization-history">
+    <div class="header">
+      <div class="header-title">
+        <h5 class="card-title-h5">Project Utilization History</h5>
+      </div>
+    </div>
+    <div *ngIf="empUtilizationHistory.length === 0">No previous records</div>
+    <div *ngIf="empUtilizationHistory.length > 0" class="utilization-table">
+      <table class="table" width="100%">
+        <thead>
+        <tr class="">
+          <th class="" width="40%">Project - Team</th>
+          <th class="" width="10%">Percentage</th>
+          <th class="" width="20%">Start Date</th>
+          <th class="" width="20%">End Date</th>
+          <th class="" width="15%">Duration (days)</th>
+          <th class="" width="5%"></th>
+        </tr>
+        </thead>
+        <tbody class="scrollbar" id="style-1">
+        <tr *ngFor="let utilization of empUtilizationHistory">
+          <td class="" width="40%">{{utilization.project}} - {{utilization.team}}</td>
+          <td class="" width="10%">{{utilization.percentage}}%</td>
+          <td class="" width="20%">{{utilization.fromDate}}</td>
+          <td class="" width="20%">{{utilization.toDate}}</td>
+          <td class="" width="15%">{{utilization.duration}}</td>
+          <td class="" width="5%">
+            <button (click)="onDeleteResourceUtilization(utilization)" class="btn btn-sm btn-delete">
+              <i class="fa fa-close delete-util"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

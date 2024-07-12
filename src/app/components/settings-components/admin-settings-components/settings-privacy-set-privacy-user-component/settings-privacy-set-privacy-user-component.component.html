@@ -1,0 +1,81 @@
+<div class="c-designation-wrapper page-privacy-settings">
+  <div class="c-define-designation-group">
+    <div class="m-form-field__field password_reset_wrapper">
+      <input class="m-form-field__input project-dashboard__search-input" type="text" id="permissionKeyToSearch"
+             minlength="0" maxlength="524288" placeholder="Search" value="" (keypress)="inputKeyPress($event)">
+      <span class="m-form-field__pre">
+        <button id="permissionSearchButton" (click)="getPermission()" style="cursor: pointer" type="button" class="password_reset-button">
+            <span class="glyphicon glyphicon-search password_reset-icon"></span>
+        </button>
+      </span>
+    </div>
+
+
+
+    <div class="m-form-field-inline"  style="margin-top: 24px">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold">Employee Number</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="text" minlength="0" disabled id="setPermissionEmpNo"
+                 maxlength="524288" value="">
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold">Name</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="text" minlength="0" disabled id="setPermissionName"
+                 maxlength="524288" value="">
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold">Designation</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" type="text" minlength="0" disabled id="setPermissionDesignation"
+                 maxlength="524288" value="">
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--bold">Permission Group</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <select class="m-form-field__select " id="setPermissionPermissionGroup" [(ngModel)]="employeeGroup">
+            <option *ngFor="let group of permissionGroups">{{group}}</option>
+          </select>
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div class="page-privacy-settings-action">
+      <button class="page-privacy-settings-action__button page-privacy-settings-action__button--primary" (click)="savePermissionGroup()">Save Permission</button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div *ngIf="isDesktop" class="col-sm-12" style="padding: 0">
+  <div class="w3-panel w3-card" routerLink="/user" style="background-color: #ffffff !important;">
+    <div class="col-sm-4" style="padding: 0">
+      <img
+        alt="Robin"
+        class="img-circle search-interested-avatar"
+        src="https://s-media-cache-ak0.pinimg.com/originals/43/88/b8/4388b869fd04d7e6dc6b899fc853ef37.png"
+        style="border: 3px solid #faa86a;">
+    </div>
+    <div class="col-sm-8" style="padding: 7% 0 0 0;">
+      <b>Find this course on Udemy</b> <br>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isMobile || isTablet" class="col-sm-12" style="padding: 0">
+  <div class="w3-panel w3-card" routerLink="/user" style="background-color: #ffffff !important;">
+    <table>
+      <tr>
+        <td><img
+          alt="Robin"
+          class="img-circle search-interested-avatar"
+          src="https://s-media-cache-ak0.pinimg.com/originals/43/88/b8/4388b869fd04d7e6dc6b899fc853ef37.png"
+          style="border: 3px solid #4a4a4a;"></td>
+        <td style="padding-left: 15px">
+          <b>Learning about AR on Udemy</b> <br>
+          <font style="color: #898989">Robin</font>
+          <font style="color: #4a90e2">UI / UX</font>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,118 @@
+/*!*Card Styles*!*/
+/*.w3-panel:after, .w3-panel:before {*/
+/*  content: "";*/
+/*  display: table;*/
+/*  clear: both*/
+/*}*/
+
+/*.w3-panel {*/
+/*  padding: 15px;*/
+/*  margin-bottom: 20px;*/
+/*  border-radius: 2px;*/
+/*  background-color: #ffffff !important;*/
+/*}*/
+
+/*.w3-card, .w3-card-2 {*/
+/*  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)*/
+/*}*/
+
+/*.w3-card-4, .w3-hover-shadow:hover {*/
+/*  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.top-card-class-custom {*/
+/*  background-color: transparent !important;*/
+/*  padding: 0 !important;*/
+/*  box-shadow: none !important;*/
+/*  margin: 0 !important;*/
+/*}*/
+
+/*.scrollbar {*/
+/*  float: left;*/
+/*  height: 80px;*/
+/*  overflow-y: scroll;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.force-overflow {*/
+/*  min-height: 70px;*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar-track {*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar {*/
+/*  width: 3px;*/
+/*}*/
+
+/*#style-1::-webkit-scrollbar-thumb {*/
+/*  background-color: rgba(0, 0, 0, .1);*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+
+/*.card-containing-div {*/
+/*  margin: 0 -15px;*/
+/*}*/
+
+/*.header-title-div {*/
+/*  height: 50px;*/
+/*}*/
+
+/*.card-title-h5 {*/
+/*  margin: 0 0 10px 0;*/
+/*  font-size: 14px;*/
+/*  color: #2d2f32;*/
+/*  font-weight: 600 !important;*/
+/*}*/
+
+/*.card-content-div {*/
+/*  height: 80px;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+/*.options-dropdown-custom {*/
+/*  min-width: 100px !important;*/
+/*}*/
+
+/*!*--------------------------------------------------------------------------------------------------------------------*!*/
+
+/*.user-avatar-image {*/
+/*  width: 35px;*/
+/*  height: 35px;*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*.user-name-h4 {*/
+/*  font-size: 14px;*/
+/*  color: #2d2f32;*/
+/*  margin: 0 !important;*/
+/*}*/
+
+/*.permission-group-description-h6 {*/
+/*  font-size: 12px;*/
+/*  color: #858585;*/
+/*  margin: 5px 0 0 0 !important;*/
+/*  font-style: italic;*/
+/*}*/
+
+/*.user-group-name-h6 {*/
+/*  font-size: 12px;*/
+/*  color: #858585;*/
+/*  margin: 5px 0 0 0 !important;*/
+/*}*/
+
+/*.edit-button {*/
+/*  padding: 2px 4px;*/
+/*  cursor: pointer;*/
+/*  color: #2d2f32;*/
+/*  float: right;*/
+/*  margin-top: -15px !important;*/
+/*}*/
+
+/*.dropdown-menu-list-item {*/
+/*  padding: 6px 8px;*/
+/*  cursor: pointer;*/
+/*}*/

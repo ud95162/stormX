@@ -1,0 +1,66 @@
+<!--<div class="w3-panel w3-card top-card-class-custom">-->
+<!--  <div *ngIf="showusergroups" class="card-containing-div">-->
+<!--    <div *ngFor="let usergroup of usergroupdataset" class="col-sm-4">-->
+<!--      <div class="w3-panel w3-card">-->
+<!--        <diV class="header-title-div">-->
+<!--          <h5 class="card-title-h5">{{usergroup.userGroup}}</h5>-->
+<!--        </diV>-->
+<!--        <div class="card-content-div">-->
+<!--          <div class="scrollbar" id="style-1">-->
+<!--            <div class="force-overflow">-->
+<!--              <div *ngFor="let user of usergroup.employeeList" class="media">-->
+<!--                <div class="media-left">-->
+<!--                  <img (click)="profileRedirect(user.empNo)" class="media-object img-circle user-avatar-image"-->
+<!--                       src="{{user.image}}">-->
+<!--                </div>-->
+<!--                <div class="media-body">-->
+<!--                  <h4 class="user-name-h4">{{user.name}}</h4>-->
+<!--                  <h6 class="user-designation-h6">{{user.designation}}</h6>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="m-form-field">
+  <div class="m-form-field__field">
+                                        <span class="m-form-field__pre">
+                                            <svg class="a-icon project-dashboard__search-icon">
+                                                <use xlink:href="#search"></use>
+                                            </svg>
+                                        </span>
+    <input class="m-form-field__input project-dashboard__search-input" type="text"
+           minlength="0" maxlength="524288" placeholder="Search" (keyup)="applyFilter($event)">
+  </div>
+</div>
+<div class="page-privacy-settings__wrapper" *ngIf="showusergroups">
+  <div class="c-accordion-section" *ngFor="let usergroup of usergroupdataset">
+    <div class="c-accordion-section__top">
+      <div class="c-accordion-section__header c-accordion-section__header--top">
+        <h2 class="c-accordion-section__header-title">{{usergroup.userGroup}} </h2>
+      </div>
+      <div class="c-accordion-section__icons">
+        <div class="c-accordion-section__icons-collapse">
+          <svg class="a-link-btn a-icon c-accordion-section__icons-collapse-icon">
+            <use xlink:href="#pointer-down-circle"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="c-accordion-section__body page-privacy-settings-accordion__body">
+      <div class="page-privacy-settings-accordion-details" *ngFor="let user of usergroup.employeeList">
+        <img (click)="profileRedirect(user.empNo)" src="{{user.image}}" alt="user image" class="accordion-details__img">
+        <div class="accordion-details__user">
+          <h3 class="accordion-details__user-name">{{user.name}}</h3>
+          <p class="accordion-details__user-position">{{user.designation}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

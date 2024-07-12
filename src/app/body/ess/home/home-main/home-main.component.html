@@ -1,0 +1,9 @@
+<div *ngIf="checkPermission.checkUserHavePermissionForSection('AdminDashboard')">
+  <div>
+<!--    <app-home-header-user-->
+<!--      *ngIf="componentPermission.AdminDashboard.subComponentPermissions.AdminDashboardHeader.mainComponentPermission"></app-home-header-user>-->
+    <br>
+    <app-home-body
+      *ngIf="checkPermission.checkUserHavePermissionForSection('AdminDashboardBody')"></app-home-body>
+  </div>
+</div>

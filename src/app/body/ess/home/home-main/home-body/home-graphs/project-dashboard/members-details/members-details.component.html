@@ -1,0 +1,35 @@
+<table class="c-kriyo-deta__table project-members__table">
+  <thead class="c-kriyo-deta__table--header">
+  <tr>
+    <th>Emp_Id</th>
+    <th>Name</th>
+    <th>Designation</th>
+    <th>Addition</th>
+    <th>Deletion</th>
+    <th>Time Spent(h)</th>
+    <th>Issue Count</th>
+  </tr>
+  </thead>
+
+  <tbody class="c-kriyo-deta__table--body project-members__table-body">
+  <tr *ngFor="let el of elements_employee">
+    <td title="Emp001">{{el.empId}}</td>
+    <td title="Saman Buddhika" (click)="employeeRedirect(el.empId)">{{el.empName}}</td>
+    <td title="Project Manager">{{el.empDesignation}}</td>
+    <td title="-">{{formatNumber(el.addition)}}</td>
+    <td title="-">{{formatNumber(el.deletion)}}</td>
+    <td title="5h">{{getTime(el.timeLog)}}</td>
+    <td title="0">{{el.issueCount}}</td>
+  </tr>
+  <tr *ngFor="let el of elements_trainee">
+    <td title="Emp001">{{el.empId}}</td>
+    <td title="Saman Buddhika" (click)="employeeRedirect(el.empId)">{{el.empName}}</td>
+    <td title="Project Manager">{{el.empDesignation}}</td>
+    <td title="-">{{formatNumber(el.addition)}}</td>
+    <td title="-">{{formatNumber(el.deletion)}}</td>
+    <td title="5h">{{getTime(el.timeLog)}}</td>
+    <td title="0">{{el.issueCount}}</td>
+  </tr>
+
+  </tbody>
+</table>

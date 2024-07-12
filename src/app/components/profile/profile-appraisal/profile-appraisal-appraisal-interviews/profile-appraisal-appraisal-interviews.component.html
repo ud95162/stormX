@@ -1,0 +1,110 @@
+<div *ngIf="showAppraiserNotesObj && year === '2019'" id="appraisalNotesForm">
+  <div class="w3-panel w3-card">
+
+    <div>
+      <h4 class="title-header-h4">Appraiser Notes</h4>
+    </div>
+
+    <div class="col-sm-12 appraiser-notes-div">
+      <h4 class="comment-title-custom">Positive</h4>
+      <textarea (focus)="increaseTextBoxSize('appraiserCommentPositive')"
+                (keydown)="increaseTextBoxSize('appraiserCommentPositive')"
+                [(ngModel)]="appraiserNotesObj.appraisalCommentsNotes.positiveComment"
+                class="form-control appraisal-question-comments-textarea" id="appraiserCommentPositive"
+                name="Positive"
+                [disabled]="true"
+                placeholder="Positive"></textarea>
+      <h4 class="comment-title-custom">Negative</h4>
+      <textarea (focus)="increaseTextBoxSize('appraiserCommentNegative')"
+                (keydown)="increaseTextBoxSize('appraiserCommentNegative')"
+                [(ngModel)]="appraiserNotesObj.appraisalCommentsNotes.negativeComment"
+                class="form-control appraisal-question-comments-textarea" id="appraiserCommentNegative"
+                name="Negative"
+                [disabled]="true"
+                placeholder="Negative"></textarea>
+      <h4 class="comment-title-custom">General</h4>
+      <textarea (focus)="increaseTextBoxSize('appraiserCommentGeneral')"
+                (keydown)="increaseTextBoxSize('appraiserCommentGeneral')"
+                [(ngModel)]="appraiserNotesObj.appraisalCommentsNotes.generalComment"
+                class="form-control appraisal-question-comments-textarea" id="appraiserCommentGeneral"
+                name="General"
+                [disabled]="true"
+                placeholder="General"></textarea>
+    </div>
+
+    <div *ngIf="appraiserNotesObj.editCommentsShow" class="col-sm-12">
+      <div class="col-sm-12 no-padding">
+        <div class="col-sm-8 no-padding">
+          <h6 *ngIf="appraiserNotesObj.lastEditedRecords !== null && appraiserNotesObj.lastEditedRecords !== undefined" class="self-appraisal-form-submission-status">
+            Submitted by {{appraiserNotesObj.lastEditedRecords}}
+          </h6>
+        </div>
+        <div class="col-sm-4 no-padding" *ngIf="false">
+          <button (click)="submitAppraiserNotes()" *ngIf="appraiserNotesObj.editComments"
+                  class="btn header-create-button pull-right"
+                  type="button">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="showLatestAppraiserNotesObj && year !== '2019'" id="latestAppraisalNotesForm">
+  <div class="w3-panel w3-card">
+
+    <div>
+      <h4 class="title-header-h4">Appraiser Notes</h4>
+    </div>
+
+    <div class="col-sm-12 appraiser-notes-div">
+      <h4 class="comment-title-custom">Positive</h4>
+      <textarea (focus)="increaseTextBoxSize('latestAppraiserCommentPositive')"
+                (keydown)="increaseTextBoxSize('latestAppraiserCommentPositive')"
+                [(ngModel)]="latestAppraiserNotesObj.appraisalCommentsNotes.positiveComment"
+                class="form-control appraisal-question-comments-textarea" id="latestAppraiserCommentPositive"
+                name="Positive"
+                placeholder="Positive"
+                [disabled]="isReadOnly"></textarea>
+      <h4 class="comment-title-custom">Negative</h4>
+      <textarea (focus)="increaseTextBoxSize('latestAppraiserCommentNegative')"
+                (keydown)="increaseTextBoxSize('latestAppraiserCommentNegative')"
+                [(ngModel)]="latestAppraiserNotesObj.appraisalCommentsNotes.negativeComment"
+                class="form-control appraisal-question-comments-textarea" id="latestAppraiserCommentNegative"
+                name="Negative"
+                placeholder="Negative"
+                [disabled]="isReadOnly"></textarea>
+      <h4 class="comment-title-custom">General</h4>
+      <textarea (focus)="increaseTextBoxSize('latestAppraiserCommentGeneral')"
+                (keydown)="increaseTextBoxSize('latestAppraiserCommentGeneral')"
+                [(ngModel)]="latestAppraiserNotesObj.appraisalCommentsNotes.generalComment"
+                class="form-control appraisal-question-comments-textarea" id="latestAppraiserCommentGeneral"
+                name="General"
+                placeholder="General"
+                [disabled]="isReadOnly"></textarea>
+    </div>
+    <!--*ngIf="appraiserNotesObj.editCommentsShow"-->
+    <div class="col-sm-12">
+      <div class="col-sm-12 no-padding">
+        <div class="col-sm-8 no-padding">
+          <!--<h6 *ngIf="latestAppraiserNotesObj.lastEditedRecords !== null || latestAppraiserNotesObj.lastEditedRecords !== undefined" class="self-appraisal-form-submission-status">-->
+          <!--Submitted by {{appraiserNotesObj.lastEditedRecords}}-->
+          <!--</h6>-->
+        </div>
+        <div class="col-sm-4 no-padding" *ngIf="!isReadOnly">
+          <button (click)="submitLatestAppraiserNotes()"
+                  class="btn header-create-button pull-right"
+                  type="button"
+                  [disabled]="isReadOnly">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

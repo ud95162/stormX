@@ -1,0 +1,41 @@
+<div class="w3-panel w3-card">
+  <h6 class="course-card-title"><i aria-hidden="true" class="fa fa-map-signs"></i>&nbsp;Recommended Courses</h6>
+  <div class="scrollbar" id="style-1" style="height: 350px !important;">
+    <div class="force-overflow">
+      <div>
+        <div *ngFor="let sCourse of sCourseList" class="media">
+          <div class="media-left">
+            <img class="media-object" src={{sCourse.image}} style="width:60px; cursor: pointer">
+            <h6 *ngIf="sCourse.viewerAlreadyRead === false"><span class="label label-danger">New</span></h6>
+          </div>
+          <div class="media-body">
+            <a href={{sCourse.url}} style="text-decoration: none" target="_blank">
+              <h4 (click)="courseRead(sCourse.id)" class="media-heading" style="color: #006eff">{{sCourse.name}}</h4>
+            </a>
+            <h5 style="color: #838383; margin-top: 0">{{sCourse.university}}</h5>
+            <!--<h6>{{sCourse.description}}</h6>-->
+            <h6 *ngIf="sCourse.provider != null" class="course-provider-h6">by {{sCourse.provider}}</h6>
+          </div>
+          <hr style="margin: 10px">
+        </div>
+      </div>
+      <div>
+        <div *ngFor="let cCourse of cCourseList" class="media">
+          <div class="media-left">
+            <img class="media-object" src={{cCourse.image}} style="width:60px; cursor: pointer">
+            <h6 *ngIf="cCourse.viewerAlreadyRead === false"><span class="label label-danger">New</span></h6>
+          </div>
+          <div class="media-body">
+            <a href={{cCourse.url}} style="text-decoration: none" target="_blank">
+              <h5 (click)="courseRead(cCourse.id)" class="media-heading" style="color: #006eff">{{cCourse.name}}</h5>
+            </a>
+            <!--<h5 style="color: #838383; margin-top: 0">{{cCourse.university}}</h5>-->
+            <!--<h6>{{cCourse.description}}</h6>-->
+            <h6 *ngIf="cCourse.provider != null" class="course-provider-h6">by {{cCourse.provider}}</h6>
+          </div>
+          <hr style="margin: 10px">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

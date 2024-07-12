@@ -1,0 +1,731 @@
+{
+  "requestPreInsert": {
+    "leaveManagers": [
+      {
+        "empId": 772,
+        "name": "Aathif Nihas"
+      },
+      {
+        "empId": 1030,
+        "name": "Hasitha Udayanga"
+      }
+    ],
+    "leaveSummary": {
+      "specialLeaves": [
+        {
+          "allocated": 0,
+          "leaveName": "Carry F/W Leave",
+          "leaveTypeId": 6,
+          "leaveTypeNo": "SPL6",
+          "remaining": 0
+        },
+        {
+          "allocated": 0,
+          "leaveName": "Official Leave",
+          "leaveTypeId": 5,
+          "leaveTypeNo": "SPL5",
+          "remaining": 0
+        }
+      ],
+      "standardLeaves": [
+        {
+          "year": 2022,
+          "summary": [
+            {
+              "allocated": 14,
+              "leaveName": "Annual Leave",
+              "leaveTypeId": 1,
+              "leaveTypeNo": "STL1",
+              "remaining": 14
+            },
+            {
+              "allocated": 14,
+              "leaveName": "Casual Leave",
+              "leaveTypeId": 2,
+              "leaveTypeNo": "STL2",
+              "remaining": 14
+            },
+            {
+              "allocated": 14,
+              "leaveName": "Medical Leave",
+              "leaveTypeId": 3,
+              "leaveTypeNo": "STL3",
+              "remaining": 14
+            }
+          ]
+        },
+        {
+          "year": 2021,
+          "summary": [
+            {
+              "allocated": 14,
+              "leaveName": "Annual Leave",
+              "leaveTypeId": 1,
+              "leaveTypeNo": "STL1",
+              "remaining": 5
+            },
+            {
+              "allocated": 7,
+              "leaveName": "Casual Leave",
+              "leaveTypeId": 2,
+              "leaveTypeNo": "STL2",
+              "remaining": 0
+            },
+            {
+              "allocated": 7,
+              "leaveName": "Medical Leave",
+              "leaveTypeId": 3,
+              "leaveTypeNo": "STL3",
+              "remaining": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "leaveManagers": [
+    {
+      "empId": 772,
+      "name": "Aathif Nihas"
+    },
+    {
+      "empId": 1030,
+      "name": "Hasitha Udayanga"
+    }
+  ],
+  "leaveAllocation": [
+    {
+      "year": 2022,
+      "leaveSummary": {
+        "specialLeaves": [
+          {
+            "allocated": 4,
+            "leaveName": "Carry F/W Leave",
+            "leaveTypeId": 6,
+            "leaveTypeNo": "SPL6",
+            "remaining": 0
+          },
+          {
+            "allocated": 0,
+            "leaveName": "Official Leave",
+            "leaveTypeId": 5,
+            "leaveTypeNo": "SPL5",
+            "remaining": 0
+          },
+          {
+            "allocated": 0,
+            "leaveName": "Official Leave",
+            "leaveTypeId": 4,
+            "leaveTypeNo": "SPL4",
+            "remaining": 0
+          },
+          {
+            "allocated": 0,
+            "leaveName": "Official Leave",
+            "leaveTypeId": 3,
+            "leaveTypeNo": "SPL3",
+            "remaining": 0
+          },
+          {
+            "allocated": 84,
+            "leaveName": "Maternity Leave",
+            "leaveTypeId": 2,
+            "leaveTypeNo": "SPL2",
+            "remaining": 84
+          },
+          {
+            "allocated": 0,
+            "leaveName": "Official Leave",
+            "leaveTypeId": 1,
+            "leaveTypeNo": "SPL1",
+            "remaining": 0
+          }
+        ],
+        "standardLeaves": [
+          {
+            "allocated": 14,
+            "leaveName": "Annual Leave",
+            "leaveTypeId": 1,
+            "leaveTypeNo": "STL1",
+            "remaining": 9
+          },
+          {
+            "allocated": 14,
+            "leaveName": "Casual Leave",
+            "leaveTypeId": 2,
+            "leaveTypeNo": "STL2",
+            "remaining": 9
+          },
+          {
+            "allocated": 14,
+            "leaveName": "Medical Leave",
+            "leaveTypeId": 3,
+            "leaveTypeNo": "STL3",
+            "remaining": 9
+          }
+        ]
+      }
+    },
+    {
+      "year": 2021,
+      "leaveSummary": {
+        "specialLeaves": [
+          {
+            "allocated": 4,
+            "leaveName": "Carry F/W Leave",
+            "leaveTypeId": 6,
+            "leaveTypeNo": "SPL6",
+            "remaining": 0
+          },
+          {
+            "allocated": 0,
+            "leaveName": "Official Leave",
+            "leaveTypeId": 5,
+            "leaveTypeNo": "SPL5",
+            "remaining": 0
+          },
+          {
+            "allocated": 0,
+            "leaveName": "Official Leave",
+            "leaveTypeId": 4,
+            "leaveTypeNo": "SPL5",
+            "remaining": 0
+          },
+          {
+            "allocated": 0,
+            "leaveName": "Official Leave",
+            "leaveTypeId": 3,
+            "leaveTypeNo": "SPL5",
+            "remaining": 0
+          },
+          {
+            "allocated": 0,
+            "leaveName": "Official Leave",
+            "leaveTypeId": 2,
+            "leaveTypeNo": "SPL5",
+            "remaining": 0
+          },
+          {
+            "allocated": 0,
+            "leaveName": "Official Leave",
+            "leaveTypeId": 1,
+            "leaveTypeNo": "SPL1",
+            "remaining": 0
+          }
+        ],
+        "standardLeaves": [
+          {
+            "allocated": 14,
+            "leaveName": "Annual Leave",
+            "leaveTypeId": 1,
+            "leaveTypeNo": "STL1",
+            "remaining": 3
+          },
+          {
+            "allocated": 7,
+            "leaveName": "Casual Leave",
+            "leaveTypeId": 2,
+            "leaveTypeNo": "STL2",
+            "remaining": 0
+          },
+          {
+            "allocated": 7,
+            "leaveName": "Medical Leave",
+            "leaveTypeId": 3,
+            "leaveTypeNo": "STL3",
+            "remaining": 2
+          }
+        ]
+      }
+    }
+  ],
+  "searchKeys": [
+    {
+      "empNO": "E1238",
+      "empImage": "https://codegen.kriyo.net//codegen/assets/img/kriyo_icon.svg",
+      "empName": "Hasitha Udayanga"
+    },
+    {
+      "empNO": "E1237",
+      "empImage": "https://codegen.kriyo.net//codegen/assets/img/kriyo_icon.svg",
+      "empName": "Deshan De"
+    },
+    {
+      "empNO": "E1236",
+      "empImage": "https://codegen.kriyo.net//codegen/assets/img/kriyo_icon.svg",
+      "empName": "Mahesh Lak"
+    },
+    {
+      "empNO": "E1235",
+      "empImage": "https://codegen.kriyo.net//codegen/assets/img/kriyo_icon.svg",
+      "empName": "Danodya Wee"
+    },
+    {
+      "empNO": "E1234",
+      "empImage": "https://codegen.kriyo.net//codegen/assets/img/kriyo_icon.svg",
+      "empName": "Pamoda Ab"
+    },
+    {
+      "empNO": "E1233",
+      "empImage": "https://codegen.kriyo.net//codegen/assets/img/kriyo_icon.svg",
+      "empName": "Shanilka Fe"
+    }
+  ],
+  "pendingStandardLeaveRequests": [
+    {
+      "leaveNo": "3192",
+      "employeeInfo": {
+        "empId": "1030",
+        "empNo": "T510",
+        "name": "Udayanga Udayanga",
+        "image": "http://119.235.9.12:7070/profile_image/T510_1612918081166_banner4 (11).jpg"
+      },
+      "leaveName": "Annual Leave",
+      "startDate": "2021-12-01",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3235,
+          "date": "2021-12-01",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "ddd",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3181",
+      "employeeInfo": {
+        "empId": "1010",
+        "empNo": "E1167",
+        "name": "Nisala Abeysinghe",
+        "image": "https://codegen.kriyo.net/profile_image/male.png"
+      },
+      "leaveName": "Casual Leave",
+      "startDate": "2021-12-23",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3224,
+          "date": "2021-12-23",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "11",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "SPL5847",
+      "employeeInfo": {
+        "empId": "1030",
+        "empNo": "T510",
+        "name": "Udayanga Udayanga",
+        "image": "http://119.235.9.12:7070/profile_image/T510_1612918081166_banner4 (11).jpg"
+      },
+      "leaveName": "Carry F/W Leave",
+      "startDate": "2021-11-19",
+      "amount": 4,
+      "dates": [
+        {
+          "id": 1641,
+          "date": "2021-11-19",
+          "approvedStatus": "Pending"
+        },
+        {
+          "id": 1642,
+          "date": "2021-11-22",
+          "approvedStatus": "Pending"
+        },
+        {
+          "id": 1643,
+          "date": "2021-11-23",
+          "approvedStatus": "Pending"
+        },
+        {
+          "id": 1644,
+          "date": "2021-11-24",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "test",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3175",
+      "employeeInfo": {
+        "empId": "1049",
+        "empNo": "E1223",
+        "name": "Danodya Weerasinghe",
+        "image": "http://119.235.9.12:7070/profile_image/E1223_1620112828075_AsianAlliancelogo-new-1.jpg"
+      },
+      "leaveName": "Annual Leave",
+      "startDate": "2021-12-07",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3218,
+          "date": "2021-12-07",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "hhh",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3213",
+      "employeeInfo": {
+        "empId": "1030",
+        "empNo": "T510",
+        "name": "Udayanga Udayanga",
+        "image": "http://119.235.9.12:7070/profile_image/T510_1612918081166_banner4 (11).jpg"
+      },
+      "leaveName": "Annual Leave",
+      "startDate": "2021-11-29",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3270,
+          "date": "2021-11-29",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "h",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3179",
+      "employeeInfo": {
+        "empId": "1030",
+        "empNo": "T510",
+        "name": "Udayanga Udayanga",
+        "image": "http://119.235.9.12:7070/profile_image/T510_1612918081166_banner4 (11).jpg"
+      },
+      "leaveName": "Annual Leave",
+      "startDate": "2021-12-15",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3222,
+          "date": "2021-12-15",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "shrthr",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3212",
+      "employeeInfo": {
+        "empId": "1030",
+        "empNo": "T510",
+        "name": "Udayanga Udayanga",
+        "image": "http://119.235.9.12:7070/profile_image/T510_1612918081166_banner4 (11).jpg"
+      },
+      "leaveName": "Annual Leave",
+      "startDate": "2021-11-30",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3269,
+          "date": "2021-11-30",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "gg",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3211",
+      "employeeInfo": {
+        "empId": "1030",
+        "empNo": "T510",
+        "name": "Udayanga Udayanga",
+        "image": "http://119.235.9.12:7070/profile_image/T510_1612918081166_banner4 (11).jpg"
+      },
+      "leaveName": "Casual Leave",
+      "startDate": "2021-12-31",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3268,
+          "date": "2021-12-31",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "f",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3177",
+      "employeeInfo": {
+        "empId": "1049",
+        "empNo": "E1223",
+        "name": "Danodya Weerasinghe",
+        "image": "http://119.235.9.12:7070/profile_image/E1223_1620112828075_AsianAlliancelogo-new-1.jpg"
+      },
+      "leaveName": "Medical Leave",
+      "startDate": "2021-12-09",
+      "amount": 0.5,
+      "dates": [
+        {
+          "id": 3220,
+          "date": "2021-12-09",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "1st Half",
+      "reason": "u",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3216",
+      "employeeInfo": {
+        "empId": "1030",
+        "empNo": "T510",
+        "name": "Udayanga Udayanga",
+        "image": "http://119.235.9.12:7070/profile_image/T510_1612918081166_banner4 (11).jpg"
+      },
+      "leaveName": "Annual Leave",
+      "startDate": "2021-10-29",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3273,
+          "date": "2021-10-29",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "gg",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3226",
+      "employeeInfo": {
+        "empId": "1030",
+        "empNo": "T510",
+        "name": "Udayanga Udayanga",
+        "image": "http://119.235.9.12:7070/profile_image/T510_1612918081166_banner4 (11).jpg"
+      },
+      "leaveName": "Annual Leave",
+      "startDate": "2021-08-31",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3284,
+          "date": "2021-08-31",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "gd",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3215",
+      "employeeInfo": {
+        "empId": "1030",
+        "empNo": "T510",
+        "name": "Udayanga Udayanga",
+        "image": "http://119.235.9.12:7070/profile_image/T510_1612918081166_banner4 (11).jpg"
+      },
+      "leaveName": "Casual Leave",
+      "startDate": "2021-11-01",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3272,
+          "date": "2021-11-01",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "gd",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "STL3214",
+      "employeeInfo": {
+        "empId": "1030",
+        "empNo": "T510",
+        "name": "Udayanga Udayanga",
+        "image": "http://119.235.9.12:7070/profile_image/T510_1612918081166_banner4 (11).jpg"
+      },
+      "leaveName": "Annual Leave",
+      "startDate": "2021-11-26",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3271,
+          "date": "2021-11-26",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "fdg",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": "SPL5860",
+      "employeeInfo": {
+        "empId": "1386",
+        "empNo": "E2033",
+        "name": "Hirudini Udugama",
+        "image": "http://192.168.3.117:8081/profile_image/female.png"
+      },
+      "leaveName": "Foreign Visit",
+      "startDate": "2021-12-22",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 1658,
+          "date": "2021-12-23",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": "past",
+      "approvedStatus": "Pending"
+    },
+    {
+      "leaveNo": null,
+      "employeeInfo": {
+        "empId": "335",
+        "empNo": "E757",
+        "name": "Shenika Herath",
+        "image": "https://codegen.kriyo.net/resized-profile-images/E757_1512023770019_15d133c.jpg"
+      },
+      "leaveName": "Casual Leave",
+      "startDate": "2021-01-05",
+      "amount": 1,
+      "dates": [
+        {
+          "id": 3121,
+          "date": "2021-01-05",
+          "approvedStatus": "Pending"
+        }
+      ],
+      "leaveTime": "Full Day",
+      "reason": null,
+      "approvedStatus": "Pending"
+    }
+  ],
+  "policyDetails": [
+    {
+      "id": 1,
+      "category": "HR",
+      "name": "GDPR Documents",
+      "fileType": "pdf",
+      "url": "https://docs.google.com/document/d/1SXTf4HfOZ6QOB1OIZ5_aRX5DtOp5LCy1/edit",
+      "version": 1.0,
+      "description": "test one with ud"
+    },
+    {
+      "id": 2,
+      "category": "HR",
+      "name": "Salary Documents",
+      "fileType": "pdf",
+      "url": "https://docs.google.com/document/d/1SXTf4HfOZ6QOB1OIZ5_aRX5DtOp5LCy1/edit",
+      "version": 1.0,
+      "description": "test one with ud"
+    },
+    {
+      "id": 3,
+      "category": "HR",
+      "name": "Finance Documents",
+      "fileType": "pdf",
+      "url": "https://docs.google.com/document/d/1SXTf4HfOZ6QOB1OIZ5_aRX5DtOp5LCy1/edit",
+      "version": 1.0,
+      "description": "test one with ud"
+    },
+    {
+      "id": 4,
+      "category": "ITD",
+      "name": "ITD_Clearance",
+      "fileType": "pdf",
+      "url": "https://drive.google.com/file/d/1V7gmP2JGSNicMWnjFWuLD8QknJrvHiZF/view?usp=sharing",
+      "version": 1.0,
+      "description": "test one with ud"
+    },
+    {
+      "id": 5,
+      "category": "ITD",
+      "name": "Lap_Issues",
+      "fileType": "pdf",
+      "url": "https://docs.google.com/spreadsheets/d/1himhS51Ve1_-ThWdzR0wk2m1gWfXfydUc_cLMFGDMJw/edit?usp=sharing",
+      "version": 1.0,
+      "description": "test one with ud"
+    },
+    {
+      "category": "HR",
+      "fileType": "pdf",
+      "name": "test version update",
+      "url": "http://119.235.9.12:7070/image/T510_1652152786921_image.png",
+      "id": 6,
+      "version": 1.0,
+      "description": "test one with ud"
+    },
+    {
+      "category": "Security",
+      "fileType": "docs",
+      "name": "Security Update",
+      "url": "http://119.235.9.12:7070/image/T510_1652153353186_image (1).png",
+      "id": 7,
+      "version": 1.0,
+      "description": "test one with ud"
+    }
+  ],
+  "policyCategories": [
+    {
+      "id": 1,
+      "name": "HR"
+    },
+    {
+      "id": 2,
+      "name": "ITD"
+    },
+    {
+      "id": 3,
+      "name": "Security"
+    },
+    {
+      "id": 4,
+      "name": "Projects"
+    }
+  ],
+
+  "selectedPolicyVersions": [
+    {
+      "id": 1,
+      "name": "Security Version 1.0",
+      "date": "20th March 2022",
+      "published": true
+    },
+    {
+      "id": 2,
+      "name": "Security Version 2.0",
+      "date": "20th April 2022",
+      "published": false
+    },
+    {
+      "id": 3,
+      "name": "Security Version 3.0",
+      "date": "20th May 2022",
+      "published": false
+    },
+    {
+      "id": 4,
+      "name": "Security Version 4.0",
+      "date": "20th June 2022",
+      "published": false
+    }
+  ]
+}

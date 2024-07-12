@@ -1,0 +1,246 @@
+
+<div class="c-leave-dashboard__middle--wrraper">
+  <div class="leave-dashboard__trable--section">
+    <div class="c-leave-dashboard__pending-container" *ngIf="leaveDataLoaded">
+      <table class="c-leave-dashboard__pending--table">
+      <thead class="c-leave-dashboard__pending--table-header">
+      <tr>
+        <th class="c-kriyo-deta__table--leave-custom"> Leave Type </th>
+        <th> Jan</th>
+        <th> Feb</th>
+        <th> Mar</th>
+        <th> Apr</th>
+        <th> May</th>
+        <th> Jun</th>
+        <th> Jul</th>
+        <th> Aug</th>
+        <th> Sep</th>
+        <th> Oct</th>
+        <th> Nov</th>
+        <th> Dec</th>
+        <th> Total</th>
+
+      </tr>
+
+      </thead>
+
+      <tbody class="c-leave-dashboard__pending--table-body">
+
+      <tr>
+        <td>Annual</td>
+        <td>{{standardLeaveSummary.Jan.annual}}</td>
+        <td>{{standardLeaveSummary.Feb.annual}}</td>
+        <td>{{standardLeaveSummary.Mar.annual}}</td>
+        <td>{{standardLeaveSummary.Apr.annual}}</td>
+        <td>{{standardLeaveSummary.May.annual}}</td>
+        <td>{{standardLeaveSummary.Jun.annual}}</td>
+        <td>{{standardLeaveSummary.Jul.annual}}</td>
+        <td>{{standardLeaveSummary.Aug.annual}}</td>
+        <td>{{standardLeaveSummary.Sep.annual}}</td>
+        <td>{{standardLeaveSummary.Oct.annual}}</td>
+        <td>{{standardLeaveSummary.Nov.annual}}</td>
+        <td>{{standardLeaveSummary.Dec.annual}}</td>
+        <td>{{totalAnnualLeave}}</td>
+      </tr>
+
+      <tr>
+        <td>Casual</td>
+        <td>{{standardLeaveSummary.Jan.casual}}</td>
+        <td>{{standardLeaveSummary.Feb.casual}}</td>
+        <td>{{standardLeaveSummary.Mar.casual}}</td>
+        <td>{{standardLeaveSummary.Apr.casual}}</td>
+        <td>{{standardLeaveSummary.May.casual}}</td>
+        <td>{{standardLeaveSummary.Jun.casual}}</td>
+        <td>{{standardLeaveSummary.Jul.casual}}</td>
+        <td>{{standardLeaveSummary.Aug.casual}}</td>
+        <td>{{standardLeaveSummary.Sep.casual}}</td>
+        <td>{{standardLeaveSummary.Oct.casual}}</td>
+        <td>{{standardLeaveSummary.Nov.casual}}</td>
+        <td>{{standardLeaveSummary.Dec.casual}}</td>
+        <td>{{totalCasualLeave}}</td>
+      </tr>
+
+
+      <tr>
+        <td>Lieu Leave</td>
+        <td>{{specialLeaveSummary.Jan.lieu}}</td>
+        <td>{{specialLeaveSummary.Feb.lieu}}</td>
+        <td>{{specialLeaveSummary.Mar.lieu}}</td>
+        <td>{{specialLeaveSummary.Apr.lieu}}</td>
+        <td>{{specialLeaveSummary.May.lieu}}</td>
+        <td>{{specialLeaveSummary.Jun.lieu}}</td>
+        <td>{{specialLeaveSummary.Jul.lieu}}</td>
+        <td>{{specialLeaveSummary.Aug.lieu}}</td>
+        <td>{{specialLeaveSummary.Sep.lieu}}</td>
+        <td>{{specialLeaveSummary.Oct.lieu}}</td>
+        <td>{{specialLeaveSummary.Nov.lieu}}</td>
+        <td>{{specialLeaveSummary.Dec.lieu}}</td>
+        <td>{{totalLieuLeave}}</td>
+      </tr>
+
+
+      <tr>
+        <td>Maternity</td>
+        <td>{{specialLeaveSummary.Jan.maternity}}</td>
+        <td>{{specialLeaveSummary.Feb.maternity}}</td>
+        <td>{{specialLeaveSummary.Mar.maternity}}</td>
+        <td>{{specialLeaveSummary.Apr.maternity}}</td>
+        <td>{{specialLeaveSummary.May.maternity}}</td>
+        <td>{{specialLeaveSummary.Jun.maternity}}</td>
+        <td>{{specialLeaveSummary.Jul.maternity}}</td>
+        <td>{{specialLeaveSummary.Aug.maternity}}</td>
+        <td>{{specialLeaveSummary.Sep.maternity}}</td>
+        <td>{{specialLeaveSummary.Oct.maternity}}</td>
+        <td>{{specialLeaveSummary.Nov.maternity}}</td>
+        <td>{{specialLeaveSummary.Dec.maternity}}</td>
+        <td>{{totalMaternityLeave}}</td>
+      </tr>
+
+
+      <tr>
+        <td>Medical</td>
+        <td>{{standardLeaveSummary.Jan.medical}}</td>
+        <td>{{standardLeaveSummary.Feb.medical}}</td>
+        <td>{{standardLeaveSummary.Mar.medical}}</td>
+        <td>{{standardLeaveSummary.Apr.medical}}</td>
+        <td>{{standardLeaveSummary.May.medical}}</td>
+        <td>{{standardLeaveSummary.Jun.medical}}</td>
+        <td>{{standardLeaveSummary.Jul.medical}}</td>
+        <td>{{standardLeaveSummary.Aug.medical}}</td>
+        <td>{{standardLeaveSummary.Sep.medical}}</td>
+        <td>{{standardLeaveSummary.Oct.medical}}</td>
+        <td>{{standardLeaveSummary.Nov.medical}}</td>
+        <td>{{standardLeaveSummary.Dec.medical}}</td>
+        <td>{{totalMedicalLeave}}</td>
+      </tr>
+
+
+      <tr>
+        <td>No Pay</td>
+        <td>{{specialLeaveSummary.Jan.noPay}}</td>
+        <td>{{specialLeaveSummary.Feb.noPay}}</td>
+        <td>{{specialLeaveSummary.Mar.noPay}}</td>
+        <td>{{specialLeaveSummary.Apr.noPay}}</td>
+        <td>{{specialLeaveSummary.May.noPay}}</td>
+        <td>{{specialLeaveSummary.Jun.noPay}}</td>
+        <td>{{specialLeaveSummary.Jul.noPay}}</td>
+        <td>{{specialLeaveSummary.Aug.noPay}}</td>
+        <td>{{specialLeaveSummary.Sep.noPay}}</td>
+        <td>{{specialLeaveSummary.Oct.noPay}}</td>
+        <td>{{specialLeaveSummary.Nov.noPay}}</td>
+        <td>{{specialLeaveSummary.Dec.noPay}}</td>
+        <td>{{totalNoPayLeave}}</td>
+      </tr>
+
+
+      <tr>
+        <td>Official</td>
+        <td>{{specialLeaveSummary.Jan.official}}</td>
+        <td>{{specialLeaveSummary.Feb.official}}</td>
+        <td>{{specialLeaveSummary.Mar.official}}</td>
+        <td>{{specialLeaveSummary.Apr.official}}</td>
+        <td>{{specialLeaveSummary.May.official}}</td>
+        <td>{{specialLeaveSummary.Jun.official}}</td>
+        <td>{{specialLeaveSummary.Jul.official}}</td>
+        <td>{{specialLeaveSummary.Aug.official}}</td>
+        <td>{{specialLeaveSummary.Sep.official}}</td>
+        <td>{{specialLeaveSummary.Oct.official}}</td>
+        <td>{{specialLeaveSummary.Nov.official}}</td>
+        <td>{{specialLeaveSummary.Dec.official}}</td>
+        <td>{{totalOfficialLeave}}</td>
+      </tr>
+
+
+      <tr>
+        <td>On Site Travel</td>
+        <td>{{specialLeaveSummary.Jan.onSite}}</td>
+        <td>{{specialLeaveSummary.Feb.onSite}}</td>
+        <td>{{specialLeaveSummary.Mar.onSite}}</td>
+        <td>{{specialLeaveSummary.Apr.onSite}}</td>
+        <td>{{specialLeaveSummary.May.onSite}}</td>
+        <td>{{specialLeaveSummary.Jun.onSite}}</td>
+        <td>{{specialLeaveSummary.Jul.onSite}}</td>
+        <td>{{specialLeaveSummary.Aug.onSite}}</td>
+        <td>{{specialLeaveSummary.Sep.onSite}}</td>
+        <td>{{specialLeaveSummary.Oct.onSite}}</td>
+        <td>{{specialLeaveSummary.Nov.onSite}}</td>
+        <td>{{specialLeaveSummary.Dec.onSite}}</td>
+        <td>{{totalOnSiteLeave}}</td>
+      </tr>
+
+
+      <tr>
+        <td>Short Leave</td>
+        <td>{{shortLeaveSummary.Jan.shortLeave}}</td>
+        <td>{{shortLeaveSummary.Feb.shortLeave}}</td>
+        <td>{{shortLeaveSummary.Mar.shortLeave}}</td>
+        <td>{{shortLeaveSummary.Apr.shortLeave}}</td>
+        <td>{{shortLeaveSummary.May.shortLeave}}</td>
+        <td>{{shortLeaveSummary.Jun.shortLeave}}</td>
+        <td>{{shortLeaveSummary.Jul.shortLeave}}</td>
+        <td>{{shortLeaveSummary.Aug.shortLeave}}</td>
+        <td>{{shortLeaveSummary.Sep.shortLeave}}</td>
+        <td>{{shortLeaveSummary.Oct.shortLeave}}</td>
+        <td>{{shortLeaveSummary.Nov.shortLeave}}</td>
+        <td>{{shortLeaveSummary.Dec.shortLeave}}</td>
+        <td>{{totalShortLeave}}</td>
+      </tr>
+
+
+      <tr>
+        <td class="leave-table__bottom-text">Total</td>
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Jan.annual + standardLeaveSummary.Jan.casual + standardLeaveSummary.Jan.medical +
+        specialLeaveSummary.Jan.lieu + specialLeaveSummary.Jan.official + specialLeaveSummary.Jan.noPay +
+        specialLeaveSummary.Jan.onSite + specialLeaveSummary.Jan.maternity + shortLeaveSummary.Jan.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Feb.annual + standardLeaveSummary.Feb.casual + standardLeaveSummary.Feb.medical +
+        specialLeaveSummary.Feb.lieu + specialLeaveSummary.Feb.official + specialLeaveSummary.Feb.noPay +
+        specialLeaveSummary.Feb.onSite + specialLeaveSummary.Feb.maternity + shortLeaveSummary.Feb.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Mar.annual + standardLeaveSummary.Mar.casual + standardLeaveSummary.Mar.medical +
+        specialLeaveSummary.Mar.lieu + specialLeaveSummary.Mar.official + specialLeaveSummary.Mar.noPay +
+        specialLeaveSummary.Mar.onSite + specialLeaveSummary.Mar.maternity + shortLeaveSummary.Mar.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Apr.annual + standardLeaveSummary.Apr.casual + standardLeaveSummary.Apr.medical +
+        specialLeaveSummary.Apr.lieu + specialLeaveSummary.Apr.official + specialLeaveSummary.Apr.noPay +
+        specialLeaveSummary.Apr.onSite + specialLeaveSummary.Apr.maternity + shortLeaveSummary.Apr.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.May.annual + standardLeaveSummary.May.casual + standardLeaveSummary.May.medical +
+        specialLeaveSummary.May.lieu + specialLeaveSummary.May.official + specialLeaveSummary.May.noPay +
+        specialLeaveSummary.May.onSite + specialLeaveSummary.May.maternity + shortLeaveSummary.May.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Jun.annual + standardLeaveSummary.Jun.casual + standardLeaveSummary.Jun.medical +
+        specialLeaveSummary.Jun.lieu + specialLeaveSummary.Jun.official + specialLeaveSummary.Jun.noPay +
+        specialLeaveSummary.Jun.onSite + specialLeaveSummary.Jun.maternity + shortLeaveSummary.Jun.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Jul.annual + standardLeaveSummary.Jul.casual + standardLeaveSummary.Jul.medical +
+        specialLeaveSummary.Jul.lieu + specialLeaveSummary.Jul.official + specialLeaveSummary.Jul.noPay +
+        specialLeaveSummary.Jul.onSite + specialLeaveSummary.Jul.maternity + shortLeaveSummary.Jul.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Aug.annual + standardLeaveSummary.Aug.casual + standardLeaveSummary.Aug.medical +
+        specialLeaveSummary.Aug.lieu + specialLeaveSummary.Aug.official + specialLeaveSummary.Aug.noPay +
+        specialLeaveSummary.Aug.onSite + specialLeaveSummary.Aug.maternity + shortLeaveSummary.Aug.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Sep.annual + standardLeaveSummary.Sep.casual + standardLeaveSummary.Sep.medical +
+        specialLeaveSummary.Sep.lieu + specialLeaveSummary.Sep.official + specialLeaveSummary.Sep.noPay +
+        specialLeaveSummary.Sep.onSite + specialLeaveSummary.Sep.maternity + shortLeaveSummary.Sep.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Oct.annual + standardLeaveSummary.Oct.casual + standardLeaveSummary.Oct.medical +
+        specialLeaveSummary.Oct.lieu + specialLeaveSummary.Oct.official + specialLeaveSummary.Oct.noPay +
+        specialLeaveSummary.Oct.onSite + specialLeaveSummary.Oct.maternity + shortLeaveSummary.Oct.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Nov.annual + standardLeaveSummary.Nov.casual + standardLeaveSummary.Nov.medical +
+        specialLeaveSummary.Nov.lieu + specialLeaveSummary.Nov.official + specialLeaveSummary.Nov.noPay +
+        specialLeaveSummary.Nov.onSite + specialLeaveSummary.Nov.maternity + shortLeaveSummary.Nov.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{standardLeaveSummary.Dec.annual + standardLeaveSummary.Dec.casual + standardLeaveSummary.Dec.medical +
+        specialLeaveSummary.Dec.lieu + specialLeaveSummary.Dec.official + specialLeaveSummary.Dec.noPay +
+        specialLeaveSummary.Dec.onSite + specialLeaveSummary.Dec.maternity + shortLeaveSummary.Dec.shortLeave}}</td>
+
+        <td class="leave-table__bottom-text">{{totalLeaveCount}}</td>
+      </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>

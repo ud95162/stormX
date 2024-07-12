@@ -1,0 +1,250 @@
+<div class="c-profile-overview__content" *ngIf="this.componentPermission.includes('CodelineChartPermission')">
+  <div class="c-matrices-card c-matrices-card--secondary">
+    <div class="c-matrices-card__Header">
+      <div class="c-matrices-card__icon">
+
+        <svg class="a-icon">
+          <use xlink:href="#codelines"></use>
+        </svg>
+      </div>
+      <div class="c-matrices-card__lbl">
+        Codelines
+      </div>
+
+      <div (mouseenter)="mouseEnter('commits')" (mouseleave)="mouseLeave('commits')">
+        <button class="a-link-btn c-matrices-card__btn">
+          <svg class="a-icon">
+
+            <use xlink:href="#more-vertical"></use>
+
+          </svg>
+        </button>
+      </div>
+
+
+    </div>
+    <div class="c-matrices-card__content">
+      <div class="c-matrices-card__section">
+        <div class="c-matrices-card__text">
+          Average Daily :
+        </div>
+        <div class="c-matrices-card__value">
+          {{ avgCommits | number }}
+        </div>
+      </div>
+      <div class="c-matrices-card__section">
+        <div class="c-matrices-card__text">
+          Total :
+        </div>
+        <div class="c-matrices-card__value">
+          {{ totalCommits | number }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-matrices-card c-matrices-card--secondary"
+       *ngIf="this.componentPermission.includes('WorklogPermission')">
+    <div class="c-matrices-card__Header">
+      <div class="c-matrices-card__icon">
+        <svg class="a-icon">
+          <use xlink:href="#suitcase"></use>
+        </svg>
+      </div>
+      <div class="c-matrices-card__lbl">
+        Worklogs
+      </div>
+      <button class="a-link-btn c-matrices-card__btn">
+        <svg class="a-icon">
+          <use xlink:href="#more-vertical"></use>
+        </svg>
+      </button>
+
+    </div>
+    <div class="c-matrices-card__content">
+      <div class="c-matrices-card__section">
+        <div class="c-matrices-card__text">
+          Average Daily :
+        </div>
+        <div class="c-matrices-card__value">
+          {{ avgJira | number }}
+        </div>
+      </div>
+      <div class="c-matrices-card__section">
+        <div class="c-matrices-card__text">
+          Total :
+        </div>
+        <div class="c-matrices-card__value">
+          {{ totalJira | number }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-matrices-card c-matrices-card--secondary"
+       *ngIf="this.componentPermission.includes('IssuePermission')">
+    <div class="c-matrices-card__Header">
+      <div class="c-matrices-card__icon">
+        <svg class="a-icon">
+          <use xlink:href="#bug"></use>
+        </svg>
+      </div>
+      <div class="c-matrices-card__lbl">
+        Issues
+      </div>
+      <div (mouseenter)="mouseEnter('issues')" (mouseleave)="mouseLeave('issues')">
+        <button class="a-link-btn c-matrices-card__btn">
+          <svg class="a-icon">
+            <use xlink:href="#more-vertical"></use>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+    <div class="c-matrices-card__content">
+      <div class="c-matrices-card__section">
+        <div class="c-matrices-card__text">
+          Average Daily :
+        </div>
+        <div class="c-matrices-card__value">
+          {{ avgIssues | number }}
+        </div>
+      </div>
+      <div class="c-matrices-card__section">
+        <div class="c-matrices-card__text">
+          Total :
+        </div>
+        <div class="c-matrices-card__value">
+          {{ totalIssues | number }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-overview-summary__wrapper">
+    <div class="c-summary-card" *ngIf="isCommits">
+
+      <div class="c-summary-card__block">
+        <div class="c-summary-card__item">
+          <div class="c-summary-card__lbl">
+            Avg Daily Addition
+          </div>
+          <div class="c-summary-card__value">
+            {{ this.avgAdditions | number }}
+          </div>
+        </div>
+        <div class="c-summary-card__item">
+          <div class="c-summary-card__lbl">
+            Total Addition
+          </div>
+          <div class="c-summary-card__value">
+            {{ this.totalAdditions | number }}
+          </div>
+        </div>
+
+      </div>
+      <div class="c-summary-card__block">
+        <div class="c-summary-card__item">
+          <div class="c-summary-card__lbl">
+            Avg Daily Deletions
+          </div>
+          <div class="c-summary-card__value">
+            {{ this.avgDeletions | number }}
+          </div>
+        </div>
+        <div class="c-summary-card__item">
+          <div class="c-summary-card__lbl">
+            Total Addition
+          </div>
+          <div class="c-summary-card__value">
+            {{ this.totalDeletions | number }}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="isIssue" class="c-summary-card c-summary-card--primary">
+      <div class="c-summary-card__wrapper">
+        <div class="c-summary-card__block">
+          <div class="c-summary-card__item">
+            <div class="c-summary-card__lbl">
+              Avg Daily Open
+            </div>
+            <div class="c-summary-card__value">
+              {{ this.avgOpen | number }}
+            </div>
+          </div>
+          <div class="c-summary-card__item">
+            <div class="c-summary-card__lbl">
+              Total Open
+            </div>
+            <div class="c-summary-card__value">
+              {{ this.totalOpen | number }}
+            </div>
+          </div>
+
+        </div>
+        <div class="c-summary-card__block">
+          <div class="c-summary-card__item">
+            <div class="c-summary-card__lbl">
+              Avg Daily Verfied
+            </div>
+            <div class="c-summary-card__value">
+              {{ this.avgVerified | number }}
+            </div>
+          </div>
+          <div class="c-summary-card__item">
+            <div class="c-summary-card__lbl">
+              Total Verified
+            </div>
+            <div class="c-summary-card__value">
+              {{ this.totalVerified | number }}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="c-summary-card__wrapper">
+        <div class="c-summary-card__block">
+          <div class="c-summary-card__item">
+            <div class="c-summary-card__lbl">
+              Avg Daily Resolved
+            </div>
+            <div class="c-summary-card__value">
+              {{ this.avgResolved | number }}
+            </div>
+          </div>
+          <div class="c-summary-card__item">
+            <div class="c-summary-card__lbl">
+              Total Resolved
+            </div>
+            <div class="c-summary-card__value">
+              {{ this.totalResolved | number }}
+            </div>
+          </div>
+
+        </div>
+        <div class="c-summary-card__block">
+          <div class="c-summary-card__item">
+            <div class="c-summary-card__lbl">
+              Avg Daily Closed
+            </div>
+            <div class="c-summary-card__value">
+              {{ this.avgClosed | number }}
+            </div>
+          </div>
+          <div class="c-summary-card__item">
+            <div class="c-summary-card__lbl">
+              Total Closed
+            </div>
+            <div class="c-summary-card__value">
+              {{ this.totalClosed| number }}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

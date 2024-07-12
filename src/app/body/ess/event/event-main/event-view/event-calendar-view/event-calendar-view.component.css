@@ -1,0 +1,74 @@
+
+.event-week-title {
+  font-size: 18px;
+  color: #858585;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.modal-hide {
+  display: none;
+}
+
+.event-loadmore-button {
+  padding: 0 !important;
+  border: 0 !important;
+  color: #858585 !important;
+  background: transparent;
+  border: none;
+}
+
+.event-summary-cards-div {
+  /*margin-top: 30px;*/
+}
+
+.event-summary-cards-div-mobile {
+  margin-top: 10px;
+}
+
+/*---------------------------------------------------------------------------------------*/
+.event-type-span {
+  margin: 0 10px 0 0;
+}
+
+.Meeting {
+  color: #5d92ff;
+}
+
+.Gathering {
+  color: #7b6ed8;
+}
+
+.Outing {
+  color: #e7b74a;
+}
+
+.Event {
+  color: #f6646d;
+}
+
+/*---------------------------------------------------------------------------------------*/
+.event-mobile-view {
+  margin-top: 10px;
+}
+
+/*---------------------------------------------------------------------------------------*/
+
+.create-new-event-button {
+  border-radius: 4px;
+  background-color: #006eff;
+  color: #FFFFFF;
+  padding: 2px 12px;
+  float: right;
+  margin-top: -4px;
+}
+
+.create-new-event-button-mobile {
+  border-radius: 4px;
+  background-color: #006eff;
+  color: #FFFFFF;
+  padding: 2px 12px;
+  width: 100%;
+}
+
+/*---------------------------------------------------------------------------------------*/

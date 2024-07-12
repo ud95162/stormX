@@ -1,0 +1,27 @@
+.skills-details .skills-details__title {
+  margin: 0px;
+  font-width: 600 !important;
+}
+
+.skills-details .o-modal__inner-header {
+  height: auto;
+  margin-bottom: 0px;
+  padding: 16px 24px;
+  border-bottom: 2px solid #F3EBFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skills-details .o-modal__inner-close {
+  position: unset;
+}
+
+.skills-details .o-tabs__pane {
+  padding: 0;
+}
+
+.skills-details .o-modal__footer {
+  padding: 16px 24px;
+  margin-top: 0px;
+}

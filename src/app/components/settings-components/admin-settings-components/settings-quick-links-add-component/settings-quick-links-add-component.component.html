@@ -1,0 +1,96 @@
+<!--new implementation-->
+<app-error-modal></app-error-modal>
+<div class="quick-link__wrapper--add" *ngIf="showQuickLinkForm">
+  <div class="quick-link__wrapper--form">
+    <h2 class="quick-link__header--text">Add a new Quick Link</h2>
+
+    <!--input fields-->
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--medium" for="quickLinkName">Name</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" id="quickLinkName" type="text" minlength="0" maxlength="524288" placeholder="" value="">
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--medium" for="quickLinkCategory">Category</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <select class="m-form-field__select " id="quickLinkCategory">
+          <option *ngFor="let quickLinkCategory of categoryList">{{quickLinkCategory.type}}</option>
+        </select>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--medium" for="quickLinkURL">URL</label>
+      </div>
+
+      <div class="m-form-field__field">
+        <div class="m-form-field__field-item">
+          <input class="m-form-field__input" id="quickLinkURL" type="text" minlength="0" maxlength="524288" placeholder="" value="">
+        </div>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--medium" for="quickLinkAbout">About</label>
+      </div>
+      <textarea id="quickLinkAbout" name="test" rows="8" cols="95" spellcheck="false"></textarea>
+      <span class="m-form-field__error">error</span>
+    </div>
+
+    <div class="m-form-field-inline">
+      <div class="m-form-field__label-wrap">
+        <label class="m-form-field__label--medium" >Quick Link Icon</label>
+      </div>
+
+      <div class="image-upload__timeline">
+        <div *ngIf="showImage">
+          <br>
+          <i (click)="deleteImage()" aria-hidden="true"
+             class="fa fa-times-circle-o delete-uploaded-image"></i>
+          <img src="{{quickLinkImage}}" style="width: 100%;">
+        </div>
+        <image-upload (uploadFinished)="quickLinkImageUploadDone($event)" *ngIf="showImageUploader"
+                      [extensions]="['jpg','png','gif','JPEG', '.jpg']"
+                      [headers]="{Accept: '*/*'}"
+                      [maxFileSize]="uploadImageSize"
+                      [style]="customStyle"
+                      [url]="imageUploadUrl"
+                      buttonCaption="Browse to upload "
+                      dropBoxMessage=" or Drag and Drop to upload (max size 1MB) - To get the best view, please upload photos with 2:1 ratio"></image-upload>
+      </div>
+
+      <span class="m-form-field__error">error</span>
+    </div>
+
+
+    <!---button-->
+
+    <div class="c-quick-link__action">
+      <button class="c-quick-link__action--button" (click)="onSaveQuickLink('save')" *ngIf="showSaveButton" >Save</button>
+      <button class="c-quick-link__action--button-cancel" (click)="onCancelQuickLink()" *ngIf="showEditButton" >Cancel</button>
+      <button class="c-quick-link__action--button u-ml" (click)="onSaveQuickLink('edit')" *ngIf="showEditButton" >Edit QuickLink</button>
+    </div>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<p>
+  message-test4 works!
+</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker1" [(ngModel)]="processedTodayCurrent" (ngModelChange)="onChangeAction($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6 form-group">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker2" [(ngModel)]="processedTodayNext" (ngModelChange)="onChangeAction($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div style="display: block">
+<!--    <canvas #mycanvas (chartClick)="chartClicked($event)"-->
+<!--            (chartHover)="chartHovered($event)"-->
+<!--            [type]="doughnutChartType"-->
+<!--            [data]="doughnutChartData"-->
+<!--            [labels]="doughnutChartLabels"-->
+<!--            baseChart></canvas>-->
+  </div>
+</div>

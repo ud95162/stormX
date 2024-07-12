@@ -1,0 +1,231 @@
+<div *ngIf="loadingOverlayView" class="overlay" id="myNav" style="text-align: center">
+  <img src="assets/image/loading/spinner-loading.svg" style="padding-top: 17%">
+</div>
+
+<div class="modal-dialog">
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <!-- <button class="close" data-dismiss="modal" type="button">&times;</button> -->
+
+      <a aria-label="close" class="close crossHover" data-dismiss="modal"
+             href="#">&times;</a>
+
+      <h4 class="modal-title">Add Qualifications</h4>
+    </div>
+
+    <div class="modal-body">
+      <ul class="nav nav-tabs nav-justified">
+        <li class="active">
+          <a data-toggle="tab" href="#university">
+            <i aria-hidden="true" class="fa fa-building fa-3x"></i>
+            <br>
+            Education
+          </a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#qualificationAdd">
+            <i aria-hidden="true" class="fa fa-flag fa-3x"></i>
+            <br>
+            Other Qualification
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="university" style="padding-bottom: 0">
+
+          <!-- <div *ngIf="showEducationSuccessAlert" class="alert alert-success alert-dismissable">
+            <a (click)="educationWarningClose()" aria-label="close" class="close" data-dismiss="alert"
+               href="#">×</a>
+            Education Qualification will be added to your profile in a while!
+          </div> -->
+
+          <div *ngIf="showEducationFailedAlert" class="alert alert-danger alert-dismissable">
+            <a (click)="educationWarningClose()" aria-label="close" class="close" data-dismiss="alert"
+               href="#">×</a>
+            Education Qualification update failed!
+          </div>
+
+          <form style="padding: 0 0 15px 0">
+            <label class="radio-inline" style="width: 45%;">
+              <input (click)="educationTypeCheck('university')" checked name="optradio" type="radio">University
+            </label>
+            <label class="radio-inline" style="width: 45%;">
+              <input (click)="educationTypeCheck('high_school')" name="optradio" type="radio">High School
+            </label>
+          </form>
+
+          <div class="form-group">
+            <label *ngIf="UniNameLabel" class="form-label" for="input_uniname" style="padding: 0">University <span
+              style="color: red"> *</span></label>
+            <label *ngIf="HighSchoolNameLabel" class="form-label" for="input_uniname" style="padding: 0">High
+              School <span style="color: red"> *</span></label>
+            <input class="form-control" id="input_uniname" list="uniSchoolList" name="input_uniname" placeholder=""
+                   type="text">
+            <datalist *ngIf="UniNameLabel" id="uniSchoolList">
+              <option *ngFor="let uniKey of universityList" value={{uniKey.name}}>
+            </datalist>
+            <datalist *ngIf="HighSchoolNameLabel" id="uniSchoolList">
+              <option *ngFor="let schoolKey of schoolList" value={{schoolKey.name}}>
+            </datalist>
+          </div>
+
+          <form *ngIf="UniTypeView" style="padding: 0 0 15px 0">
+            <label class="radio-inline" style="width: 30%;">
+              <input (click)="uniTypeCheck('State')" checked name="optradio" type="radio">State
+            </label>
+            <label class="radio-inline" style="width: 30%;">
+              <input (click)="uniTypeCheck('Private')" name="optradio" type="radio">Private
+            </label>
+            <label class="radio-inline" style="width: 30%;">
+              <input (click)="uniTypeCheck('Foreign')" name="optradio" type="radio">Foreign
+            </label>
+          </form>
+
+          <div class="form-group">
+            <label class="form-label" for="input_degree" style="padding: 0">Degree <span
+              style="color: red"> *</span></label>
+            <input class="form-control" id="input_degree" name="input_degree" placeholder="" type="text">
+          </div>
+
+          <div *ngIf="UniTypeView" class="form-group">
+            <label class="form-label" for="input_result" style="padding: 0">Result <span
+              style="color: red"> *</span></label>
+            <select class="form-control" id="input_result">
+              <option>--</option>
+              <option>1st Class</option>
+              <option>2nd Upper</option>
+              <option>2nd Class</option>
+              <option>2nd Lower</option>
+              <option>General</option>
+              <option>Merit</option>
+              <option>Pass</option>
+              <option>Pending</option>
+            </select>
+          </div>
+
+          <div *ngIf="HighSchoolTypeView" class="form-group">
+            <label class="form-label" for="input_result" style="padding: 0">Result <span
+              style="color: red"> *</span></label>
+            <input class="form-control" id="input_result" name="input_result" placeholder="" type="text">
+          </div>
+
+          <div class="form-group col-sm-6" style="padding-left: 0; padding-right: 0">
+            <label class="form-label" for="input_fromDate" style="padding: 0">From <span
+              style="color: red"> *</span></label>
+            <div class="input-group registration-date-time">
+                <span class="input-group-addon">
+                  <i aria-hidden="true" class="fa fa-calendar"></i>
+                </span>
+              <input class="form-control" id="input_fromDate" name="input_fromDate" type="date">
+            </div>
+          </div>
+
+          <div class="form-group col-sm-6" style="padding-left: 0; padding-right: 0">
+            <label class="form-label" for="input_toDate" style="padding: 0">To <span
+              style="color: red"> *</span></label>
+            <div class="input-group registration-date-time">
+                <span class="input-group-addon">
+                  <i aria-hidden="true" class="fa fa-calendar"></i>
+                </span>
+              <input class="form-control" id="input_toDate" name="registration_date" type="date">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input_edudescription" style="padding: 0">Description</label>
+            <textarea class="form-control" id="input_edudescription" rows="5" style="resize: vertical"></textarea>
+          </div>
+
+          <hr>
+          <table width="100%">
+            <tr>
+              <td align="left" width="50%">
+                <form>
+                  <label class="checkbox-inline">
+                    <input checked id="educationPostOnFeedCheck" type="checkbox" value=""><b>Post on Feed</b>
+                  </label>
+                </form>
+              </td>
+              <td align="right" width="50%">
+                <button (click)="onSubmitEducationBtnClick()" data-dismiss="modal" class="btn submit-but" type="button">Submit</button>
+              </td>
+            </tr>
+          </table>
+
+        </div>
+
+        <div class="tab-pane fade" id="qualificationAdd" style="padding-bottom: 0">
+
+          <!-- <div *ngIf="showQualificationSuccessAlert" class="alert alert-success alert-dismissable">
+            <a (click)="qualificationWarningClose()" aria-label="close" class="close" data-dismiss="alert"
+               href="#">×</a>
+            Qualification will be added to your profile in a while!
+          </div> -->
+
+          <div *ngIf="showQualificationFailedAlert" class="alert alert-danger alert-dismissable">
+            <a (click)="qualificationWarningClose()" aria-label="close" class="close" data-dismiss="alert"
+               href="#">×</a>
+            Qualification update failed!
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input_qualification" style="padding: 0">Qualification <span
+              style="color: red"> *</span></label>
+            <input class="form-control" id="input_qualification" list="qualificationList" name="input_qualification"
+                   placeholder=""
+                   type="text">
+            <datalist id="qualificationList">
+              <option *ngFor="let qualificationKey of qualificationList" value={{qualificationKey.name}}>
+            </datalist>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input_issuer" style="padding: 0">Issuer <span
+              style="color: red"> *</span></label>
+            <input class="form-control" id="input_issuer" name="input_issuer" placeholder="" type="text">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input_qulresult" style="padding: 0">Result</label>
+            <input class="form-control" id="input_qulresult" name="input_qulresult" placeholder="" type="text"
+                   value="--">
+          </div>
+
+          <div class="form-group col-sm-12" style="padding-left: 0; padding-right: 0">
+            <label class="form-label" for="input_qualificationdate" style="padding: 0">Date <span
+              style="color: red"> *</span></label>
+            <div class="input-group registration-date-time">
+                <span class="input-group-addon">
+                  <i aria-hidden="true" class="fa fa-calendar"></i>
+                </span>
+              <input class="form-control" id="input_qualificationdate" name="input_qualificationdate" type="date">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input_quldescription" style="padding: 0">Description</label>
+            <textarea class="form-control" id="input_quldescription" rows="5" style="resize: vertical"></textarea>
+          </div>
+
+          <hr>
+          <table width="100%">
+            <tr>
+              <td align="left" width="50%">
+                <form>
+                  <label class="checkbox-inline">
+                    <input checked id="qualificationPostOnFeedCheck" type="checkbox" value="">Post on Feed
+                  </label>
+                </form>
+              </td>
+              <td align="right" width="50%">
+                <button (click)="onSubmitQualificationBtnClick()" class="btn submit-but" data-dismiss="modal" type="button">Submit</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

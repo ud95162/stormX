@@ -1,0 +1,21 @@
+.div__wrapper_table td:first-child{
+  position: absolute;
+  display: block;
+  width: 122px;
+  background-color: white;
+}
+.div__wrapper_table th:first-child {
+  position: absolute;
+  display: block;
+  width: 122px;
+  background-color: #147ad6;
+  height: 100px;
+}
+.tbody__leave_vs_emp {
+  position: unset !important;
+  overflow: unset !important;
+}
+.div__wrapper_table{
+  height: 590px;
+}
+

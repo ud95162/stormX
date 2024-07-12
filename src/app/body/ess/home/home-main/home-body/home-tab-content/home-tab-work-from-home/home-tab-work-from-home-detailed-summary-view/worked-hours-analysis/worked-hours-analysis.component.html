@@ -1,0 +1,126 @@
+<!--main-->
+
+<div *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortWorkedHoursAnalysis')">
+  <div class="dashboard-page @@class">
+    <div class="dashboard-page__block-main">
+      <div class="dashboard-page__block-wrapper-main">
+
+
+        <!--work effort filters--->
+        <div class="workeffort-filter_section">
+
+          <div class="m-form-field-inline">
+          </div>
+          <div class="m-form-field-inline">
+          </div>
+
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--workflow">System</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select " [(ngModel)]="selectedSystem"
+                        (change)="setDetailedSummaryReportObject()">
+                  <option *ngFor="let datasource of dataSources" [ngValue]="datasource">{{datasource}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--workflow" for="worked-hour-from-date">Date</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" id="worked-hour-from-date" type="date" minlength="0"
+                       maxlength="524288" placeholder="Days" value=""
+                       (change)="setDetailedSummaryReportObject()" [(ngModel)]="fromDate">
+              </div>
+            </div>
+
+            <span class="m-form-field__error">error</span>
+          </div>
+        </div>
+
+        <!--          filter section end-->
+
+        <!--          chart section start-->
+
+        <!--distribution charts--->
+        <div class="hour-analysis__chart--wrapper">
+          <!--pie chart start-->
+          <div class="hour-distributioin__chart">
+            <h2 class="hour-analysis__chart--text">Hourly Distribution</h2>
+
+            <div class="hour-analysis__chart--details" *ngIf="doughnutChartDataLoaded">
+              <app-wfh-worked-hour-analysis-dnut
+                [workHourAnalysisDoughnutChartData]="userWorkTimeDoughnutChartData"
+                [workHourAnalysisDoughnutChartLabels]="userWorkTimeDoughnutChartLabels"></app-wfh-worked-hour-analysis-dnut>
+
+            </div>
+          </div>
+
+          <!--              pie chart end-->
+          <!--              bar chart start-->
+          <div class="average-distributioin__chart">
+            <h2 class="hour-analysis__chart--text">Average Hours</h2>
+
+            <div class="hour-analysis__chart--details" *ngIf="taskTimeResponse">
+              <app-wfh-average-hours-bar-chart
+                [barChartDataFromResponse]="barChartData[0].data"
+                [barChartColorsFromResponse]="barChartData[0].backgroundColor"
+                [barChartMaximumFromResponse]="barChartMaximum">
+              </app-wfh-average-hours-bar-chart>
+            </div>
+          </div>
+          <!--              bar chart end-->
+          <!--            chart section end-->
+        </div>
+
+
+        <!--weekly monthly chart--->
+
+        <div class="yearly-work-hour__wrraper">
+
+          <div class="yearly-work-hour__filters">
+
+            <div class="yearly-work-hour__filters--checkbox">
+              <label class="a-checkbox">
+                <input type="checkbox" class="a-checkbox__check" [(ngModel)]="lastWeekChecked"
+                       (click)="getDataForPeriod(WEEK_IDENTIFIER)">
+                <span class="a-checkbox__label">Weekly</span>
+              </label>
+              <label class="a-checkbox">
+                <input type="checkbox" class="a-checkbox__check" [(ngModel)]="lastMonthChecked"
+                       (click)="getDataForPeriod(MONTH_IDENTIFIER)">
+                <span class="a-checkbox__label">Monthly</span>
+              </label>
+
+              <label class="a-checkbox">
+                <input type="checkbox" class="a-checkbox__check" [(ngModel)]="lastYearChecked"
+                       (click)="getDataForPeriod(YEAR_IDENTIFIER)">
+                <span class="a-checkbox__label">Yearly</span>
+              </label>
+            </div>
+          </div>
+
+
+          <!--main chart-->
+
+          <div class="yearly-work-hour__chart--wrapper" *ngIf="responseDataLoaded">
+            <app-wfh-worked-hours-analysis-line-chart [workedHourAnalysisLineChartResponse]="chartData"
+                                                      [workedHourAnalysisLineChartDataLabels]="chartLabels">
+
+            </app-wfh-worked-hours-analysis-line-chart>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

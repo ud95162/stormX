@@ -1,0 +1,39 @@
+<div class="profile-page__main-content">
+
+  <div class="profile-summary-header" style="justify-content: flex-end; background: #FFFFFF; padding: 20px">
+    <div class="">
+      <div class="m-form-field-inline" style="margin-bottom: 0">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label--workflow" for="start-date">Start Date</label>
+        </div>
+        <div class="m-form-field__field">
+          <input class="m-form-field__input project-wise-date__input" id="start-date" type="date"
+                 [(ngModel)]="startDate" [ngModelOptions]="{standalone: true }"
+                 (change)="changeDates()"
+                 minlength="0"
+                 maxlength="524288" placeholder="06/01/2022" value="06/01/2022">
+        </div>
+      </div>
+    </div>
+    <div class="" style="margin-left: 10px">
+      <div class="m-form-field-inline" style="margin-bottom: 0">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label--workflow" for="end-date">End Date</label>
+        </div>
+        <div class="m-form-field__field">
+          <input class="m-form-field__input project-wise-date__input" id="end-date" type="date"
+                 [(ngModel)]="endDate" [ngModelOptions]="{standalone: true }"
+                 (change)="changeDates()"
+                 minlength="0"
+                 maxlength="524288" placeholder="06/01/2022" value="06/01/2022">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <app-attendance-log-summary #attendanceLogSummaryComponent
+                              [startDate]="startDate"
+                              [endDate]="endDate"></app-attendance-log-summary>
+</div>

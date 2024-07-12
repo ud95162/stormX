@@ -1,0 +1,137 @@
+<!---designation grades-->
+<div class="c-designnation__roles">
+  <!--  <div class="m-form-field__field">-->
+
+  <!--    &lt;!&ndash; visible in desktop&ndash;&gt;-->
+  <!--    <span class="m-form-field__pre">-->
+  <!--                    <svg class="a-icon m-form-field__pre-icon">-->
+  <!--                    <use xlink:href="#search"></use>-->
+  <!--                </svg>-->
+  <!--                </span>-->
+  <!--    <input name="designation" id="designation" class="m-form-field__input" type="text"-->
+  <!--           minlength="0" maxlength="524288" placeholder="Search designation" [(ngModel)]="searchTerm">-->
+  <!--  </div>-->
+  <!--  <br>-->
+  <!--  <div *ngIf="searchTerm !== ''" class="c-accordian-item__description">-->
+  <!--    <div *ngFor="let designationCategory of designationCategoriesList">-->
+  <!--      <ul class="c-accordian-item__description&#45;&#45;item"-->
+  <!--          *ngFor="let designation of designationCategory.designation | designationFilterPipe:searchTerm">-->
+  <!--        <li class="c-accordian-item__job" style="cursor: pointer" (click)="setDesignationDataToEdit(designation)">-->
+  <!--          {{designation.designation}}</li>-->
+  <!--      </ul>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+  <div *ngIf="showDesignationGradeList">
+    <div *ngFor="let designationGrade of designationGrades; let i = index">
+      <div class="c-designnation__accordian--item">
+        <h2 class="c-designnation__accordian--text">{{designationGrade.gradeCode}}</h2>
+        <div class="c-designnation__accordian">
+          <div class="c-designnation__accordian--edit"
+               (click)="setDesignationGradeDataToEdit(designationGrade)">
+            <svg class="a-link-btn a-icon c-pax-details__block-main-icon">
+              <use xlink:href="#edit"></use>
+            </svg>
+          </div>
+
+          <div class="c-designnation__accordian--collapse"
+               (click)="onClickShowHideGrades(i, designationGrade)">
+            <svg class="a-link-btn a-icon c-accordian__collapse-icon">
+              <use xlink:href="#pointer-down" id="icon_direction_{{i}}"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="o-modal" id="editDesignationGradeModal" >
+
+  <div class="o-modal__content edit-personal-details">
+
+    <div class="o-modal__body" *ngIf="editDesignationGradeClicked">
+
+      <div class="o-modal__inner-header">
+        <h2 class="c-define-designation__text">Edit Designation Grade</h2>
+        <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('editDesignationGradeModal')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+        <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm">
+          <svg class="a-icon u-mr">
+            <use xlink:href="#previous"></use>
+          </svg>
+          Back
+        </button>
+      </div>
+
+
+      <div class="m-define-designation-group">
+        <div class="">
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--bold" >Grade name</label>
+            </div>
+
+            <div class="m-form-field__field">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" type="text"
+                       [(ngModel)]="selectedDesignationGrades.gradeName" >
+              </div>
+            </div>
+
+            <span class="m-form-field__error">error</span>
+          </div>
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--bold" for="groupName">Grade Code</label>
+            </div>
+
+            <div class="m-form-field__field">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" id="groupName" type="text"
+                       placeholder=""
+                       [(ngModel)]="selectedDesignationGrades.gradeCode" value="{{selectedDesignationGrades.gradeCode}}">
+              </div>
+            </div>
+
+            <span class="m-form-field__error">error</span>
+          </div>
+
+          <div class="m-form-field-inline">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label--bold" for="GroupAbbreviation">Grade Description</label>
+            </div>
+
+            <div class="m-form-field__field">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" id="GroupAbbreviation" type="text"
+                       placeholder="" [(ngModel)]="selectedDesignationGrades.description"
+                       value="{{selectedDesignationGrades.description}}">
+              </div>
+            </div>
+
+            <span class="m-form-field__error">error</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="o-modal__footer">
+        <div class="o-modal__footer__add" style="cursor: pointer" (click)="deleteDesignationGrade(selectedDesignationGrades.gradeID)">
+          <div class="m-designation__delete--text">Delete Designation Grade</div>
+        </div>
+        <button class="a-btn a-btn--primary" (click)="editDesignationGrade()">Update</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!--end editDesignationGrade modal-->
+
+

@@ -1,0 +1,75 @@
+<div class="c-designnation__roles">
+  <div class="welfare-header-input__wraper">
+    <div class="m-form-field__field">
+      <div class="m-form-field__field-item">
+        <span class="m-form-field__pre">
+                    <svg class="a-icon m-form-field__pre-icon">
+                    <use xlink:href="#search"></use>
+                </svg>
+                </span>
+        <input class="m-form-field__input" id="page" type="text" minlength="0" maxlength="524288" placeholder="Search Project"
+               value="">
+      </div>
+    </div>
+  </div>
+
+  <div class="c-settings__project--wraper" *ngIf="allProjectsDataLoaded" style="margin-top: 10px">
+    <div *ngFor="let project of allProjectsData; let i = index" style="margin-bottom: 10px">
+      <div>
+        <div class="c-designnation__accordian--item" style="margin-bottom: 0; border-radius: 0">
+          <div style="display: flex; justify-content: start; align-items: center">
+            <img src="{{project.projectImage}}" alt="" style="width: 40px; height: 40px">
+            <h2 class="c-designnation__accordian--text" style="margin-left: 5px">{{project.projectName}}</h2>
+          </div>
+          <div class="c-designnation__accordian">
+            <div class="c-designnation__accordian--edit">
+              <svg class="a-link-btn a-icon c-pax-details__block-main-icon" (click)="editProject(project)">
+                <use xlink:href="#edit"></use>
+              </svg>
+            </div>
+
+            <div class="c-designnation__accordian--collapse"
+                 (click)="onClickShowHideProject(i)">
+              <svg class="a-link-btn a-icon c-accordian__collapse-icon">
+                <use xlink:href="#pointer-down" id="icon_direction_{{i}}"></use>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="c-accordian-item__description" id="project_{{i}}" style="display: none; border-radius: 0">
+          <div class="project-dashboard-management__card">
+            <div *ngIf="project.projectManagerEntities.length > 0">
+              <h5 style="font-weight: 600 !important;">PM</h5>
+              <div *ngFor="let emp of project.projectManagerEntities" style="display: flex; justify-content: start; align-items: center">
+                <img src="{{emp.employeeDetails.profileImage}}" alt="emp" style="width: 30px; height: 30px; border-radius: 50%"/>
+                <p style="margin-left: 5px; font-size: 10px">{{emp.employeeDetails.firstName}}</p>
+              </div>
+            </div>
+            <div *ngIf="project.projectOwnerEntities.length > 0">
+              <h5 style="font-weight: 600 !important;">VP</h5>
+              <div *ngFor="let emp of project.projectOwnerEntities" style="display: flex; justify-content: start; align-items: center">
+                <img src="{{emp.employeeDetails.profileImage}}" alt="emp" style="width: 30px; height: 30px; border-radius: 50%"/>
+                <p style="margin-left: 5px; font-size: 10px">{{emp.employeeDetails.firstName}}</p>
+              </div>
+            </div>
+            <div *ngIf="project.projectCoordinatorEntities.length > 0">
+              <h5 style="font-weight: 600 !important;">PC</h5>
+              <div *ngFor="let emp of project.projectCoordinatorEntities" style="display: flex; justify-content: start; align-items: center">
+                <img src="{{emp.employeeDetails.profileImage}}" alt="emp" style="width: 30px; height: 30px; border-radius: 50%"/>
+                <p style="margin-left: 5px; font-size: 10px">{{emp.employeeDetails.firstName}}</p>
+              </div>
+            </div>
+            <div *ngIf="project.projectDirectorEntities.length > 0">
+              <h5 style="font-weight: 600 !important;">Director</h5>
+              <div *ngFor="let emp of project.projectDirectorEntities" style="display: flex; justify-content: start; align-items: center">
+                <img src="{{emp.employeeDetails.profileImage}}" alt="emp" style="width: 30px; height: 30px; border-radius: 50%"/>
+                <p style="margin-left: 5px; font-size: 10px">{{emp.employeeDetails.firstName}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

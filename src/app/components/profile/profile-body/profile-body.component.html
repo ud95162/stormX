@@ -1,0 +1,107 @@
+<div class="profile-page__nav">
+  <div class="c-page-nav">
+    <nav class="c-page-nav__wrapper">
+      <a class="c-page-nav__item attendance" [ngClass]="{'is-selected': activeTabName == 'attendance'}"
+         *ngIf="componentPermission.includes('AttendanceSummary')"
+         (click)="changeActiveTab('attendance')" data-toggle="tab"><span>Attendance</span></a>
+      <a class="c-page-nav__item overview" [ngClass]="{'is-selected': activeTabName == 'overview'}"
+         *ngIf="componentPermission.includes('Overview')"
+         (click)="changeActiveTab('overview')" data-toggle="tab"><span>Overview</span></a>
+
+      <a class="c-page-nav__item timeline" [ngClass]="{'is-selected': activeTabName == 'timeline'}"
+         *ngIf="componentPermission.includes('Timeline')"
+         (click)="changeActiveTab('timeline')" data-toggle="tab"><span>Timeline</span></a>
+      <a class="c-page-nav__item post" [ngClass]="{'is-selected': activeTabName == 'post'}"
+         *ngIf="componentPermission.includes('ProfilePostsComponent')"
+         (click)="changeActiveTab('post')" data-toggle="tab"><span>Post</span></a>
+      <a class="c-page-nav__item review" [ngClass]="{'is-selected': activeTabName == 'review'}"
+         *ngIf="componentPermission.includes('ProfileReviews')"
+         (click)="changeActiveTab('review')" data-toggle="tab"><span>Review</span></a>
+      <a class="c-page-nav__item resume" [ngClass]="{'is-selected': activeTabName == 'resume'}"
+         *ngIf="componentPermission.includes('Resume')"
+         (click)="changeActiveTab('resume')" data-toggle="tab"><span>Resume</span></a>
+      <a class="c-page-nav__item summary" [ngClass]="{'is-selected': activeTabName == 'summary'}"
+         *ngIf="componentPermission.includes('LeaveSummary') || componentPermission.includes('OPDSummary') ||
+          componentPermission.includes('LetterRequestSummary') || componentPermission.includes('FacilityRequestSummary')"
+         (click)="changeActiveTab('summary')" data-toggle="tab"><span>Summary</span></a>
+
+      <a class="c-page-nav__item knowledgeGraph" [ngClass]="{'is-selected': activeTabName == 'knowledgeGraph'}"
+         (click)="changeActiveTab('knowledgeGraph')" data-toggle="tab"><span>Knowledge Graph</span></a>
+
+      <a class="c-page-nav__item appraisal" [ngClass]="{'is-selected': activeTabName == 'appraisal'}"
+         *ngIf="componentPermission.includes('Appraisal') && customAppraisalPermission.showOverallAppraisal"
+         (click)="changeActiveTab('appraisal')" data-toggle="tab"><span>Appraisal</span></a>
+    </nav>
+  </div>
+</div>
+
+<div class="l-wrapper profile-page__wrapper">
+  <div class="profile-page__page-content">
+    <div class="profile-page__sidebar">
+      <app-header-card
+        [employeeId]="employeeId"
+        (profileBodyEventEmitter)="redirectFromChild($event)"></app-header-card>
+    </div>
+    <div *ngIf="loadView">
+      <div class="profile-page__main-content" >
+        <div
+          *ngIf="componentPermission.includes('AttendanceSummary')">
+          <app-profile-attendance *ngIf="activeTabName === 'attendance'"></app-profile-attendance>
+        </div>
+        <div
+          *ngIf="componentPermission.includes('Overview')">
+          <app-profile-overview *ngIf="activeTabName === 'overview'" [employeeFirstName]="employeeFirstName"
+                                [employeeId]="employeeId"
+                                (profileBodyEventEmitter)="redirectFromChild($event)"
+          ></app-profile-overview>
+        </div>
+
+
+        <div *ngIf="componentPermission.includes('Timeline')">
+          <app-profile-timeline *ngIf="activeTabName === 'timeline'" [employeeFirstName]="employeeFirstName"
+                                [employeeId]="employeeId"
+                                (profileBodyEventEmitter)="redirectFromChild($event)"></app-profile-timeline>
+        </div>
+
+        <div
+          *ngIf="componentPermission.includes('ProfilePostsComponent')">
+          <app-profile-post *ngIf="activeTabName === 'post'" [employeeId]="employeeId"></app-profile-post>
+        </div>
+
+        <div
+          *ngIf="componentPermission.includes('ProfileReviews')">
+          <app-profile-review *ngIf="activeTabName === 'review'"
+                              [employeeFirstName]="employeeFirstName"
+                              [employeeId]="employeeId"
+                              [employeeImage] = "employeeImage"
+                              [getReviewType]="'person'"></app-profile-review>
+        </div>
+        <div
+          *ngIf="componentPermission.includes('Resume')">
+          <app-profile-resume *ngIf="activeTabName === 'resume'"
+                              [employeeFirstName]="employeeFirstName"
+                              [employeeId]="employeeId"
+          ></app-profile-resume>
+        </div>
+        <div
+          *ngIf="componentPermission.includes('LeaveSummary') || componentPermission.includes('OPDSummary') ||
+          componentPermission.includes('LetterRequestSummary') || componentPermission.includes('FacilityRequestSummary')">
+          <app-profile-summary *ngIf="activeTabName === 'summary'"
+                               [employeeFullName] = "employeeFullName"
+          ></app-profile-summary>
+        </div>
+        <div
+          *ngIf="componentPermission.includes('Appraisal') && customAppraisalPermission.showOverallAppraisal">
+          <app-profile-appraisal *ngIf="activeTabName === 'appraisal'" [customAppraisalPermission]="customAppraisalPermission"
+                                 [employeeId]="employeeId"></app-profile-appraisal>
+        </div>
+        <div>
+          <app-profile-knowledge-extraction *ngIf="activeTabName === 'knowledgeGraph'" [employeeFirstName]="employeeFirstName"
+                                 [employeeId]="employeeId"></app-profile-knowledge-extraction>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

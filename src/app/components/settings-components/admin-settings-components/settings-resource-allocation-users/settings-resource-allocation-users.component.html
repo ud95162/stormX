@@ -1,0 +1,238 @@
+<div class="profile-page__main-content route-settings">
+  <div class="quick-link__wrapper--add">
+    <nav class="c-page-nav__wrapper">
+      <a class="c-page-nav__item" [class.is-selected]="selectedUser === user" *ngFor="let user of users"
+         (click)="changeUser(user)">{{user}} Settings</a>
+    </nav>
+
+    <div class="">
+
+      <div class="route-settings__header">
+        <h4 class="route-settings__header-title">{{selectedUser}} Settings</h4>
+        <button class="a-btn a-btn--primary" (click)="addNewUser()">
+          <svg class="a-icon u-mr-">
+            <use xlink:href="#plus"></use>
+          </svg>
+          Add {{selectedUser}}</button>
+      </div>
+
+      <div class="resource-allocation__filter u-mb2+">
+        <div class="l-grid l-grid--1-1" *ngIf="selectedUser === 'HR'"
+             style="width: 50%; display: flex; float: right; padding-top: 30px;">
+          <div class="m-form-field u-mr" *ngIf="companyData.length > 0">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Company </label>
+            </div>
+            <div class="m-form-field__field">
+              <select class="m-form-field__select" [(ngModel)]="selectedCompany" (change)="getBusinessUnitsDetails();">
+                <option *ngFor="let data of companyData" [ngValue]="data.companyID">{{data.companyName}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="m-form-field u-mr" *ngIf="businessUnitsData.length > 0">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Business Unit </label>
+            </div>
+            <div class="m-form-field__field">
+              <select class="m-form-field__select " [(ngModel)]="selectedBusinessUnit"
+                      (change)="getDepartmentsDetails();">
+                <option *ngFor="let data of businessUnitsData" [ngValue]="data.id">{{data.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resource-allocation-settings" *ngIf="selectedUser !== 'HR'">
+        <div class="resource-allocation-settings__details" *ngFor="let data of employeeData">
+          <p class="resource-allocation-settings__details-title">{{data.empName}}</p>
+          <div class="resource-allocation-settings__actions">
+            <a class="resource-allocation-settings__actions-link u-ml-" (click)="removeUser(data)">
+              <svg class="a-icon resource-allocation-settings__actions-delete">
+                <use xlink:href="#trash"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="resource-allocation-settings" *ngIf="selectedUser === 'HR' && departmentsData.length > 0">
+        <div *ngFor="let departmentId of getUniqueDepartmentIds()">
+          <p style="font-weight: bold;margin-bottom: 16px"> {{ getDepartmentName(departmentId) }} Department</p>
+          <div class="resource-allocation-settings__details" style="padding-left: 20px;"
+               *ngFor="let data of getEmployeesByDepartment(departmentId)">
+            <p class="resource-allocation-settings__details-title" >{{ data.empName }}
+              <span style="padding-left: 30px;color: orangered; font-size: 10px" *ngIf="data.departmentStatus === 1">Default</span>
+              <span style="padding-left: 30px;color: #0062b7; font-size: 10px; cursor: pointer" *ngIf="data.departmentStatus === 0" (click)="changeDefaultUser(data)">Make Default</span>
+              <!--              <span style="padding-left: 30px;color: orangered; font-size: 10px">{{ data.departmentStatus === 1 ? 'default ' : 'make default' }}</span>-->
+            </p>
+            <div class="resource-allocation-settings__actions">
+              <a class="resource-allocation-settings__actions-link u-ml-" (click)="removeUser(data)">
+                <svg class="a-icon resource-allocation-settings__actions-delete">
+                  <use xlink:href="#trash"></use>
+                </svg>
+              </a>
+              <!--              <div class="btn-group" style="float: right; z-index: 2">-->
+              <!--                <button-->
+              <!--                  style="border: none;background: none; line-height: unset !important; min-width: unset!important; padding: unset !important;"-->
+              <!--                  mat-button [matMenuTriggerFor]="menu">-->
+              <!--                  <i class="fa fa-ellipsis-v" aria-hidden="true"-->
+              <!--                     style="font-size:20px;color:#595959;width: 30px;padding-top: 3px"></i>-->
+              <!--                </button>-->
+              <!--                <mat-menu #menu="matMenu" class="leave-approve-actions">-->
+              <!--                  <button class="dropdown-item resource-request-action__td-item"-->
+              <!--                          style=" padding: 8px 20px !important;"-->
+              <!--                          (click)="removeUser(data)">Delete-->
+              <!--                  </button>-->
+              <!--                  <button class="dropdown-item resource-request-action__td-item"-->
+              <!--                          style="padding: 8px 20px !important;"-->
+              <!--                          (click)="changeDefaultUser(data)">-->
+              <!--                    {{ data.departmentStatus === 0 ? 'Make Default ' : '' }}-->
+              <!--                  </button>-->
+              <!--                </mat-menu>-->
+              <!--              </div>-->
+            </div>
+          </div>
+          <hr class="resource-allocation-divider" *ngIf="selectedUser === 'HR'">
+        </div>
+      </div>
+
+      <div class="c-empty-status u-mt2+ u-mb2+"
+           *ngIf="((selectedUser === 'HR' && departmentsData.length === 0) || employeeData.length === 0) && !isLoading">
+        <div class="c-empty-status__content">
+          <img src="../../assets/images/empty-state.png" alt="empty state" class="c-empty-status__img">
+          <h3 class="c-empty-status__title">No Results Found</h3>
+          <p class="c-empty-status__description">We can’t find any item matching your search. <br>
+            Please try again.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center">
+        <img *ngIf="isLoading" src="assets/image/loading/spinner-loading.svg" alt="" style="padding-top: 10%">
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>
+
+<div class="o-modal resource-allocation-modal is-active" *ngIf="addNewUserClicked">
+  <div class="o-modal__content o-modal__content-md">
+    <div class="o-modal__inner-header">
+      <h3 class="o-modal__inner-header-title">Add {{selectedUser}}</h3>
+      <button class="a-btn a-btn--link" (click)="hideAddUserModal()">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+    </div>
+    <div class="o-modal__body">
+      <div class="l-grid l-grid--1-1" *ngIf="selectedUser === 'HR'">
+        <div class="m-form-field u-mr" *ngIf="companyData.length > 0">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label">Company </label>
+          </div>
+          <div class="m-form-field__field">
+            <select class="m-form-field__select" [(ngModel)]="selectedCompany" (change)="getBusinessUnitsDetails();">
+              <option *ngFor="let data of companyData" [ngValue]="data.companyID">{{data.companyName}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="m-form-field u-mr" *ngIf="businessUnitsData.length > 0">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label">Business Unit </label>
+          </div>
+          <div class="m-form-field__field">
+            <select class="m-form-field__select " [(ngModel)]="selectedBusinessUnit"
+                    (change)="getDepartmentsDetails();">
+              <option *ngFor="let data of businessUnitsData" [ngValue]="data.id">{{data.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="m-form-field u-mr" *ngIf="departmentsData.length > 0">
+          <div class="m-form-field__label-wrap">
+            <label class="m-form-field__label">Department </label>
+          </div>
+          <div class="m-form-field__field">
+            <select class="m-form-field__select" [(ngModel)]="selectedDepartment">
+              <option *ngFor=" let data of departmentsData" [ngValue]="data.id">{{data.name}}</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="resource-allocation-divider" *ngIf="selectedUser === 'HR'">
+
+      <div class="m-form-field u-mb">
+        <div class="m-form-field__label-wrap">
+          <label class="m-form-field__label">Enter EmpNo <span class="required">*</span></label>
+        </div>
+        <div class="m-form-field__field">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input" type="text" [(ngModel)]="newEmployee.empNo" placeholder="CGIE1234"
+                   (ngModelChange)="convertToUppercase($event)">
+          </div>
+        </div>
+      </div>
+
+      <div class="resource-allocation-add">
+        <a class="resource-allocation-link" (click)="addToNewUserList()">
+          <svg class="a-icon">
+            <use xlink:href="#plus"></use>
+          </svg>
+          Add
+        </a>
+      </div>
+
+      <div class="resource-allocation-list">
+        <div class="resource-allocation__item" *ngFor="let data of newUsersList; let i = index">
+          <p class="resource-allocation__item-name">{{data.empNo}}</p>
+          <svg class="a-icon" (click)="removeUserFromList(i)">
+            <use xlink:href="#close"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="o-modal__footer">
+      <div class="o-modal__footer-group">
+        <button class="a-btn a-btn--outline u-mr" (click)="hideAddUserModal()"  style="font-size: 14px;">Cancel</button>
+        <button class="a-btn a-btn--primary" [ngClass]="{'is-disabled': newUsersList.length === 0}"
+                (click)="saveNewUsers()">Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="o-modal o-modal__alert is-active" id="successWarningModal" *ngIf="showConfirmationMsg">
+  <div class="o-modal__content o-modal__content-sm o-modal__content--success">
+    <div class="o-modal__body">
+      <button class="a-btn o-modal__close" (click)="closeConfirmationModal()">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+      <div class="o-modal__alert-icon o-modal__alert-icon--warning">
+        <svg class="a-icon">
+          <use xlink:href="#warning"></use>
+        </svg>
+      </div>
+      <h3 class="o-modal__alert-title">Warning</h3>
+      <p class="o-modal__alert-description">Only one person can be assigned as HR Manager. Do you want to replace the
+        user?</p>
+      <div class="o-modal__footer-group">
+        <button class="a-btn a-btn--outline u-mr" (click)="closeConfirmationModal()">Close</button>
+        <button class="a-btn a-btn--primary" (click)="replaceUser()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-resource-success-modal [title1]="title1" [title2]="title1" *ngIf="successModalOpen"></app-resource-success-modal>
+
+<app-resource-confirmation-modal *ngIf="failedModalOpen" [message]=errorMsg></app-resource-confirmation-modal>

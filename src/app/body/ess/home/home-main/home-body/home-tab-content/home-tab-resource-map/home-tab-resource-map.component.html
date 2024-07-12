@@ -1,0 +1,27 @@
+<div class="col-sm-12 no-padding">
+    <div class="col-xs-2">
+      <ul class="nav nav-tabs tabs-left">
+        <li [ngClass]="{ 'active':activeTab === 'userView'}">
+          <a data-toggle="tab" href="#userView"
+             (click)="changeTab('userView')">
+            <i aria-hidden="true" class="fa fa-check-circle"></i>&nbsp;&nbsp;Resource Map
+          </a>
+        </li>
+        <li [ngClass]="{ 'active':activeTab === 'adminView'}">
+          <a data-toggle="tab" href="#adminView"
+             (click)="changeTab('adminView')">
+            <i aria-hidden="true" class="fa fa-check-circle"></i>&nbsp;&nbsp;Finance Data
+          </a>
+
+        </li>
+      </ul>
+    </div>
+  <div class="tab-content">
+    <div *ngIf="userView" class="col-xs-10">
+      <app-get-designations-and-members-count></app-get-designations-and-members-count>
+    </div>
+    <div *ngIf="adminView" class="col-xs-10">
+      <app-get-projects-cost-and-revenue-detailes-view></app-get-projects-cost-and-revenue-detailes-view>
+    </div>
+  </div>
+</div>

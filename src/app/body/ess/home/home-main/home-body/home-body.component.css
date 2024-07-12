@@ -1,0 +1,21 @@
+@media only screen and (min-width: 380px) and (max-width: 768px) {
+  .dashboard-card__wraper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-card__wraper .summary-card .c-card-text {
+    padding: 0px 10px;
+  }
+}
+
+@media only screen and (max-width: 379px) {
+  .dashboard-card__wraper {
+    grid-template-columns: 1fr !important;
+  }
+  .dashboard-card__wraper .summary-card .c-card-text {
+    padding: 0px 10px;
+  }
+}
+
+.dashboard-card__wraper .summary-card .c-card-text {
+  padding: 0px 15px;
+}

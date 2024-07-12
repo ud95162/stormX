@@ -1,0 +1,56 @@
+.nav-tabs > li.active > a {
+  background-color: transparent;
+  border: none;
+}
+
+.tabs-left {
+  border-bottom: none;
+  padding-top: 2px;
+}
+
+.tabs-left {
+  border-right: 1px solid #ddd;
+}
+
+.tabs-left > li {
+  float: none;
+  margin-bottom: 2px;
+}
+
+.tabs-left > li {
+  margin-right: -1px;
+}
+
+.tabs-left > li.active > a,
+.tabs-left > li.active > a:hover,
+.tabs-left > li.active > a:focus,
+.tabs-left > li.active > a > .mobile-sidebar-icon:before,
+.tabs-left > li.active > a:hover > .mobile-sidebar-icon:before,
+.tabs-left > li.active > a:focus > .mobile-sidebar-icon:before {
+  border-bottom-color: #ddd;
+  border-right-color: transparent;
+  color: #006eff;
+}
+
+.tabs-left > li > a {
+  border-radius: 4px 0 0 4px;
+  margin-right: 0;
+  display: block;
+  color: #333333;
+  font-size: 14px;
+  padding: 6px 8px;
+  word-break: break-word !important;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.list-divider {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.divider {
+  height: 1px;
+  margin: 9.5px 0;
+  overflow: hidden;
+  /*background-color: rgba(0, 0, 0, 0.2)*/
+}

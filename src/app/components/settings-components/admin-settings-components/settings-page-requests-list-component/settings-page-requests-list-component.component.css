@@ -1,0 +1,10 @@
+.request-page-admins {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-auto-flow: row;
+}
+
+.request-page-admin-list:not(:first-child) {
+  margin-top: 10px;
+}

@@ -1,0 +1,113 @@
+<div class="modal fade" id="postReviewPopupModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal" id="closeReviewModalButton" type="button">&times;</button>
+        <h4 class="modal-title">Review {{advanceSearchReviewObject.modalHeader}}</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="reviewTitle">Title</label>
+            <input [(ngModel)]="reviewObjectToPost.title" class="form-control" id="reviewTitle" name="reviewTitle"
+                   type="text">
+          </div>
+
+          <div class="m-form-field">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label" for="full-name">Title Test</label>
+            </div>
+            <div class="m-form-field__field">
+              <div class="m-form-field__field-item">
+                <input class="m-form-field__input" id="full-name" type="text" minlength="0"
+                       maxlength="524288" placeholder="title test" value="">
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+
+          <div style="color: gold; margin-bottom: 10px; margin-top: 5px; cursor:pointer; font-size: 1.2em;"
+               title="Add a rating">
+            <span (click)="setGroupStar(0)" *ngIf="reviewObjectToPost.starRating >= 1">
+              <i class="fa fa-star"></i>
+            </span>
+            <span (click)="setGroupStar(1)" *ngIf="reviewObjectToPost.starRating === 0">
+              <i class="fa fa-star-o"></i>
+            </span>
+            <span (click)="setGroupStar(1)" *ngIf="reviewObjectToPost.starRating >= 2">
+              <i class="fa fa-star"></i>
+            </span>
+            <span (click)="setGroupStar(2)" *ngIf="reviewObjectToPost.starRating <= 1">
+              <i class="fa fa-star-o"></i>
+            </span>
+            <span (click)="setGroupStar(2)" *ngIf="reviewObjectToPost.starRating >= 3">
+              <i class="fa fa-star"></i>
+            </span>
+            <span (click)="setGroupStar(3)" *ngIf="reviewObjectToPost.starRating <= 2">
+              <i class="fa fa-star-o"></i>
+            </span>
+            <span (click)="setGroupStar(3)" *ngIf="reviewObjectToPost.starRating >= 4">
+              <i class="fa fa-star"></i>
+            </span>
+            <span (click)="setGroupStar(4)" *ngIf="reviewObjectToPost.starRating <= 3">
+              <i class="fa fa-star-o"></i>
+            </span>
+            <span (click)="setGroupStar(4)" *ngIf="reviewObjectToPost.starRating === 5">
+              <i class="fa fa-star"></i>
+            </span>
+            <span (click)="setGroupStar(5)" *ngIf="reviewObjectToPost.starRating <= 4">
+              <i class="fa fa-star-o"></i>
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="reviewComment">Comment</label>
+            <textarea [(ngModel)]="reviewObjectToPost.comment" class="form-control" id="reviewComment"
+                      name="reviewComment"
+                      rows="5" style="resize: vertical"></textarea>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+
+        <table *ngIf="showLoading" width="100%">
+          <tr>
+            <td align="right">
+              <img src="assets/image/loading/spinner-loading.svg" style="height: 30px;">
+            </td>
+          </tr>
+        </table>
+
+        <table *ngIf="!showLoading" width="100%">
+          <tr>
+            <td align="left" width="50%">
+              <form *ngIf="!advanceSearchReviewObject.edit">
+                <label class="checkbox-inline">
+                  <input checked id="postReviewOnFeedFromAdvanceSearch" type="checkbox" value="">Post on Feed
+                </label>
+              </form>
+
+              <button *ngIf="advanceSearchReviewObject.edit" class="btn delete-review-button pull-left"
+                      (click)="showSaveQuoteModal('deleteReview')">
+                Delete
+              </button>
+            </td>
+            <td align="right" width="50%">
+              <button (click)="saveReview()" *ngIf="!advanceSearchReviewObject.edit"
+                      class="btn save-review-button pull-right"
+                      id="postReview" type="button">
+                Submit
+              </button>
+              <button *ngIf="advanceSearchReviewObject.edit" class="btn save-review-button pull-right"
+                      data-dismiss="modal" id="editReview"
+                      type="button">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

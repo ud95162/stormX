@@ -1,0 +1,404 @@
+<div class="project-wise-details">
+      <div class="project-wise-details__sidebar">
+        <div class="m-form-field u-mb-">
+          <div class="m-form-field__field">
+                        <span class="m-form-field__pre">
+                            <svg class="a-icon m-form-field__pre-icon project-wise-icon__search">
+                                <use xlink:href="#search"></use>
+                            </svg>
+                        </span>
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Search here" [(ngModel)]="searchProject">
+            </div>
+          </div>
+        </div>
+      <div class="project-wise-details__list">
+        <span class="project-wise-details__item " *ngFor="let project of allProjects | projects: searchProject"
+           [ngClass]="{'is-active': selectedProjectName === project.projectName}" (click)="setSelectedProjectData(project)"
+              style="cursor: pointer">
+          <span class="project-wise-details__title">{{project.projectName}}</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="project-wise-details__content" *ngIf="selectedProjectData !== undefined">
+      <div class="project-details-card">
+        <div class="project-details-card-top">
+          <div class="project-details__info">
+            <img [src]="selectedProjectData.projectImg" alt="project-logo" class="project-details__info-logo"
+                 (error) ="setDefaultPic($event)">
+            <div class="project-details__summaray">
+              <h2 class="project-details__summaray--title" *ngIf="selectedProjectData.projectName !== null">
+                {{selectedProjectData.projectName}}
+              </h2>
+              <h2 class="project-details__summaray--title" *ngIf="selectedProjectData.projectName == null">
+                Not Assigned
+              </h2>
+            </div>
+          </div>
+          <div class="project-details__member">
+            <p class="project-details__member-title">Members&nbsp;:&nbsp;<span
+              class="project-details__member-count">{{selectedProjectData.currentAttendanceResponse.totalCount}}</span></p>
+          </div>
+        </div>
+        <div class="l-grid l-grid--3-2 u-mt+ project-wise-grid">
+          <div class="project-wise-card project-wise-card__projects">
+            <div class="project-wise-card__box project-wise-card__box--line"
+                 (click)="showModal('projectAttendanceEmployees', 'Present Employees', 'Present')">
+              <h5 class="project-wise-card__title project-wise-card__title--main">Present Count</h5>
+              <h2 class="project-wise-card__count">{{selectedProjectData.currentAttendanceResponse.presentCount}}</h2>
+            </div>
+
+            <div class="project-wise-card__box project-wise-card__projects"
+                 (click)="showModal('projectAttendanceEmployees', 'WFO Employees', 'WFO')">
+              <h5 class="project-wise-card__title">WFO Count</h5>
+              <h2 class="project-wise-card__count">{{selectedProjectData.currentAttendanceResponse.officeCount}}</h2>
+            </div>
+
+            <div class="project-wise-card__box project-wise-card__projects"
+                 (click)="showModal('projectAttendanceEmployees', 'WFH Employees', 'WFH')">
+              <h5 class="project-wise-card__title">WFH Count</h5>
+              <h2 class="project-wise-card__count">{{selectedProjectData.currentAttendanceResponse.homeCount}}</h2>
+            </div>
+          </div>
+          <div class="l-grid__item">
+            <div class="l-grid l-grid--1-1">
+              <div class="project-wise-card project-wise-card__projects"
+                   (click)="showModal('projectAttendanceEmployees', 'Absent Employees', 'Absent')">
+                <div class="project-wise-card__box project-wise-card__box--line">
+                  <h5 class="project-wise-card__title">Absent Count</h5>
+                  <h2 class="project-wise-card__count project-wise-card__count--error">{{selectedProjectData.currentAttendanceResponse.absentCount}}</h2>
+                </div>
+              </div>
+              <div class="project-wise-card project-wise-card__projects"
+                   (click)="showModal('projectAttendanceEmployees', 'Leave Employees', 'Leave')">
+                <div class="project-wise-card__box project-wise-card__box--line">
+                  <h5 class="project-wise-card__title">Leave Count</h5>
+                  <h2 class="project-wise-card__count project-wise-card__count--error">{{selectedProjectData.currentAttendanceResponse.leaveCount}}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-wise-details__filter" style="margin-top: 16px;">
+        <div class="m-form-field project-wise-details__search">
+          <div class="m-form-field__field">
+                        <span class="m-form-field__pre">
+                            <svg class="a-icon m-form-field__pre-icon project-wise-icon__search">
+                                <use xlink:href="#search"></use>
+                            </svg>
+                        </span>
+            <div class="m-form-field__field-item">
+              <input class="m-form-field__input" type="text" minlength="0" maxlength="524288"
+                     placeholder="Search here" [(ngModel)]="searchTerm">
+            </div>
+          </div>
+        </div>
+
+        <div class="project-wise-details__filter-group">
+          <div class="project-wise-details__sort">
+            <p class="project-wise-details__sort-name" style="width: 140px">Status :</p>
+            <div class="m-form-field__field project-wise-details__sort-select">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select " [(ngModel)]="selectedStatus">
+                  <option value="All">All</option>
+                  <option value="Office">Office</option>
+                  <option value="Home">Home</option>
+                  <option value="Leave">Leave</option>
+                  <option value="Absent">Absent</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pro-employee-details u-mt+">
+        <div *ngIf="(selectedStatus === 'All' || selectedStatus === 'Office') && selectedProjectData !== undefined" style="margin-bottom: 20px">
+          <div class="pro-employee-card" style="display: flex; justify-content: space-between; align-items: center"
+               *ngFor="let employee of selectedProjectData.currentAttendanceResponse.officeAttendances | projectMembers: searchTerm">
+            <div class="pro-employee-card__top">
+              <div class="pro-employee-card__info">
+                <img src="{{employee.empImage}}" alt="employee Img" class="pro-employee-card__img">
+                <div class="pro-employee-card__details">
+                  <div class="pro-employee-card__details-top">
+                    <h4 class="pro-employee-card__details-name">{{employee.empName}}</h4>
+                    <span class="pro-employee-card__location pro-employee-card__location--office">Office</span>
+                    <span *ngIf="employee.wfhRequestApprovedStatus !== null"
+                          class="pro-employee-card__location__wfh-requested {{employee.wfhRequestApprovedStatus}}">WFH Requested  - {{employee.wfhRequestApprovedStatus}}</span>
+                  </div>
+                  <div class="pro-employee-card__details-bottom">
+                    <span class="pro-employee-card__designation">{{employee.empNo}}</span>
+                    <a class="pro-employee-card__contact">
+                      <svg class="a-icon m-form-field__post-icon pro-employee-card__contact-icon">
+                        <use xlink:href="#mobile"></use>
+                      </svg>
+                      {{employee.empMobileNo}}
+                    </a>
+                    <a class="pro-employee-card__contact">
+                      <svg class="a-icon m-form-field__post-icon pro-employee-card__contact-icon">
+                        <use xlink:href="#envelope"></use>
+                      </svg>
+                      {{employee.workEmail}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pro-employee-card__bottom" style="justify-content: end">
+              <div class="pro-employee-card__wwt">
+                <div class="pro-employee-card__rowline">
+                  <img *ngIf="employee.inAttendanceDevice === 'FACE'" class="attendance-system-logo" src="assets/image/attendance/faceRecLogo.png" alt="face-logo">
+                  <img *ngIf="employee.inAttendanceDevice === 'FINGER_PRINT'" class="attendance-system-logo" src="assets/image/attendance/bioLogo.png" alt="face-logo" >
+                  <img *ngIf="employee.inAttendanceDevice === 'WWT'" class="attendance-system-logo" src="assets/image/attendance/wwtLogo.png" alt="face-logo" >
+                  <p class="pro-employee-card__time-recorded" >
+                    In Time -
+                    <span class="pro-employee-card__time-recorded-value pro-employee-card__time-recorded-value--color" *ngIf="employee.inTime !== null">{{employee.inTime}}</span>
+                    <span class="pro-employee-card__time-recorded-value pro-employee-card__time-recorded-value--color" *ngIf="employee.inTime === null">N/A</span>
+                  </p>
+                </div>
+                <div class="pro-employee-card__rowline">
+                <img *ngIf="employee.outAttendanceDevice === 'FINGER_PRINT'" class="attendance-system-logo" src="assets/image/attendance/bioLogo.png" alt="face-logo" >
+                <img *ngIf="employee.outAttendanceDevice === 'FACE'" class="attendance-system-logo" src="assets/image/attendance/faceRecLogo.png" alt="face-logo" >
+                <img *ngIf="employee.outAttendanceDevice === 'WWT'" class="attendance-system-logo" src="assets/image/attendance/wwtLogo.png" alt="face-logo" >
+                <p class="pro-employee-card__time-recorded">
+                  Out Time -
+                  <span class="pro-employee-card__time-recorded-value" *ngIf="employee.outTime !== null">{{employee.outTime}}</span>
+                  <span class="pro-employee-card__time-recorded-value" *ngIf="employee.outTime === null">N/A</span>
+                </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(selectedStatus === 'All' || selectedStatus === 'Home') && selectedProjectData !== undefined" style="margin-bottom: 20px">
+          <div class="pro-employee-card" *ngFor="let employee of selectedProjectData.currentAttendanceResponse.homeAttendances | projectMembers: searchTerm">
+            <div class="pro-employee-card__top">
+              <div class="pro-employee-card__info">
+                <img src="{{employee.empImage}}" alt="employee Img" class="pro-employee-card__img">
+                <div class="pro-employee-card__details">
+                  <div class="pro-employee-card__details-top">
+                    <h4 class="pro-employee-card__details-name">{{employee.empName}}</h4>
+                    <span class="pro-employee-card__location pro-employee-card__location--home">Home</span>
+                    <span *ngIf="employee.wfhRequestApprovedStatus !== null"
+                          class="pro-employee-card__location__wfh-requested {{employee.wfhRequestApprovedStatus}}">WFH Requested  - {{employee.wfhRequestApprovedStatus}}</span>
+                  </div>
+                  <div class="pro-employee-card__details-bottom">
+                    <span class="pro-employee-card__designation">{{employee.empNo}}</span>
+                    <a class="pro-employee-card__contact">
+                      <svg class="a-icon m-form-field__post-icon pro-employee-card__contact-icon">
+                        <use xlink:href="#mobile"></use>
+                      </svg>
+                      {{employee.empMobileNo}}
+                    </a>
+                    <a class="pro-employee-card__contact">
+                      <svg class="a-icon m-form-field__post-icon pro-employee-card__contact-icon">
+                        <use xlink:href="#envelope"></use>
+                      </svg>
+                      {{employee.workEmail}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pro-employee-card__bottom" style="justify-content: end">
+              <div class="pro-employee-card__wwt">
+                <div class="pro-employee-card__rowline">
+                <img class="attendance-system-logo" src="assets/image/attendance/wwtLogo.png" alt="face-logo" >
+                <p class="pro-employee-card__time-recorded" >
+                  In Time -
+                  <span class="pro-employee-card__time-recorded-value pro-employee-card__time-recorded-value--color" *ngIf="employee.inTime !== null">{{employee.inTime}}</span>
+                  <span class="pro-employee-card__time-recorded-value pro-employee-card__time-recorded-value--color" *ngIf="employee.inTime === null">N/A</span>
+                </p>
+                </div>
+                <div class="pro-employee-card__rowline">
+                <img class="attendance-system-logo" src="assets/image/attendance/wwtLogo.png" alt="face-logo" >
+                <p class="pro-employee-card__time-recorded">
+                  Out Time -
+                  <span class="pro-employee-card__time-recorded-value" *ngIf="employee.outTime !== null">{{employee.outTime}}</span>
+                  <span class="pro-employee-card__time-recorded-value" *ngIf="employee.outTime === null">N/A</span>
+                </p>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(selectedStatus === 'All' || selectedStatus === 'Leave') && selectedProjectData !== undefined" style="margin-bottom: 20px">
+          <div class="pro-employee-card" *ngFor="let employee of selectedProjectData.currentAttendanceResponse.leaveAttendances | projectMembers: searchTerm">
+            <div class="pro-employee-card__top">
+              <div class="pro-employee-card__info">
+                <img src="{{employee.empImage}}" alt="employee Img" class="pro-employee-card__img">
+                <div class="pro-employee-card__details">
+                  <div class="pro-employee-card__details-top">
+                    <h4 class="pro-employee-card__details-name">{{employee.empName}}</h4>
+                    <span class="pro-employee-card__location pro-employee-card__location--leave">Leave
+                      <span *ngIf="employee.leaveTime !== null"> - {{employee.leaveTime}}</span>
+                    </span>
+                    <span *ngIf="employee.wfhRequestApprovedStatus !== null"
+                          class="pro-employee-card__location__wfh-requested {{employee.wfhRequestApprovedStatus}}">WFH Requested  - {{employee.wfhRequestApprovedStatus}}</span>
+                  </div>
+                  <div class="pro-employee-card__details-bottom">
+                    <span class="pro-employee-card__designation">{{employee.empNo}}</span>
+                    <a class="pro-employee-card__contact">
+                      <svg class="a-icon m-form-field__post-icon pro-employee-card__contact-icon">
+                        <use xlink:href="#mobile"></use>
+                      </svg>
+                      {{employee.empMobileNo}}
+                    </a>
+                    <a class="pro-employee-card__contact">
+                      <svg class="a-icon m-form-field__post-icon pro-employee-card__contact-icon">
+                        <use xlink:href="#envelope"></use>
+                      </svg>
+                      {{employee.workEmail}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pro-employee-card__bottom" style="justify-content: end">
+              <div class="pro-employee-card__wwt">
+                <p class="pro-employee-card__time-recorded" >
+                  In Time -
+                  <span class="pro-employee-card__time-recorded-value pro-employee-card__time-recorded-value--color" *ngIf="employee.inTime !== null">{{employee.inTime}}</span>
+                  <span class="pro-employee-card__time-recorded-value pro-employee-card__time-recorded-value--color" *ngIf="employee.inTime === null">N/A</span>
+                </p>
+                <p class="pro-employee-card__time-recorded">
+                  Out Time -
+                  <span class="pro-employee-card__time-recorded-value" *ngIf="employee.outTime !== null">{{employee.outTime}}</span>
+                  <span class="pro-employee-card__time-recorded-value" *ngIf="employee.outTime === null">N/A</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(selectedStatus === 'All' || selectedStatus === 'Absent') && selectedProjectData !== undefined" style="margin-bottom: 20px">
+          <div class="pro-employee-card" *ngFor="let employee of selectedProjectData.currentAttendanceResponse.absentAttendances | projectMembers: searchTerm">
+            <div class="pro-employee-card__top">
+              <div class="pro-employee-card__info">
+                <img src="{{employee.empImage}}" alt="employee Img" class="pro-employee-card__img">
+                <div class="pro-employee-card__details">
+                  <div class="pro-employee-card__details-top">
+                    <h4 class="pro-employee-card__details-name">{{employee.empName}}</h4>
+                    <span class="pro-employee-card__location pro-employee-card__location--absent">Absent</span>
+                    <span *ngIf="employee.wfhRequestApprovedStatus !== null"
+                          class="pro-employee-card__location__wfh-requested {{employee.wfhRequestApprovedStatus}}">WFH Requested  - {{employee.wfhRequestApprovedStatus}}</span>
+                  </div>
+                  <div class="pro-employee-card__details-bottom">
+                    <span class="pro-employee-card__designation">{{employee.empNo}}</span>
+                    <a class="pro-employee-card__contact">
+                      <svg class="a-icon m-form-field__post-icon pro-employee-card__contact-icon">
+                        <use xlink:href="#mobile"></use>
+                      </svg>
+                      {{employee.empMobileNo}}
+                    </a>
+                    <a class="pro-employee-card__contact">
+                      <svg class="a-icon m-form-field__post-icon pro-employee-card__contact-icon">
+                        <use xlink:href="#envelope"></use>
+                      </svg>
+                      {{employee.workEmail}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pro-employee-card__bottom" style="justify-content: end">
+              <div class="pro-employee-card__wwt">
+                <p class="pro-employee-card__time-recorded" >
+                  In Time -
+                  <span class="pro-employee-card__time-recorded-value pro-employee-card__time-recorded-value--color" *ngIf="employee.inTime !== null">{{employee.inTime}}</span>
+                  <span class="pro-employee-card__time-recorded-value pro-employee-card__time-recorded-value--color" *ngIf="employee.inTime === null">N/A</span>
+                </p>
+                <p class="pro-employee-card__time-recorded">
+                  Out Time -
+                  <span class="pro-employee-card__time-recorded-value" *ngIf="employee.outTime !== null">{{employee.outTime}}</span>
+                  <span class="pro-employee-card__time-recorded-value" *ngIf="employee.outTime === null">N/A</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div >
+      </div>
+    </div>
+
+  <div class="project-wise-details__content"  *ngIf="selectedProjectData === undefined">
+    <div class="project-setting__empty--state">
+      <div class="project-setting__empty--wraper">
+        <img src="assets/images/empty-box.png" alt="">
+        <h4 class="project-setting__empty--text">No Data Available!</h4>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+
+<div class="o-modal" id="projectAttendanceEmployees">
+  <div class="o-modal__content-sm edit-personal-details">
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header header-line__bottom">
+        <h4>{{modalHeader}}</h4>
+        <button class="a-btn a-btn--link o-modal__inner-close o-modal__inner-close-sm"
+                (click)="hideModal('projectAttendanceEmployees')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="o-modal-liked-people" style="max-height: 550px; overflow-y: auto; overflow-x: hidden" *ngIf="modalEmployeeList.length > 0">
+        <ul class="m-form-field__results-list">
+          <li *ngFor="let employee of modalEmployeeList">
+            <div class="m-form-field__results-item" style="padding: 16px 8px 4px 0 !important;">
+              <div class="m-form-field__results-leftside">
+                <div class="m-form-field__results-pic">
+                  <img src="{{employee.empImage}}" alt="img" class="m-form-field__results-img">
+                </div>
+                <div class="m-form-field__results-details">
+                  <div style="display: flex; align-items: center">
+                    <p class="m-form-field__results-name">{{employee.empName}}</p>
+                  </div>
+                  <p class="m-form-field__results-number">{{employee.empNo}}</p>
+                </div>
+              </div>
+              <div class="m-form-field__results-leftside">
+                <div style="padding-top: 6px; display: flex; align-items: center;">
+                  <i class="fa fa-phone m-form-field__results-icon" aria-hidden="true"></i>
+                  <p class="m-form-field__results-mobnumber"> {{employee.empMobileNo}}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="o-modal-liked-people" *ngIf="modalEmployeeList.length === 0">
+        <div class="project-setting__empty--state">
+          <div class="project-setting__empty--wraper">
+            <img src="assets/images/empty-box.png" alt="">
+            <h4 class="project-setting__empty--text">No Data Available!</h4>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="o-modal__footer" style="padding: 24px 24px 10px; justify-content: end" *ngIf="modalEmployeeList.length > 0">
+      <button  (click)="downloadExcel()" class="btn export-report-button" id="btnExport"
+               type="button">
+        <svg class="a-icon">
+          <use xlink:href="#printer"></use>
+        </svg>
+        Export (.csv)
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+

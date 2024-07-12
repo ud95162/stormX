@@ -1,0 +1,22 @@
+.password_reset_wrapper .project-dashboard__search-input:focus{
+  outline: none;
+}
+
+.password_reset_wrapper .password_reset-button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+
+.password_reset_wrapper .password_reset-icon {
+  font-size: 18px;
+  color: #C6C7C7;
+  transition: all 0.5s;
+}
+
+
+.password_reset_wrapper .password_reset-icon:hover {
+  opacity: 0.8;
+}
+

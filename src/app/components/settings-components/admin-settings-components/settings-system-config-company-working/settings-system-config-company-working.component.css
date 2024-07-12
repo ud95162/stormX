@@ -1,0 +1,122 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background-color: #ffffff !important;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.card-title-h5 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #2d2f32;
+  font-weight: 600 !important;
+}
+
+.card-content-div {
+  padding: 0 15px;
+}
+
+.form-label-card {
+  font-size: 14px;
+  color: #6f6f6f;
+}
+
+.custom-form-label {
+  width: 14.5% !important;
+}
+
+.custom-textarea-div {
+  width: 85.5%;
+}
+
+.save-category-designation {
+  border-radius: 4px;
+  background-color: #006eff;
+  color: #FFFFFF;
+  padding: 2px 12px;
+  float: right;
+}
+
+.designation-textarea {
+  resize: vertical;
+}
+
+.form-control-select {
+  margin-bottom: 7px;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.chip-div {
+  padding: 0 15px;
+  margin-bottom: 15px;
+}
+
+/*Chips*/
+.chip-custom {
+  text-align: center;
+  margin: 0 10px 3px 0;
+  display: inline-block;
+  padding: 5px 8px;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+  /*box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12);*/
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.chip-selected-repeat-day {
+  border: solid 1px #5d92ff;
+  background-color: #5d92ff;
+  color: #ffffff !important;
+  width: 95px;
+}
+
+.chip-repeat-day {
+  border: solid 1px #5d92ff;
+  color: #5d92ff !important;
+  width: 95px;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.warning-text {
+  color: #858585;
+  font-size: 12px;
+  margin: 10px 20px 0 20px !important;
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.delete-trash-icon {
+  color: #ef3648;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.add-plus-icon {
+  color: #006eff;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.record-add-delete-icon {
+  color: #cccccc;
+  cursor: pointer;
+  font-size: 1.2em;
+}

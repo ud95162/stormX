@@ -1,0 +1,43 @@
+<div class="o-modal" id="skillHistory">
+  <div class="o-modal__content-sm edit-personal-details">
+
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header header-line__bottom">
+        <h4 style="font-weight: 600 !important;">History</h4>
+        <button class="a-btn a-btn--link o-modal__inner-close o-modal__inner-close-sm"
+                (click)="hideModal('skillHistory')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="resource-allocation-history u-mt">
+        <div class="resource-allocation-history__row" *ngFor="let data of empSkillHistory">
+          <p class="resource-allocation-history__info">{{generateText(data)}}
+            <a target="_blank" class="resource-allocation-history__person">{{data.empName}} </a>
+          </p>
+          <p class="resource-allocation-history__date">
+            {{data.createdDateTime}}
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+<!--      <div class="o-modal-liked-people">-->
+<!--        <ul class="o-modal-liked-people__list">-->
+<!--          <li class="o-modal-liked-people__wrapper" *ngFor="let person of peopleList">-->
+<!--            <div><img src="{{person.image}}" class="liked-person__image" alt=""-->
+<!--                      (click)="profileRedirectFromModal(person.empNo)" ></div>-->
+<!--            <div class="liked-person__name"><h5>{{person.name}}</h5></div>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+
+    </div>
+  </div>
+
+</div>

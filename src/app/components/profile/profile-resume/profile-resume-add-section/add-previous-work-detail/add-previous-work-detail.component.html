@@ -1,0 +1,98 @@
+<div *ngIf="loadingOverlayView" class="overlay" id="myNav" style="text-align: center">
+  <img src="assets/image/loading/spinner-loading.svg" style="padding-top: 17%">
+</div>
+
+<div class="modal-dialog">
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <!-- <button class="close" data-dismiss="modal" type="button">&times;</button> -->
+      <a aria-label="close" class="close crossHover" data-dismiss="modal"
+             href="#">&times;</a>
+
+      <h4 class="modal-title">Add Previous Employment Details</h4>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- <div *ngIf="showSuccessAlert" class="alert alert-success alert-dismissable">
+        <a (click)="warningClose()" aria-label="close" class="close" data-dismiss="alert"
+           href="#">×</a>
+        Previous Employment Detail will be added to your profile in a while!
+      </div> -->
+
+      <div *ngIf="showFailedAlert" class="alert alert-danger alert-dismissable">
+        <a (click)="warningClose()" aria-label="close" class="close" data-dismiss="alert"
+           href="#">×</a>
+        Save Failed
+      </div>
+
+      <div class="form-group" title="Search Designation">
+        <label for="typeahead-designation">Designation
+        <span
+              style="color: red"> *</span>
+            </label>
+        <input
+          id="typeahead-designation"
+          type="text"
+          class="form-control"
+          placeholder="Search for Designation"
+          [(ngModel)]="previousJobRole"
+          [ngbTypeahead]="filterPreviousJobRoles"/>
+      </div>
+
+      <div class="form-group" title="Search Company">
+        <label for="typeahead-company">Company<span
+          style="color: red"> *</span>
+        </label>
+        <input
+          id="typeahead-company"
+          type="text"
+          class="form-control"
+          placeholder="Search for Company"
+          [(ngModel)]="previousWorkCompany"
+          [ngbTypeahead]="filterPreviousCompanies"/>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 select-container">
+          <label>From Date<span
+            style="color: red"> *</span>
+          </label>
+          <div class="input-group date-selector-container" title="From Date">
+                <span class="input-group-addon date-range-select-span">
+                  <i aria-hidden="true" class="fa fa-calendar"></i>
+                </span>
+            <input
+              (change)="hi()" [(ngModel)]="fromDate"
+              class="form-control date-range-select-input" id="fromDate" name="dateRangeFromDate"
+              type="date">
+          </div>
+        </div>
+
+        <div class="col-sm-6 select-container">
+          <label>To Date<span
+            style="color: red"> *</span>
+          </label>
+          <div class="input-group date-selector-container" title="To Date">
+                <span class="input-group-addon date-range-select-span">
+                  <i aria-hidden="true" class="fa fa-calendar"></i>
+                </span>
+            <input
+              (change)="hi()" [(ngModel)]="toDate"
+              class="form-control date-range-select-input" id="toDate" name="dateRangeFromDate"
+              type="date">
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div style="text-align: right">
+        <button [disabled]="dis()" (click)="savePreviousWorkDetail()" data-dismiss="modal" class="btn submit-but" type="button">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

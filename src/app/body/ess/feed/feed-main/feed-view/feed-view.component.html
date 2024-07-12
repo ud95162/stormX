@@ -1,0 +1,69 @@
+<div *ngIf="isDesktop" class="">
+
+
+  <div class="Container">
+    <div class="Left">
+      <app-feed-company-card
+        *ngIf="checkPermission.checkUserHavePermissionForSection('FeedCompanyCard')">
+      </app-feed-company-card>
+      <app-feed-user-card
+        *ngIf="checkPermission.checkUserHavePermissionForSection('FeedProfileCard')"
+        [employeeId]="employeeId"></app-feed-user-card>
+        <app-feed-work-summary-card
+          [employeeId]="employeeId"></app-feed-work-summary-card>
+      <app-feed-filter-card
+        *ngIf="checkPermission.checkUserHavePermissionForSection('FilterFeedCard')"
+        [employeeId]="employeeId"></app-feed-filter-card>
+      <app-pages-list-card *ngIf="checkPermission.checkUserHavePermissionForSection('FeedPageList')"
+        [callingFrom]="'feed'" [employeeId]="employeeId"></app-pages-list-card>
+
+      <app-feed-email-subscription
+        *ngIf="checkPermission.checkUserHavePermissionForSection('EmailSubscriptionCard')"
+        [employeeId]="employeeId"></app-feed-email-subscription>
+
+    </div>
+    <div class="Middle" (scroll)="onScroll($event)">
+      <app-feed-posts
+        *ngIf="checkPermission.checkUserHavePermissionForSection('FeedPostsComponent')"
+        [employeeId]="employeeId"></app-feed-posts>
+    </div>
+    <div class="Right">
+      <div>
+        <app-feed-notification
+          *ngIf="checkPermission.checkUserHavePermissionForSection('BirthdayEventCard')">
+        </app-feed-notification>
+      </div>
+      <div>
+        <app-feed-feedback-card></app-feed-feedback-card>
+      </div>
+      <div>
+        <app-feed-sport-fiesta-score-card></app-feed-sport-fiesta-score-card>
+      </div>
+      <div>
+        <app-feed-project-card
+          *ngIf="checkPermission.checkUserHavePermissionForSection('CurrentProject')"
+          [employeeId]="employeeId"></app-feed-project-card>
+      </div>
+      <div>
+        <app-event-ongoing-summary
+          *ngIf="checkPermission.checkUserHavePermissionForSection('FeedEventCard')"
+          [callingFrom]="'feed'"></app-event-ongoing-summary>
+      </div>
+      <div>
+        <app-feed-courses
+          *ngIf="checkPermission.checkUserHavePermissionForSection('RecommendedCourses')"
+          [employeeId]="employeeId"></app-feed-courses>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isMobile || isTablet" class="container">
+  <div style="margin-top: 15px">
+    <app-feed-filter-card
+      *ngIf="checkPermission.checkUserHavePermissionForSection('FilterFeedCard')"
+      [employeeId]="employeeId"></app-feed-filter-card>
+    <app-feed-posts *ngIf="checkPermission.checkUserHavePermissionForSection('FeedPostsComponent')"
+      [employeeId]="employeeId"></app-feed-posts>
+  </div>
+</div>

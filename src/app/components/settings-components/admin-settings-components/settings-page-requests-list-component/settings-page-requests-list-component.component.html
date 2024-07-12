@@ -1,0 +1,44 @@
+<!--new implementation-->
+<div class="project-setting__request--list" *ngIf="showpendingpages">
+
+  <!--project card-->
+  <div class="project-setting__permisson--card" *ngFor="let pagerequest of pendingpages">
+    <h2 class="requested-project__details"><span class="requested-project__details-person">{{pagerequest.creatorInfo.name}}</span> is requesting permission to create a new page.</h2>
+    <div class="project-setting__project--details">
+      <div class="project-setting__project--name">
+        <img src={{pagerequest.pageImage}} class="project-setting__project--image" alt="">
+
+        <div class="project-setting__details--description">
+          <h2 class="project-setting__details--name">{{pagerequest.pageName}}</h2>
+          <p class="project-setting__details--description">{{pagerequest.description}}</p>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="project-setting__project--admins">
+      <h2 class="project-setting__admin--text">Admins</h2>
+
+      <ul class="project-setting__admin--images request-page-admins">
+        <li class="project-setting__admin--image-item request-page-admin-list" *ngFor="let pageadmin of pagerequest.adminInfos">
+          <img src={{pageadmin.image}} class="project-setting__admin--person-image" alt="" title="{{pageadmin.name}}">
+        </li>
+      </ul>
+    </div>
+
+    <div class="project-setting__action--buttons">
+      <button class="project-setting__action--cancel" (click)="pageAcceptDecline(pagerequest.id, 'DECLINED')">Decline</button>
+      <button class="project-setting__action--accept" (click)="pageAcceptDecline(pagerequest.id, 'ACCEPTED')">Accept</button>
+    </div>
+  </div>
+</div>
+<div class="project-setting__request--list" *ngIf="!showpendingpages">
+<div class="project-setting__empty--state">
+  <div class="project-setting__empty--wraper">
+    <img src="../../../assets/images/empty-box.png" alt="">
+    <h4 class="project-setting__empty--text">No pending page requests available!</h4>
+  </div>
+</div>
+</div>
+

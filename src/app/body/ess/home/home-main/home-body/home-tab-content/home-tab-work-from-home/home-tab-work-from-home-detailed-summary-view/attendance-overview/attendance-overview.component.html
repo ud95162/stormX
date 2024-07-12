@@ -1,0 +1,356 @@
+<!--main-->
+
+<div *ngIf="checkPermission.checkUserHavePermissionForSection('WorkEffortAttendanceOverview')">
+  <div class="dashboard-page @@class">
+    <div class="dashboard-page__block-main">
+      <div class="dashboard-page__block-wrapper-main">
+        <div class="c-dashboard-page__block--wrapper">
+
+          <!--work effort filters--->
+          <div class="workeffort-filter_section">
+
+            <div class="m-form-field-inline">
+            </div>
+
+            <div class="m-form-field-inline">
+            </div>
+
+            <div class="m-form-field-inline">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label--workflow" for="attendance-overview-system">System</label>
+              </div>
+
+              <div class="m-form-field__field m-form-field__min-height">
+                <div class="m-form-field__field-item">
+                  <select class="m-form-field__select " id="attendance-overview-system" [(ngModel)]="selectedSystem"
+                          (change)="getDataForSelectedSystem(selectedSystem)">
+                    <option *ngFor="let datasource of dataSources" [ngValue]="datasource">{{datasource}}</option>
+                  </select>
+                </div>
+              </div>
+              <span class="m-form-field__error">error</span>
+            </div>
+
+            <div class="m-form-field-inline">
+              <div class="m-form-field__label-wrap">
+                <label class="m-form-field__label--workflow" for="attendance-overview-date">Date</label>
+              </div>
+
+              <div class="m-form-field__field m-form-field__min-height">
+                <div class="m-form-field__field-item">
+                  <input class="m-form-field__input" id="attendance-overview-date" type="date" minlength="0"
+                         maxlength="524288" placeholder="Days" value=""
+                         (change)="setDataForDateChanged()" [(ngModel)]="fromDate">
+                </div>
+              </div>
+
+              <span class="m-form-field__error">error</span>
+            </div>
+          </div>
+          <!--            filters end-->
+
+          <!--work effort presentage cards--->
+
+          <div class="workeffort-total__presentage--wrapper">
+
+            <div class="workeffort-total__presentage--card">
+              <div class="workeffort-total__presentage-rightside">
+                <div class="workeffort-wfrom__presentage--icon">
+                  <svg class="a-icon workeffort-wfrom__icon">
+                    <use xlink:href="#stars"></use>
+                  </svg>
+                </div>
+                <h2 class="workeffort-total__presentage--text" *ngIf="selectedSystem === 'WWT'">WWT</h2>
+                <h2 class="workeffort-total__presentage--text" *ngIf="selectedSystem === 'FaceRec'">FaceRec</h2>
+              </div>
+              <h3 class="workeffort-total__presentage--count" *ngIf="presentDataLoaded">{{wfhPercentage}}%</h3>
+            </div>
+
+            <!--Daily house-->
+
+            <div class="workeffort-total__presentage--card">
+              <div class="workeffort-total__presentage-rightside">
+                <div class="workeffort-wfrom__presentage--icon daily-hours__icon--wrap">
+                  <svg class="a-icon workeffort-wfrom__icon daily-hours__icon">
+                    <use xlink:href="#stars"></use>
+                  </svg>
+                </div>
+                <h2 class="workeffort-total__presentage--text">Daily Hours</h2>
+              </div>
+              <h3 class="workeffort-total__hours--count" *ngIf="activeHrsDataLoaded">{{dailyHrs}}%</h3>
+            </div>
+
+            <!--Utilized leave-->
+
+            <div class="workeffort-total__presentage--card">
+              <div class="workeffort-total__presentage-rightside">
+                <div class="workeffort-wfrom__presentage--icon Utilized-leave__icon--wrap">
+                  <svg class="a-icon workeffort-wfrom__icon Utilized-leave__icon">
+                    <use xlink:href="#calendar--solid"></use>
+                  </svg>
+                </div>
+                <h2 class="workeffort-total__presentage--text">Utilized Leave</h2>
+              </div>
+              <h3 class="workeffort-total__leave--count" *ngIf="leaveDataLoaded">{{utilizeLeavePercentage}}%</h3>
+            </div>
+
+            <!--weekly hour-->
+
+            <div class="workeffort-total__presentage--card">
+              <div class="workeffort-total__presentage-rightside">
+                <div class="workeffort-wfrom__presentage--icon weekly-hour__icon--wrap">
+                  <svg class="a-icon workeffort-wfrom__icon weekly-hour__icon">
+                    <use xlink:href="#tick"></use>
+                  </svg>
+                </div>
+                <h2 class="workeffort-total__presentage--text">Weekly Hours</h2>
+              </div>
+              <h3 class="workeffort-total__weekly--count" *ngIf="activeHrsDataLoaded">{{weeklyHrs}}%</h3>
+            </div>
+
+
+          </div>
+
+          <!--work effort count cards--->
+
+          <div class="workeffort-total__count--wrapper">
+
+            <div class="workeffort-total__card">
+              <div class="workeffort-total__card--header">
+                <h2 class="total-present_count" *ngIf="presentDataLoaded">{{presentResponse.totalPresentCount}}</h2>
+                <h2 *ngIf="!presentDataLoaded"><img src="assets/image/loading/posts-loading.svg"
+                                                    class="loading-image-for-cards" alt="Loading"></h2>
+                <span class="total-present_count--name">Total Present</span>
+              </div>
+
+              <div class="workeffort-total__card--body">
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name" *ngIf="selectedSystem === 'WWT'">Total WWT Registered
+                    Employees</h5>
+                  <h5 class="workeffort-total__item--name" *ngIf="selectedSystem === 'FaceRec'">Total Employees</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="presentDataLoaded">{{presentResponse.totalEmployeeCount}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!presentDataLoaded"></h5>
+                </div>
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name" *ngIf="selectedSystem === 'WWT'">Total WWT Logged
+                    Employees</h5>
+                  <h5 class="workeffort-total__item--name" *ngIf="selectedSystem === 'FaceRec'">Total at Office</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="presentDataLoaded">{{presentResponse.totalPresentCount}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!presentDataLoaded"></h5>
+                </div>
+              </div>
+            </div>
+
+
+            <!--total absent-->
+
+            <div class="workeffort-total__card">
+              <div class="workeffort-total__card--header">
+                <h2 class="total-absent_count"
+                    *ngIf="presentDataLoaded">{{presentResponse.totalEmployeeCount - presentResponse.totalPresentCount}}</h2>
+                <h2 *ngIf="!presentDataLoaded"><img src="assets/image/loading/posts-loading.svg"
+                                                    class="loading-image-for-cards" alt="Loading"></h2>
+                <span class="total-present_count--name">Total Absent</span>
+              </div>
+
+              <div class="workeffort-total__card--body">
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name" *ngIf="selectedSystem === 'WWT'">Not Logged to WWT</h5>
+                  <h5 class="workeffort-total__item--name" *ngIf="selectedSystem === 'FaceRec'">Not in Office</h5>
+                  <h5 class="workeffort-total__item--value" *ngIf="absentDataLoaded">{{notLoggedEmployeeCount}}
+                    <em class="fa fa-eye" style="color: #147AD6" *ngIf="notLoggedEmployeeCount > 0"
+                        (click)="showModal('notLoggedEmployees')"></em></h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!absentDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Annual Leave</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="absentDataLoaded">{{absentResponse.leaveDataForPeriod.annual_leave}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!absentDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Casual Leave</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="absentDataLoaded">{{absentResponse.leaveDataForPeriod.casual_leave}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!absentDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Medical Leave</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="absentDataLoaded">{{absentResponse.leaveDataForPeriod.medical_leave}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!absentDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Other Leave</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="absentDataLoaded">{{absentResponse.leaveDataForPeriod.other_leave}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!absentDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Short Leave</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="absentDataLoaded">{{absentResponse.leaveDataForPeriod.short_leave}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!absentDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Maternity Leave</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="absentDataLoaded">{{absentResponse.leaveDataForPeriod.maternity_leave}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!absentDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Lieu Leave</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="absentDataLoaded">{{absentResponse.leaveDataForPeriod.lieu_leave}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!absentDataLoaded"></h5>
+                </div>
+              </div>
+            </div>
+
+
+            <!--active hours-->
+
+            <div class="workeffort-total__card">
+              <div class="workeffort-total__card--header">
+                <h2 class="total-activehour_count"
+                    *ngIf="activeHrsDataLoaded">{{formatNumber(activeHrsResponse.dailyActiveHrs)}}</h2>
+                <h2 *ngIf="!activeHrsDataLoaded"><img src="assets/image/loading/posts-loading.svg"
+                                                      class="loading-image-for-cards" alt="Loading"></h2>
+                <span class="total-present_count--name">Active Hours</span>
+              </div>
+
+              <div class="workeffort-total__card--body">
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Day Expected</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="activeHrsDataLoaded">{{formatNumber(activeHrsResponse.dailyExpectedHrs)}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!activeHrsDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Week Active</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="activeHrsDataLoaded">{{formatNumber(activeHrsResponse.weeklyActiveHrs)}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!activeHrsDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Week Expected</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="activeHrsDataLoaded">{{formatNumber(activeHrsResponse.weeklyExpectedHrs)}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!activeHrsDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Week Leave Hrs</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="activeHrsDataLoaded">{{formatNumber(activeHrsResponse.weekLeaveHrs)}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!activeHrsDataLoaded"></h5>
+                </div>
+              </div>
+            </div>
+
+            <!--unused leaves--->
+
+            <div class="workeffort-total__card">
+              <div class="workeffort-total__card--header">
+                <h2 class="total-unused_count" *ngIf="leaveDataLoaded">{{leaveResponse.totalUnUsedCount | number}}</h2>
+                <h2 *ngIf="!leaveDataLoaded"><img src="assets/image/loading/posts-loading.svg"
+                                                  class="loading-image-for-cards" alt="Loading"></h2>
+                <span class="total-present_count--name">Unused Leave</span>
+              </div>
+
+              <div class="workeffort-total__card--body">
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Utilized Leave</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="leaveDataLoaded">{{leaveResponse.totalUtilizedCount | number}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!leaveDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Unused Annual</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="leaveDataLoaded">{{leaveResponse.annualUnUsedCount | number}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!leaveDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Unused Casual</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="leaveDataLoaded">{{leaveResponse.casualUnUsedCount | number}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!leaveDataLoaded"></h5>
+                </div>
+
+                <div class="workeffort-total__card--item">
+                  <h5 class="workeffort-total__item--name">Unused Medical</h5>
+                  <h5 class="workeffort-total__item--value"
+                      *ngIf="leaveDataLoaded">{{leaveResponse.medicalUnUsedCount | number}}</h5>
+                  <h5 class="workeffort-total__item--value loading" *ngIf="!leaveDataLoaded"></h5>
+                </div>
+
+
+              </div>
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="o-modal" id="notLoggedEmployees">
+  <div class="o-modal__content-sm edit-personal-details">
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header header-line__bottom" style="margin-bottom: 0">
+        <h4>Not Logged Employees</h4>
+        <button class="a-btn a-btn--link o-modal__inner-close o-modal__inner-close-sm"
+                (click)="hideModal('notLoggedEmployees')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="o-modal-liked-people" *ngIf="absentDataLoaded" style="height: 450px; overflow-y: auto">
+        <ul class="o-modal-liked-people__list">
+          <li class="o-modal-liked-people__wrapper" *ngFor="let person of absentResponse.notLogged">
+            <div><img src="{{person.image}}" class="liked-person__image" alt=""></div>
+            <div>
+              <div class="liked-person__name"><h5 style="margin-top: 0">{{person.fullName}}</h5></div>
+              <div class="liked-person__name"><h6 style="margin: 0">{{person.empNO}}</h6></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="o-modal__footer" style="padding: 10px 0 0 0; justify-content: end">
+        <button  (click)="downloadExcel()" class="btn export-report-button" id="btnExport"
+                type="button">
+          <svg class="a-icon">
+            <use xlink:href="#printer"></use>
+          </svg>
+          Export (.csv)
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,45 @@
+<div *ngIf="isDesktop" class="graph-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <app-compare-projects-cost-revenue></app-compare-projects-cost-revenue>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <app-compare-projects-member-count></app-compare-projects-member-count>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <app-comparison-graph></app-comparison-graph>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <app-compare-jira-project-tasks></app-compare-jira-project-tasks>
+    </div>
+  </div>
+<!--  <div class="row">-->
+<!--    <div class="col-sm-12">-->
+<!--      <app-compare-projects-timelogs></app-compare-projects-timelogs>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>
+
+<div *ngIf="isTablet || isMobile" class="graph-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <app-compare-projects-cost-revenue></app-compare-projects-cost-revenue>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <app-comparison-graph></app-comparison-graph>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <app-compare-jira-project-tasks></app-compare-jira-project-tasks>
+    </div>
+  </div>
+</div>

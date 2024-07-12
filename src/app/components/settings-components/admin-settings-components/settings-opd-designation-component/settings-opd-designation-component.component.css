@@ -1,0 +1,210 @@
+.opd-settings-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.opd-settings__body{
+  background: #ffffff;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.opd-settings-filter{
+  display: grid;
+  /*grid-template-columns: 1fr 1fr 1fr 1fr;*/
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-column-gap: 20px;
+  grid-auto-flow: row;
+}
+
+
+.btn-remove-synonym-model {
+  border-radius: 4px;
+  padding: 0 6px;
+  background-color: transparent;
+  border-color: #dc3545;
+  color: #dc3545;
+  font-size: 14px;
+  height: 25px;
+  width: 25px;
+  text-align: right;
+}
+
+
+.btn-add-synonym-model {
+  border-radius: 4px;
+  padding: 0 6px;
+  background-color: transparent;
+  border-color: #007bff;
+  color: #007bff;
+  font-size: 14px;
+  height: 25px;
+  width: 25px;
+  text-align: right;
+}
+
+
+tr:nth-of-type(even) .opd-config-btn-group {
+  background-color: #fcfcfc;
+}
+
+tr:nth-of-type(odd) .opd-config-btn-group {
+  background-color: #FFFFFF;
+}
+
+.opd-config-btn-group {
+  width: 100px;
+  min-width: 100px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: sticky;
+  right: 0;
+  background-color: white;
+}
+
+
+.leave-type__user--dto::-webkit-scrollbar-track
+{
+  background-color: #e8e8e8;
+}
+
+.leave-type__user--dto::-webkit-scrollbar
+{
+  width: 10px;
+  height: 10px;
+  background-color: #F5F5F5;
+}
+
+.leave-type__user--dto::-webkit-scrollbar-thumb
+{
+  background-color: #a5a5a5;
+}
+
+.m-form-field__label--medium{
+  color: #222222;
+  font-weight: 600;
+}
+.m-form-field__label--medium__disabled{
+  font-weight: 500;
+  font-size: 14.4px;
+  line-height: 17px;
+  letter-spacing: 0.75px;
+  color: #979797;
+  position: relative;
+  top: 8px;
+}
+
+
+.opd-designation-card__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+tr:nth-of-type(even) .opd-config-btn-group {
+  background-color: #fcfcfc;
+}
+
+tr:nth-of-type(odd) .opd-config-btn-group {
+  background-color: #FFFFFF;
+}
+
+.opd-config-btn-group {
+  width: 100px;
+  min-width: 100px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: sticky;
+  right: 0;
+  background-color: white;
+}
+
+
+.leave-type__user--dto::-webkit-scrollbar-track
+{
+  background-color: #e8e8e8;
+}
+
+.leave-type__user--dto::-webkit-scrollbar
+{
+  width: 10px;
+  height: 10px;
+  background-color: #F5F5F5;
+}
+
+.leave-type__user--dto::-webkit-scrollbar-thumb
+{
+  background-color: #a5a5a5;
+}
+
+.m-form-field__label--medium{
+  color: #222222;
+  font-weight: 600;
+}
+
+.opd-config-designation-card:not(:last-child){
+  margin-bottom: 20px;
+}
+
+.opd-config-designation-marital-card__wrapper:not(:last-child){
+  margin-bottom: 20px;
+}
+
+.opd-config-designation-card{
+  background-color: #f5f5f5;
+  padding: 20px;
+  border: 1px solid #e9e9e9;
+  border-radius: 4px;
+}
+
+.opd-config-designation-marital-card__wrapper{
+  background-color: #EFFFECFF;
+  padding: 20px 20px 1px 20px;
+  border: 1px solid #e9e9e9;
+  border-radius: 4px;
+}
+
+.opd-config-designation-marital-card__wrapper:nth-child(5) {
+  background-color: #EEF2FD;
+}
+.opd-config-designation-marital-card__wrapper:nth-child(4) {
+  background-color: #f2f5ff;
+}
+.opd-config-designation-marital-card__wrapper:nth-child(2) {
+  background-color: #f5faff;
+  margin-top: 20px;
+}
+.opd-config-designation-marital-card__wrapper:nth-child(3) {
+  background-color: #fff9f2;
+}
+
+
+
+.opd-config-designation-marital-card__default{
+  background-color: #f5f5f5;
+  padding: 20px 20px 1px 20px;
+  border: 1px solid #e9e9e9;
+  border-radius: 4px;
+  /*margin-bottom: 20px;*/
+}
+
+
+.opd-config-status__card::-webkit-scrollbar-track
+{
+  background-color: #e8e8e8;
+}
+
+.opd-config-status__card::-webkit-scrollbar
+{
+  width: 10px;
+  height: 10px;
+  background-color: #F5F5F5;
+}
+
+.opd-config-status__card::-webkit-scrollbar-thumb
+{
+  background-color: #bababa;
+}

@@ -1,0 +1,13 @@
+<div *ngIf="showList" class="w3-panel w3-card" routerLink="/notification/main">
+  <table width="100%">
+    <tr *ngFor="let notificationItem of feedNotificationArray">
+      <td style="padding: 5px; color: #838383;" width="5%">
+        <i *ngIf="notificationItem.type === 'birthday'" aria-hidden="true" class="fa fa-birthday-cake"></i>
+        <i *ngIf="notificationItem.type === 'event'" aria-hidden="true" class="fa fa-calendar"></i>
+      </td>
+      <td style="padding: 5px; cursor: pointer;" width="95%">
+        <span (click)="feedNotificationRedirect()">{{notificationItem.notification}}</span>
+      </td>
+    </tr>
+  </table>
+</div>

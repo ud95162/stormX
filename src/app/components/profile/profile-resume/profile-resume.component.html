@@ -1,0 +1,1497 @@
+<div *ngIf="showLoadingSpinner" style="text-align: center">
+  <img src="assets/image/loading/spinner-loading.svg" style="padding-top: 30%;">
+</div>
+
+
+<div *ngIf="showEmployeeRecords" class="c-pax-details @@class">
+
+  <div class="c-pax-details__block-main">
+    <div class="c-pax-details__header-wrapper">
+      <div class="c-pax-details__block-main__header">
+        <svg class="a-icon c-pax-details__block-main-icon">
+          <use xlink:href="#personal-details"></use>
+        </svg>
+        <span class="c-pax-details__block-main-lbl">
+                Personal Details
+            </span>
+      </div>
+
+      <div class="c-pax-cross">
+        <div class="c-pax-details__edit">
+          <svg *ngIf="showEdit" class="a-link-btn a-icon c-pax-details__block-main-icon"
+               (click)="showSaveQuoteModal('editPersonalDetails')">
+            <use xlink:href="#edit"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-pax-details__block-wrapper-main">
+      <div class="c-pax-details__block-wrapper">
+        <div
+          *ngIf="componentPermission.includes('PersonalDetailsTab')"
+          class="o-table c-pax-details__block">
+          <div class="c-pax-details__header-wrapper">
+            <h4 class="o-table__caption c-pax-details__block-header">Personal Details</h4>
+          </div>
+          <div *ngIf="viewLessPersonal" class="o-table__body c-pax-details__body">
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Title</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.title}}</span>
+              </div>
+            </div>
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Initials</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.initials}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Full Name</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.full_name}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">First Name</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.first_name}}</span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="viewMorePersonal" class="o-table__body c-pax-details__body">
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Title</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.title}}</span>
+              </div>
+            </div>
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Initials</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.initials}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Full Name</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.full_name}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">First Name</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.first_name}}</span>
+              </div>
+            </div>
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Last Name</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.last_name}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Gender</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.gender}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">NIC Number</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.nic}}</span>
+              </div>
+            </div>
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Date of Birth</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.dob}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<div>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+        <div
+          *ngIf="componentPermission.includes('PersonalDetailsTab')"
+          class="o-table c-pax-details__block ">
+          <div class="c-pax-details__header-wrapper">
+            <div *ngIf="viewLessPersonal" class="c-pax-details__edit c-pax-view__more">
+              <span (click)="onClickViewMore('personal')">View more</span>
+            </div>
+            <div *ngIf="viewMorePersonal" class="c-pax-details__edit c-pax-view__more">
+              <span (click)="onClickViewLess('personal')">View less</span>
+            </div>
+          </div>
+
+          <div *ngIf="viewLessPersonal" class="o-table__body">
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Last Name</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.last_name}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Gender</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.gender}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">NIC Number</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.nic}}</span>
+              </div>
+            </div>
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Date of Birth</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.dob}}</span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="viewMorePersonal" class="o-table__body">
+            <div *ngIf="!clientPermission.includes('ClientRnJ')"
+                 class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Passport Number</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.passport}}</span>
+              </div>
+            </div>
+
+            <div *ngIf="!clientPermission.includes('ClientRnJ')"
+                 class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Passport Expiry Date</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.passportExpDate}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Marital Status</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.marital_status}}</span>
+              </div>
+            </div>
+            <div *ngIf="!clientPermission.includes('ClientRnJ')"
+                 class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Driving License No.</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.drivingLicNo}}</span>
+              </div>
+            </div>
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Food Preference</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.food_pref}}</span>
+              </div>
+            </div>
+            <div *ngIf="!clientPermission.includes('ClientRnJ')"
+                 class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Religion</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.religion}}</span>
+              </div>
+            </div>
+            <div *ngIf="!clientPermission.includes('ClientRnJ')"
+                 class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Nationality</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.nationality}}</span>
+              </div>
+            </div>
+            <div *ngIf="!clientPermission.includes('ClientRnJ')"
+                 class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Race</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.personal_details.race}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!--       <div>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+
+        <div class="o-table c-pax-details__block">
+          <div class="c-pax-details__header-wrapper">
+            <h4 class="o-table__caption c-pax-details__block-header">Contact Details</h4>
+          </div>
+          <div class="o-table__body">
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Permanent Address</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.address}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">City</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.city}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Residential Address</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.other_address}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Living Status</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.livingSituation}}</span>
+              </div>
+            </div>
+            <div *ngIf="viewMoreContact" class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Mobile Number</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.mobile}}</span>
+              </div>
+            </div>
+            <div *ngIf="viewMoreContact" class="c-pax-details__item__wrapper">
+              <div *ngIf="!clientPermission.includes('ClientRnJ')"
+                   class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Home Number</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.home_mobile}}</span>
+              </div>
+            </div>
+            <div *ngIf="viewMoreContact" class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Personal Email</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.personal_email}}</span>
+              </div>
+            </div>
+            <div *ngIf="viewMoreContact" class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Work Email</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.work_email}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!--        <div>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+
+        <div class="o-table c-pax-details__block">
+          <div class="c-pax-details__header-wrapper">
+            <div *ngIf="viewLessContact" class="c-pax-details__edit c-pax-view__more">
+              <span (click)="onClickViewMore('contact')">View more</span>
+            </div>
+            <div *ngIf="viewMoreContact" class="c-pax-details__edit c-pax-view__more">
+              <span (click)="onClickViewLess('contact')">View less</span>
+            </div>
+          </div>
+
+          <div class="o-table__body">
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">General Line</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.extension}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Skype ID</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.skype}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Facebook</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.facebook}}</span>
+              </div>
+            </div>
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Twitter</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.twitter}}</span>
+              </div>
+            </div>
+            <div *ngIf="viewMoreContact" class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">LinkedIn</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.linkedin}}</span>
+              </div>
+            </div>
+            <div *ngIf="viewMoreContact" class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Personal Website</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.personal_web_site}}</span>
+              </div>
+            </div>
+            <div *ngIf="viewMoreContact" class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Traveling Mode</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.contact_details.modeOfTravel}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--       <div>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+
+
+        <!--        emergency contact start-->
+        <div class="o-table c-pax-details__block">
+          <div class="c-pax-details__header-wrapper">
+            <h4 class="o-table__caption c-pax-details__block-header">Emergency Contact Details</h4>
+          </div>
+          <div class="o-table__body">
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Name</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.emergencyContact.guardianName}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Phone No</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.emergencyContact.guardianPhoneNo}}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="o-table c-pax-details__block">
+          <div class="c-pax-details__header-wrapper">
+            <h4 class="o-table__caption c-pax-details__block-header"></h4>
+          </div>
+          <div class="o-table__body">
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Address</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.emergencyContact.guardianAddress}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Relationship</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.emergencyContact.relationship}}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!--        emergency contact end-->
+
+        <div class="o-table c-pax-details__block">
+          <div class="c-pax-details__header-wrapper">
+            <h4 class="o-table__caption c-pax-details__block-header">Medical Details</h4>
+          </div>
+          <div class="o-table__body">
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Known Allergies</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.medical_details.known_allergies}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Regular Medication</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.medical_details.medication}}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!--       <div>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+
+        <div class="o-table c-pax-details__block">
+          <div class="c-pax-details__header-wrapper">
+            <div class="c-pax-details__edit c-pax-view__more">
+
+            </div>
+          </div>
+          <div class="o-table__body">
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Chronic Ailments</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.medical_details.chronic_ailment}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Blood Type</span>
+                <span
+                  class="o-table__cell c-pax-details__item-value">{{personalInformation.medical_details.blood_type}}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!--        new implementation of family details-->
+        <div class="o-table c-pax-details__block">
+          <div class="c-pax-details__header-wrapper">
+            <h4 class="o-table__caption c-pax-details__block-header">Family Details</h4>
+          </div>
+          <div class="o-table__body" *ngIf="viewLessFamily && familyDetailsSplitList.length!=0">
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Bond</span>
+                <span class="o-table__cell c-pax-details__item-value">{{familyDetailsSplitList[0][0].bond}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Name</span>
+                <span class="o-table__cell c-pax-details__item-value">{{familyDetailsSplitList[0][0].name}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Occupation</span>
+                <span class="o-table__cell c-pax-details__item-value">{{familyDetailsSplitList[0][0].occupation}}</span>
+              </div>
+            </div>
+
+            <br>
+
+          </div>
+          <div *ngIf="viewMoreFamily">
+            <div class="o-table__body" *ngFor="let familyDetail of familyDetailsSplitList">
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Bond</span>
+                  <span class="o-table__cell c-pax-details__item-value">{{familyDetail[0].bond}}</span>
+                </div>
+              </div>
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Name</span>
+                  <span class="o-table__cell c-pax-details__item-value">{{familyDetail[0].name}}</span>
+                </div>
+              </div>
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Occupation</span>
+                  <span class="o-table__cell c-pax-details__item-value">{{familyDetail[0].occupation}}</span>
+                </div>
+              </div>
+
+              <br>
+
+            </div>
+          </div>
+        </div>
+
+        <!--       <div>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+
+        <div class="o-table c-pax-details__block">
+          <div class="c-pax-details__header-wrapper">
+            <!--            <div class="c-pax-details__edit c-pax-view__more">-->
+            <div *ngIf="viewLessFamily&&familyDetailsSplitList.length>1" class="c-pax-details__edit c-pax-view__more">
+              <span (click)="onClickViewMore('family')">View more</span>
+            </div>
+            <div *ngIf="viewLessFamily&&familyDetailsSplitList.length<=1" class="c-pax-details__edit c-pax-view__more">
+
+            </div>
+            <div *ngIf="viewMoreFamily&&familyDetailsSplitList.length>1" class="c-pax-details__edit c-pax-view__more">
+              <span (click)="onClickViewLess('family')">View less</span>
+            </div>
+            <!--            </div>-->
+          </div>
+          <div *ngIf="familyDetailsSplitList.length!=0 && familyDetailsSplitList[0].length == 2 && viewLessFamily"
+               class="o-table__body">
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Bond</span>
+                <span class="o-table__cell c-pax-details__item-value">{{familyDetailsSplitList[0][1].bond}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Name</span>
+                <span class="o-table__cell c-pax-details__item-value">{{familyDetailsSplitList[0][1].name}}</span>
+              </div>
+            </div>
+
+            <div class="c-pax-details__item__wrapper">
+              <div class="o-table__row c-pax-details__item">
+                <span class="o-table__cell c-pax-details__item-lbl">Occupation</span>
+                <span class="o-table__cell c-pax-details__item-value">{{familyDetailsSplitList[0][1].occupation}}</span>
+              </div>
+            </div>
+
+            <br>
+          </div>
+          <div class="o-table__body" *ngFor="let familyDetail of familyDetailsSplitList">
+            <div *ngIf="familyDetailsSplitList.length > 1 && familyDetail.length > 1 && viewMoreFamily">
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Bond</span>
+                  <span class="o-table__cell c-pax-details__item-value">{{familyDetail[1].bond}}</span>
+                </div>
+              </div>
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Name</span>
+                  <span class="o-table__cell c-pax-details__item-value">{{familyDetail[1].name}}</span>
+                </div>
+              </div>
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Occupation</span>
+                  <span class="o-table__cell c-pax-details__item-value">{{familyDetail[1].occupation}}</span>
+                </div>
+              </div>
+
+              <br>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <!--        <div>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+    </div>
+
+
+    <div class="c-pax-details__block-main">
+      <div class="c-pax-details__header-wrapper">
+        <div class="c-pax-details__block-main__header">
+          <svg class="a-icon c-pax-details__block-main-icon">
+            <use xlink:href="#personal-details"></use>
+          </svg>
+          <span class="c-pax-details__block-main-lbl">
+                    Work Details
+                </span>
+        </div>
+
+        <div class="c-pax-cross">
+          <div class="c-pax-details__edit">
+            <!--            <svg class="a-link-btn a-icon c-pax-details__block-main-icon">-->
+            <!--              <use xlink:href="#edit"></use>-->
+            <!--            </svg>-->
+          </div>
+        </div>
+      </div>
+
+      <div class="c-pax-details__block-wrapper-main">
+        <div
+          *ngIf="componentPermission.includes('CurrentWorkInfoTab')"
+          class="c-pax-details__block-wrapper">
+          <div class="o-table c-pax-details__block">
+            <div class="c-pax-details__header-wrapper">
+              <h4 class="o-table__caption c-pax-details__block-header">Employee Details</h4>
+
+            </div>
+            <div class="o-table__body c-pax-details__body">
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Employee ID</span>
+                  <span class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].emp_no}}</span>
+                </div>
+              </div>
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">EPF number</span>
+                  <span class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].epf_no}}</span>
+                </div>
+              </div>
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Employment Type</span>
+                  <span
+                    class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].employee_type}}</span>
+                </div>
+              </div>
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Current Designation</span>
+                  <span
+                    class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].designation}}</span>
+                </div>
+              </div>
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Seat Number</span>
+                  <span class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].seatNo}}</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!--       <div>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+
+          <div class="o-table c-pax-details__block">
+            <div class="c-pax-details__header-wrapper">
+              <h4 class="o-table__caption c-pax-details__block-header">Joining Details</h4>
+            </div>
+            <div class="o-table__body">
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Date of Join</span>
+                  <span
+                    class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].date_of_join}}</span>
+                </div>
+              </div>
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Joined Designation</span>
+                  <span
+                    class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].joinedDesignation}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--<div>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+          <div class="o-table c-pax-details__block">
+            <div class="c-pax-details__header-wrapper">
+              <h4 class="o-table__caption c-pax-details__block-header">Confirmation Details</h4>
+            </div>
+            <div class="o-table__body">
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Confirmation Date</span>
+                  <span
+                    class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].confirmation_date}}</span>
+                </div>
+              </div>
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Confimation Status</span>
+                  <span
+                    class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].confirmation_status}}</span>
+                </div>
+              </div>
+
+              <div
+                *ngIf="workInformation.workInfo[0].confirmation_status === 'Resigned' || workInformation.workInfo[0].confirmation_status === 'Terminated'"
+                class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Resigned Date</span>
+                  <span
+                    class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].employeeResignation.resignationDate}}</span>
+                </div>
+              </div>
+
+              <div
+                *ngIf="workInformation.workInfo[0].confirmation_status === 'Resigned'"
+                class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Last Working Date</span>
+                  <span
+                    class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].employeeResignation.lastWorkingDate}}</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!--        <div>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+
+          <div class="o-table c-pax-details__block">
+            <div class="c-pax-details__header-wrapper">
+              <h4 class="o-table__caption c-pax-details__block-header">Project Details</h4>
+
+            </div>
+
+            <div class="o-table__body">
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Project Group</span>
+                  <span
+                    class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].project}}</span>
+                </div>
+              </div>
+
+              <div class="c-pax-details__item__wrapper">
+                <div class="o-table__row c-pax-details__item">
+                  <span class="o-table__cell c-pax-details__item-lbl">Work Email</span>
+                  <span
+                    class="o-table__cell c-pax-details__item-value">{{workInformation.workInfo[0].work_email}}</span>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          <!--<div>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+          <div *ngIf="workInformation.workInfo[0].promotions !== null">
+            <div *ngIf="workInformation.workInfo[0].promotions.length > 0" class="o-table c-pax-details__block">
+              <div class="c-pax-details__header-wrapper">
+                <h4 class="o-table__caption c-pax-details__block-header">Promotion Details</h4>
+              </div>
+              <div class="o-table__body">
+                <div *ngFor="let promotion of workInformation.workInfo[0].promotions">
+                  <div class="c-pax-details__item__wrapper">
+                    <div class="o-table__row c-pax-details__item">
+                      <span class="o-table__cell c-pax-details__item-lbl">Designation</span>
+                      <span
+                        class="o-table__cell c-pax-details__item-value">{{promotion.designation}}</span>
+                    </div>
+                  </div>
+
+                  <div class="c-pax-details__item__wrapper">
+                    <div class="o-table__row c-pax-details__item">
+                      <span class="o-table__cell c-pax-details__item-lbl">Promotion Date</span>
+                      <span
+                        class="o-table__cell c-pax-details__item-value">{{promotion.date}}</span>
+                    </div>
+                  </div>
+                  <br>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+
+          <!--        <div>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+
+          <div *ngIf="workInformation.workInfo[0].employeeCadreChanges !== null">
+            <div *ngIf="workInformation.workInfo[0].employeeCadreChanges.length > 0"
+                 class="o-table c-pax-details__block">
+              <div class="c-pax-details__header-wrapper">
+                <h4 class="o-table__caption c-pax-details__block-header">Cadre Changes</h4>
+
+              </div>
+
+              <div class="o-table__body" *ngFor="let cadreChange of workInformation.workInfo[0].employeeCadreChanges">
+
+                <div class="c-pax-details__item__wrapper">
+                  <div class="o-table__row c-pax-details__item">
+                    <span class="o-table__cell c-pax-details__item-lbl">Previous Emp No.</span>
+                    <span class="o-table__cell c-pax-details__item-value">{{cadreChange.previousEmpNo}}</span>
+                  </div>
+                </div>
+
+                <div class="c-pax-details__item__wrapper">
+                  <div class="o-table__row c-pax-details__item">
+                    <span class="o-table__cell c-pax-details__item-lbl">Designation</span>
+                    <span
+                      class="o-table__cell c-pax-details__item-value">{{cadreChange.previousDesignation}}</span>
+                  </div>
+                </div>
+                <div class="c-pax-details__item__wrapper">
+                  <div class="o-table__row c-pax-details__item">
+                    <span class="o-table__cell c-pax-details__item-lbl">Start Date</span>
+                    <span
+                      class="o-table__cell c-pax-details__item-value">{{cadreChange.startDate}}</span>
+                  </div>
+                </div>
+                <div class="c-pax-details__item__wrapper">
+                  <div class="o-table__row c-pax-details__item">
+                    <span class="o-table__cell c-pax-details__item-lbl">End Date</span>
+                    <span
+                      class="o-table__cell c-pax-details__item-value">{{cadreChange.endDate}}</span>
+                  </div>
+                </div>
+                <br>
+
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+      <!--        <div>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+    </div>
+
+    <!--    Qulifications-->
+    <div class="c-pax-details__block-main div__custom_css">
+
+      <div class="c-pax-details__header-wrapper">
+        <div class="c-pax-details__block-main__header">
+          <svg class="a-icon c-pax-details__block-main-icon">
+            <use xlink:href="#qualifications"></use>
+          </svg>
+          <span class="c-pax-details__block-main-lbl">
+                    Qualification
+                </span>
+        </div>
+        <!--        TODO: uncomment if needed this edit icon-->
+        <!--        <div class="c-pax-cross">-->
+        <!--          <div class="c-pax-details__edit">-->
+        <!--            <svg class="a-link-btn a-icon c-pax-details__block-main-icon">-->
+        <!--              <use xlink:href="#edit"></use>-->
+        <!--            </svg>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <div *ngIf="showEdit" (click)="showSaveQuoteModal('editQualifications');
+              changeModalType('new', 'editQualifications'); changeActiveTab('Education','editQualifications')"
+             class="dashboard-square__header-icon globe-square__plus">
+          <svg class="a-icon">
+            <use xlink:href="#plus"></use>
+          </svg>
+        </div>
+      </div>
+
+      <div
+        *ngIf="componentPermission.includes('QualificationsTab')"
+        class="c-pax-details-content__block-wrapper">
+        <div class="c-pax-details-content__block">
+
+          <div class="c-pax-details__header-wrapper wrraper-height">
+            <h4 class="o-table__caption c-pax-details__block-header">Education</h4>
+
+
+          </div>
+          <div class="c-info-card__wrapper">
+            <div class="c-info-card"
+                 *ngFor="let educationInfor of qualificationInformation.employeeEducations; let i = index">
+              <!--                    <div class="c-info-card__media">-->
+              <!--            <img class="c-info-card__img" alt="User Profile" *ngIf="educationInfor.type == 'university'" src='assets/image/resume/university.png'>-->
+              <!--            <img class="c-info-card__img" alt="User Profile" *ngIf="educationInfor.type == 'high_school'" src='assets/image/resume/high_school.png'>-->
+              <img class="c-info-card__img" alt="User Profile" src='assets/image/education.svg'>
+              <!--                    </div>-->
+              <div class="c-info-card__content">
+                <span class="c-info-card__title">{{educationInfor.school}}</span>
+                <span class="c-info-card__value">{{educationInfor.degree}}</span>
+                <span class="c-info-card__value"
+                      *ngIf="educationInfor.grade !='' || educationInfor.grade != null || educationInfor.grade !='-'">{{educationInfor.grade}}</span>
+                <span class="c-info-card__value">{{educationInfor.fromDate}} to {{educationInfor.toDate}}</span>
+              </div>
+
+              <div *ngIf="showEdit" class="c-pax-details__edit">
+                <svg class="a-link-btn a-icon c-pax-details__block-main-icon" (click)="showSaveQuoteModal('editQualifications');
+                 changeModalType('edit', 'editQualifications'); setDetailsToEdit(i,'Education'); changeActiveTab('Education','editQualifications')">
+                  <use xlink:href="#edit"></use>
+                </svg>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!--            qualifications-->
+        <div class="c-pax-details-content__block" id="OtherQualifications">
+          <div class="c-pax-details__header-wrapper wrraper-height">
+            <h4 class="o-table__caption c-pax-details__block-header">Other</h4>
+
+
+          </div>
+
+          <div class="c-info-card__wrapper">
+            <div class="c-info-card c-info-card--secondary"
+                 *ngFor="let qualificationInfor of qualificationInformation.employeeQualifications; let i = index">
+              <!--                        <div class="c-info-card__media">-->
+              <img class="c-info-card__img" alt="User Profile" src='assets/image/book.svg'>
+
+              <!--                        </div>-->
+              <div class="c-info-card__content">
+                <span class="c-info-card__title c-info-card__title--secondary">{{qualificationInfor.name}}</span>
+                <span class="c-info-card__value">{{qualificationInfor.issuer}}</span>
+                <span class="c-info-card__value"
+                      *ngIf="qualificationInfor.results !='' || qualificationInfor.results != null || qualificationInfor.results !='-'">{{qualificationInfor.results}}</span>
+                <span class="c-info-card__value">{{qualificationInfor.date}}</span>
+              </div>
+
+              <div *ngIf="showEdit" class="c-pax-details__edit">
+                <svg class="a-link-btn a-icon c-pax-details__block-main-icon" (click)="showSaveQuoteModal('editQualifications');
+              changeModalType('edit', 'editQualifications'); setDetailsToEdit(i, 'Other'); changeActiveTab('Other','editQualifications')">
+                  <use xlink:href="#edit"></use>
+                </svg>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+    <!--    Work Experience-->
+    <div
+      *ngIf="componentPermission.includes('PreviousWorkInfoTab')"
+      class="c-pax-details__block-main">
+      <div class="c-pax-details__block-main__header">
+        <svg class="a-icon c-pax-details__block-main-icon">
+          <use xlink:href="#qualifications"></use>
+        </svg>
+        <span class="c-pax-details__block-main-lbl">
+            Work Experience
+        </span>
+      </div>
+      <div class="c-pax-details__block-wrapper-main">
+        <div class="c-pax-details__header-wrapper wrraper-custom-align">
+          <h4 class="o-table__caption c-pax-details__block-header">Previous work experience</h4>
+
+          <!-- <div class="c-pax-details__edit">
+              <svg class="a-link-btn a-icon c-pax-details__block-main-icon">
+                  <use xlink:href="#edit"></use>
+              </svg>
+          </div> -->
+
+          <div *ngIf="showEdit" class="dashboard-square__header-icon globe-square__plus">
+            <svg class="a-icon" (click)="showSaveQuoteModal('editPrevWorkDetails');
+            changeModalType('new', 'editPrevWorkDetails')"
+                 id="prevWork-new">
+              <use xlink:href="#plus"></use>
+            </svg>
+          </div>
+
+        </div>
+
+        <div class="c-pax-details-content__block-wrapper c-pax-details-content__block-reset"
+             *ngFor="let prevWorkInfor of prevWorkSplitList; let i = index">
+          <div class="c-pax-details-content__block-seconary-wraper wraper-cisyom__bottom-height">
+            <!--            <div class="c-pax-details-content__block-seconary-wraper">-->
+            <div class="c-info-card c-info-card__min">
+              <!--                    <div class="c-info-card__media">-->
+              <img class="c-info-card__img" alt="User Profile" src='../assets/image/laptop.svg'>
+
+              <!--                    </div>-->
+              <div class="c-info-card__content">
+                <span class="c-info-card__title">{{prevWorkInfor[0].company}}</span>
+                <span class="c-info-card__value">{{prevWorkInfor[0].title}}</span>
+                <span class="c-info-card__value">{{prevWorkInfor[0].from_date}}
+                  to {{prevWorkInfor[0].to_date}}</span>
+              </div>
+
+              <div *ngIf="showEdit" class="c-pax-details__edit">
+                <svg class="a-link-btn a-icon c-pax-details__block-main-icon"
+                     (click)="changeModalType('edit', 'editPrevWorkDetails');
+                       setPrevWorkDetailsToEdit(i, 0);
+                       showSaveQuoteModal('editPrevWorkDetails')" id="prevWork-edit">
+                  <use xlink:href="#edit"></use>
+                </svg>
+              </div>
+            </div>
+
+            <div *ngIf="prevWorkInfor.length > 1" class="c-info-card c-info-card__min">
+              <!-- <div class="c-info-card__media">-->
+              <img class="c-info-card__img" alt="User Profile" src='../assets/image/laptop.svg'>
+
+              <!--                        </div>-->
+              <div class="c-info-card__content">
+                <span class="c-info-card__title">{{prevWorkInfor[1].company}}</span>
+                <span class="c-info-card__value">{{prevWorkInfor[1].title}}</span>
+                <span class="c-info-card__value">{{prevWorkInfor[1].from_date}}
+                  to {{prevWorkInfor[1].to_date}}</span>
+              </div>
+
+
+              <div *ngIf="showEdit" class="c-pax-details__edit">
+                <svg class="a-link-btn a-icon c-pax-details__block-main-icon"
+                     (click)="changeModalType('edit', 'editPrevWorkDetails');
+                       setPrevWorkDetailsToEdit(i, 1);
+                       showSaveQuoteModal('editPrevWorkDetails')" id="prevWork-edit">
+                  <use xlink:href="#edit"></use>
+                </svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!--    Extra-->
+
+
+      <div class="c-pax-details__block-main">
+        <div class="c-pax-details__header-wrapper">
+          <div class="c-pax-details__block-main__header">
+            <svg class="a-icon c-pax-details__block-main-icon">
+              <use xlink:href="#qualifications"></use>
+            </svg>
+            <span class="c-pax-details__block-main-lbl">
+                    Skills
+                </span>
+          </div>
+          <!--TODO: uncomment if needed this edit icon-->
+          <!--        <div class="c-pax-cross">-->
+          <!--          <div class="c-pax-details__edit">-->
+          <!--            <svg class="a-link-btn a-icon c-pax-details__block-main-icon">-->
+          <!--              <use xlink:href="#edit"></use>-->
+          <!--            </svg>-->
+          <!--          </div>-->
+          <!--        </div>-->
+        </div>
+
+        <div
+          *ngIf="componentPermission.includes('SkillsTab')"
+          class="c-pax-details-content__block-wrapper">
+
+          <div class="c-pax-details-content__block">
+            <div class="c-pax-details__header-wrapper wrraper-height">
+              <h4 class="o-table__caption c-pax-details__block-header">Technical Skills</h4>
+
+              <div *ngIf="showEdit" class="dashboard-square__header-icon globe-square__plus"
+                   (click)="showSaveQuoteModal('editSkills'); changeModalType('new', 'editSkills');
+                  changeSkillType('Technical Skills')">
+                <svg class="a-icon">
+                  <use xlink:href="#plus"></use>
+                </svg>
+              </div>
+
+            </div>
+
+
+            <div *ngIf="skillInformation.skillLists!=null" class="c-info-card__wrapper">
+              <div class="c-info-card"
+                   *ngFor="let techSkill of skillInformation?.skillLists[1]?.skills; let i = index" style="cursor: pointer">
+                <!--                    <div class="c-info-card__media">-->
+                <img class="c-info-card__img" alt="User Profile" src='../assets/image/pencil.svg'>
+
+                <!--                    </div>-->
+                <div class="c-info-card__content" (click)="viewSelectedSkillHistory(techSkill)">
+                  <span class="c-info-card__title">{{techSkill.skillName}}</span>
+                  <span class="c-info-card__value">Personal Rate: {{techSkill.personal_rate}}/10</span>
+                  <!--                <span *ngIf="techSkill.supervisor_rate > 0"-->
+                  <!--                      class="c-info-card__value">Supervisor Rate: {{techSkill.supervisor_rate}}/10  <img-->
+                  <!--                  class="c-info-card__img" alt="User Profile"-->
+                  <!--                  src="{{techSkill.skillApprovedEmployee.image}}"> {{techSkill.skillApprovedEmployee.name}}</span>-->
+                  <span *ngIf="techSkill.supervisor_rate > 0"
+                        class="c-info-card__value">Supervisor Rate: {{techSkill.supervisor_rate}}/10</span>
+                  <div *ngIf="techSkill.supervisor_rate > 0" class="rated-person">
+                    <!--                  <span class="c-info-card__value">Supervisor: </span>-->
+                    <img src="{{techSkill.skillApprovedEmployee.image}}" class="rated-person__profile" alt="image">
+                    <span
+                      class="c-info-card__value">Supervisor:</span> <span
+                    class="c-info-card__value">&nbsp;{{techSkill.skillApprovedEmployee.name}}</span>
+                  </div>
+                  <span *ngIf="techSkill.supervisor_rate == 0" class="c-info-card__value">Supervisor Rate: N/A</span>
+                </div>
+
+                <div *ngIf="showEdit" class="c-pax-details__edit">
+                  <svg class="a-link-btn a-icon c-pax-details__block-main-icon" (click)="showSaveQuoteModal('editSkills');
+              changeModalType('edit', 'editSkills'); setDetailsToEdit(i, 'Technical Skills'); ; changeSkillType('Technical Skills')">
+                    <use xlink:href="#edit"></use>
+                  </svg>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <!--            qualifications-->
+          <div class="c-pax-details-content__block">
+            <div class="c-pax-details__header-wrapper wrraper-height">
+              <h4 class="o-table__caption c-pax-details__block-header">Soft Skills</h4>
+
+              <div *ngIf="showEdit" class="dashboard-square__header-icon globe-square__plus"
+                   (click)="showSaveQuoteModal('editSkills'); changeModalType('new', 'editSkills');
+                    changeSkillType('Soft Skills')">
+                <svg class="a-icon">
+                  <use xlink:href="#plus"></use>
+                </svg>
+              </div>
+
+            </div>
+            <div *ngIf="skillInformation.skillLists!=null" class="c-info-card__wrapper">
+              <div class="c-info-card c-info-card--secondary"
+                   *ngFor="let softSkill of skillInformation.skillLists[0].skills; let i = index">
+                <!--                        <div class="c-info-card__media">-->
+                <img class="c-info-card__img" alt="User Profile" src='../assets/image/pencil.svg'>
+
+                <!--                        </div>-->
+                <div class="c-info-card__content" (click)="viewSelectedSkillHistory(softSkill)">
+                  <span class="c-info-card__title c-info-card__title--secondary">{{softSkill.skillName}}</span>
+                  <span class="c-info-card__value">Personal Rate: {{softSkill.personal_rate}}/10</span>
+                  <!--                <span class="c-info-card__value">Supervisor Rate: {{softSkill.supervisor_rate}}/10</span>-->
+                </div>
+
+                <div *ngIf="showEdit" class="c-pax-details__edit">
+                  <svg class="a-link-btn a-icon c-pax-details__block-main-icon" (click)="showSaveQuoteModal('editSkills');
+              changeModalType('edit', 'editSkills'); setDetailsToEdit(i, 'Soft Skills'); ; changeSkillType('Soft Skills')">
+                    <use xlink:href="#edit"></use>
+                  </svg>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+      <!--Achivements-->
+      <div class="c-pax-details__block-main">
+        <div class="c-pax-details__block-main__header">
+          <svg class="a-icon c-pax-details__block-main-icon">
+            <use xlink:href="#accomplishment"></use>
+          </svg>
+          <span class="c-pax-details__block-main-lbl">
+            Accomplishments
+        </span>
+        </div>
+        <div
+          *ngIf="componentPermission.includes('SkillsTab')"
+          class="c-pax-details__block-wrapper-main">
+          <div class="c-pax-details__header-wrapper wrraper-custom-align">
+            <h4 class="o-table__caption c-pax-details__block-header">All Achievements</h4>
+
+            <!-- <div class="c-pax-details__edit">
+                <svg class="a-link-btn a-icon c-pax-details__block-main-icon">
+                    <use xlink:href="#edit"></use>
+                </svg>
+            </div> -->
+
+            <div *ngIf="showEdit" class="dashboard-square__header-icon globe-square__plus">
+              <svg class="a-icon" (click)="showSaveQuoteModal('editAccomplishments');
+            changeModalType('new', 'editAccomplishments')"
+                   id="accomplishment-new">
+                <use xlink:href="#plus"></use>
+              </svg>
+            </div>
+
+          </div>
+
+          <div class="c-pax-details-content__block-wrapper c-pax-details-content__block-reset"
+               *ngFor="let accomplishment of accomplishmentSplitList; let i = index">
+            <div class="c-pax-details-content__block-seconary-wraper wraper-cisyom__bottom-height">
+              <div class="c-info-card__wrapper">
+                <div class="c-info-card c-info-card__min">
+                  <!--                    <div class="c-info-card__media">-->
+                  <img class="c-info-card__img" alt="User Profile" src='../assets/image/supercup.svg'>
+
+                  <!--                    </div>-->
+                  <div class="c-info-card__content">
+                    <span class="c-info-card__title">{{accomplishment[0].accomplishment}}</span>
+                    <span class="c-info-card__value">{{accomplishment[0].issuer}}</span>
+                    <span class="c-info-card__value">{{accomplishment[0].fromDate}}</span>
+                  </div>
+
+                  <div *ngIf="showEdit" class="c-pax-details__edit">
+                    <svg class="a-link-btn a-icon c-pax-details__block-main-icon"
+                         (click)="changeModalType('edit', 'editAccomplishments');
+                  setAccomplishmentDetailsToEdit(i, 0);
+                  showSaveQuoteModal('editAccomplishments');
+        " id="accomplishment-edit">
+                      <use xlink:href="#edit"></use>
+                    </svg>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div *ngIf="accomplishment.length > 1" class="c-pax-details-content__block c-pax-details-custom__align">
+              <div class="c-info-card__wrapper">
+
+                <div class="c-info-card c-info-card--secondary">
+                  <!-- <div class="c-info-card__media">-->
+                  <img class="c-info-card__img" alt="User Profile" src='../assets/image/supercup.svg'>
+
+                  <!--                        </div>-->
+                  <div class="c-info-card__content">
+                    <span class="c-info-card__title">{{accomplishment[1].accomplishment}}</span>
+                    <span class="c-info-card__value">{{accomplishment[1].issuer}}</span>
+                    <span class="c-info-card__value">{{accomplishment[1].fromDate}}</span>
+                  </div>
+
+                  <div *ngIf="showEdit" class="c-pax-details__edit">
+                    <svg class="a-link-btn a-icon c-pax-details__block-main-icon" (click)="changeModalType('edit','editAccomplishments');
+                  setAccomplishmentDetailsToEdit(i, 1);
+                  showSaveQuoteModal('editAccomplishments')" id="accomplishment-edit">
+                      <use xlink:href="#edit"></use>
+                    </svg>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="c-pax-details__block-main"
+           *ngIf="!clientPermission.includes('ClientRnJ')">
+        <div class="c-pax-details__block-main__header">
+          <svg class="a-icon c-pax-details__block-main-icon">
+            <use xlink:href="#projects"></use>
+          </svg>
+          <span class="c-pax-details__block-main-lbl">
+            Projects
+            </span>
+        </div>
+
+
+      <div class="c-pax-details-content__block-wrapper" >
+        <div class="c-pax-details-content__block" *ngIf="isProjectsLoading">
+          <div class="c-pax-details__header-wrapper wrraper-height">
+            <h4 class="o-table__caption c-pax-details__block-header">Current Projects</h4>
+          </div>
+          <div class="c-info-card__wrapper">
+            <div class="c-info-card c-info-card--light">
+              <img  class="c-info-card__img" alt="User Profile" *ngIf="employeeCurrentProject.projectImage !== null"
+                    src="{{employeeCurrentProject.projectImage}}" />
+              <div class="c-info-card__content">
+                <span class="c-info-card__title">{{employeeCurrentProject.projectName}}</span>
+                <span class="c-info-card__value">CodeGen</span>
+                <span class="c-info-card__value">From {{employeeCurrentProject.date}}</span>
+              </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        <!--            qualifications-->
+        <div class="c-pax-details-content__block" *ngIf="isProjectsLoading && employeeContributedProjects.length > 0">
+          <div class="c-pax-details__header-wrapper wrraper-height">
+            <h4 class="o-table__caption c-pax-details__block-header">Contributed Projects</h4>
+          </div>
+          <div class="c-info-card__wrapper">
+            <div class="c-info-card c-info-card--light" *ngFor="let project of employeeContributedProjects">
+              <img class="c-info-card__img" alt="User Profile" src="{{project.projectImage}}">
+              <div class="c-info-card__content">
+                <span class="c-info-card__title c-info-card__title--secondary">{{project.projectName}}</span>
+                <span class="c-info-card__value">CodeGen</span>
+                <span class="c-info-card__value">From {{project.date}}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        </div>
+
+
+      </div>
+
+      <div class="c-pax-details__block-main">
+        <div class="c-pax-details__block-main__header">
+          <svg class="a-icon c-pax-details__block-main-icon">
+            <use xlink:href="#matrices"></use>
+          </svg>
+          <span class="c-pax-details__block-main-lbl">
+            Matrices
+        </span>
+        </div>
+
+        <div class="c-pax-details__block-main-sub">
+            <span class="c-pax-details__block-main-lbl">
+            Other Matrices
+            </span>
+
+          <!--            <div class="c-matrics__wrapper-main">-->
+          <div class="c-matrics__wrapper">
+
+
+            <div class="c-matrics-block">
+
+                        <span class="c-matrics-block__title">
+                            Contribution to CSR Projects
+                        </span>
+
+
+              <span class="c-matrics-block__value">
+<!--                            {{matricData['csrCount']}}-->
+                {{csrCount}}
+                        </span>
+
+            </div>
+            <div class="c-matrics-block">
+
+                        <span class="c-matrics-block__title">
+                            Actual Work Hours(Average)
+                        </span>
+
+              <span class="c-matrics-block__value">
+<!--                            {{attendanceData['avgWorkHrs']}}-->
+                {{avgWorkHrs}}
+                        </span>
+
+            </div>
+            <div class="c-matrics-block">
+
+                        <span class="c-matrics-block__title">
+                            In Time(Average)
+                        </span>
+
+              <span class="c-matrics-block__value">
+<!--                            {{attendanceData['avgIn']}}-->
+                {{avgInTime}}
+                        </span>
+            </div>
+            <div class="c-matrics-block">
+                        <span class="c-matrics-block__title">
+                            WWT Total Time
+                        </span>
+
+              <span class="c-matrics-block__value">
+<!--                            {{matricData['wwtTotal']}}-->
+                {{ wwtTotalTime }}
+                        </span>
+            </div>
+            <div class="c-matrics-block">
+                        <span class="c-matrics-block__title">
+                            Participate Training Hours
+                        </span>
+
+              <span class="c-matrics-block__value">
+<!--                            {{matricData['trainingHrs']}}-->
+                {{trainingHours}}
+                        </span>
+            </div>
+            <div class="c-matrics-block">
+                        <span class="c-matrics-block__title">
+                            Time Spend in Office(Average)
+                        </span>
+
+              <span class="c-matrics-block__value">
+<!--                            {{attendanceData['avgOfficeHrs']}}-->
+                {{avgOfficeHrs}}
+                        </span>
+            </div>
+            <div class="c-matrics-block">
+                        <span class="c-matrics-block__title">
+                            Out Time(Average)
+                        </span>
+
+              <span class="c-matrics-block__value">
+<!--                            {{attendanceData['avgOut']}}-->
+                {{avgOutTime}}
+                        </span>
+
+            </div>
+            <div class="c-matrics-block">
+                        <span class="c-matrics-block__title">
+                            WWT Average Level
+                        </span>
+
+              <span class="c-matrics-block__value c-matrics-block__value-secondary">
+<!--                            {{matricData['wwtLevel']}}-->
+                {{ wwtLevel }}
+                        </span>
+            </div>
+
+            <!--                </div>-->
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+  <!-- Modal -->
+  <app-personal-details-modal *ngIf="showEmployeeRecords && showEdit"
+                              [employeeNo]="personalInformation.empNo"
+                              [personalInfo]="personalInformation"
+                              [workDetails]="workInformation.workInfo[0]"
+                              (success)="loadEmpData($event)"></app-personal-details-modal>
+
+  <app-qualifications-modal *ngIf="showEmployeeRecords && showEdit"
+                            [employeeNo]="personalInformation.empNo"
+                            [qualificationInfo]="qualificationInformation"
+                            [modalType]="modalType"
+                            [modalId]="modalId"
+                            [eduDetailsToEdit]="educationDetailsToEditComponent"
+                            [qualDetailsToEdit]="qualificationDetailsToEditComponent"
+                            (success)="loadEmpData($event)"></app-qualifications-modal>
+
+  <app-skills-modal *ngIf="showEmployeeRecords && showEdit"
+                    [employeeNo]="personalInformation.empNo"
+                    [skillInfo]="skillInformation"
+                    [modalType]="modalType"
+                    [modalId]="modalId"
+                    [techSkillDetailsToEdit]="techSkillDetailsToEditComponent"
+                    [softSkillDetailsToEdit]="softSkillDetailsToEditComponent"
+                    (success)="loadEmpData($event)"></app-skills-modal>
+
+  <app-accomplishments-modal *ngIf="showEmployeeRecords && showEdit"
+                             [employeeNo]="personalInformation.empNo"
+                             (success)="loadEmpData($event)"
+                             [modalType]="modalType"
+                             [modalId]="modalId"
+                             [accomplishmentDetailsToEdit]="accomplishmentDetailsToEditComponent"></app-accomplishments-modal>
+
+  <app-prev-work-details-modal *ngIf="showEmployeeRecords && showEdit"
+                               [employeeNo]="personalInformation.empNo"
+                               (success)="loadEmpData($event)"
+                               [modalType]="modalType"
+                               [modalId]="modalId"
+                               [prevWorkDetailsToEdit]="prevWorkDetailsToEditComponent"></app-prev-work-details-modal>
+
+  <app-skill-history [empSelectedSkillId]="empSelectedSkillId"
+                     (modalHide)="changeStatusOfHistoryModal()"
+                     *ngIf="empSelectedSkillHistoryModalDisplay"></app-skill-history>

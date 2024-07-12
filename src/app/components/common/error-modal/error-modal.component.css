@@ -1,0 +1,57 @@
+.ERROR {
+  color: #Ef3648
+}
+
+.WARNING {
+  color: #e99002
+}
+
+.SUCCESS {
+  color: #43ac6a
+}
+
+.error-message-modal-content {
+  border-radius: 4px !important;
+}
+
+/*---------------------------------------------------------------------------------------------------------------------*/
+.vertical-alignment-helper {
+  display: table;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.vertical-align-center {
+  /* To center vertically */
+  display: table-cell;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+.modal-content {
+  /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+  width: 450px;
+  height: 175px;
+  /* To center horizontally */
+  margin: 0 auto;
+  pointer-events: all;
+  word-break: break-word;
+}
+
+.crossHover:hover {/*close button style changed*/
+  color: #ef3648;
+}
+
+@media screen and (max-width: 768px) {
+  .reservation-modal {
+    display: flex;
+    align-items: center;
+  }
+
+  .reservation-modal__content-sm {
+    min-height: unset;
+  }
+}
+
+

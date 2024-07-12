@@ -1,0 +1,24 @@
+.achievement-title {
+  color: #62aae8;
+  font-size: 1.2vmax;
+}
+
+.achievement-value-box {
+  color: #95abbf;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  margin-left: 20px;
+  font-size: 1vmax;
+}
+.achievement-value {
+  margin: 20px;
+  /*background: #f0f8ff9c;*/
+  padding-bottom: 17px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 15px;
+  font-size: 1.1vmax;
+  border: solid 5px #F8860DDE;;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}

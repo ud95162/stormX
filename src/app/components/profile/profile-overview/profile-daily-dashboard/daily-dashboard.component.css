@@ -1,0 +1,37 @@
+.row {
+  display: flex;
+  text-align: center;
+  background: white;
+  justify-content: space-evenly;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  box-shadow: 0px -2px 3px -1px #a3aab1;
+  font-family: 'Droid Serif';
+
+  width: 61vmax;
+  margin-top: -12px;
+}
+
+.sub-data {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+.sub-data-top {
+  margin-bottom: 2vmax;
+}
+
+.value-1 {
+  font-size: 2vmax;
+  color: #62aae8;
+}
+
+.value-2 {
+  font-size: 2vmax;
+  color: #48d6d2;
+}
+.title-1 {
+  font-size: 0.8vmax;
+  color: #95abbf;
+  font-weight: bold;
+}

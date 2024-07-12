@@ -1,0 +1,24 @@
+<div class="project-dashboard__project-details-header" *ngIf="headerDataLoaded">
+  <div class="project-details-header__details">
+    <img src= {{projectImage}} alt="Image" class="project-details-header__details-img">
+    <div class="project-details-header__section">
+      <h2 class="project-details-header__title">{{projectName}}</h2>
+      <div class="project-details-header__description project-details-header-flex">
+        <p class="project-details-header__description-topic">Project Owner</p>
+        <span class="project-details-header__description-answer">{{projectOwner}}</span>
+      </div>
+      <div class="project-details-header__description project-details-header-flex">
+        <p class="project-details-header__description-topic">Project Manager</p>
+        <span class="project-details-header__description-answer">{{projectManager}}</span>
+      </div>
+<!--      <div class="project-details-header__description project-details-header-flex">-->
+<!--        <p class="project-details-header__description-topic">More Details</p>-->
+<!--        <span class="project-details-header__description-link">www.linkformoredetails.com</span>-->
+<!--      </div>-->
+    </div>
+  </div>
+  <div class="project-details-header__members">
+    <h3 class="project-details-header__members-number">{{projectCount}}</h3>
+    <p class="project-details-header__members-text">Members</p>
+  </div>
+</div>

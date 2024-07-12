@@ -1,0 +1,92 @@
+.dashboard {
+  flex-wrap: nowrap;
+  display: flex;
+  width: 61vmax;
+  margin-bottom: 20px;
+}
+
+.left-box {
+  background: #53c434;
+}
+
+.right-box {
+  /*background: #44c2fd;*/
+  background: #f08b1e;
+}
+
+.middle-box {
+  background: #468eea;
+}
+
+.main-data {
+  color: #eae5ec;
+  margin: .5vmax;
+  width: 100%;
+  box-shadow: 0px -2px 3px -1px #a3aab1;
+  height: 13vmax;
+  display: block;
+  text-align: center;
+}
+
+hr {
+  margin-top: 1vmax;
+  margin-bottom: 1vmax;
+}
+
+.top-title {
+  font-size: 2vmax;
+  /*color: #62aae8;*/
+  color: #fff;
+  font-family: 'Droid Serif';
+}
+
+.top-value {
+  font-size: 1.2vmax;
+  font-family: 'Rubik', sans-serif;
+}
+
+.top-value-middle {
+  font-size: 1.2vmax;
+  color: #66d7ea;
+}
+
+.popup-issues {
+  background: white;
+  position: fixed;
+  z-index: 1000;
+  right: 22vw;
+  display: flex;
+  box-shadow: 0px 0px 16px -5px #373532;
+  text-align: center;
+}
+
+.popup-commits {
+  background: white;
+  position: fixed;
+  z-index: 1000;
+  left: 22vw;
+  display: flex;
+  box-shadow: 0px 0px 16px -5px #373532;
+  text-align: center;
+}
+
+.sub-popup {
+  padding: 10px;
+  font-size: 1.2vmax;
+}
+
+.sub-val {
+  color: #399be9;
+}
+
+.sub-title {
+  color: #48d6d2;
+}
+
+.box:nth-of-type(odd) {
+  background: #fff;
+}
+
+.box:nth-of-type(even) {
+  background-color:#cecece75;
+}

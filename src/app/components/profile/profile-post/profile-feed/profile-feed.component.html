@@ -1,0 +1,441 @@
+<!-- profile feed component -->
+
+<app-error-modal></app-error-modal>
+
+<div class="c-profile-posts-main">
+  <div class="c-profile-posts-add">
+    <div class="c-profile-posts__content"
+         *ngIf="componentPermission.includes('SavePostsFromProfile')">
+      <div class="c-profile-posts__media">
+        <img class="c-profile-posts__img c-post-card__img" src='{{luim_}}'>
+      </div>
+
+      <textarea id="writePost" class="c-profile-posts__text c-post-modal" placeholder="What's on your Mind!"
+                rows="5" (click)="showSaveQuoteModal('newPostModal')">{{postText}}</textarea>
+    </div>
+
+    <div class="uploaded-images__section">
+      <!---uploaded images-->
+      <div class="m-form-upload__wraper">
+        <ul>
+          <li class="wrapper-image" *ngFor="let image of imageUploadArray">
+            <i (click)="deleteUploadedImage(image)" aria-hidden="true" class="fa fa-2x fa-times pull-right"
+               style="color: #Ef3648; position: absolute; cursor: pointer;"></i>
+            <img src={{image}} class="uploaded-image" alt="">
+
+          </li>
+        </ul>
+      </div>
+
+
+      <!---utagged frineds-->
+      <div class="m-form-item__list">
+                    <span class="a-loz a-loz--light m-form-item__list-item" *ngFor="let tagFriend of taggedFriends">
+                        {{tagFriend.name}}
+                        <svg class="a-icon m-form-item__list-item-remove" (click)="untagFriend(tagFriend, 'new')">
+                            <use xlink:href="#close"></use>
+                        </svg>
+                    </span>
+      </div>
+      <!---end tagged frineds-->
+    </div>
+<!--    &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+    <button class="dashboard-square__header-icon profile-post__action" (click)="savePost()">
+      <svg class="a-icon">
+        <use xlink:href="#send"></use>
+      </svg>
+    </button>
+
+  </div>
+  <!--  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+  <div class="c-profile-posts-actions">
+    <div class="c-profile-post-action__set">
+      <div class="c-profile-posts__action">
+
+        <div class="filter-text__wraper">
+          <h4 class="filter-text__text">Filter Feed by :</h4>
+        </div>
+
+        <div class="a-btn {{activeFilterPublic}} c-profile-posts__btn" (click)="changePostFilter(0)">
+
+          <svg class="a-icon c-profile-posts__icon">
+            <use xlink:href="#world-2"></use>
+          </svg>
+
+          <div class="c-profile-posts__lbl">
+            Public
+          </div>
+
+        </div>
+
+
+        <div class="a-btn {{activeFilterPrivate}} c-profile-posts__btn" (click)="changePostFilter(1)">
+
+          <svg class="a-icon c-profile-posts__icon">
+            <use xlink:href="#open-lock"></use>
+          </svg>
+
+          <div class="c-profile-posts__lbl">
+            Only me
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div style="text-align: center">
+  <img *ngIf="postLoading" src="assets/image/loading/spinner-loading.svg" style="padding-top: 10%">
+</div>
+
+<div *ngIf="(postLoading === false) && (dataLoaded === false)" style="margin-top: 50px; text-align: center">
+  <img src="assets/image/bad_face.svg">
+  <h4 style="color: #838383">No Posts Yet!</h4>
+</div>
+
+<div
+  *ngIf="componentPermission.includes('ViewProfilePosts')">
+  <div (scroll)="onScroll()" *ngIf="dataLoaded" style="word-wrap: break-word;">
+  </div>
+</div>
+
+<!--upload photos-->
+<div class="o-modal" id="uploadPhoto">
+  <div class="o-modal__content">
+    <div class="o-modal__body">
+      <div class="o-modal__inner-header">
+        <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('uploadPhoto')">
+          <svg class="a-icon o-modal__close-icon">
+            <use xlink:href="#close"></use>
+          </svg>
+        </button>
+        <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm">
+          <svg class="a-icon u-mr">
+            <use xlink:href="#previous"></use>
+          </svg>
+          Back
+        </button>
+      </div>
+      <h3 class="t1 ts-dark">Upload Photo</h3>
+      <span>
+        <image-upload (uploadFinished)="uploadFinish($event)" [extensions]="['jpg','png','gif','JPEG', '.jpg']"
+                      [headers]="{Accept: '*/*'}" [maxFileSize]="uploadImageSize" [style]="customStyle"
+                      [url]="imageUploadUrl"
+                      buttonCaption="Browse to upload " dropBoxMessage=" or Drag and Drop to upload (max size 5MB)">
+        </image-upload>
+
+
+        <div class="row" style="margin: 10px 0 0 0">
+          <div class="col-sm-12">
+            <div *ngFor="let image of imageUploadArray" class="col-sm-3"
+                 style="padding: 0 !important; margin-bottom: 10px">
+              <img height="60px" src={{image}} width="100px"/>
+              <i (click)="deleteUploadedImage(image)" aria-hidden="true" class="fa fa-2x fa-times pull-right"
+                 style="color: #Ef3648; position: absolute; margin-left: -26px; cursor: pointer;"></i>
+            </div>
+          </div>
+        </div>
+      </span>
+      <div class="o-modal__footer" *ngIf="isDesktop">
+        <button class="a-btn a-btn--primary" (click)="hideModal('uploadPhoto')">Done</button>
+      </div>
+      <div class="o-modal__footer" *ngIf="isMobile || isTablet">
+        <button class="a-btn a-btn--primary" (click)="hideModal('uploadPhoto')">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div style="text-align: center">
+  <img *ngIf="postLoading" src="assets/image/loading/spinner-loading.svg" style="padding-top: 10%">
+</div>
+
+<div *ngIf="(postLoading === false) && (dataLoaded === false)" style="margin-top: 50px; text-align: center">
+  <img src="assets/image/bad_face.svg">
+  <h4 style="color: #838383">No Posts Yet!</h4>
+</div>
+
+<div
+  *ngIf="componentPermission.includes('ViewProfilePosts')">
+  <div (scroll)="onScroll()" *ngIf="dataLoaded" style="word-wrap: break-word;">
+
+    <!--Edit post modal-->
+    <app-edit-post-modal (closeEditModalEvent)="modalClose()" (saveEditedEvent)="editPost()"
+                         (tagPeopleEvent)="addTags($event)"
+                         (untagPeopleEvent)="untagFriend($event.person, $event.fromwhere)"
+                         [editTaggedFriendsToEditFromFeed]="editTaggedFriendsArray"
+                         [fullNameListToEditFromFeed]="fullNameList"
+                         [imageListToEditFromFeed]="editImageArray"
+                         [imageUploadUrl]="imageUploadUrl"
+                         [editPrivacy]="editPrivacy"></app-edit-post-modal>
+
+    <!--Delete post modal-->
+    <app-delete-post-modal (closeDeleteModalEvent)="modalClose()" (deletePostEvent)="deletePost()">
+    </app-delete-post-modal>
+
+    <!--Share post modal-->
+    <app-share-post-modal (closeShareModalEvent)="modalClose()" (sharePostEvent)="sharePublishPost()"
+                          (viewTaggedAllEvent)="modalClose($event.type, $event.shareId)"
+                          [postToShareFromComponent]="sharePost"></app-share-post-modal>
+
+    <!--View people modal-->
+    <app-view-people-modal (profileRedirectEvent)="profileRedirect($event, 0, null)"
+                           [modalDialogContentSize]="showResizeModalDialogContent"
+                           [modalDialogSize]="showResizeModalDialog"
+                           [modalHeader]="peopleModalHeader" [peopleList]="taggedList"
+                           (click)="showSaveQuoteModal('taggedPeople')"></app-view-people-modal>
+
+    <div *ngFor="let post of postList" class="c-profile-posts__item">
+
+      <!--Post body-->
+      <app-post
+        (employeeIdToRedirectEvent)="profileRedirect($event.employeeId, $event.postedAs, $event.postedPageObj)"
+        (postDeleteEvent)="deletePostMenuClick($event)"
+        (postEditEvent)="editPostOnClick($event.postId, $event.postTitle, $event.postContent, $event.postVisibility, $event.postImages, $event.postEmpId)"
+        (postHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+        (postRedirectEvent)="postRedirect($event)"
+        (readMorePostEvent)="loadMorePost($event)"
+        (viewImageModalEvent)="viewImageModal($event.postId, $event.imageArray, $event.image)"
+        (viewTaggedEvent)="viewTaggedAll($event.viewTagType, $event.postId)" *ngIf="post.postType === 'post'"
+        [postFilter]="postFilter"
+        [postDataFromFeed]="post"></app-post>
+
+      <!--Post Review-->
+      <app-review
+        (employeeIdToRedirectEvent)="profileRedirect($event.employeeId, $event.postedAs, $event.postedPageObj)"
+        (reviewPostDeleteEvent)="deletePostMenuClick($event)"
+        (reviewPostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+        (reviewPostRedirectEvent)="postRedirect($event)" *ngIf="post.postType === 'review'"
+        [reviewDataFromFeed]="post">
+      </app-review>
+
+      <!--Post Skill-->
+      <app-skill (employeeIdToRedirectEvent)="profileRedirect($event, 0, null)"
+                 (skillPostDeleteEvent)="deletePostMenuClick($event)"
+                 (skillPostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+                 (skillPostRedirectEvent)="postRedirect($event)" *ngIf="post.postType === 'skill'"
+                 [skillDataFromFeed]="post">
+      </app-skill>
+
+      <!--Post Accomplishments-->
+      <app-accomplishment (accomplishmentPostDeleteEvent)="deletePostMenuClick($event)"
+                          (accomplishmentPostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+                          (accomplishmentPostRedirectEvent)="postRedirect($event)"
+                          (employeeIdToRedirectEvent)="profileRedirect($event, 0, null)"
+                          *ngIf="post.postType === 'accomp'"
+                          [accomplishmentDataFromFeed]="post"></app-accomplishment>
+
+      <!--Post Qualification-->
+      <app-qualification (employeeIdToRedirectEvent)="profileRedirect($event, 0, null)"
+                         (qualificationPostDeleteEvent)="deletePostMenuClick($event)"
+                         (qualificationPostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+                         (qualificationPostRedirectEvent)="postRedirect($event)" *ngIf="post.postType === 'quali'"
+                         [qualificationDataFromFeed]="post"></app-qualification>
+
+      <!--Post Profile Picture-->
+      <app-prof-picture (employeeIdToRedirectEvent)="profileRedirect($event, 0, null)"
+                        (profPicPostDeleteEvent)="deletePostMenuClick($event)"
+                        (profPicPostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+                        (profPicPostRedirectEvent)="postRedirect($event)" *ngIf="post.postType === 'profupdate'"
+                        [profPicDataFromFeed]="post"></app-prof-picture>
+
+      <!--Post Share -->
+      <app-share (employeeIdToRedirectEvent)="profileRedirect($event, 0, null)"
+                 (sharePostDeleteEvent)="deletePostMenuClick($event)"
+                 (sharePostHideEvent)="hideFromFeed($event.postId, $event.hideType)"
+                 (sharePostRedirectEvent)="postRedirect($event)"
+                 (shareViewTaggedEvent)="viewTaggedAll($event.viewTagType, $event.postId)"
+                 *ngIf="post.postType === 'share' && post.originalPost != null"
+                 [shareDataFromFeed]="post"></app-share>
+
+      <!--Like and comment the post-->
+      <app-like-comment (deleteCommentEvent)="deleteComment($event.commentId, $event.postId, 'fromfeed')"
+                        (likeUnlikePostEvent)="likeUnlikePost($event.postId, $event.operation, 'fromfeed')"
+                        (loadCommentsEvent)="loadComments($event, 'fromfeed')"
+                        (postCommentEvent)="commentPost($event, 'fromfeed')"
+                        (profileRedirectEvent)="profileRedirect($event, 0, null)"
+                        (viewLikedEvent)="viewTaggedAll($event.funType, $event.postId)" [callingFrom]="callingFrom"
+                        [postCommentDataFromFeed]="post"></app-like-comment>
+
+      <!--view image modal-->
+      <app-image-viewer
+        (deleteCommentOnImageViewerEvent)="deleteComment($event.commentId, $event.postId, 'frommodal')"
+        (likeUnlikePostOnImageViewerEvent)="likeUnlikePost($event.postId, $event.operation, 'frommodal')"
+        (loadCommentsOnImageViewerEvent)="loadComments($event, 'frommodal')"
+        (postCommentOnImageViewerEvent)="commentPost($event, 'frommodal')"
+        (profileRedirectOnImageViewerEvent)="profileRedirect($event, 0, null)"
+        (viewLikedOnImageViewerEvent)="viewTaggedAll($event.funType, $event.postId)"
+        [postDataFromFeed]="postObjofImageToView" [postImageShowFromFeed]="showImageModal"
+        [getImagesStatus]="getImages"></app-image-viewer>
+
+    </div>
+    <div style="text-align: center">
+      <h5 *ngIf="showNoMorePosts" style="color: #838383">No more posts to load!</h5>
+      <img *ngIf="loadMorePosts" src="assets/image/loading/posts-loading.svg">
+    </div>
+  </div>
+</div>
+
+
+<!--create new post modal-->
+<div class="o-modal" id="newPostModal">
+  <div class="o-modal__content">
+    <div class="o-modal__header" style="padding: 20px 20px; border-bottom: 1px solid #d8d8d8;">
+      <h3 class="t1 ts-dark" style="margin: 0;">Create a Post</h3>
+      <button class="a-btn a-btn--link o-modal__inner-close" (click)="hideModal('newPostModal')">
+        <svg class="a-icon o-modal__close-icon">
+          <use xlink:href="#close"></use>
+        </svg>
+      </button>
+      <button class="a-btn a-btn--light o-modal__back-btn u-visible-sm">
+        <svg class="a-icon u-mr">
+          <use xlink:href="#previous"></use>
+        </svg>
+        Back
+      </button>
+    </div>
+    <div class="o-modal__body">
+
+
+<!--      <h4>Create a Post</h4>-->
+      <span>
+        <div class="form-group post-modal-text-section">
+          <div class="c-profile-posts__media">
+             <img class="c-profile-posts__img c-post-card__img" src='{{luim_}}'>
+          </div>
+
+          <textarea id="writePostModalText" class="c-profile-posts__text" placeholder="What's on your Mind!" cols="80"
+                    rows="2" style="resize: vertical">{{postText}}</textarea>
+
+        </div>
+
+        <div class="form-group">
+          <div>
+            <image-upload (uploadFinished)="uploadFinish($event)" [extensions]="['jpg','png','gif','JPEG', '.jpg']"
+                          [headers]="{Accept: '*/*'}"
+                          [style]="customStyle"
+                          [url]="imageUploadUrl"
+                          buttonCaption="Browse to upload "
+                          dropBoxMessage=" or Drag and Drop to upload (max size 5MB)"></image-upload>
+
+            <!-- show uploaded images with remove icon -->
+             <div class="m-form-field">
+             <div class="m-form-upload__wraper">
+               <ul>
+
+                  <li *ngFor="let image of imageUploadArray" class="wrapper-image">
+                      <img src={{image}} class="uploaded-image" alt="uploaded imaged for a post"/>
+                    <button (click)="deleteUploadedImage(image)"
+                            class="a-btn a-btn--link o-modal__inner-close custum-alighnment">
+                                    <svg class="a-icon o-modal__close-icon">
+                                        <use xlink:href="#close"></use>
+                                    </svg>
+                    </button>
+                  </li>
+               </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- show tagged friends and untagging button  -->
+          <div class="m-form-field" style="margin-top: 20px">
+
+            <div class="m-form-field__field">
+                    <span class="m-form-field__pre">
+                        <svg class="a-icon m-form-field__pre-icon">
+                            <use xlink:href="#search"></use>
+                        </svg>
+                    </span>
+                    <div class="m-form-field__field-item">
+                        <input (keypress)="inputKeyPress($event)" class="m-form-field__input" id="tagInput"
+                               list="tagKeys" type="text" minlength="0" maxlength="524288"
+                               placeholder="Tag your Friends here.." value="">
+                        <datalist id="tagKeys">
+                            <option *ngFor="let friendEmail of fullNameList" value={{friendEmail.name}}>
+                        </datalist>
+                    </div>
+                    <span class="m-form-field__pre">
+                        <svg (click)="addTags('new')" id="tagBtn" class="a-icon m-form-field__post-icon">
+                            <use xlink:href="#guest--group"></use>
+                        </svg>
+                    </span>
+                </div>
+
+            <div class="m-form-item__list">
+              <span class="a-loz a-loz--light m-form-item__list-item"
+                    *ngFor="let tagFriend of taggedFriends">
+                {{tagFriend.name}}
+                <svg (click)="untagFriend(tagFriend, 'new')" class="a-icon m-form-item__list-item-remove">
+                            <use xlink:href="#close"></use>
+                        </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </span>
+
+      <!--  select admin pages    -->
+      <div>
+        <div *ngIf="false">
+          <label *ngIf="this.userType === 'admin'" class="checkbox-inline">
+            <input (click)="emailToAll()" style="width: 15px; height: 15px" type="checkbox" value="">
+            <h6 style="margin-top: 0; margin-bottom: 0">Email to all</h6>
+          </label>
+        </div>
+
+        <form class="form-inline">
+
+          <div class="m-form-field">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Pages</label>
+            </div>
+            <div class="m-form-field__field">
+              <select *ngIf="showPagesList" id="postPostAs" class="m-form-field__select">
+                <option *ngFor="let pageForUser of pagesListForUser" style="padding: 0 5px 0 5px;">
+                  {{pageForUser.pageName}}
+                </option>
+              </select>
+
+            </div>
+          </div>
+          <br>
+
+          <div class="m-form-field">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Privacy</label>
+            </div>
+            <div class="m-form-field__field">
+              <select *ngIf="taggedFriends.length!=0" id="postVisibilitySelect" class="m-form-field__select">
+                <option *ngFor="let postPrivacy of postPrivacyList">
+                  {{postPrivacy}}
+                </option>
+              </select>
+              <select *ngIf="taggedFriends.length ==0" id="postVisibilitySelect" class="m-form-field__select">
+                <option *ngFor="let postPrivacy of postPrivacyListNew">
+                  {{postPrivacy}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+
+
+    </div>
+    <div class="o-modal__footer" style="padding: 20px; margin-top: 0px">
+      <button (click)="hideModal('newPostModal')" class="a-btn a-btn--trinity u-mr">Cancel</button>
+      <button (click)="addPost()" class="a-btn a-btn--primary">Add</button>
+      <!--        <button (click)="saveEditedPost()" class="a-btn a-btn&#45;&#45;primary">Send</button>-->
+    </div>
+  </div>
+</div>

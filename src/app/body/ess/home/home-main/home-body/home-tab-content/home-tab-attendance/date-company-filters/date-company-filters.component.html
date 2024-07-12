@@ -1,0 +1,126 @@
+<div class="project-wise-date" xmlns="http://www.w3.org/1999/html">
+
+  <div *ngIf="singleDateCalendar">
+
+      <div class="m-form-field u-mr+">
+        <div class="m-form-field__field project-wise-date__input">
+          <div class="m-form-field__field-item">
+            <input class="m-form-field__input project-wise-date__input" id="f-name" type="date"
+                   [(ngModel)]="selectedDate" [ngModelOptions]="{standalone: true }"
+                   (change)="dateChanged()"
+                   minlength="0"
+                   maxlength="524288" placeholder="06/01/2022" value="06/01/2022">
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+  <div *ngIf="dateRangeFlter">
+
+    <div class="m-form-field u-mr+" style="padding-right: 5px;">
+      <div class="m-form-field__field project-wise-date__input">
+        <div class="m-form-field__field-item">
+          <button class="m-form-field__input project-wise-date__input" id="f-name"
+                  (click)="dateRangeChanged($event)" value="" >
+            <div *ngIf="startDate===endDate">{{startDate}}</div>
+            <div *ngIf="startDate!==endDate">{{startDate}}&nbsp;&nbsp;&nbsp; to &nbsp;&nbsp;{{endDate}}</div>
+          </button>
+          <div class="project-wise-filter-box " *ngIf="companyFilterSectionDisplay" (click)="$event.stopPropagation()">
+            <app-date-range-filter (dataEvent)="getDateRange($event)" ></app-date-range-filter>
+          </div>
+          <i class="fa fa-calendar-o" aria-hidden="true" style="padding-right: 15px;"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="companyFilter">
+
+      <div class="project-wise-filter">
+        <button class="project-wise-filter__btn" (click)="displayHideFilterSection($event)">
+          <svg class="a-icon m-form-field__pre-icon project-wise-filter__icon">
+            <use xlink:href="#filter"></use>
+          </svg>
+        </button>
+        <div class="project-wise-filter-box " *ngIf="filterSectionDisplay" (click)="$event.stopPropagation()">
+          <div class="m-form-field" *ngIf="preInsertDataLoaded">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Company</label>
+            </div>
+
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select"
+                        [(ngModel)]="selectedCompanyID" [ngModelOptions]="{standalone: true}"
+                        (change)="getBusinessUnitsData(); getData();
+                      ">
+                  <option value="0">All</option>
+                  <option *ngFor="let data of companiesList" value="{{data.id}}">{{data.name}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+
+          <div class="m-form-field" *ngIf="businessUnitsDataLoaded">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Business Unit</label>
+            </div>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select"
+                        [(ngModel)]="selectedBUID" [ngModelOptions]="{standalone: true}"
+                        (change)="getDepartmentsData(); getData();
+                            ">
+                  <option value="0">All</option>
+                  <option *ngFor="let data of businessUnitList" value="{{data.id}}">{{data.name}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+
+          <div class="m-form-field" *ngIf="departmentsDataLoaded">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Department</label>
+            </div>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select"
+                        [(ngModel)]="selectedDepID" [ngModelOptions]="{standalone: true}"
+                        (change)="getDepartmentsData(); getData();
+                            ">
+                  <option value="0">All</option>
+                  <option *ngFor="let data of departmentList" value="{{data.id}}">{{data.name}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+
+          <div class="m-form-field" *ngIf="preInsertDataLoaded">
+            <div class="m-form-field__label-wrap">
+              <label class="m-form-field__label">Cadre</label>
+            </div>
+            <div class="m-form-field__field m-form-field__min-height">
+              <div class="m-form-field__field-item">
+                <select class="m-form-field__select"
+                        [(ngModel)]="selectedCadreID" [ngModelOptions]="{standalone: true}"
+                        (change)="getData();">
+                  <option value="0">All</option>
+                  <option *ngFor="let data of cadresList" value="{{data.cadreID}}">{{data.cadreName}}</option>
+                </select>
+              </div>
+            </div>
+            <span class="m-form-field__error">error</span>
+          </div>
+
+        </div>
+      </div>
+
+  </div>
+
+</div>
+

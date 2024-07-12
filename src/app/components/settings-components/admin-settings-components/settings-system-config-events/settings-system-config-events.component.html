@@ -1,0 +1,107 @@
+<app-error-modal></app-error-modal>
+<div class="w3-panel w3-card">
+  <h5 class="card-title-h5">Event</h5>
+  <div class="card-content-div">
+
+    <div class="col-sm-12 no-padding">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <label>Calendar Start Time:</label>
+          <input [(ngModel)]="eventSaveObj.startTime" class="form-control" id="eventCalendarStartTime"
+                 name="eventCalendarStartTime"
+                 type="time">
+        </div>
+        <div class="col-sm-6 form-group">
+          <label>Calendar End Time:</label>
+          <input [(ngModel)]="eventSaveObj.endTime" class="form-control" id="eventCalendarEndTime"
+                 name="eventCalendarEndTime"
+                 type="time">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button (click)="saveCalendarEventTime()" class="btn save-category-designation" type="button">
+        <i aria-hidden="true" class="fa fa-floppy-o"></i> Save
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div class="w3-panel w3-card">
+  <h5 class="card-title-h5">Venue</h5>
+  <div class="card-content-div">
+
+    <div class="col-sm-12 no-padding">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <label>Venue Name:</label>
+          <input [(ngModel)]="venueSaveObj.venueName" class="form-control" id="venueName" name="venueName"
+                 type="text">
+        </div>
+        <div class="col-sm-6 form-group">
+          <label>Capacity:</label>
+          <input [(ngModel)]="venueSaveObj.capacity" class="form-control" id="venueCapacity" name="venueCapacity"
+                 type="number" min="0">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-12 no-padding">
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label>Select Features:</label>
+          <div *ngIf="preData | async as data; else loading" class="chip-div">
+            <div (click)="addFacility(facility.id)" *ngFor="let facility of data"
+                 class="chip-custom {{venueFacilityChip(facility.id)}}">
+              {{facility.propertyName}}
+            </div>
+          </div>
+          <ng-template #loading>
+            <div>Loading ...</div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 no-padding">
+      <p style="color: red; font-size: 13px; font-weight: 600">{{validationErrorMessage}}</p>
+    </div>
+
+    <div class="form-group">
+      <button (click)="saveEventVenue()" class="btn save-category-designation" type="button">
+        <i aria-hidden="true" class="fa fa-floppy-o"></i> Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<button
+  class="btn btn-info hide" data-target="#notificationPopup" data-toggle="modal"
+  id="openNotificationPopup"
+  type="button">Open Modal
+</button>
+
+<div class="modal fade" id="notificationPopup" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          class="close" data-dismiss="modal" id="closeNotificationPopup"
+          type="button">&times;
+        </button>
+        <h4 class="modal-title title-header-h4">Notification</h4>
+      </div>
+      <div class="modal-body">
+        <h5 class="notification-body">
+          {{eventResponse?.message}}
+        </h5>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,376 @@
+<div class="profile-page__main-content">
+
+  <div>
+    <div class=" profile-summary-header">
+      <p class="c-pax-details__header u-mb0 u-mt0"></p>
+      <div class="c-overview-card__filter">
+        <div class="m-form-field">
+          <div class="m-form-field__field">
+            <select class="m-form-field__select " [(ngModel)]="selectedYear" (change)="changeYear()">
+              <option *ngFor="let val of leaveYearList" value="{{val}}">{{val}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-pax-details @@class">
+      <div class="c-pax-details__block-main u-pb+ u-mb+" *ngIf="componentPermission.includes('OPDSummary')">
+        <div class="c-pax-details__block-main__header profile-summary__header">
+          <span class=""> OPD Details </span>
+        </div>
+        <div class="profile-summary__block-main l-grid--2-1 u-mt">
+          <div class="l-grid--2-1">
+            <a class="profile-summary-link" (click)="routeToNotification('opdRequests','New')">
+              <div class="profile-summary__card">
+                <div class="profile-summary__card-details">
+                  <p class="profile-summary__card-title profile-summary__card-title--blue">New</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="opdDataLoaded">{{opdStatusData.newCount}}</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="!opdDataLoaded">0</p>
+                </div>
+
+                <div class="profile-summary__card-box profile-summary__card-box--calendar">
+                  <svg class="a-icon profile-summary__card-icon profile-summary__card-icon--calendar">
+                    <use xlink:href="#stethoscope"></use>
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <a class="profile-summary-link" (click)="routeToNotification('opdRequests','Declined')">
+              <div class="profile-summary__card">
+                <div class="profile-summary__card-details">
+                  <p class="profile-summary__card-title profile-summary__card-title--blue">Decline</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="opdDataLoaded">{{opdStatusData.declinedCount}}</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="!opdDataLoaded">0</p>
+                </div>
+
+                <div class="profile-summary__card-box profile-summary__card-box--calendar">
+                  <svg class="a-icon profile-summary__card-icon profile-summary__card-icon--calendar">
+                    <use xlink:href="#stethoscope"></use>
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <a class="profile-summary-link" (click)="routeToNotification('opdRequests','Processing')">
+              <div class="profile-summary__card">
+                <div class="profile-summary__card-details">
+                  <p class="profile-summary__card-title profile-summary__card-title--blue">Processing</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="opdDataLoaded">{{opdStatusData.processingCount}}</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="!opdDataLoaded">0</p>
+                </div>
+
+                <div class="profile-summary__card-box profile-summary__card-box--calendar">
+                  <svg class="a-icon profile-summary__card-icon profile-summary__card-icon--calendar">
+                    <use xlink:href="#stethoscope"></use>
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <a class="profile-summary-link" (click)="routeToNotification('opdRequests','Completed')">
+              <div class="profile-summary__card">
+                <div class="profile-summary__card-details">
+                  <p class="profile-summary__card-title profile-summary__card-title--blue">Collected</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="opdDataLoaded">{{opdStatusData.completedCount}}</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="!opdDataLoaded">0</p>
+                </div>
+
+                <div class="profile-summary__card-box profile-summary__card-box--calendar">
+                  <svg class="a-icon profile-summary__card-icon profile-summary__card-icon--calendar">
+                    <use xlink:href="#stethoscope"></use>
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="opd-balance-section">
+            <div *ngIf="!opdDataLoaded">
+              <div class="opd-balance u-mb-">
+                <div class="opd-balance__bg opd-balance__bg--blue" style="width: 250px">
+                  <p class="opd-balance__title">OPD Balance </p>
+                  <p class="opd-balance__remaining"> N/A</p>
+                </div>
+              </div>
+              <p class="opd-blance-valid"><span
+                class="opd-blance-valid__date"> Not eligible to OPD</span>
+              </p>
+            </div>
+            <div *ngIf="opdDataLoaded">
+              <div class="opd-balance u-mb-">
+                <div class="opd-balance__bg opd-balance__bg--blue"
+                     *ngIf="((opdData.allocatedAmount - opdData.utilizedAmount) > 0)">
+                  <p class="opd-balance__title">OPD Balance </p>
+                  <p class="opd-balance__remaining"> {{opdData.allocatedAmount - opdData.utilizedAmount | number}} /
+                    <span
+                      class="opd-balance__full">{{opdData.allocatedAmount | number}}</span></p>
+                </div>
+                <div class="opd-balance__bg opd-balance__bg--red"
+                     *ngIf="((opdData.allocatedAmount - opdData.utilizedAmount) === 0)">
+                  <p class="opd-balance__title">OPD Balance </p>
+                  <p class="opd-balance__remaining"> {{opdData.allocatedAmount - opdData.utilizedAmount | number}} /
+                    <span
+                      class="opd-balance__full">{{opdData.allocatedAmount | number}}</span></p>
+                </div>
+              </div>
+              <p class="opd-blance-valid" *ngIf="(validStartForOpd !== null || validEndForOpd !== null)"><span
+                class="opd-blance-valid__date"> {{opdData.validStart}}</span>&nbsp;&nbsp;to&nbsp;&nbsp;
+                <span class="opd-blance-valid__date">{{opdData.validEnd}}</span>
+                <span class="opd-blance-valid__remaining" *ngIf="remainingDatesForOpd > 1 && !deadlinePassedForOpd">&nbsp;&nbsp;(
+                <span class="opd-blance-valid__remaining-days--blue" *ngIf="remainingDatesForOpd > 100">
+                  {{remainingDatesForOpd}}
+                </span>
+                <span class="opd-blance-valid__remaining-days--green"
+                      *ngIf="remainingDatesForOpd < 100 && remainingDatesForOpd > 30">
+                  {{remainingDatesForOpd}}
+                </span>
+                <span class="opd-blance-valid__remaining-days--orange"
+                      *ngIf="remainingDatesForOpd <= 30 && remainingDatesForOpd > 10">
+                  {{remainingDatesForOpd}}
+                </span>
+                <span class="opd-blance-valid__remaining-days--red"
+                      *ngIf="remainingDatesForOpd <= 10 && remainingDatesForOpd > 1">
+                  {{remainingDatesForOpd}}
+                </span> more days)
+              </span>
+                <span class="opd-blance-valid__remaining" *ngIf="remainingDatesForOpd == 1 && !deadlinePassedForOpd">&nbsp;&nbsp;(
+                  <span class="opd-blance-valid__remaining-days--red">
+                    {{remainingDatesForOpd}}
+                  </span> more day)
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="profile-summary__redirect" *ngIf="opdDataLoaded && personalOrOther === 'personal'">
+          <a (click)="routeToNotification('opdRequests', 'All')" class="profile-summary__redirect-link"
+             style="cursor:pointer;">View OPD Requests
+            <svg class="a-icon profile-summary__redirect-icon">
+              <use xlink:href="#next"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="c-pax-details__block-main u-pb+ u-mb+" *ngIf="componentPermission.includes('LeaveSummary')">
+        <div class="c-pax-details__block-main__header profile-summary__header">
+            <span class="">
+            Leave Details
+            </span>
+
+        </div>
+        <div class="profile-summary__block-main l-grid--2-1 u-mt+">
+          <div class="l-grid--2-1">
+            <a class="profile-summary-link">
+              <div class="profile-summary__card">
+                <div class="profile-summary__card-details">
+                  <p class="profile-summary__card-title profile-summary__card-title--blue">Casual Leave</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="casualLeaveDataLoaded">
+                    {{casualLeaveSummary.remaining}} / <span
+                    class="profile-summary__card-full profile-summary__card-full--blue">{{casualLeaveSummary.allocated}}</span>
+                  </p>
+                  <span class="profile-summary__card-not-app" *ngIf="!casualLeaveDataLoaded">N / A</span>
+                </div>
+
+                <div class="profile-summary__card-box profile-summary__card-box--calendar">
+                  <svg class="a-icon profile-summary__card-icon profile-summary__card-icon--calendar">
+                    <use xlink:href="#calendar-line"></use>
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <a class="profile-summary-link">
+              <div class="profile-summary__card">
+                <div class="profile-summary__card-details">
+                  <p class="profile-summary__card-title profile-summary__card-title--blue">Annual Leave</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="annualLeaveDataLoaded">
+                    {{annualLeaveSummary.remaining}} / <span
+                    class="profile-summary__card-full profile-summary__card-full--blue">{{annualLeaveSummary.allocated}}</span>
+                  </p>
+                  <span class="profile-summary__card-not-app" *ngIf="!annualLeaveDataLoaded">N / A</span>
+                </div>
+
+                <div class="profile-summary__card-box profile-summary__card-box--calendar">
+                  <svg class="a-icon profile-summary__card-icon profile-summary__card-icon--calendar">
+                    <use xlink:href="#calendar-line"></use>
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <a class="profile-summary-link">
+              <div class="profile-summary__card">
+                <div class="profile-summary__card-details">
+                  <p class="profile-summary__card-title profile-summary__card-title--blue">Medical Leave</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="medicalLeaveDataLoaded">
+                    {{medicalLeaveSummary.remaining}} / <span
+                    class="profile-summary__card-full profile-summary__card-full--blue">{{medicalLeaveSummary.allocated}}</span>
+                  </p>
+                  <span class="profile-summary__card-not-app" *ngIf="!medicalLeaveDataLoaded">N / A</span>
+                </div>
+
+                <div class="profile-summary__card-box profile-summary__card-box--calendar">
+                  <svg class="a-icon profile-summary__card-icon profile-summary__card-icon--calendar">
+                    <use xlink:href="#calendar-line"></use>
+                  </svg>
+                </div>
+              </div>
+            </a>
+            <a class="profile-summary-link">
+              <div class="profile-summary__card">
+                <div class="profile-summary__card-details">
+                  <p class="profile-summary__card-title profile-summary__card-title--blue">Additional Leave</p>
+                  <p class="profile-summary__card-remaining profile-summary__card-remaining--blue"
+                     *ngIf="specialLeaveDataLoaded">
+                    {{specialLeavesRemaining}} / <span
+                    class="profile-summary__card-full profile-summary__card-full--blue">{{specialLeavesAllocated}}</span>
+                  </p>
+                  <span class="profile-summary__card-not-app" *ngIf="!specialLeaveDataLoaded">N / A</span>
+                </div>
+
+                <div class="profile-summary__card-box profile-summary__card-box--calendar">
+                  <svg class="a-icon profile-summary__card-icon profile-summary__card-icon--calendar">
+                    <use xlink:href="#calendar-line"></use>
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="c-leaves-bar-section">
+            <div class="c-leaves-days" *ngIf="specialLeaveDataLoaded && leaveDataLoaded">
+              <div class="c-leaves-days__count">
+                <p class="c-leaves-days__count-value">{{utilizedAllLeaveCount}}</p>
+                <p class="c-leaves-days__count-title">Utilized Leaves</p>
+              </div>
+              <div class="c-leaves-days__count">
+                <p class="c-leaves-days__count-value">{{remainingAllLeaveCount}}</p>
+                <p class="c-leaves-days__count-title">Remaining Leaves</p>
+              </div>
+            </div>
+            <div class="c-leaves-days" *ngIf="!specialLeaveDataLoaded && !leaveDataLoaded">
+              <div class="c-leaves-days__count">
+                <p class="c-leaves-days__count-value">N/A</p>
+                <p class="c-leaves-days__count-title">Utilized Leaves</p>
+              </div>
+              <div class="c-leaves-days__count">
+                <p class="c-leaves-days__count-value">N/A</p>
+                <p class="c-leaves-days__count-title">Remaining Leaves</p>
+              </div>
+            </div>
+
+
+            <div class="c-progress">
+              <div class="c-progress__bar c-progress__bar--color" id="utilized-vs-allocated-leave-percent"
+                   role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+            <div class="c-leaves-days-full" *ngIf="specialLeaveDataLoaded && leaveDataLoaded">
+              <div class="c-leaves-days-full__count">
+                <p class="c-leaves-days-full__count-value">{{allocatedAllLeaveCount}}</p>
+                <p class="c-leaves-days-full__count-title">Total Leaves</p>
+              </div>
+            </div>
+            <div class="c-leaves-days-full" *ngIf="!specialLeaveDataLoaded && !leaveDataLoaded">
+              <div class="c-leaves-days-full__count">
+                <p class="c-leaves-days-full__count-value">N/A</p>
+                <p class="c-leaves-days-full__count-title">Total Leaves</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="profile-summary__redirect"
+             *ngIf="leaveDataLoaded && remainingAllLeaveCount > 0 && personalOrOther === 'personal'">
+          <a routerLink="/leave/main" class="profile-summary__redirect-link" style="cursor:pointer;">View Leaves
+            <svg class="a-icon profile-summary__redirect-icon">
+              <use xlink:href="#next"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="c-pax-details__block-main u-pb+ u-mb+" *ngIf="componentPermission.includes('LetterRequestSummary')">
+        <div class="c-pax-details__block-main__header profile-summary__header">
+          <span class=""> Letter Request Details </span>
+        </div>
+
+        <div class="profile-summary__block-main l-grid--2-1 u-mt" *ngIf="issueLetterDataLoaded">
+          <div class="profile-summary__card" *ngFor="let data of issueLetterData | slice: 0: 4">
+            <div class="profile-summary__card-details">
+              <p class="profile-summary__card-request-title">{{data.letterTypeName}}</p>
+              <p class="profile-summary__card-request-date">Requested Date : {{data.requiredDate}}</p>
+              <p class="profile-summary__card-request-id">Id: {{data.requestId}}</p>
+            </div>
+            <span class="a-chip__summary a-chip__summary--new" *ngIf="data.letterStatus === 'New'">New</span>
+            <span class="a-chip__summary a-chip__summary--collected"
+                  *ngIf="data.letterStatus === 'Completed'">Collected</span>
+            <span class="a-chip__summary a-chip__summary--processing" *ngIf="data.letterStatus === 'Processing'">Processing</span>
+            <span class="a-chip__summary a-chip__summary--printed"
+                  *ngIf="data.letterStatus === 'Printed'">Printed</span>
+            <span class="a-chip__summary a-chip__summary--ready" *ngIf="data.letterStatus === 'Ready'">Ready</span>
+          </div>
+        </div>
+        <div class="profile-summary__redirect"
+             *ngIf="issueLetterDataLoaded && issueLetterData.length > 4 && personalOrOther === 'personal'">
+          <a (click)="routeToNotification('letterRequest', 'All')" class="profile-summary__redirect-link"
+             style="cursor:pointer;">View More Letter Requests
+            <svg class="a-icon profile-summary__redirect-icon">
+              <use xlink:href="#next"></use>
+            </svg>
+          </a>
+        </div>
+
+        <div *ngIf="issueLetterDataLoaded && issueLetterData.length === 0" style="text-align: center; top: 25%;" >
+          <img src="assets/image/bad_face.svg" alt="no-data">
+          <h4 style="color: #838383">No data available</h4>
+        </div>
+      </div>
+
+      <div class="c-pax-details__block-main u-pb+ u-mb+" *ngIf="componentPermission.includes('FacilityRequestSummary')">
+        <div class="c-pax-details__block-main__header profile-summary__header">
+            <span class="">
+            Facility Request Details
+            </span>
+        </div>
+
+        <div class="profile-summary__block-main l-grid--2-1 u-mt" *ngIf="facilityRequestDataLoaded">
+          <div class="profile-summary__card" *ngFor="let data of facilityRequestData | slice: 0: 4">
+            <div class="profile-summary__card-details">
+              <p class="profile-summary__card-request-title">{{data.facilityTypeName}}</p>
+              <p class="profile-summary__card-request-date">Requested Date : {{data.requestedDate}}</p>
+              <p class="profile-summary__card-request-id">Id: {{data.facilityId}}</p>
+            </div>
+            <span class="a-chip__summary a-chip__summary--new" *ngIf="data.status === 'New'">New</span>
+            <span class="a-chip__summary a-chip__summary--collected"
+                  *ngIf="data.status === 'Completed'">Completed</span>
+            <span class="a-chip__summary a-chip__summary--processing"
+                  *ngIf="data.status === 'WIP'">In Progress</span>
+          </div>
+        </div>
+        <div class="profile-summary__redirect"
+             *ngIf="facilityRequestDataLoaded && facilityRequestData.length > 4 && personalOrOther === 'personal'">
+          <a (click)="routeToNotification('facilityRequests', 'All')" class="profile-summary__redirect-link"
+             style="cursor:pointer;">View More Facility Requests
+            <svg class="a-icon profile-summary__redirect-icon">
+              <use xlink:href="#next"></use>
+            </svg>
+          </a>
+        </div>
+
+        <div *ngIf="facilityRequestDataLoaded && facilityRequestData.length === 0" style="text-align: center; top: 25%;" >
+          <img src="assets/image/bad_face.svg" alt="no-data">
+          <h4 style="color: #838383">No data available</h4>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

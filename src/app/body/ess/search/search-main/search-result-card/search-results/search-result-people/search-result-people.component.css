@@ -1,0 +1,429 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*----------------------------------------------------------------------------------*/
+/*Search loading*/
+.loadingSvg {
+  padding-top: 15%;
+  width: 90px;
+  -ms-transform: rotate(-35deg); /* IE 9 */
+  -webkit-transform: rotate(-35deg); /* Safari 3-8 */
+  transform: rotate(-35deg);
+}
+
+/*----------------------------------------------------------------------------------*/
+
+.search-result-avatar {
+  width: 80px !important;
+  height: 80px !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.search-result-avatar-mobile {
+  width: 60px;
+  height: 60px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.result-card-icon {
+  padding: 0;
+  color: #006eff;
+}
+
+/*select button*/
+.btn.active {
+  display: none;
+}
+
+.btn span:nth-of-type(1) {
+  display: none;
+}
+
+.btn span:last-child {
+  display: block;
+}
+
+.btn.active span:nth-of-type(1) {
+  display: block;
+}
+
+.btn.active span:last-child {
+  display: none;
+}
+
+.cbtn-act {
+  width: 25px;
+  height: 25px;
+  border-radius: 4px !important;
+  background-color: #FD4E66;
+  padding: 2px 0 0 0 !important;
+}
+
+.cbtn-deact {
+  width: 25px;
+  height: 25px;
+  border-radius: 4px !important;
+  background-color: #FFFFFF;
+  padding: 2px 0 0 0 !important;
+}
+
+.chkbx {
+  width: 15px;
+  height: 15px;
+}
+
+.sltbtn {
+  /*width: 30px;*/
+  /*height: 30px;*/
+  padding: 0 !important;
+  background-color: transparent;
+  color: #006eff;
+  border-radius: 4px !important;
+}
+
+.selectAllbtn {
+  /*width: 30px;*/
+  /*height: 30px;*/
+  padding: 0 !important;
+  /*background-color: #EF3648;*/
+  color: #EF3648;
+  border-radius: 4px !important;
+}
+
+.dropdown-btn {
+  padding: 12px 15px;
+  color: #555555 !important;
+  line-height: 1.4;
+  font-size: 12px;
+  background-color: #FFFFFF;
+  border-radius: 0 !important;
+}
+
+/*user chips*/
+.chip {
+  display: inline-block;
+  padding: 0 10px 0 25px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 2px;
+  background-color: #f1f1f1;
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 30px;
+  width: 30px;
+  border-radius: 2px;
+}
+
+.closebtn {
+  padding-left: 20px;
+  color: #888;
+  font-weight: bold;
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.closebtn:hover {
+  color: #000;
+}
+
+.postReviewBut {
+  background-color: #006eff;
+  border: #006eff;
+  color: #FFFFFF;
+}
+
+.reportGenerateBtn {
+  background-color: #43ac6a;
+  border: #43ac6a;
+  color: #FFFFFF;
+}
+
+/*Loading overlay*/
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {
+    font-size: 20px
+  }
+
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+/*----------------------------------------------------------------------------------*/
+/*Bread Crumbs*/
+btn-breadcrumb > .btn.disabled {
+  opacity: 1 !important;
+  color: #999;
+}
+
+.btn-breadcrumb .btn:not(:last-child):after {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
+  border-left: 10px solid white;
+  position: absolute;
+  top: 50%;
+  margin-top: -17px;
+  left: 100%;
+  z-index: 3;
+}
+
+.btn-breadcrumb .btn:not(:last-child):before {
+  content: " ";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 17px solid transparent;
+  border-bottom: 17px solid transparent;
+  border-left: 10px solid rgb(173, 173, 173);
+  position: absolute;
+  top: 50%;
+  margin-top: -17px;
+  margin-left: 1px;
+  left: 100%;
+  z-index: 3;
+}
+
+/** The Spacing **/
+.btn-breadcrumb .btn {
+  padding: 6px 12px 6px 24px;
+}
+
+.btn-breadcrumb .btn:first-child {
+  padding: 6px 6px 6px 10px;
+}
+
+.btn-breadcrumb .btn:last-child {
+  padding: 6px 18px 6px 24px;
+}
+
+/** Primary button **/
+.btn-breadcrumb .btn.breadcrumb-btn:not(:last-child):after {
+  border-left: 10px solid #006eff;
+}
+
+.btn-breadcrumb .btn.breadcrumb-btn:not(:last-child):before {
+  border-left: 10px solid #1455a1;
+}
+
+.btn-breadcrumb .btn.breadcrumb-btn:hover:not(:last-child):after {
+  border-left: 10px solid #1455a1;
+}
+
+.btn-breadcrumb .btn.breadcrumb-btn:hover:not(:last-child):before {
+  border-left: 10px solid #1455a1;
+}
+
+.breadcrumb-btn {
+  background-color: #006eff;
+  border-radius: 3px;
+  color: #FFFFFF;
+}
+
+.breadcrumb-btn:hover {
+  background-color: #1455a1;
+  color: #FFFFFF;
+}
+
+/*----------------------------------------------------------------------------------*/
+.ACTIVE {
+  border: 3px solid #006eff;
+}
+
+.INACTIVE {
+  border: 3px solid #Ef3648;
+}
+
+/*----------------------------------------------------------------------------------*/
+.profile-badge-web {
+  width: 20px;
+  margin-top: -55px;
+  margin-left: 60px;
+  position: relative;
+}
+
+.profile-badge-mobile {
+  width: 20px;
+  margin-top: -42px;
+  margin-left: 45px;
+  position: relative;
+}
+
+/*----------------------------------------------------------------------------------*/
+
+.checkbox {
+  padding-left: 20px;
+}
+
+.checkbox label {
+  display: inline-block;
+  position: relative;
+  padding-left: 5px;
+}
+
+.checkbox label::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 0;
+  margin-left: -20px;
+  border: 1px solid #cccccc;
+  border-radius: 2px;
+  background-color: #fff;
+  -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.checkbox label::after {
+  display: inline-block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 0;
+  top: 0;
+  margin-left: -20px;
+  padding-left: 3px;
+  padding-top: 1px;
+  font-size: 11px;
+  color: #555555;
+}
+
+.checkbox input[type="checkbox"] {
+  opacity: 0;
+}
+
+.checkbox input[type="checkbox"]:focus + label::before {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.checkbox input[type="checkbox"]:checked + label::after {
+  font-family: 'FontAwesome';
+  content: "\f00c";
+}
+
+.checkbox input[type="checkbox"]:disabled + label {
+  opacity: 0.65;
+}
+
+.checkbox input[type="checkbox"]:disabled + label::before {
+  background-color: #eeeeee;
+  cursor: not-allowed;
+}
+
+.checkbox.checkbox-circle label::before {
+  border-radius: 50%;
+}
+
+.checkbox.checkbox-inline {
+  margin-top: 0;
+}
+
+.checkbox-primary input[type="checkbox"]:checked + label::before {
+  background-color: #006eff;
+  border-color: #006eff;
+}
+
+.checkbox-primary input[type="checkbox"]:checked + label::after {
+  color: #fff;
+}
+
+/*----------------------------------------------------------------------------------*/
+
+/*Scrollbar*/
+.scrollbar {
+  float: left;
+  height: 450px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.force-overflow {
+  min-height: 650px;
+  margin-right: 10px;
+}
+
+#style-1::-webkit-scrollbar-track {
+}
+
+#style-1::-webkit-scrollbar {
+  width: 3px;
+}
+
+#style-1::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .1);
+}

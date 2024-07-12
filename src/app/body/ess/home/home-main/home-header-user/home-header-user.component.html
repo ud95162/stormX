@@ -1,0 +1,126 @@
+<div class="admin-header-div">
+  <div *ngIf="homeDataLoaded" class="w3-panel w3-card">
+    <div class="container no-padding">
+      <div class="col-sm-12 no-padding">
+        <div *ngIf="isDesktop" class="container no-padding">
+          <div>
+            <div class="col-sm-4 vertical-line">
+              <div class="col-sm-4">
+                <img
+                  (click)="imgRedirect()"
+                  alt={{this.homeHeaderData.name}} class="img-circle dashboard-header-avatar"
+                  src={{this.homeHeaderData.profileImage}}>
+              </div>
+              <div class="col-sm-8">
+                <h4>{{this.homeHeaderData.name}}</h4>
+                <h5>{{this.homeHeaderData.designation}}</h5>
+                <div class="dashboard-header-stars">
+            <span *ngFor="let headerStar of headerStarArray">
+              <span title={{headerStar}}><i class="fa fa-star"></i></span>
+            </span>
+                  <span *ngIf="showHalfStar"><i class="fa fa-star-half"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4 vertical-line">
+              <div class="col-sm-10">Today</div>
+              <div class="col-sm-1">
+          <span (click)="setPopupModalData(1)" data-target="#myModal" data-toggle="modal" style="cursor: pointer">
+            <i class="fa fa-ellipsis-h"></i>
+          </span>
+              </div>
+              <br>
+              <div>
+                <ul class="dashboard-header-calender-ul">
+                  <li *ngFor="let task of trimmedTasklist" class="dashboard-header-calender-li">
+                    <div class="col-sm-9">
+                      {{task.task}}
+                    </div>
+                    <div class="col-sm-3">
+                      {{task.time}}
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="col-sm-10">Trending</div>
+              <div class="col-sm-1">
+          <span (click)="setPopupModalData(2)" data-target="#myModal" data-toggle="modal" style="cursor: pointer">
+            <i class="fa fa-ellipsis-h"></i>
+          </span>
+              </div>
+              <br>
+              <div>
+                <ul class="dashboard-header-calender-ul">
+                  <li *ngFor="let trend of trimmedTrendlist" class="dashboard-header-calender-li">
+                    <div class="col-sm-9">
+                      {{trend.trend}} - {{trend.from}}
+                    </div>
+                    <div class="col-sm-3">
+                      <a href={{trend.url}} style="text-decoration: none" target="_blank">More</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="isMobile || isTablet" class="col-sm-12 no-padding" style="text-align: center;">
+          <div style="padding-top: 5px">
+            <img
+              (click)="imgRedirect()"
+              alt={{this.homeHeaderData.name}} class="img-circle dashboard-header-avatar"
+              src={{this.homeHeaderData.profileImage}}>
+          </div>
+          <div>
+            <h4>{{this.homeHeaderData.name}}</h4>
+            <h5>{{this.homeHeaderData.designation}}</h5>
+            <div class="dashboard-header-stars">
+          <span *ngFor="let headerStar of headerStarArray">
+            <span title={{headerStar}}><i class="fa fa-star"></i></span>
+          </span>
+              <span *ngIf="showHalfStar"><i class="fa fa-star-half"></i></span>
+            </div>
+            <hr style="margin-top: 10px; margin-bottom: 10px">
+            <div class="btn-group btn-group-justified">
+              <a (click)="setPopupModalData(1)" class="btn btn-link" data-target="#myModal"
+                 data-toggle="modal"
+                 style="cursor: pointer; padding-top: 0; padding-bottom: 0">Tasks</a>
+              <a (click)="setPopupModalData(2)" class="btn btn-link" data-target="#myModal"
+                 data-toggle="modal"
+                 style="cursor: pointer; padding-top: 0; padding-bottom: 0">Trends</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal" type="button">&times;</button>
+        <h4 class="modal-title">{{modalHeader}}</h4>
+      </div>
+      <div class="modal-body">
+        <table *ngIf="modalDataType === 'Task'" style="width: 100%">
+          <tr *ngFor="let task of taskList">
+            <td>{{task.task}}</td>
+            <td>{{task.time}}</td>
+          </tr>
+        </table>
+        <table *ngIf="modalDataType === 'Trend'" style="width: 100%">
+          <tr *ngFor="let trend of trendList">
+            <td>{{trend.trend}} - {{trend.from}}</td>
+            <td><a data-dismiss="modal" href={{trend.url}} style="text-decoration: none" target="_blank">More</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

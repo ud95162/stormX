@@ -1,0 +1,165 @@
+<!--<button class="hide" data-target="#createIntent" data-toggle="modal" id="openModal" type="button"></button>-->
+<!--<div class="modal fade" id="createIntent" role="dialog">-->
+<!--  <div class="modal-dialog modal-sm">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <button (click)="resetEntitySelectField()" class="close" data-dismiss="modal" id="dismiss" type="button">-->
+<!--          &times;-->
+<!--        </button>-->
+<!--        <h4 class="card-title-h5">Create new Intent</h4>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <form>-->
+<!--          <div [formGroup]="newIntentForm" class="form-group" style="margin-top: 5px">-->
+<!--            <input class="form-control" formControlName="intent" id="addEntityName" placeholder="Enter entity name"-->
+<!--                   type="text">-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button (click)="onIntentSave()" class="btn btn-add" type="button">Save new Intent</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<button class="hide" data-target="#untrainedModel" data-toggle="modal" id="openUntrainedModel" type="button"></button>-->
+<!--<div class="modal fade" id="untrainedModel" role="dialog">-->
+<!--  <div class="modal-dialog">-->
+
+<!--    &lt;!&ndash; Modal content&ndash;&gt;-->
+<!--    <div class="modal-content">-->
+
+<!--      <div class="modal-header">-->
+<!--        <h4 class="card-title-h5">Untrained Search Queries: {{untrainedCount}}-->
+<!--          <i (click)="loadUntrainedSearchQueries()" class="btn-refresh fa fa-refresh"></i>-->
+<!--        </h4>-->
+<!--        <button class="close hide" data-dismiss="modal" id="dismissUntrainedModel" type="button">&times;</button>-->
+<!--      </div>-->
+
+<!--      <div class="model-body">-->
+<!--        <div class="scrollbar" id="style-1">-->
+<!--          <div class="force-overflow">-->
+<!--            <div class="untrained-query-div">-->
+<!--              <table *ngIf="untrainedQueriesLoaded" class="table table-striped" width="100%">-->
+<!--                <tr *ngFor="let untrainedQuery of untrainedQueriesList; let i = index">-->
+<!--                  <td class="untrained-query-td" width="70%">{{untrainedQuery.query}}</td>-->
+<!--                  <td align="right" class="untrained-query-td" width="30%">-->
+<!--                    <button (click)="onSelectUntrainedQuery(i)" class="btn btn-sm btn-select-query">Select</button>-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--              </table>-->
+<!--              <p *ngIf="!untrainedQueriesLoaded">loading..</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="modal-footer"></div>-->
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<div class="w3-panel w3-card">-->
+<!--  <div>-->
+<!--    <div>-->
+<!--      <h5 class="card-title-h5">Advanced Search Training</h5>-->
+<!--      <p (click)="openUntrainedModel()" *ngIf="untrainedQueriesLoaded && untrainedQueriesList.length > 0"-->
+<!--         class="untrained-count">Untrained Search Queries <span class="badge badge-secondary">{{untrainedCount}}</span>-->
+<!--      </p>-->
+<!--    </div>-->
+
+<!--    <form [formGroup]="trainingForm" class="training-form">-->
+
+<!--      <div class="row">-->
+<!--        <div class="form-group col-sm-9 input-query">-->
+<!--          <textarea (click)="textAreaAdjust($event)" (focus)="removeErrorClassFromText()"-->
+<!--                    class="form-control untrained-query-textarea" formControlName="text" id="trainingModelText"-->
+<!--                    placeholder="Enter search query"-->
+<!--                    rows="1" type="text"></textarea>-->
+
+<!--          <div>-->
+<!--            <p *ngIf="untrainedQueriesList.length === 0" class="txt-gray">-->
+<!--              eg: Show me Software Engineers who know Blockchain.-->
+<!--            </p>-->
+<!--            <p *ngIf="untrainedQueriesList.length > 0" class="txt-gray">eg: {{untrainedQueriesList[0].query}}</p>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group col-sm-3 input-entity">-->
+<!--          <select (change)="onIntentSelect($event.target.value)" (focus)="removeErrorClassFromIntent()"-->
+<!--                  *ngIf="showIntentSelect" class="form-control" formControlName="intent" id="trainingModelIntent">-->
+<!--            <optgroup *ngIf="showIntentSelect" label="">-->
+<!--              <option *ngFor="let _intent of intentList" value="{{_intent.intent}}">{{_intent.intent}}</option>-->
+<!--            </optgroup>-->
+<!--            <option value="-1"><i class="fa fa-plus"> Create new intent</i></option>-->
+<!--            <option value="placeholder">Select intent</option>-->
+<!--          </select>-->
+<!--          <img *ngIf="!showIntentSelect" src="assets/image/loading/loading-stripe.svg">-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--      <div>-->
+<!--        <h6 class="card-sub-title-h6">Select Entities</h6>-->
+<!--        <div (focus)="removeErrorClassFromEntities()" formArrayName="entities" id="trainingModelEntities">-->
+
+<!--          <div *ngFor="let control of entitiesArray.controls; let i = index" [formGroupName]="i" class="row">-->
+<!--            <div class="form-group col-sm-5 input-keyword">-->
+<!--              <input class="form-control" formControlName="entity" id="modelEntityEntity_{{i}}" placeholder="keyword"-->
+<!--                     type="text">-->
+<!--            </div>-->
+<!--            <div class="form-group col-sm-4 input-type">-->
+<!--              <select (change)="onUpdateJson()" (focus)="removeErrorClassFromEntities()" *ngIf="showEntitySelect"-->
+<!--                      class="form-control" formControlName="value" id="modelEntityValue_{{i}}">-->
+<!--                <optgroup *ngIf="showEntitySelect" label="">-->
+<!--                  <option *ngFor="let _entity of entityList" value="{{_entity.entity}}">{{_entity.entity}}</option>-->
+<!--                </optgroup>-->
+<!--                <option value="placeholder">Select entity</option>-->
+<!--              </select>-->
+<!--              <img *ngIf="!showEntitySelect" src="assets/image/loading/loading-stripe.svg">-->
+<!--            </div>-->
+<!--            <div class="form-group col-sm-3 btn-add-div">-->
+<!--              <button (click)="onRemoveEntity(i)" class="btn btn-remove"><i class="fa fa-close"></i></button>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--        <button (click)="onAddEntity()" class="btn btn-add"><i class="fa fa-plus"></i> {{getTxtBtnGreen()}}</button>-->
+<!--        <button (click)="onUpdateJson()" *ngIf="trainingModel" class="btn btn-update"><i class="fa fa-pencil"></i>-->
+<!--          Update Entity Names-->
+<!--        </button>-->
+<!--      </div>-->
+
+<!--      <div>-->
+<!--        <h6 class="card-sub-title-h6">Generated JSON</h6>-->
+<!--        <button (click)="onCopyToClipboard()" *ngIf="trainingModel" class="btn btn-sm btn-ctc"-->
+<!--                title="Copy to clipboard"><i class="fa fa-clone"></i></button>-->
+<!--        <pre *ngIf="!trainingModel" id="trainingModelJSON">[ ... ]</pre>-->
+<!--        <pre *ngIf="trainingModel" [innerHTML]="styleJson()" id="trainingModelJSON2"></pre>-->
+<!--        <p id="errMsg"></p>-->
+<!--      </div>-->
+
+<!--      <textarea *ngIf="trainingModel" [innerHTML]="trainingModel | json" class="hide"-->
+<!--                id="trainingModelJsonCopy"></textarea>-->
+
+<!--      <div class="">-->
+<!--        <button (click)="saveTrainingDataset()" class="btn btn-sm btn-primary btn-submit" id="trainingSubmitButton">-->
+<!--          <i aria-hidden="true" class="fa fa-floppy-o"></i> Save-->
+<!--        </button>-->
+<!--      </div>-->
+
+<!--      <div class="loading">-->
+<!--        <img *ngIf="loading" alt="" class="loading"-->
+<!--             src="assets/image/loading/posts-loading.svg" style="margin-top: -15px; width: 80%;">-->
+<!--      </div>-->
+
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div (click)="closeSnackbar()" class="snackbar" id="snackbar">-->
+<!--  <p>{{snackbarMsg}}</p>-->
+<!--</div>-->

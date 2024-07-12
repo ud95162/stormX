@@ -1,0 +1,223 @@
+<div *ngIf="showWorkingDateTimeConfigPreInsert" class="w3-panel w3-card">
+  <h5 class="card-title-h5">Working Days</h5>
+  <div *ngIf="showWorkingDateSaveObj" class="card-content-div">
+
+    <div class="col-sm-12 no-padding">
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label>Select Working Days:</label>
+          <div class="chip-div">
+            <div (click)="setRepeatingDate(repeatDay)"
+                 *ngFor="let repeatDay of workingDateTimeConfigPreInsert.allDaysInWeek"
+                 class="chip-custom {{setEventRepeatChips(repeatDay)}}">
+              {{repeatDay}}
+            </div>
+          </div>
+          <p class="warning-text">* Deselected dates will be considered as off-days (Weekends)</p>
+        </div>
+      </div>
+    </div>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-3 form-label-card" for="workStartingDate">Week Starting Date:</label>
+        <div class="col-sm-9">
+          <select [(ngModel)]="workingDateSaveObj.workStartingDate" class="form-control" id="workStartingDate"
+                  name="workStartingDate">
+            <option *ngFor="let repeatDay of workingDateTimeConfigPreInsert.allDaysInWeek">{{repeatDay}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <div class="form-group">
+      <button (click)="clickOnSaveWorkingDays()" class="btn save-category-designation" type="button">
+        <i aria-hidden="true" class="fa fa-floppy-o"></i> Save
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div class="w3-panel w3-card">
+  <h5 class="card-title-h5">Working Hours</h5>
+  <div class="card-content-div">
+    <div>
+      <div class="col-sm-12 no-padding">
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Starting Time:</label>
+            <input [(ngModel)]="workingHourSaveObj.startingTime" class="form-control" id="companyStartingTime"
+                   name="companyStartingTime" type="time">
+          </div>
+          <div class="col-sm-6 form-group">
+            <label>End Time:</label>
+            <input [(ngModel)]="workingHourSaveObj.endingTime" class="form-control" id="companyEndTime"
+                   name="companyEndTime" type="time">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>Office Hour(s):</label>
+            <input [(ngModel)]="workingHourSaveObj.officeHours" class="form-control" id="companyOfficeHours"
+                   name="companyOfficeHours" type="number">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>Working Hour(s):</label>
+            <input [(ngModel)]="workingHourSaveObj.workingHours" class="form-control" id="companyWorkingHours"
+                   name="companyWorkingHours" type="number">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>Lunch Hour(s):</label>
+            <input [(ngModel)]="workingHourSaveObj.officeHours" class="form-control"
+                   id="companyLunchHours" name="companyLunchHours" type="number">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h5 class="card-title-h5">Time Margins</h5>
+      <div *ngFor="let timeType of workingHourSaveObj.timeMargins">
+        <h6 class="form-label-card">{{timeType.type}} time</h6>
+
+        <form class="form-horizontal">
+          <div *ngFor="let timeCategory of timeType.margins; let j = index" class="form-group">
+            <div class="col-sm-2">
+              <label>{{timeCategory.range}}</label>
+              <input [(ngModel)]="timeCategory.range" class="form-control" id="rangeName" name="rangeName"
+                     type="text">
+            </div>
+            <div class="col-sm-10">
+              <div class="col-sm-12 no-padding">
+                <div class="row">
+                  <div class="col-sm-4 form-group no-margin">
+                    <label>Upper Margin Time:</label>
+                    <input [(ngModel)]="timeCategory.upper" class="form-control"
+                           id="{{timeType.type}}{{timeCategory.range}}Upper"
+                           name="{{timeType.type}}{{timeCategory.range}}Upper"
+                           type="time">
+                  </div>
+                  <div class="col-sm-4 form-group no-margin">
+                    <label>Lower Margin Time:</label>
+                    <input [(ngModel)]="timeCategory.lower" class="form-control"
+                           id="{{timeType.type}}{{timeCategory.range}}Lower"
+                           name="{{timeType.type}}{{timeCategory.range}}Lower"
+                           type="time">
+                  </div>
+                  <div class="col-sm-3 form-group no-margin">
+                    <label>Graph Color:</label>
+                    <input [(ngModel)]="timeCategory.colorCode" class="form-control"
+                           id="{{timeType.type}}{{timeCategory.range}}Color"
+                           name="{{timeType.type}}{{timeCategory.range}}Color"
+                           type="color">
+                  </div>
+                  <div class="col-sm-1 form-group no-margin">
+                    <i (click)="removeNewHourRow(timeType.type, j)" aria-hidden="true"
+                       class="fa fa-trash delete-trash-icon" style="margin-top: 25px !important;"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <i (click)="addNewHourRow(timeType.margins, timeType.type)" aria-hidden="true"
+               class="fa fa-plus-circle add-plus-icon"></i>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button (click)="clickOnSaveWorkingHours()" class="btn save-category-designation" type="button">
+        <i aria-hidden="true" class="fa fa-floppy-o"></i> Save
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!--<div *ngIf="showWorkingDateTimeConfigPreInsert" class="w3-panel w3-card">-->
+<!--  <div class="col-sm-12 no-padding">-->
+<!--    <div class="col-sm-10 no-padding">-->
+<!--      <h5 class="card-title-h5">Other Company Holidays</h5>-->
+<!--    </div>-->
+<!--    <div class="col-sm-2 no-padding">-->
+<!--      <form>-->
+<!--        <div class="form-group">-->
+<!--          <select (change)="changeOnYear()" [(ngModel)]="yearToView" class="form-control leave-history-select-year"-->
+<!--                  id="yearToView" name="yearToView">-->
+<!--            <option selected>{{workingDateTimeConfigPreInsert.companyLeave.years[0]-1}}</option>-->
+<!--            <option *ngFor="let year of workingDateTimeConfigPreInsert.companyLeave.years">{{year}}</option>-->
+<!--          </select>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="card-content-div">-->
+<!--    <div>-->
+<!--      <div class="col-sm-12 no-padding">-->
+
+<!--        <table class="table table-striped">-->
+<!--          <tr>-->
+<!--            <th width="5%">#</th>-->
+<!--            <th width="30%">Name</th>-->
+<!--            <th width="20%">Type</th>-->
+<!--            <th width="15%">Date</th>-->
+<!--            <th width="15%">Month</th>-->
+<!--            <th width="10%">Year</th>-->
+<!--            <th width="5%"></th>-->
+<!--          </tr>-->
+<!--          <tr *ngFor="let specialLeave of specialLeavesToProcess; let i = index">-->
+<!--            <td>{{specialLeave.id}}</td>-->
+<!--            <td>-->
+<!--              <input [(ngModel)]="specialLeave.leaveName" class="form-control" id="leaveName" name="leaveName"-->
+<!--                     type="text">-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <select *ngFor="let leaveType of specialLeave.holidayTypes" [(ngModel)]="leaveType.label"-->
+<!--                      class="form-control form-control-select" id="leaveType" name="leaveType">-->
+<!--                <option *ngFor="let leaveType of workingDateTimeConfigPreInsert.companyLeave.existingLeaveTypes">-->
+<!--                  {{leaveType.label}}-->
+<!--                </option>-->
+<!--                <option>- delete -</option>-->
+<!--              </select>-->
+<!--              <div>-->
+<!--                <i (click)="deleteNewTypeOnLeave(specialLeave.holidayTypes)" aria-hidden="true"-->
+<!--                   class="fa fa-trash record-add-delete-icon"></i>-->
+<!--                <i (click)="addNewTypeOnLeave(specialLeave.holidayTypes)" aria-hidden="true"-->
+<!--                   class="fa fa-plus-circle record-add-delete-icon pull-right"></i>-->
+<!--              </div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--              <select [(ngModel)]="specialLeave.day" class="form-control" id="leaveDate"-->
+<!--                      name="leaveDate">-->
+<!--                <option *ngFor="let day of workingDateTimeConfigPreInsert.companyLeave.days">{{day}}</option>-->
+<!--              </select>-->
+<!--            <td>-->
+<!--              <select [(ngModel)]="specialLeave.month" class="form-control" id="leaveMonth"-->
+<!--                      name="leaveMonth">-->
+<!--                <option *ngFor="let month of workingDateTimeConfigPreInsert.companyLeave.months">{{month}}</option>-->
+<!--              </select>-->
+<!--            <td>{{specialLeave.year}}</td>-->
+<!--            <td><i (click)="removeHolidayRow(i)" aria-hidden="true" class="fa fa-trash delete-trash-icon"></i></td>-->
+<!--          </tr>-->
+<!--        </table>-->
+
+<!--        <div>-->
+<!--          <i (click)="addNewHolidayRow(specialLeavesToProcess)" aria-hidden="true"-->
+<!--             class="fa fa-plus-circle add-plus-icon"></i>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="form-group">-->
+<!--      <button (click)="clickOnSaveSpecialLeaves()" class="btn save-category-designation" type="button">-->
+<!--        <i aria-hidden="true" class="fa fa-floppy-o"></i> Save-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

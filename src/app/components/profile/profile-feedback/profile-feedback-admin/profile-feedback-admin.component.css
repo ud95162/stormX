@@ -1,0 +1,163 @@
+/*Card Styles*/
+.w3-panel:after, .w3-panel:before {
+  content: "";
+  display: table;
+  clear: both
+}
+
+.w3-panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background-color: #ffffff !important;
+}
+
+.w3-card, .w3-card-2 {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 1px 2px 0px rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+/*-----------------------------------------------------------------------------------*/
+
+.fb-title {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #2d2f32;
+  font-weight: 600 !important;
+  display: inline;
+}
+
+.fb-title-2 {
+  color: #3d7ce2;
+  font-size: 14px;
+}
+
+.fb-container {
+  margin-top: 12px;
+}
+
+.fb-emp-feedbak-container {
+  margin-bottom: 8px;
+}
+
+.fb-cycle-container {
+  margin-bottom: 5px;
+}
+
+.fb-question-container {
+
+}
+
+.fb-question {
+  color: #3d7ce2;
+  font-weight: 600;
+}
+
+.fb-answer {
+
+}
+
+.btn-redirect {
+  color: #FFFFFF;
+  background-color: #006eff;
+  border: #006eff;
+  height: 30px !important;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.point-cursor {
+  cursor: pointer;
+}
+
+.img-profile {
+  width: 40px;
+  height: 40px;
+}
+
+.panel-title {
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+.panel-group {
+  padding-bottom: 0;
+}
+
+/*----------------------------------------------------------------------------------*/
+.panel-heading {
+  padding: 6px;
+}
+
+.panel-body {
+  padding: 6px;
+}
+
+.div-no-records {
+  margin-top: 25px;
+  text-align: center;
+}
+
+
+.div-separator-small {
+  height: 20px;
+}
+
+.group-list{
+  font-family: 'Rubik', sans-serif !important;
+  font-weight: 500 !important;
+}
+
+
+.scrollbar {
+  float: left;
+  height: 308px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.force-overflow {
+  min-height: 260px;
+}
+
+#progressbar-complete::-webkit-scrollbar-track {
+}
+
+#progressbar-complete::-webkit-scrollbar {
+  width: 8px;
+}
+
+#progressbar-complete::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .1);
+}
+
+#progressbar-uncomplete::-webkit-scrollbar-track {
+}
+
+#progressbar-uncomplete::-webkit-scrollbar {
+  width: 8px;
+}
+
+#progressbar-uncomplete::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.header-font-color{
+  color: #006eff;
+}
+
+.graph-dropdown-button {
+  text-decoration: none;
+  padding: 2px 0 2px 4px;
+  color: #006eff;
+  font-size: 22px;
+  margin-top: -5px;
+}
+
+.graph-dropdown-button:focus,
+.graph-dropdown-button:active:focus {
+  outline: none;
+}

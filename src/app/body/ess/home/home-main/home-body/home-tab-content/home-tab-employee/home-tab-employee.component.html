@@ -1,0 +1,96 @@
+  <div class="l-wrapper profile-page__wrapper"
+       *ngIf="checkPermission.checkUserHavePermissionForSection('PeopleTab')">
+    <div class="dashboard-page__block-main-header">
+      <div class="dashboard-page__left dashboard-page_previous">
+        <div class="previous-icon">
+          <svg class="a-icon" (click)="backToHomePage()">
+            <use xlink:href="#previous"></use>
+          </svg>
+        </div>
+        <div class="previous-text">People Dashboard</div>
+      </div>
+    </div>
+
+    <div class="profile-page__page-content">
+
+      <!--sidebar-->
+      <div class="profile-page__sidebar">
+
+        <div class="c-profile-card @@class">
+          <div class="c-profile-card__summary">
+            <div class="c-page-nav c-page-nav--vertical">
+              <nav id="nav-container" class="c-page-nav__wrapper c-page-nav__wrapper--vertical">
+                <a class="c-page-nav__item roleWiseDistribution " [ngClass]="{'is-selected': tabName == 'roleWiseDistribution'}" (click)="changeTabs('roleWiseDistribution')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('RoleWiseDistributionGraph')"> Role wise - Team Distribution</a>
+                <a class="c-page-nav__item employeeCadreLine " [ngClass]="{'is-selected': tabName == 'employeeCadreLine'}" (click)="changeTabs('employeeCadreLine')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('EmployeeCadreLineGraph')">Employment Distribution</a>
+                <a class="c-page-nav__item employeeGenderBar " [ngClass]="{'is-selected': tabName == 'employeeGenderBar'}" (click)="changeTabs('employeeGenderBar')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('GenderAgeDistributionGraph')">Gender Distribution</a>
+                <a class="c-page-nav__item classesBar " [ngClass]="{'is-selected': tabName == 'classesBar'}" (click)="changeTabs('classesBar')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('DegreeClassesGraph')">Classes</a>
+                <a class="c-page-nav__item degBar " [ngClass]="{'is-selected': tabName == 'degBar'}" (click)="changeTabs('degBar')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('DegreeClassesGraph')">Degree</a>
+                <a class="c-page-nav__item resBar " [ngClass]="{'is-selected': tabName == 'resBar'}" (click)="changeTabs('resBar')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('ResignationDepartmentsGraph')">Resignation Analysis</a>
+                <a class="c-page-nav__item yearWithCompany " [ngClass]="{'is-selected': tabName == 'yearWithCompany'}" (click)="changeTabs('yearWithCompany')"
+                   *ngIf="checkPermission.checkUserHavePermissionForSection('YearsWithCompanyGraph')">Years with the Company</a>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--main-->
+      <div class="profile-page__main-content">
+
+        <div id="roleWiseDistribution" class="tabcontent"
+             *ngIf="tabName == 'roleWiseDistribution'">
+          <app-e-role-bar
+            *ngIf="checkPermission.checkUserHavePermissionForSection('RoleWiseDistributionGraph')"></app-e-role-bar>
+        </div>
+
+
+        <div id="employeeCadreLine" class="tabcontent"
+             *ngIf="tabName == 'employeeCadreLine'">
+          <app-e-cadre-line
+            *ngIf="checkPermission.checkUserHavePermissionForSection('EmployeeCadreLineGraph')"></app-e-cadre-line>
+        </div>
+
+        <div id="employeeGenderBar" class="tabcontent"
+             *ngIf="tabName == 'employeeGenderBar'">
+          <app-e-gender-bar
+            *ngIf="checkPermission.checkUserHavePermissionForSection('GenderAgeDistributionGraph')">
+          </app-e-gender-bar>
+
+        </div>
+
+        <div id="classesBar" class="tabcontent"
+             *ngIf="tabName == 'classesBar'">
+          <app-e-wlt-cls-bar *ngIf="checkPermission.checkUserHavePermissionForSection('DegreeClassesGraph')"></app-e-wlt-cls-bar>
+        </div>
+
+
+        <div id="degBar" class="tabcontent"
+             *ngIf="tabName == 'degBar'">
+          <app-e-wlt-deg-bar
+            *ngIf="checkPermission.checkUserHavePermissionForSection('DegreeClassesGraph')">
+          </app-e-wlt-deg-bar>
+        </div>
+
+        <div id="resBar" class="tabcontent"
+             *ngIf="tabName == 'resBar'">
+          <app-e-op-res-bar
+            *ngIf="checkPermission.checkUserHavePermissionForSection('ResignationDepartmentsGraph')"></app-e-op-res-bar>
+        </div>
+        <div id="yearWithCompany" class="tabcontent"
+             *ngIf="tabName == 'yearWithCompany'">
+          <app-e-op-years-bar
+            *ngIf="checkPermission.checkUserHavePermissionForSection('YearsWithCompanyGraph')"></app-e-op-years-bar>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
